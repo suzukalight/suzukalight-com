@@ -25,7 +25,9 @@ export default function BlogPost({ mdxSource, frontMatter }) {
       <Box>
         <Box m="1em">
           <Box maxW="640px" mx="auto">
-            <Heading as="h1">{frontMatter.title}</Heading>
+            <Heading as="h1" my="2em">
+              {frontMatter.title}
+            </Heading>
 
             {content}
           </Box>

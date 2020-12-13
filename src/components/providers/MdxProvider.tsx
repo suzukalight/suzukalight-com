@@ -19,7 +19,25 @@ import {
 
 export function MdxComponentProvider(props) {
   const state = {
-    h1: (props) => <Heading as="h1" mt="6em" mb="1.5em" fontSize="1.75em" {...props} />,
+    h1: (props) => (
+      <Heading
+        as="h1"
+        position="relative"
+        mt="4em"
+        mb="1.5em"
+        fontSize="1.75em"
+        _before={{
+          content: '".　.　."',
+          position: 'absolute',
+          top: '-4rem',
+          width: '100%',
+          fontSize: '1.25rem',
+          textAlign: 'center',
+          color: '#666',
+        }}
+        {...props}
+      />
+    ),
     h2: (props) => (
       <Heading as="h2" mt="2em" mb="1.5em" fontSize="1.375em" lineHeight="1" {...props} />
     ),
@@ -28,8 +46,8 @@ export function MdxComponentProvider(props) {
     p: (props) => <Text as="p" fontSize="1.125em" mb="2em" lineHeight="2" {...props} />,
     a: (props) => <Link as="a" color="teal.500" textDecoration="underline" {...props} />,
     code: (props) => <Code w="100%" p="1em" overflowX="auto" {...props} />,
-    ul: (props) => <UnorderedList {...props} />,
-    ol: (props) => <OrderedList {...props} />,
+    ul: (props) => <UnorderedList mb="2em" {...props} />,
+    ol: (props) => <OrderedList mb="2em" {...props} />,
     li: (props) => <ListItem fontSize="1.125em" lineHeight="2em" ml="1em" mb="0.25em" {...props} />,
     table: (props) => <Table mb="2em" p="0" fontSize="1em" lineHeight="1em" {...props} />,
     tr: (props) => <Tr px="0" py="0.5em" {...props} />,
