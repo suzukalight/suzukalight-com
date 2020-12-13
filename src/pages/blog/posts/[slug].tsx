@@ -4,7 +4,7 @@ import hydrate from 'next-mdx-remote/hydrate';
 import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
-import { Button } from '@chakra-ui/react';
+import { Box, Button, Heading } from '@chakra-ui/react';
 import Head from 'next/head';
 
 import { MdxComponentProvider } from '../../../components/providers/MdxProvider';
@@ -22,8 +22,15 @@ export default function BlogPost({ mdxSource, frontMatter }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>{frontMatter.title}</h1>
-      {content}
+      <Box>
+        <Box m="1em">
+          <Box maxW="640px" mx="auto">
+            <Heading as="h1">{frontMatter.title}</Heading>
+
+            {content}
+          </Box>
+        </Box>
+      </Box>
     </MdxComponentProvider>
   );
 }
