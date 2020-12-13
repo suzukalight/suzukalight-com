@@ -1,67 +1,79 @@
 import React from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
+import { Flex, Code, Heading, Link, Text, Box, Image } from '@chakra-ui/react';
 
-import styles from '../styles/Home.module.css'
+const LinkItem = ({
+  url,
+  title,
+  description,
+}: {
+  url: string;
+  title: string;
+  description: string;
+}) => (
+  <Box as="a" href={url} p="6" m="4" borderWidth="1px" rounded="lg" flexBasis={['auto', '45%']}>
+    <Heading as="h3" size="lg" mb="2">
+      {title} &rarr;
+    </Heading>
+    <Text fontSize="lg">{description}</Text>
+  </Box>
+);
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <Flex direction="column" justifyContent="center" alignItems="center" pt={8} pb={8} minH="100vh">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Heading as="h1" size="2xl" mb="2">
+        Welcome to{' '}
+        <Link href="https://nextjs.org" color="teal.500">
+          Next.js!
+        </Link>
+      </Heading>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+      <Text fontSize="xl" mt="2">
+        Get started by editing <Code>pages/index.js</Code>
+      </Text>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+      <Flex flexWrap="wrap" alignItems="center" justifyContent="center" maxW="800px" mt="10">
+        <LinkItem
+          url="https://nextjs.org/docs"
+          title="Documentation"
+          description="Find in-depth information about Next.js features and API."
+        />
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+        <LinkItem
+          url="https://nextjs.org/learn"
+          title="Learn"
+          description="Learn about Next.js in an interactive course with quizzes!"
+        />
+        <LinkItem
+          url="https://github.com/vercel/next.js/tree/master/examples"
+          title="Examples"
+          description="Discover and deploy boilerplate example Next.js projects."
+        />
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+        <LinkItem
+          url="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          title="Deploy"
+          description="Instantly deploy your Next.js site to a public URL with Vercel."
+        />
+      </Flex>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
+      <Box justifyContent="center" alignItems="center">
+        <Link
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+          <Text textAlign="center">
+            Powered by <Image src="/vercel.svg" alt="Vercel Logo" display="inline-block" h="16px" />
+          </Text>
+        </Link>
+      </Box>
+    </Flex>
+  );
 }
