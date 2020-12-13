@@ -7,6 +7,8 @@ import path from 'path';
 import { Button } from '@chakra-ui/react';
 import Head from 'next/head';
 
+import { MdxComponentProvider } from '../../../components/providers/MdxProvider';
+
 const components = { Button };
 const root = process.cwd();
 const contentDir = 'src/contents/blog';
@@ -14,7 +16,7 @@ const contentDir = 'src/contents/blog';
 export default function BlogPost({ mdxSource, frontMatter }) {
   const content = hydrate(mdxSource, { components });
   return (
-    <>
+    <MdxComponentProvider>
       <Head>
         <title>{`${frontMatter.title} - suzukalight.com`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -22,7 +24,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 
       <h1>{frontMatter.title}</h1>
       {content}
-    </>
+    </MdxComponentProvider>
   );
 }
 
