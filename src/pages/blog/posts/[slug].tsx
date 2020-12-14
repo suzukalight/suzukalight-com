@@ -1,11 +1,12 @@
 import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
-import Head from 'next/head';
-import { Heading, Box } from '@chakra-ui/react';
+import { Heading, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
 
 import styles from './slug.module.scss';
 
@@ -17,7 +18,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
   const content = hydrate(mdxSource);
 
   return (
-    <>
+    <Box>
       <Head>
         <title>{`${frontMatter.title} - suzukalight.com`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -31,10 +32,23 @@ export default function BlogPost({ mdxSource, frontMatter }) {
             </Heading>
 
             <article className={styles.article}>{content}</article>
+
+            <Box mb={16}>
+              <Link href="/blog">
+                <ChakraLink>
+                  <Text py={2}>← Back to Blog List</Text>
+                </ChakraLink>
+              </Link>
+              <Link href="/">
+                <ChakraLink>
+                  <Text py={2}>← Back to Home</Text>
+                </ChakraLink>
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }
 

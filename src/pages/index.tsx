@@ -1,12 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { Flex, Box, Icon, SimpleGrid } from '@chakra-ui/react';
+import { Flex, Icon, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
+import { FaCode, FaPen, FaUser } from 'react-icons/fa';
 
 import Header from '../components/molecules/Header';
 import { Hero } from '../components/molecules/Hero';
 import { Card } from '../components/atoms/Card';
-import { FaCode, FaPen, FaUser } from 'react-icons/fa';
 
 export default function Home(props) {
   return (
@@ -28,31 +28,31 @@ export default function Home(props) {
 
       <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32}>
         <Link href="/blog">
-          <Box>
+          <ChakraLink>
             <Card
               image={<Icon as={FaPen} boxSize={16} color="teal.500" />}
               title="Writings"
               description="Blogs and Documents"
             />
-          </Box>
+          </ChakraLink>
         </Link>
         <Link href="/outputs#products">
-          <Box>
+          <ChakraLink>
             <Card
               image={<Icon as={FaCode} boxSize={16} color="teal.500" />}
               title="My Outputs"
               description="Products and Examples"
             />
-          </Box>
+          </ChakraLink>
         </Link>
         <Link href="/about">
-          <Box>
+          <ChakraLink>
             <Card
               image={<Icon as={FaUser} boxSize={16} color="teal.500" />}
               title="Skill & Bio"
               description="Skill map, Awards and Biography"
             />
-          </Box>
+          </ChakraLink>
         </Link>
       </SimpleGrid>
     </Flex>
