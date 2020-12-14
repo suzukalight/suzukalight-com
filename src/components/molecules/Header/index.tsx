@@ -45,7 +45,7 @@ export const Header: React.FC = (props) => {
       </Flex>
 
       <Box display={{ base: 'block', md: 'none' }} onClick={toggleMenu}>
-        {show ? <CloseIcon /> : <HamburgerIcon />}
+        {show ? <CloseIcon boxSize={6} /> : <HamburgerIcon boxSize={6} />}
       </Box>
 
       <Box

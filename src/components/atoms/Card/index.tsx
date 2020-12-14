@@ -9,7 +9,7 @@ type CardProps = {
 
 export const Card: React.FC<CardProps> = ({ image, title, description }) => (
   <Box borderWidth="1px" borderRadius="lg" overflowX="hidden">
-    <Center w="100%" h="240px">
+    <Center w="100%" h="180px">
       {image}
     </Center>
 

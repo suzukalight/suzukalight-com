@@ -68,7 +68,7 @@ export const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }: Hero
       </Link>
 
       <Text>
-        <Icon as={FaTwitter} boxSize={8} color="teal.500" />
+        <Icon as={FaTwitter} boxSize={8} mr={3} color="teal.500" />
         <Icon as={FaGithub} boxSize={8} />
       </Text>
     </Stack>
