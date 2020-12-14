@@ -54,12 +54,13 @@ export const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }: Hero
 
       <Link href={ctaLink}>
         <Button
-          colorScheme="teal"
-          borderRadius="8px"
-          py="4"
-          px="4"
-          lineHeight="1"
           size="md"
+          rounded="md"
+          color={['teal.500', 'teal.500', 'white', 'white']}
+          bg={['white', 'white', 'teal.500', 'teal.500']}
+          _hover={{
+            bg: ['teal.100', 'teal.100', 'teal.600', 'teal.600'],
+          }}
           rightIcon={<ArrowRightIcon />}
         >
           {ctaText}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, Flex, Text, Button } from '@chakra-ui/react';
+import { Box, Flex, Text, Button, Link as ChakraLink } from '@chakra-ui/react';
 import Logo from '../../atoms/Logo';
 
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
@@ -11,14 +11,16 @@ type MenuItemProps = {
 };
 
 const MenuItems: React.FC<MenuItemProps> = ({ children, to, isLast, ...rest }) => (
-  <Text
-    mb={{ base: isLast ? 0 : 8, sm: 0 }}
-    mr={{ base: 0, sm: isLast ? 0 : 8 }}
-    display="block"
-    {...rest}
-  >
-    <Link href={to}>{children}</Link>
-  </Text>
+  <ChakraLink>
+    <Text
+      mb={{ base: isLast ? 0 : 8, sm: 0 }}
+      mr={{ base: 0, sm: isLast ? 0 : 8 }}
+      display="block"
+      {...rest}
+    >
+      <Link href={to}>{children}</Link>
+    </Text>
+  </ChakraLink>
 );
 
 export const Header: React.FC = (props) => {
