@@ -1,79 +1,60 @@
 import React from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
-import { Flex, Code, Heading, Link, Text, Box, Image } from '@chakra-ui/react';
+import { Flex, Box, Icon, SimpleGrid } from '@chakra-ui/react';
 
-const LinkItem = ({
-  url,
-  title,
-  description,
-}: {
-  url: string;
-  title: string;
-  description: string;
-}) => (
-  <Box as="a" href={url} p="6" m="4" borderWidth="1px" rounded="lg" flexBasis={['auto', '45%']}>
-    <Heading as="h3" size="lg" mb="2">
-      {title} &rarr;
-    </Heading>
-    <Text fontSize="lg">{description}</Text>
-  </Box>
-);
+import Header from '../components/molecules/Header';
+import { Hero } from '../components/molecules/Hero';
+import { Card } from '../components/atoms/Card';
+import { FaCode, FaPen, FaUser } from 'react-icons/fa';
 
-export default function Home() {
+export default function Home(props) {
   return (
-    <Flex direction="column" justifyContent="center" alignItems="center" pt={8} pb={8} minH="100vh">
+    <Flex direction="column" align="center" maxW={{ xl: '1200px' }} m="0 auto" {...props}>
       <Head>
-        <title>Create Next App</title>
+        <title>suzukalight.com</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Heading as="h1" size="2xl" mb="2">
-        Welcome to{' '}
-        <Link href="https://nextjs.org" color="teal.500">
-          Next.js!
+      <Header />
+
+      <Hero
+        title="suzukalight.com"
+        subtitle="This is the subheader section where you describe the basic benefits of your product"
+        image="https://source.unsplash.com/collection/404339/800x600"
+        ctaText="My Outputs"
+        ctaLink="/outputs"
+      />
+
+      <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32}>
+        <Link href="/blog">
+          <Box>
+            <Card
+              image={<Icon as={FaPen} boxSize={16} color="teal.500" />}
+              title="Writings"
+              description="Blogs and Documents"
+            />
+          </Box>
         </Link>
-      </Heading>
-
-      <Text fontSize="xl" mt="2">
-        Get started by editing <Code>pages/index.js</Code>
-      </Text>
-
-      <Flex flexWrap="wrap" alignItems="center" justifyContent="center" maxW="800px" mt="10">
-        <LinkItem
-          url="https://nextjs.org/docs"
-          title="Documentation"
-          description="Find in-depth information about Next.js features and API."
-        />
-
-        <LinkItem
-          url="https://nextjs.org/learn"
-          title="Learn"
-          description="Learn about Next.js in an interactive course with quizzes!"
-        />
-        <LinkItem
-          url="https://github.com/vercel/next.js/tree/master/examples"
-          title="Examples"
-          description="Discover and deploy boilerplate example Next.js projects."
-        />
-
-        <LinkItem
-          url="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          title="Deploy"
-          description="Instantly deploy your Next.js site to a public URL with Vercel."
-        />
-      </Flex>
-
-      <Box justifyContent="center" alignItems="center">
-        <Link
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Text textAlign="center">
-            Powered by <Image src="/vercel.svg" alt="Vercel Logo" display="inline-block" h="16px" />
-          </Text>
+        <Link href="/outputs#products">
+          <Box>
+            <Card
+              image={<Icon as={FaCode} boxSize={16} color="teal.500" />}
+              title="My Outputs"
+              description="Products and Examples"
+            />
+          </Box>
         </Link>
-      </Box>
+        <Link href="/about">
+          <Box>
+            <Card
+              image={<Icon as={FaUser} boxSize={16} color="teal.500" />}
+              title="Skill & Bio"
+              description="Skill map, Awards and Biography"
+            />
+          </Box>
+        </Link>
+      </SimpleGrid>
     </Flex>
   );
 }
