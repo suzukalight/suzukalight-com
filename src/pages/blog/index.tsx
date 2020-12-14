@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 import Link from 'next/link';
 
 const root = process.cwd();
-const contentDir = 'src/contents/blog';
+const contentDir = 'contents/blog';
 const baseUrl = '/blog/posts';
 
 export default function IndexPage({ postData }) {
