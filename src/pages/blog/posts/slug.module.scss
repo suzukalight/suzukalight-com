@@ -1,0 +1,156 @@
+$mq-lg: 1279px;
+$mq-md: 959px;
+$mq-sp: 767px;
+$mq-sm: 639px;
+
+@mixin mq($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin mq-md {
+  @media screen and (max-width: $mq-md) {
+    @content;
+  }
+}
+
+@mixin mq-sp {
+  @media screen and (max-width: $mq-sp) {
+    @content;
+  }
+}
+
+@mixin mq-sm {
+  @media screen and (max-width: $mq-sm) {
+    @content;
+  }
+}
+
+.article {
+  position: relative;
+  margin: 2em 0 4em;
+  font-size: 18px;
+  line-height: 2;
+
+  @include mq-sp() {
+    font-size: 16px;
+  }
+
+  &:after {
+    content: '.　.　.　.　.　.　.';
+    position: absolute;
+    bottom: -3em;
+    width: 100%;
+    font-size: 0.75em;
+    text-align: center;
+    color: #666;
+  }
+
+  & p {
+    margin: 0 0 2em;
+    padding: 0;
+  }
+
+  & h1,
+  & h2,
+  & h3 {
+    border: 0;
+    font-weight: bold;
+  }
+
+  & h1 {
+    position: relative;
+    margin: 6em 0 2em;
+    padding: 0;
+    font-size: 1.5em;
+    line-height: 1;
+
+    &:before {
+      content: '.　.　.';
+      position: absolute;
+      top: -4em;
+      width: 100%;
+      font-size: 1em;
+      text-align: center;
+      color: #666;
+    }
+  }
+
+  & h2 {
+    margin: 2.5em 0 2em;
+    padding: 0;
+    font-size: 1.25em;
+    line-height: 1;
+  }
+
+  & h3 {
+    margin: 2em 0;
+    font-size: 1em;
+  }
+
+  & pre {
+    font-size: 0.75em;
+    line-height: 1;
+  }
+
+  & p[class='contentful-paragraph'] {
+    white-space: pre-wrap;
+  }
+
+  & p[class='contentful-paragraph'] > code {
+    display: block;
+    background-color: #f2f2f2;
+    white-space: pre-wrap;
+  }
+
+  & :not(pre) > code[class*='language-'] {
+    background-color: #f2f2f2;
+  }
+
+  & ul,
+  & ol {
+    margin-bottom: 2em;
+  }
+
+  & li {
+    margin-left: 1em;
+    margin-bottom: 0.25em;
+    line-height: 2em;
+  }
+
+  & strong {
+    font-weight: bold;
+  }
+
+  & a {
+    text-decoration: underline;
+    color: #319795;
+  }
+
+  & table {
+    width: 100%;
+    margin: 0 0 2em;
+    border: 0;
+    padding: 0;
+    font-size: 0.875em;
+    line-height: 1.5;
+
+    @include mq-sp() {
+      font-size: 0.75em;
+    }
+  }
+
+  & th,
+  & td {
+    padding: 0.5em;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  & th {
+    font-weight: bold;
+    font-size: 0.75em;
+    background-color: #f7fafc;
+  }
+}

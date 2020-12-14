@@ -4,19 +4,20 @@ import hydrate from 'next-mdx-remote/hydrate';
 import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
-import { Box, Button, Heading } from '@chakra-ui/react';
 import Head from 'next/head';
+import { Heading, Box } from '@chakra-ui/react';
 
-import { MdxComponentProvider } from '../../../components/providers/MdxProvider';
+import styles from './slug.module.scss';
 
-const components = { Button };
 const root = process.cwd();
-const contentDir = 'src/contents/blog';
+const contentDir = 'contents/blog';
 
 export default function BlogPost({ mdxSource, frontMatter }) {
-  const content = hydrate(mdxSource, { components });
+  // NOTE: markdownのHTMLにCSSを直接あてることにする
+  const content = hydrate(mdxSource);
+
   return (
-    <MdxComponentProvider>
+    <>
       <Head>
         <title>{`${frontMatter.title} - suzukalight.com`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -29,11 +30,11 @@ export default function BlogPost({ mdxSource, frontMatter }) {
               {frontMatter.title}
             </Heading>
 
-            {content}
+            <article className={styles.article}>{content}</article>
           </Box>
         </Box>
       </Box>
-    </MdxComponentProvider>
+    </>
   );
 }
 
