@@ -153,4 +153,11 @@ $mq-sm: 639px;
     font-size: 0.75em;
     background-color: #f7fafc;
   }
+
+  & pre {
+    overflow-x: auto;
+    margin-bottom: 2em;
+    padding: 1em;
+    background-color: #f7fafc;
+  }
 }

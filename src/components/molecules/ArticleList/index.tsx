@@ -35,8 +35,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   baseUrl,
 }) => (
   <Link href={`${baseUrl}/[slug]`} as={`${baseUrl}/${slug}`}>
-    <ChakraLink>
-      <Flex direction="row" maxH={24} overflowY="hidden">
+    <ChakraLink overflow="hidden">
+      <Flex direction="row" maxH={24} overflow="hidden">
         {image ? (
           <Img
             src={image}
@@ -57,14 +57,14 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
             {title}
           </Heading>
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-            <Text fontSize="sm" color="gray.500" opacity="0.8">
-              {date ? format(new Date(date), 'yyyy.MM.dd') : ''}
-            </Text>
             <Flex direction="row" maxH="1em" overflow="hidden" ml="-4px">
               {(tags || []).map((tag) => (
                 <Badge key={tag} color="gray.500">{`#${tag}`}</Badge>
               ))}
             </Flex>
+            <Text fontSize="sm" color="gray.500" opacity="0.8">
+              {date ? format(new Date(date), 'yyyy.MM.dd') : ''}
+            </Text>
           </Flex>
         </Flex>
       </Flex>
