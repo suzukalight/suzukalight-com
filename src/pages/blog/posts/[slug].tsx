@@ -5,12 +5,8 @@ import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import { Heading, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
 
-import {
-  ArticleFrontMatter,
-  getDirNamesThatHaveMdx,
-  getMdxDataAndContent,
-  getMdxSource,
-} from '../../../utils/article';
+import { ArticleFrontMatter, getMdxDataAndContent } from '../../../utils/article';
+import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';

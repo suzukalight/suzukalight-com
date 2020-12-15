@@ -1,25 +1,23 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Box, Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
 
 import { ArticleList } from '../../components/molecules/ArticleList';
 import {
   ArticleData,
-  getDirNamesThatHaveMdx,
+  blogDir,
   getMdxDataAndContent,
-  getMdxSource,
   sortArticlesByDateDesc,
 } from '../../utils/article';
+import { getDirNamesThatHaveMdx, getMdxSource } from '../../utils/article-fs';
 
 type IndexPageProps = {
   articles: ArticleData[];
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => {
-  const { pathname } = useRouter();
-  const baseUrl = `${pathname}/posts`;
+  const baseUrl = `${blogDir}/posts`;
 
   return (
     <Box>
@@ -36,7 +34,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => {
             </Heading>
 
             <Box mb={8}>
-              <ArticleList articles={articles} baseUrl={baseUrl} />
+              <ArticleList articles={articles} baseUrl={baseUrl} imageRootDir={blogDir} />
             </Box>
 
             <Box mb={16}>

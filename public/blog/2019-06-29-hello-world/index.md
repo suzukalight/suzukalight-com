@@ -93,4 +93,4 @@ $ yarn deploy
 - [x] タグ追加
 - [x] PWA 対応
 - [x] SNS カード
-- [ ] Contentful 使ってみる
+- [x] Contentful 使ってみる

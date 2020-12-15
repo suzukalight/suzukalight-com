@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import {
   Flex,
+  Box,
   Center,
   Icon,
   Heading,
@@ -9,14 +10,16 @@ import {
   Text,
   SimpleGrid,
   Link as ChakraLink,
-  Badge,
 } from '@chakra-ui/react';
 import { FaPen } from 'react-icons/fa';
 import format from 'date-fns/format';
 
 import { ArticleData } from '../../../utils/article';
 
-type ArticleCardProps = ArticleData & { baseUrl: string };
+type ArticleCardProps = ArticleData & {
+  baseUrl: string;
+  imageRootDir: string;
+};
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   slug,
@@ -25,40 +28,50 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   tags,
   image,
   baseUrl,
+  imageRootDir,
 }) => (
   <Link href={`${baseUrl}/[slug]`} as={`${baseUrl}/${slug}`}>
     <ChakraLink overflow="hidden" href={`${baseUrl}/${slug}`}>
       <Flex direction="row" maxH={24} overflow="hidden">
+        <Flex flexGrow={1} direction="column">
+          <Heading
+            as="h3"
+            size="md"
+            lineHeight={1.25}
+            maxH="2.5em"
+            overflowY="hidden"
+            wordBreak="break-all"
+          >
+            {title}
+          </Heading>
+
+          <Flex flexGrow={1} direction="column" justifyContent="flex-end" mt={1}>
+            <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
+              {(tags || []).map((tag) => (
+                <Text as="span" key={tag} mr={2} color="teal.500" fontSize="sm">{`#${tag}`}</Text>
+              ))}
+            </Box>
+            <Text fontSize="sm" color="gray.500" opacity="0.8">
+              {date ? format(new Date(date), 'yyyy.MM.dd') : ''}
+            </Text>
+          </Flex>
+        </Flex>
+
         {image ? (
           <Img
-            src={image}
-            boxSize={24}
+            src={`${imageRootDir}/${slug}/${image}`}
+            boxSize={20}
             borderRadius={8}
             flexShrink={0}
-            mr={4}
+            ml={4}
             backgroundColor="gray.100"
+            objectFit="cover"
           />
         ) : (
           <Center boxSize={24} borderRadius={8} flexShrink={0} mr={4} backgroundColor="gray.100">
             <Icon as={FaPen} boxSize={12} color="gray.500" />
           </Center>
         )}
-
-        <Flex flexGrow={1} direction="column">
-          <Heading as="h3" size="sm" lineHeight={1.5} maxH="3em" overflowY="hidden">
-            {title}
-          </Heading>
-          <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-            <Flex direction="row" maxH="1em" overflow="hidden" ml="-4px">
-              {(tags || []).map((tag) => (
-                <Badge key={tag} color="gray.500">{`#${tag}`}</Badge>
-              ))}
-            </Flex>
-            <Text fontSize="sm" color="gray.500" opacity="0.8">
-              {date ? format(new Date(date), 'yyyy.MM.dd') : ''}
-            </Text>
-          </Flex>
-        </Flex>
       </Flex>
     </ChakraLink>
   </Link>
@@ -67,12 +80,13 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 type ArticleListProps = {
   articles: ArticleData[];
   baseUrl: string;
+  imageRootDir: string;
 };
 
-export const ArticleList: React.FC<ArticleListProps> = ({ articles, baseUrl }) => (
-  <SimpleGrid columns={[1, 1, 2]} gap={4}>
+export const ArticleList: React.FC<ArticleListProps> = ({ articles, baseUrl, imageRootDir }) => (
+  <SimpleGrid columns={[1, 1, 2]} gap={8}>
     {articles.map((article) => (
-      <ArticleCard key={article.slug} {...article} baseUrl={baseUrl} />
+      <ArticleCard key={article.slug} {...article} baseUrl={baseUrl} imageRootDir={imageRootDir} />
     ))}
   </SimpleGrid>
 );
