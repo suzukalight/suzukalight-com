@@ -28,7 +28,7 @@ export default function Home(props) {
 
       <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32}>
         <Link href="/blog">
-          <ChakraLink>
+          <ChakraLink href="/blog">
             <Card
               image={<Icon as={FaPen} boxSize={16} color="teal.500" />}
               title="Writings"
@@ -37,7 +37,7 @@ export default function Home(props) {
           </ChakraLink>
         </Link>
         <Link href="/outputs#products">
-          <ChakraLink>
+          <ChakraLink href="/outputs#products">
             <Card
               image={<Icon as={FaCode} boxSize={16} color="teal.500" />}
               title="My Outputs"
@@ -46,7 +46,7 @@ export default function Home(props) {
           </ChakraLink>
         </Link>
         <Link href="/about">
-          <ChakraLink>
+          <ChakraLink href="/about">
             <Card
               image={<Icon as={FaUser} boxSize={16} color="teal.500" />}
               title="Skill & Bio"

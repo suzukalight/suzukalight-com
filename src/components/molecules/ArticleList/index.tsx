@@ -12,17 +12,9 @@ import {
   Badge,
 } from '@chakra-ui/react';
 import { FaPen } from 'react-icons/fa';
-
 import format from 'date-fns/format';
 
-type ArticleData = {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string | null;
-  tags: string[] | null;
-  image?: string;
-};
+import { ArticleData } from '../../../utils/article';
 
 type ArticleCardProps = ArticleData & { baseUrl: string };
 
@@ -35,7 +27,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   baseUrl,
 }) => (
   <Link href={`${baseUrl}/[slug]`} as={`${baseUrl}/${slug}`}>
-    <ChakraLink overflow="hidden">
+    <ChakraLink overflow="hidden" href={`${baseUrl}/${slug}`}>
       <Flex direction="row" maxH={24} overflow="hidden">
         {image ? (
           <Img
