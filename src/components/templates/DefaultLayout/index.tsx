@@ -12,7 +12,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children, ...props
   <Flex direction="column" align="center" m="0 auto" {...props}>
     <Header />
 
-    <Box maxW="1280px">{children}</Box>
+    <Box maxW="80em">{children}</Box>
 
     <Footer />
   </Flex>

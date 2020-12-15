@@ -13,7 +13,7 @@ import {
 
 export const Footer: React.FC = () => (
   <Flex direction="column" alignItems="center" w="100%" backgroundColor="gray.100">
-    <Box w="100%" maxW="1280px" mt={12}>
+    <Box w="100%" maxW="80em" mt={12}>
       <SimpleGrid columns={[1, 2, 3]} gap={12}>
         <Box textAlign="center">
           <Heading as="h4" size="sm">

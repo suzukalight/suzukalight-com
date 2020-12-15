@@ -34,6 +34,7 @@ export const Header: React.FC = (props) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
+      maxW="80em"
       mb={4}
       p={4}
       bg={['teal.500', 'teal.500', 'transparent', 'transparent']}
