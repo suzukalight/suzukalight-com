@@ -7,7 +7,12 @@ import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import { Heading, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
 
-import { ArticleFrontMatter, blogContentsUrl, getMdxDataAndContent } from '../../../utils/article';
+import {
+  ArticleFrontMatter,
+  blogContentsUrl,
+  getArticleDate,
+  getMdxDataAndContent,
+} from '../../../utils/article';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
@@ -20,9 +25,11 @@ type BlogPostProps = {
 };
 
 export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug }) => {
+  const contentBaseUrl = `${blogContentsUrl}/${slug}`;
+
   const content = hydrate(mdxSource, {
     components: {
-      img: (props) => <img {...props} src={`${blogContentsUrl}/${slug}/${props.src}`} />,
+      img: (props) => <img {...props} src={`${contentBaseUrl}/${props.src}`} />,
     },
   });
 
@@ -36,9 +43,21 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
       <Box>
         <Box m="1em">
           <Box maxW="640px" mx="auto">
-            <Heading as="h1" my="2em">
+            {frontMatter.hero && <img src={`${contentBaseUrl}/${frontMatter.hero}`} />}
+
+            <Heading as="h1" mt={8} mb={2}>
               {frontMatter.title}
             </Heading>
+            <Box mb={8}>
+              <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
+                {(frontMatter.tags || []).map((tag) => (
+                  <Text as="span" key={tag} mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
+                ))}
+              </Box>{' '}
+              <Text fontSize="sm" color="gray.400" opacity="0.8">
+                {getArticleDate(frontMatter.date)}
+              </Text>
+            </Box>
 
             <article className={styles.article}>{content}</article>
 

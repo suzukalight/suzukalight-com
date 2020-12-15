@@ -65,7 +65,7 @@ export async function getStaticProps() {
       title: data.title,
       excerpt: content.substr(0, 128),
       date: data.date || null,
-      image: data.hero || null,
+      hero: data.hero || null,
       tags: data.tags || null,
     } as ArticleData;
   });

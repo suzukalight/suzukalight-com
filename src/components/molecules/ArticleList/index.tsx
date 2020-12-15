@@ -12,9 +12,8 @@ import {
   Link as ChakraLink,
 } from '@chakra-ui/react';
 import { FaPen } from 'react-icons/fa';
-import format from 'date-fns/format';
 
-import { ArticleData } from '../../../utils/article';
+import { ArticleData, getArticleDate } from '../../../utils/article';
 
 type ArticleCardProps = ArticleData & {
   blogRootUrl: string;
@@ -26,7 +25,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   title,
   date,
   tags,
-  image,
+  hero,
   blogRootUrl,
   blogContentsUrl,
 }) => (
@@ -52,14 +51,14 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
               ))}
             </Box>
             <Text fontSize="sm" color="gray.400" opacity="0.8">
-              {date ? format(new Date(date), 'yyyy.MM.dd') : ''}
+              {getArticleDate(date)}
             </Text>
           </Flex>
         </Flex>
 
-        {image ? (
+        {hero ? (
           <Img
-            src={`${blogContentsUrl}/${slug}/${image}`}
+            src={`${blogContentsUrl}/${slug}/${hero}`}
             boxSize={20}
             borderRadius={8}
             flexShrink={0}

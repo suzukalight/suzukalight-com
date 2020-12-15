@@ -1,6 +1,7 @@
 import matter from 'gray-matter';
 import isAfter from 'date-fns/isAfter';
 import isEqual from 'date-fns/isEqual';
+import format from 'date-fns/format';
 
 export const blogRootUrl = '/blog/posts';
 export const blogContentsUrl = '/contents/blog';
@@ -10,7 +11,7 @@ export type ArticleFrontMatter = {
   excerpt: string;
   date: string | null;
   tags: string[] | null;
-  image?: string | null;
+  hero?: string | null;
 };
 
 export type ArticleData = ArticleFrontMatter & {
@@ -42,4 +43,12 @@ export const comparatorDateDesc = (a: ArticleData, b: ArticleData) => {
  */
 export const sortArticlesByDateDesc = (articles: ArticleData[]) => {
   return articles.slice().sort(comparatorDateDesc);
+};
+
+/**
+ * 記事の投稿日時を文字列化して返す
+ * @param article 記事
+ */
+export const getArticleDate = (date: string) => {
+  return date ? format(new Date(date), 'yyyy.MM.dd') : '';
 };
