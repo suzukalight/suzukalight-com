@@ -46,15 +46,17 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
           <Box maxW="640px" mx="auto">
             {frontMatter.hero && <img src={`${contentBaseUrl}/${frontMatter.hero}`} />}
 
-            <Heading as="h1" mt={8} mb={2}>
+            <Heading as="h1" mt={8} mb={2} wordBreak="break-all">
               {frontMatter.title}
             </Heading>
+
             <Box mb={8}>
               <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
                 {(frontMatter.tags || []).map((tag) => (
                   <Text as="span" key={tag} mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
                 ))}
-              </Box>{' '}
+              </Box>
+
               <Text fontSize="sm" color="gray.400" opacity="0.8">
                 {getArticleDate(frontMatter.date)}
               </Text>
@@ -68,6 +70,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
                   <Text py={2}>← Back to Blog List</Text>
                 </ChakraLink>
               </Link>
+
               <Link href="/">
                 <ChakraLink href="/">
                   <Text py={2}>← Back to Home</Text>

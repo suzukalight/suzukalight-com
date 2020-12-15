@@ -30,12 +30,8 @@ $mq-sm: 639px;
 .article {
   position: relative;
   margin: 2em 0 4em;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 2;
-
-  @include mq-sp() {
-    font-size: 16px;
-  }
 
   &:after {
     content: '.　.　.　.　.　.　.';
@@ -57,6 +53,7 @@ $mq-sm: 639px;
   & h3 {
     border: 0;
     font-weight: bold;
+    word-break: break-word;
   }
 
   & h1 {
@@ -87,11 +84,6 @@ $mq-sm: 639px;
   & h3 {
     margin: 2em 0;
     font-size: 1em;
-  }
-
-  & pre {
-    font-size: 0.75em;
-    line-height: 1;
   }
 
   & p[class='contentful-paragraph'] {
@@ -126,6 +118,7 @@ $mq-sm: 639px;
   & a {
     text-decoration: underline;
     color: #319795;
+    word-break: break-all;
   }
 
   & table {
@@ -160,5 +153,17 @@ $mq-sm: 639px;
     margin: 0 -1rem 2rem;
     padding: 1rem;
     background-color: #f7fafc;
+    font-size: 0.75em;
+    line-height: 1;
+  }
+
+  & code {
+    line-height: 1.5;
+  }
+
+  & :not(pre) code {
+    padding: 0.5rem;
+    background-color: #f7fafc;
+    word-break: break-all;
   }
 }
