@@ -1,17 +1,25 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import { useRouter } from 'next/router';
 import { Box, Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
+
 import { ArticleList } from '../../components/molecules/ArticleList';
+import {
+  ArticleData,
+  getDirNamesThatHaveMdx,
+  getMdxDataAndContent,
+  getMdxSource,
+} from '../../utils/article';
 
-const root = process.cwd();
-const contentDir = 'contents/blog';
-const baseUrl = '/blog/posts';
+type IndexPageProps = {
+  articles: ArticleData[];
+};
 
-export default function IndexPage({ articles }) {
+export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => {
+  const { pathname } = useRouter();
+  const baseUrl = `${pathname}/posts`;
+
   return (
     <Box>
       <Head>
@@ -42,22 +50,24 @@ export default function IndexPage({ articles }) {
       </Box>
     </Box>
   );
-}
+};
+
+export default IndexPage;
 
 export async function getStaticProps() {
-  const contentRoot = path.join(root, contentDir);
-  const articles = fs.readdirSync(contentRoot).map((p) => {
-    const source = fs.readFileSync(path.join(contentRoot, p), 'utf8');
-    const { data, content } = matter(source);
+  const mdxDirs = getDirNamesThatHaveMdx();
+  const articles = mdxDirs.map((slug) => {
+    const source = getMdxSource(slug);
+    const { data, content } = getMdxDataAndContent(source);
 
     return {
-      slug: p.replace(/\.mdx/, ''),
+      slug,
       title: data.title,
       excerpt: content.substr(0, 128),
       date: data.date || null,
       image: data.hero || null,
       tags: data.tags || null,
-    };
+    } as ArticleData;
   });
 
   return { props: { articles } };

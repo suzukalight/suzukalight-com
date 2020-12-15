@@ -3,18 +3,24 @@ import Head from 'next/head';
 import Link from 'next/link';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
-import matter from 'gray-matter';
-import fs from 'fs';
-import path from 'path';
 import { Heading, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
 
+import {
+  ArticleFrontMatter,
+  getDirNamesThatHaveMdx,
+  getMdxDataAndContent,
+  getMdxSource,
+} from '../../../utils/article';
+
+// NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
 
-const root = process.cwd();
-const contentDir = 'contents/blog';
+type BlogPostProps = {
+  mdxSource: string;
+  frontMatter: ArticleFrontMatter;
+};
 
-export default function BlogPost({ mdxSource, frontMatter }) {
-  // NOTE: markdownのHTMLにCSSを直接あてることにする
+export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter }) => {
   const content = hydrate(mdxSource);
 
   return (
@@ -35,12 +41,12 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 
             <Box mb={16}>
               <Link href="/blog">
-                <ChakraLink>
+                <ChakraLink href="/blog">
                   <Text py={2}>← Back to Blog List</Text>
                 </ChakraLink>
               </Link>
               <Link href="/">
-                <ChakraLink>
+                <ChakraLink href="/">
                   <Text py={2}>← Back to Home</Text>
                 </ChakraLink>
               </Link>
@@ -50,20 +56,24 @@ export default function BlogPost({ mdxSource, frontMatter }) {
       </Box>
     </Box>
   );
-}
+};
+
+export default BlogPost;
 
 export async function getStaticPaths() {
+  const dirNamesThatHaveMdx = getDirNamesThatHaveMdx();
+  const paths = dirNamesThatHaveMdx.map((dir) => ({ params: { slug: dir.replace(/\.mdx?/, '') } }));
+
   return {
     fallback: false,
-    paths: fs
-      .readdirSync(path.join(root, contentDir))
-      .map((p) => ({ params: { slug: p.replace(/\.mdx/, '') } })),
+    paths,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const source = fs.readFileSync(path.join(root, contentDir, `${params.slug}.mdx`), 'utf8');
-  const { data, content } = matter(source);
+  const source = getMdxSource(params.slug);
+  const { data, content } = getMdxDataAndContent(source);
   const mdxSource = await renderToString(content);
+
   return { props: { mdxSource, frontMatter: data } };
 }
