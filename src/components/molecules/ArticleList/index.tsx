@@ -17,8 +17,8 @@ import format from 'date-fns/format';
 import { ArticleData } from '../../../utils/article';
 
 type ArticleCardProps = ArticleData & {
-  baseUrl: string;
-  imageRootDir: string;
+  blogRootUrl: string;
+  blogContentsUrl: string;
 };
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
@@ -27,11 +27,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   date,
   tags,
   image,
-  baseUrl,
-  imageRootDir,
+  blogRootUrl,
+  blogContentsUrl,
 }) => (
-  <Link href={`${baseUrl}/[slug]`} as={`${baseUrl}/${slug}`}>
-    <ChakraLink overflow="hidden" href={`${baseUrl}/${slug}`}>
+  <Link href={`${blogRootUrl}/[slug]`} as={`${blogRootUrl}/${slug}`}>
+    <ChakraLink overflow="hidden" href={`${blogRootUrl}/${slug}`}>
       <Flex direction="row" maxH={24} overflow="hidden">
         <Flex flexGrow={1} direction="column">
           <Heading
@@ -59,7 +59,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
         {image ? (
           <Img
-            src={`${imageRootDir}/${slug}/${image}`}
+            src={`${blogContentsUrl}/${slug}/${image}`}
             boxSize={20}
             borderRadius={8}
             flexShrink={0}
@@ -79,14 +79,23 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
 type ArticleListProps = {
   articles: ArticleData[];
-  baseUrl: string;
-  imageRootDir: string;
+  blogRootUrl: string;
+  blogContentsUrl: string;
 };
 
-export const ArticleList: React.FC<ArticleListProps> = ({ articles, baseUrl, imageRootDir }) => (
+export const ArticleList: React.FC<ArticleListProps> = ({
+  articles,
+  blogRootUrl,
+  blogContentsUrl,
+}) => (
   <SimpleGrid columns={[1, 1, 2]} gap={8}>
     {articles.map((article) => (
-      <ArticleCard key={article.slug} {...article} baseUrl={baseUrl} imageRootDir={imageRootDir} />
+      <ArticleCard
+        key={article.slug}
+        {...article}
+        blogRootUrl={blogRootUrl}
+        blogContentsUrl={blogContentsUrl}
+      />
     ))}
   </SimpleGrid>
 );

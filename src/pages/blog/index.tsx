@@ -6,7 +6,8 @@ import { Box, Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { ArticleList } from '../../components/molecules/ArticleList';
 import {
   ArticleData,
-  blogDir,
+  blogContentsUrl,
+  blogRootUrl,
   getMdxDataAndContent,
   sortArticlesByDateDesc,
 } from '../../utils/article';
@@ -16,40 +17,40 @@ type IndexPageProps = {
   articles: ArticleData[];
 };
 
-export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => {
-  const baseUrl = `${blogDir}/posts`;
+export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
+  <Box>
+    <Head>
+      <title>Blog - suzukalight.com</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
 
-  return (
-    <Box>
-      <Head>
-        <title>Blog - suzukalight.com</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Box py={8}>
+      <Box m="1em">
+        <Box maxW="960px" mx="auto">
+          <Heading as="h1" mb={8}>
+            Blog
+          </Heading>
 
-      <Box py={8}>
-        <Box m="1em">
-          <Box maxW="960px" mx="auto">
-            <Heading as="h1" mb={8}>
-              Blog
-            </Heading>
+          <Box mb={8}>
+            <ArticleList
+              articles={articles}
+              blogRootUrl={blogRootUrl}
+              blogContentsUrl={blogContentsUrl}
+            />
+          </Box>
 
-            <Box mb={8}>
-              <ArticleList articles={articles} baseUrl={baseUrl} imageRootDir={blogDir} />
-            </Box>
-
-            <Box mb={16}>
-              <Link href="/">
-                <ChakraLink href="/">
-                  <Text py={2}>← Back to Home</Text>
-                </ChakraLink>
-              </Link>
-            </Box>
+          <Box mb={16}>
+            <Link href="/">
+              <ChakraLink href="/">
+                <Text py={2}>← Back to Home</Text>
+              </ChakraLink>
+            </Link>
           </Box>
         </Box>
       </Box>
     </Box>
-  );
-};
+  </Box>
+);
 
 export default IndexPage;
 

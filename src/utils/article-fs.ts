@@ -1,10 +1,11 @@
 import path from 'path';
 import fs from 'fs';
 
-import { publicBlogDir } from './article';
+import { blogContentsUrl } from './article';
 
 const root = process.cwd();
 
+export const publicBlogDir = `public/${blogContentsUrl}`;
 export const defaultBlogDir = path.join(root, publicBlogDir);
 
 /**

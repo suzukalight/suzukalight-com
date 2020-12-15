@@ -2,8 +2,8 @@ import matter from 'gray-matter';
 import isAfter from 'date-fns/isAfter';
 import isEqual from 'date-fns/isEqual';
 
-export const blogDir = 'blog';
-export const publicBlogDir = `public/${blogDir}`;
+export const blogRootUrl = 'blog/posts';
+export const blogContentsUrl = 'contents/blog';
 
 export type ArticleFrontMatter = {
   title: string;
