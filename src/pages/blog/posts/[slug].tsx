@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -5,7 +7,7 @@ import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import { Heading, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
 
-import { ArticleFrontMatter, getMdxDataAndContent } from '../../../utils/article';
+import { ArticleFrontMatter, blogContentsUrl, getMdxDataAndContent } from '../../../utils/article';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
@@ -14,10 +16,15 @@ import styles from './slug.module.scss';
 type BlogPostProps = {
   mdxSource: string;
   frontMatter: ArticleFrontMatter;
+  slug: string;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter }) => {
-  const content = hydrate(mdxSource);
+export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug }) => {
+  const content = hydrate(mdxSource, {
+    components: {
+      img: (props) => <img {...props} src={`${blogContentsUrl}/${slug}/${props.src}`} />,
+    },
+  });
 
   return (
     <Box>
@@ -69,7 +76,17 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const source = getMdxSource(params.slug);
   const { data, content } = getMdxDataAndContent(source);
-  const mdxSource = await renderToString(content);
+  const mdxSource = await renderToString(content, {
+    components: {
+      img: (props) => <img {...props} src={`${blogContentsUrl}/${params.slug}/${props.src}`} />,
+    },
+  });
 
-  return { props: { mdxSource, frontMatter: data } };
+  return {
+    props: {
+      mdxSource,
+      frontMatter: data,
+      slug: params.slug,
+    } as BlogPostProps,
+  };
 }
