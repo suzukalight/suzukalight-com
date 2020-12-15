@@ -18,7 +18,7 @@ type IndexPageProps = {
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
-  <Box>
+  <Box backgroundColor="gray.50">
     <Head>
       <title>Blog - suzukalight.com</title>
       <link rel="icon" href="/favicon.ico" />
