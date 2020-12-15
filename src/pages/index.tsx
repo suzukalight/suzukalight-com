@@ -1,22 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { Flex, Icon, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
+import { Icon, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
 import { FaCode, FaPen, FaUser } from 'react-icons/fa';
 
-import Header from '../components/molecules/Header';
+import DefaultLayout from '../components/templates/DefaultLayout';
 import { Hero } from '../components/molecules/Hero';
 import { Card } from '../components/atoms/Card';
 
 export default function Home(props) {
   return (
-    <Flex direction="column" align="center" maxW={{ xl: '1200px' }} m="0 auto" {...props}>
+    <DefaultLayout {...props}>
       <Head>
         <title>suzukalight.com</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header />
 
       <Hero
         title="suzukalight.com"
@@ -55,6 +53,6 @@ export default function Home(props) {
           </ChakraLink>
         </Link>
       </SimpleGrid>
-    </Flex>
+    </DefaultLayout>
   );
 }

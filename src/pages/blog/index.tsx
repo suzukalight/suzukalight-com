@@ -12,13 +12,14 @@ import {
   sortArticlesByDateDesc,
 } from '../../utils/article';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../utils/article-fs';
+import DefaultLayout from '../../components/templates/DefaultLayout';
 
 type IndexPageProps = {
   articles: ArticleData[];
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
-  <Box backgroundColor="gray.50">
+  <DefaultLayout backgroundColor="gray.50">
     <Head>
       <title>Blog - suzukalight.com</title>
       <link rel="icon" href="/favicon.ico" />
@@ -49,7 +50,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
         </Box>
       </Box>
     </Box>
-  </Box>
+  </DefaultLayout>
 );
 
 export default IndexPage;

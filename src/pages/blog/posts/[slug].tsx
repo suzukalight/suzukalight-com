@@ -14,6 +14,7 @@ import {
   getMdxDataAndContent,
 } from '../../../utils/article';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
+import DefaultLayout from '../../../components/templates/DefaultLayout';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
@@ -34,7 +35,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
   });
 
   return (
-    <Box>
+    <DefaultLayout>
       <Head>
         <title>{`${frontMatter.title} - suzukalight.com`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -76,7 +77,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
           </Box>
         </Box>
       </Box>
-    </Box>
+    </DefaultLayout>
   );
 };
 
