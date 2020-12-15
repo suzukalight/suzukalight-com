@@ -1,6 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 import matter from 'gray-matter';
+import isAfter from 'date-fns/isAfter';
+import isEqual from 'date-fns/isEqual';
 
 const root = process.cwd();
 const blogDir = 'public/blog';
@@ -48,4 +50,23 @@ export const getMdxSource = (slug: string, blogRootDir = defaultBlogDir) => {
  */
 export const getMdxDataAndContent = (source: string) => {
   return matter(source);
+};
+
+/**
+ * 記事を日付降順で並べ替える comparator
+ */
+export const comparatorDateDesc = (a: ArticleData, b: ArticleData) => {
+  const dateA = new Date(a.date);
+  const dateB = new Date(b.date);
+
+  if (isEqual(dateA, dateB)) return 0;
+  return isAfter(dateA, dateB) ? -1 : 1;
+};
+
+/**
+ * 記事を日付降順で並べ替え、新しい配列を返す
+ * @param articles 記事
+ */
+export const sortArticlesByDateDesc = (articles: ArticleData[]) => {
+  return articles.slice().sort(comparatorDateDesc);
 };

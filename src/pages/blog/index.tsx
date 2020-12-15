@@ -10,6 +10,7 @@ import {
   getDirNamesThatHaveMdx,
   getMdxDataAndContent,
   getMdxSource,
+  sortArticlesByDateDesc,
 } from '../../utils/article';
 
 type IndexPageProps = {
@@ -40,7 +41,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => {
 
             <Box mb={16}>
               <Link href="/">
-                <ChakraLink>
+                <ChakraLink href="/">
                   <Text py={2}>← Back to Home</Text>
                 </ChakraLink>
               </Link>
@@ -70,5 +71,5 @@ export async function getStaticProps() {
     } as ArticleData;
   });
 
-  return { props: { articles } };
+  return { props: { articles: sortArticlesByDateDesc(articles) } };
 }
