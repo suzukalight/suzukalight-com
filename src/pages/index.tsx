@@ -18,13 +18,13 @@ export default function Home(props) {
 
       <Hero
         title="suzukalight.com"
-        subtitle="This is the subheader section where you describe the basic benefits of your product"
-        image="https://source.unsplash.com/collection/404339/800x600"
+        subtitle={`"なければ作ればいいじゃない"`}
+        image="images/hero/01.jpg"
         ctaText="My Outputs"
         ctaLink="/outputs"
       />
 
-      <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32}>
+      <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32} mx={8}>
         <Link href="/blog">
           <ChakraLink href="/blog">
             <Card

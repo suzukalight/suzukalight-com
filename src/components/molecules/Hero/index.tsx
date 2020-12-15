@@ -1,7 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
-import { Box, Button, Flex, Image, Heading, Stack, Text, Icon } from '@chakra-ui/react';
-import { ArrowRightIcon } from '@chakra-ui/icons';
+import { Box, Flex, Image, Heading, Stack, Text, Icon } from '@chakra-ui/react';
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 
 type HeroProps = {
@@ -14,13 +12,14 @@ type HeroProps = {
   [key: string]: any;
 };
 
-export const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }: HeroProps) => (
+export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
   <Flex
     align="center"
     justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
     direction={{ base: 'column-reverse', md: 'row' }}
     wrap="nowrap"
     minH="70vh"
+    maxH="70vh"
     px={8}
     mb={16}
     {...rest}
@@ -52,6 +51,7 @@ export const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }: Hero
         {subtitle}
       </Heading>
 
+      {/* 
       <Link href={ctaLink}>
         <Button
           size="md"
@@ -65,7 +65,8 @@ export const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }: Hero
         >
           {ctaText}
         </Button>
-      </Link>
+      </Link> 
+      */}
 
       <Text>
         <Icon as={FaTwitter} boxSize={8} mr={3} color="teal.500" />
@@ -73,8 +74,15 @@ export const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }: Hero
       </Text>
     </Stack>
 
-    <Box w={{ base: '80%', sm: '60%', md: '50%' }} mb={{ base: 12, md: 0 }}>
-      <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
+    <Box maxW={{ base: '80%', sm: '60%', md: '50%' }} maxH="320px" mb={{ base: 12, md: 0 }}>
+      <Image
+        src={image}
+        fit="cover"
+        w="100%"
+        maxH="320px"
+        rounded={{ base: '0.5em', md: '1rem' }}
+        shadow="2xl"
+      />
     </Box>
   </Flex>
 );

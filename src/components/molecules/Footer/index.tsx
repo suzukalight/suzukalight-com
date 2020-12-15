@@ -23,6 +23,7 @@ export const Footer: React.FC = () => (
             <ChakraLink href="/blog">blog</ChakraLink>
           </Link>
         </Box>
+
         <Box textAlign="center">
           <Heading as="h4" size="sm">
             Outputs
@@ -31,6 +32,7 @@ export const Footer: React.FC = () => (
             <ChakraLink href="/products">products</ChakraLink>
           </Link>
         </Box>
+
         <Box textAlign="center">
           <Heading as="h4" size="sm">
             About
