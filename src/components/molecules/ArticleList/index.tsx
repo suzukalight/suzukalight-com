@@ -62,7 +62,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
             boxSize={20}
             borderRadius={8}
             flexShrink={0}
-            ml={4}
+            ml={6}
             backgroundColor="gray.100"
             objectFit="cover"
           />
@@ -87,7 +87,7 @@ export const ArticleList: React.FC<ArticleListProps> = ({
   blogRootUrl,
   blogContentsUrl,
 }) => (
-  <SimpleGrid columns={[1, 1, 2]} gap={[8, 8, 12]}>
+  <SimpleGrid columns={[1, 1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[12, 12, 16]}>
     {articles.map((article) => (
       <ArticleCard
         key={article.slug}
