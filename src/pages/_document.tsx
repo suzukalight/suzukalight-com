@@ -10,7 +10,7 @@ export default class Document extends NextDocument {
 
   render() {
     return (
-      <Html>
+      <Html lang="ja">
         <Head />
         <body>
           <ColorModeScript />
