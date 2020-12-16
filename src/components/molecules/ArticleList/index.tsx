@@ -5,7 +5,6 @@ import {
   Box,
   Center,
   Icon,
-  Heading,
   Img,
   Text,
   SimpleGrid,
@@ -33,8 +32,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     <ChakraLink overflow="hidden" href={`${blogRootUrl}/${slug}`}>
       <Flex direction="row" maxH={24} overflow="hidden">
         <Flex flexGrow={1} direction="column">
-          <Heading
-            as="h3"
+          <Text
+            as="strong"
             size="sm"
             lineHeight={1.25}
             maxH="2.5em"
@@ -42,15 +41,15 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
             wordBreak="break-all"
           >
             {title}
-          </Heading>
+          </Text>
 
           <Flex flexGrow={1} direction="column" justifyContent="flex-end" mt={1}>
             <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
               {(tags || []).map((tag) => (
-                <Text as="span" key={tag} mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
+                <Text as="small" key={tag} mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
               ))}
             </Box>
-            <Text fontSize="sm" color="gray.400" opacity="0.8">
+            <Text as="small" fontSize="sm" color="gray.400" opacity="0.8">
               {getArticleDate(date)}
             </Text>
           </Flex>
@@ -59,6 +58,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         {hero ? (
           <Img
             src={`${blogContentsUrl}/${slug}/${hero}`}
+            alt={slug}
             boxSize={20}
             borderRadius={8}
             flexShrink={0}
