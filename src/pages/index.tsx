@@ -1,20 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
 import { Icon, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
 import { FaCode, FaPen, FaUser } from 'react-icons/fa';
 
 import DefaultLayout from '../components/templates/DefaultLayout';
+import { HtmlHead } from '../components/atoms/HtmlHead';
 import { Hero } from '../components/molecules/Hero';
 import { Card } from '../components/atoms/Card';
 
 export default function Home(props) {
   return (
     <DefaultLayout {...props}>
-      <Head>
-        <title>suzukalight.com</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HtmlHead />
 
       <Hero
         title="suzukalight.com"

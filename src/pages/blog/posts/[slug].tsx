@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
@@ -15,6 +14,7 @@ import {
 } from '../../../utils/article';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
+import { HtmlHead } from '../../../components/atoms/HtmlHead';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
@@ -36,10 +36,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
 
   return (
     <DefaultLayout>
-      <Head>
-        <title>{`${frontMatter.title} - suzukalight.com`}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HtmlHead title={frontMatter.title} />
 
       <Box>
         <Box m="1em">

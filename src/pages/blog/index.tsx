@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { Box, Heading, Text, Link as ChakraLink } from '@chakra-ui/react';
 
@@ -13,6 +12,7 @@ import {
 } from '../../utils/article';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../utils/article-fs';
 import DefaultLayout from '../../components/templates/DefaultLayout';
+import { HtmlHead } from '../../components/atoms/HtmlHead';
 
 type IndexPageProps = {
   articles: ArticleData[];
@@ -20,14 +20,11 @@ type IndexPageProps = {
 
 export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
   <DefaultLayout backgroundColor="gray.50">
-    <Head>
-      <title>Blog - suzukalight.com</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    <HtmlHead title="Blog" />
 
     <Box py={8}>
       <Box m="1em">
-        <Box maxW="960px" mx="auto">
+        <Box maxW="64em" mx="auto">
           <Heading as="h1" mb={8}>
             Blog
           </Heading>
