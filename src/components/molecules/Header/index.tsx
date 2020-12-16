@@ -33,9 +33,11 @@ export const Header: React.FC = (props) => {
       w="100%"
       mb={4}
       p={4}
-      bg="transparent"
+      bg={['white', 'white', 'transparent', 'transparent']}
       color="teal.700"
+      zIndex={['banner', 'banner', 'base', 'base']}
       boxShadow={['md', 'md', 'sm', 'sm']}
+      position={['fixed', 'fixed', 'relative', 'relative']}
       {...props}
     >
       <Flex w="100%" maxW="80em" align="center" justify="space-between" wrap="wrap">
