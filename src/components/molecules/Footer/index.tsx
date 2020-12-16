@@ -38,7 +38,7 @@ export const Footer: React.FC = () => (
     <Divider mt={8} mb={2} />
 
     <Center mb={8}>
-      <Text color="gray.400">©︎ suzukalight</Text>
+      <Text as="small">©︎ suzukalight</Text>
     </Center>
   </Flex>
 );
