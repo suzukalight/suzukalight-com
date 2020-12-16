@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Image, Heading, Stack, Text, Icon } from '@chakra-ui/react';
+import { Center, Flex, Image, Heading, Stack, Text, Icon } from '@chakra-ui/react';
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 
 type HeroProps = {
@@ -13,45 +13,47 @@ type HeroProps = {
 };
 
 export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
-  <Flex
-    align="center"
-    justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
-    direction={{ base: 'column-reverse', md: 'row' }}
-    wrap="nowrap"
-    minH="70vh"
-    maxH="70vh"
-    px={8}
-    mb={16}
-    {...rest}
-  >
-    <Stack
-      spacing={4}
-      w={{ base: '80%', md: '40%' }}
-      align={['center', 'center', 'flex-start', 'flex-start']}
+  <Center>
+    <Flex
+      align="center"
+      justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
+      direction={{ base: 'column-reverse', md: 'row' }}
+      wrap="nowrap"
+      w={['100%', '100%', '100%', '90%']}
+      h="70vh"
+      px={8}
+      mt={[8, 8, 0]}
+      mb={16}
+      {...rest}
     >
-      <Heading
-        as="h1"
-        size="xl"
-        fontWeight="bold"
-        color="teal.800"
-        textAlign={['center', 'center', 'left', 'left']}
+      <Stack
+        spacing={4}
+        w={['100%', '100%', '50%']}
+        align={['center', 'center', 'flex-start', 'flex-start']}
       >
-        {title}
-      </Heading>
+        <Heading
+          as="h1"
+          size="xl"
+          fontWeight="bold"
+          color="teal.800"
+          textAlign={['center', 'center', 'left', 'left']}
+        >
+          {title}
+        </Heading>
 
-      <Heading
-        as="h2"
-        size="md"
-        color="teal.800"
-        opacity="0.8"
-        fontWeight="normal"
-        lineHeight={1.5}
-        textAlign={['center', 'center', 'left', 'left']}
-      >
-        {subtitle}
-      </Heading>
+        <Heading
+          as="h2"
+          size="md"
+          color="teal.800"
+          opacity="0.8"
+          fontWeight="normal"
+          lineHeight={1.5}
+          textAlign={['center', 'center', 'left', 'left']}
+        >
+          {subtitle}
+        </Heading>
 
-      {/* 
+        {/* 
       <Link href={ctaLink}>
         <Button
           size="md"
@@ -68,21 +70,21 @@ export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
       </Link> 
       */}
 
-      <Text>
-        <Icon as={FaTwitter} boxSize={8} mr={3} color="teal.500" />
-        <Icon as={FaGithub} boxSize={8} />
-      </Text>
-    </Stack>
-
-    <Box maxW={{ base: '80%', sm: '60%', md: '50%' }} maxH="320px" mb={{ base: 12, md: 0 }}>
+        <Text>
+          <Icon as={FaTwitter} boxSize={8} mr={3} color="teal.500" />
+          <Icon as={FaGithub} boxSize={8} />
+        </Text>
+      </Stack>
       <Image
         src={image}
+        alt="hero image"
         fit="cover"
-        w="100%"
-        maxH="320px"
+        w={['100%', '100%', '50%']}
+        h={['16em', '16em', '20em']}
+        mb={{ base: 12, md: 0 }}
         rounded={{ base: '0.5em', md: '1rem' }}
         shadow="2xl"
       />
-    </Box>
-  </Flex>
+    </Flex>
+  </Center>
 );
