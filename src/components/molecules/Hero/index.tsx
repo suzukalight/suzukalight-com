@@ -1,6 +1,6 @@
 import React from 'react';
 import { Center, Flex, Image, Heading, Stack, Text, Icon } from '@chakra-ui/react';
-import { FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaTwitter, FaGithub, FaFacebookF } from 'react-icons/fa';
 
 type HeroProps = {
   title: string;
@@ -71,8 +71,9 @@ export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
       */}
 
         <Text>
-          <Icon as={FaTwitter} boxSize={8} mr={3} color="teal.500" />
-          <Icon as={FaGithub} boxSize={8} />
+          <Icon as={FaTwitter} boxSize={6} color="teal.500" mr={3} />
+          <Icon as={FaFacebookF} boxSize={6} color="teal.500" mr={3} />
+          <Icon as={FaGithub} boxSize={6} color="teal.500" />
         </Text>
       </Stack>
       <Image
