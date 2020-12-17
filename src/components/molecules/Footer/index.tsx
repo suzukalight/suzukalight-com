@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
-import { Flex, Center, Box, Link as ChakraLink, SimpleGrid, Divider, Text } from '@chakra-ui/react';
+import { Flex, Center, Box, SimpleGrid, Divider, Text } from '@chakra-ui/react';
+import { Link } from '../../atoms/Link';
 
 export const Footer: React.FC = () => (
   <Flex direction="column" alignItems="center" w="100%" backgroundColor="gray.100">
@@ -10,27 +10,21 @@ export const Footer: React.FC = () => (
           <Text size="sm" fontWeight="bold">
             Writings
           </Text>
-          <Link href="/blog">
-            <ChakraLink href="/blog">blog</ChakraLink>
-          </Link>
+          <Link to="/blog">blog</Link>
         </Box>
 
         <Box textAlign="center">
           <Text size="sm" fontWeight="bold">
             Outputs
           </Text>
-          <Link href="/products">
-            <ChakraLink href="/products">products</ChakraLink>
-          </Link>
+          <Link to="/products">products</Link>
         </Box>
 
         <Box textAlign="center">
           <Text size="sm" fontWeight="bold">
             About
           </Text>
-          <Link href="/about">
-            <ChakraLink href="/about">skill map</ChakraLink>
-          </Link>
+          <Link to="/about">skill map</Link>
         </Box>
       </SimpleGrid>
     </Box>

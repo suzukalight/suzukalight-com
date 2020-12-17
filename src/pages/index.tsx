@@ -1,12 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
-import { Icon, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
+import { Icon, SimpleGrid } from '@chakra-ui/react';
 import { FaCode, FaPen, FaUser } from 'react-icons/fa';
 
 import DefaultLayout from '../components/templates/DefaultLayout';
 import { HtmlHead } from '../components/atoms/HtmlHead';
 import { Hero } from '../components/molecules/Hero';
 import { Card } from '../components/atoms/Card';
+import { Link } from '../components/atoms/Link';
 
 export default function Home(props) {
   return (
@@ -22,32 +22,26 @@ export default function Home(props) {
       />
 
       <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32} mx={8}>
-        <Link href="/blog">
-          <ChakraLink href="/blog">
-            <Card
-              image={<Icon as={FaPen} boxSize={16} color="teal.500" />}
-              title="Writings"
-              description="Blogs and Documents"
-            />
-          </ChakraLink>
+        <Link to="/blog">
+          <Card
+            image={<Icon as={FaPen} boxSize={16} color="teal.500" />}
+            title="Writings"
+            description="Blogs and Documents"
+          />
         </Link>
-        <Link href="/outputs#products">
-          <ChakraLink href="/outputs#products">
-            <Card
-              image={<Icon as={FaCode} boxSize={16} color="teal.500" />}
-              title="My Outputs"
-              description="Products and Examples"
-            />
-          </ChakraLink>
+        <Link to="/outputs#products">
+          <Card
+            image={<Icon as={FaCode} boxSize={16} color="teal.500" />}
+            title="My Outputs"
+            description="Products and Examples"
+          />
         </Link>
-        <Link href="/about">
-          <ChakraLink href="/about">
-            <Card
-              image={<Icon as={FaUser} boxSize={16} color="teal.500" />}
-              title="Skill & Bio"
-              description="Skill map, Awards and Biography"
-            />
-          </ChakraLink>
+        <Link to="/about">
+          <Card
+            image={<Icon as={FaUser} boxSize={16} color="teal.500" />}
+            title="Skill & Bio"
+            description="Skill map, Awards and Biography"
+          />
         </Link>
       </SimpleGrid>
     </DefaultLayout>

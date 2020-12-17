@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
 
 import React from 'react';
-import Link from 'next/link';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
-import { Heading, Box, Text, Link as ChakraLink } from '@chakra-ui/react';
+import { Heading, Box, Text, Icon } from '@chakra-ui/react';
+import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import {
   ArticleFrontMatter,
@@ -15,6 +15,7 @@ import {
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
+import { Link } from '../../../components/atoms/Link';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
@@ -62,16 +63,16 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
             <article className={styles.article}>{content}</article>
 
             <Box mb={16}>
-              <Link href="/blog">
-                <ChakraLink href="/blog">
-                  <Text py={2}>← Back to Blog List</Text>
-                </ChakraLink>
+              <Link to="/blog">
+                <Text py={2}>
+                  ← <Icon as={FaPencilAlt} boxSize={4} /> Back to Blog List
+                </Text>
               </Link>
 
-              <Link href="/">
-                <ChakraLink href="/">
-                  <Text py={2}>← Back to Home</Text>
-                </ChakraLink>
+              <Link to="/">
+                <Text py={2}>
+                  ← <Icon as={FaHome} boxSize={4} /> Back to Home
+                </Text>
               </Link>
             </Box>
           </Box>
