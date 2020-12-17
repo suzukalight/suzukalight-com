@@ -1,9 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
-import { Center, Box, Flex, Text, Button, Link as ChakraLink } from '@chakra-ui/react';
-import Logo from '../../atoms/Logo';
-
+import React, { useState } from 'react';
+import { Center, Box, Flex, Text, Button } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+
+import Logo from '../../atoms/Logo';
+import { Link } from '../../atoms/Link';
 
 type MenuItemProps = {
   to: string;
@@ -11,50 +12,58 @@ type MenuItemProps = {
 };
 
 const MenuItems: React.FC<MenuItemProps> = ({ children, to, isLast, ...rest }) => (
-  <ChakraLink href={to}>
+  <Link to={to}>
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       display="block"
       {...rest}
     >
-      <Link href={to}>{children}</Link>
+      {children}
     </Text>
-  </ChakraLink>
+  </Link>
 );
 
 export const Header: React.FC = (props) => {
-  const [show, setShow] = React.useState(false);
-  const toggleMenu = () => setShow(!show);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const toggleDropdown = () => setShowDropdown(!showDropdown);
+
+  const [showMenu, setShowMenu] = useState(true);
+
+  useScrollPosition(({ prevPos, currPos }) => {
+    const visible = currPos.y > prevPos.y;
+    setShowMenu(visible);
+  }, []);
 
   return (
     <Center
       as="nav"
+      position="fixed"
       w="100%"
       mb={4}
       p={4}
-      bg={['white', 'white', 'transparent', 'transparent']}
+      bg="white"
       color="teal.700"
-      zIndex={['banner', 'banner', 'base', 'base']}
+      zIndex="banner"
       boxShadow={['md', 'md', 'sm', 'sm']}
-      position={['fixed', 'fixed', 'relative', 'relative']}
+      visibility={showMenu ? 'visible' : 'hidden'}
+      transition={`all 200ms ${showMenu ? 'ease-in' : 'ease-out'}`}
+      transform={showMenu ? 'none' : 'translate(0, -100%)'}
       {...props}
     >
       <Flex w="100%" maxW="80em" align="center" justify="space-between" wrap="wrap">
         <Flex align="center">
-          <ChakraLink href="/">
-            <Link href="/">
-              <Logo />
-            </Link>
-          </ChakraLink>
+          <Link to="/">
+            <Logo />
+          </Link>
         </Flex>
 
-        <Box display={{ base: 'block', md: 'none' }} onClick={toggleMenu}>
-          {show ? <CloseIcon boxSize={6} /> : <HamburgerIcon boxSize={6} />}
+        <Box display={{ base: 'block', md: 'none' }} onClick={toggleDropdown}>
+          {showDropdown ? <CloseIcon boxSize={6} /> : <HamburgerIcon boxSize={6} />}
         </Box>
 
         <Box
-          display={{ base: show ? 'block' : 'none', md: 'block' }}
+          display={{ base: showDropdown ? 'block' : 'none', md: 'block' }}
           flexBasis={{ base: '100%', md: 'auto' }}
         >
           <Flex
