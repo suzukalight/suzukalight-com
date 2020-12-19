@@ -22,19 +22,19 @@ $ cd study-storybook-component-story-format
 $ yarn add -D @storybook/react babel-loader @babel/core @babel/plugin-syntax-jsx
 ```
 
-```javascript{2}:title=/package.json
+```javascript{2}:/package.json
   "scripts": {
     "storybook": "start-storybook"
   },
 ```
 
-```javascript:title=/.storybook/config.js
+```javascript:/.storybook/config.js
 import { configure } from '@storybook/react';
 
 configure(require.context('../src', true, /\.stories\.tsx$/), module);
 ```
 
-```javascript:title=/src/components/atoms/Button/__stories__/index.stories.tsx
+```javascript:/src/components/atoms/Button/__stories__/index.stories.tsx
 import React from 'react';
 import { Button } from '@storybook/react/demo';
 
@@ -110,7 +110,7 @@ export const withEmoji =（）=> <Button>😀😎👍💯</Button>;
 
 **Counter コンポーネント**
 
-```javascript:title=/src/components/atoms/Counter/index.tsx
+```javascript:/src/components/atoms/Counter/index.tsx
 import React, { useState } from 'react';
 
 interface CounterProps {
@@ -135,7 +135,7 @@ export default Counter;
 
 **Component Story Format**
 
-```javascript:title=/src/components/atoms/Counter/__stories__/index.stories.tsx
+```javascript:/src/components/atoms/Counter/__stories__/index.stories.tsx
 import React from 'react';
 import Counter from '..';
 
@@ -160,7 +160,7 @@ CSF ファイルには、initial/disabled の 2 種類の状態を定義しま�
 
 テストファイルで CSF を import して、enabled/disabled の 2 種類の状態パターンとして利用します。click をボタンに対してトリガして、カウンタ値が期待通りに変化するかについて、テストを書きます；
 
-```javascript:title=/src/components/atoms/Counter/__tests__/index.tsx
+```javascript:/src/components/atoms/Counter/__tests__/index.tsx
 import { render, fireEvent } from '@testing-library/react';
 
 import { initial, disabled } from '../__stories__/index.stories';

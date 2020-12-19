@@ -25,7 +25,7 @@ $ yarn workspace client add -D @types/storybook__react @types/storybook__addon-a
 - `/.stories.tsx?$/` にマッチするファイルすべてを対象にするように設定
 - viewport, actions のアドオンを追加
 
-```javascript:title=src/client/.storybook/config.js
+```javascript:src/client/.storybook/config.js
 import { configure, addParameters } from '@storybook/react';
 import { create } from '@storybook/theming';
 
@@ -47,7 +47,7 @@ function loadStories() {
 configure(loadStories, module);
 ```
 
-```javascript:title=src/client/.storybook/addons.js
+```javascript:src/client/.storybook/addons.js
 import '@storybook/addon-viewport/register';
 import '@storybook/addon-actions/register';
 ```
@@ -57,7 +57,7 @@ import '@storybook/addon-actions/register';
 - コンポーネントを TypeScript で記述
 - Story も同様。
 
-```javascript:title=src/client/src/components/organisms/RaceListSmall/index.tsx
+```javascript:src/client/src/components/organisms/RaceListSmall/index.tsx
 import React from 'react';
 import format from 'date-fns/format';
 
@@ -117,7 +117,7 @@ export const RaceListPresenter: React.FC<RaceListPresenterProps> = ({ races }) =
 );
 ```
 
-```javascript:title=src/client/src/components/organisms/RaceListSmall/storybook/index.stories.tsx
+```javascript:src/client/src/components/organisms/RaceListSmall/storybook/index.stories.tsx
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -148,7 +148,7 @@ storiesOf('organisms/RaceListSmall', module).add('correct', () => (
 - package.json で `yarn workspace [package-name] [command]` を使って `yarn workspace client start-storybook` と記述
 - これで `yarn storybook` と単純な記述で起動できる
 
-```json:title=package.json
+```json:package.json
 {
   "scripts": {
     "storybook": "yarn workspace client start-storybook"

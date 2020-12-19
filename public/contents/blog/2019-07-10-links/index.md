@@ -23,7 +23,7 @@ status: 'published'
 
 `gatsby-remark-external-links` を gatsby-transformer-remark のプラグイン設定に追加します。これだけで、記事内の外部リンク表現が自動的に処理され、新タブで開いたり、noopener 属性をつけたりすることができます；
 
-```javascript{6-10}:title=gatsby-config.js
+```javascript{6-10}:gatsby-config.js
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -41,7 +41,7 @@ status: 'published'
 
 `gatsby-plugin-twitter` プラグインをインストールすると、自動展開してくれるようになります；
 
-```javascript{4}:title=gatsby-config.js
+```javascript{4}:gatsby-config.js
 module.exports = {
   plugins: [
     ...,
@@ -52,7 +52,7 @@ module.exports = {
 
 Twitter で対象の投稿を開き、右上のボタンをクリックして「ツイートをサイトに埋め込む」を選択すると、埋め込み用の HTML を得ることができます。このうち `blockquote` のタグだけを markdown にコピペすれば、あとはプラグインが自動的にツイートを展開してくれます；
 
-```html:title=「ツイートをサイトに埋め込む」で得られたHTML
+```html:「ツイートをサイトに埋め込む」で得られたHTML
 <blockquote class="twitter-tweet" data-dnt="true" align="center">
   <p lang="ja" dir="ltr">
     カオマンガイ美味しすぎる… <a href="https://t.co/3Su9WXz678">pic.twitter.com/3Su9WXz678</a>
@@ -85,7 +85,7 @@ iframely というサービスを利用すると、oEmbed に対応している�
 
 iframely を利用するためには、専用のスクリプトを取り込む必要があります。React 系の場合は、Helmet を使って読み込むコンポーネントを作成すると良い、と公式で案内されていました；
 
-```javascript:title=components/atoms/Iframely/index.js
+```javascript:components/atoms/Iframely/index.js
 import React from 'react';
 import Helmet from 'react-helmet';
 
@@ -109,7 +109,7 @@ export default class Iframely extends React.Component {
 }
 ```
 
-```javascript{4}:title=BlogPost.js
+```javascript{4}:BlogPost.js
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title={title} description={description} />
@@ -146,7 +146,7 @@ Heading 要素にアンカーリンクを付与し、鎖マークで取得でき
 
 `gatsby-remark-autolink-headers` を追加すると、Markdown の heading 要素に対して、鎖マークを付与し、アンカーリンクを提供できるようになります。
 
-```javascript{6-11}:title=gatsby-config.js
+```javascript{6-11}:gatsby-config.js
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [

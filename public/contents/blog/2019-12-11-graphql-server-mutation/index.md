@@ -48,7 +48,7 @@ const resolvers: IResolvers = {
 };
 ```
 
-```graphql:title=query
+```graphql:query
 mutation {
   createMessage(text: "Hello GraphQL!") {
     id
@@ -61,7 +61,7 @@ mutation {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "createMessage": {
@@ -111,13 +111,13 @@ const resolvers: IResolvers = {
 };
 ```
 
-```graphql:title=query
+```graphql:query
 mutation {
   deleteMessage(id: "3")
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "deleteMessage": true
@@ -133,7 +133,7 @@ message keys [ '1', '2', '05955f56-7c44-456e-bc36-72abf8b170a9' ]
 
 ## 技術ベース
 
-```typescript:title=./src/models/index.ts
+```typescript:./src/models/index.ts
 export let users: Users = {
   '1': { id: '1', firstName: 'masahiko', lastName: 'kubara' },
   '2': { id: '2', firstName: 'suzuka', lastName: 'light' },
@@ -151,7 +151,7 @@ export default {
 };
 ```
 
-```typescript:title=./src/schema/index.ts
+```typescript:./src/schema/index.ts
 import { gql } from 'apollo-server-express';
 
 const schema = gql`
@@ -187,7 +187,7 @@ const schema = gql`
 export default schema;
 ```
 
-```typescript:title=./src/resolvers/index.ts
+```typescript:./src/resolvers/index.ts
 import { IResolvers } from 'apollo-server-express';
 import uuidv4 from 'uuid/v4';
 
@@ -234,7 +234,7 @@ const resolvers: IResolvers = {
 export default resolvers;
 ```
 
-```typescript:title=./src/index.ts
+```typescript:./src/index.ts
 import express from 'express';
 import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
@@ -268,7 +268,7 @@ user と message に切り分けてみます；
 
 **User**
 
-```typescript:title=./src/schema/user.ts
+```typescript:./src/schema/user.ts
 import { gql } from 'apollo-server-express';
 
 const schema = gql`
@@ -295,7 +295,7 @@ export default schema;
 
 **Message**
 
-```typescript:title=./src/schema/message.ts
+```typescript:./src/schema/message.ts
 import { gql } from 'apollo-server-express';
 
 const schema = gql`
@@ -321,7 +321,7 @@ export default schema;
 
 **ベースとなるスキーマファイル**
 
-```typescript:title=./src/schema/index.ts
+```typescript:./src/schema/index.ts
 import { gql } from 'apollo-server-express';
 
 import userSchema from './user';
@@ -354,7 +354,7 @@ export default [linkSchema, userSchema, messageSchema];
 
 **User**
 
-```typescript:title=./src/index.ts
+```typescript:./src/index.ts
 import { IResolvers } from 'apollo-server-express';
 import uuidv4 from 'uuid/v4';
 
@@ -379,7 +379,7 @@ export default resolvers;
 
 **Message**
 
-```typescript:title=./src/index.ts
+```typescript:./src/index.ts
 import { IResolvers } from 'apollo-server-express';
 import uuidv4 from 'uuid/v4';
 
@@ -420,7 +420,7 @@ export default resolvers;
 
 **ベースとなるリゾルバファイル**
 
-```typescript:title=./src/index.ts
+```typescript:./src/index.ts
 import userResolvers from './user';
 import messageResolvers from './message';
 

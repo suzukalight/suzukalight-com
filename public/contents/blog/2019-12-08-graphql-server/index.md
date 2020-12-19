@@ -40,7 +40,7 @@ $ yarn add -D ts-node ts-node-dev
 
 自分自身の username を返す、me リゾルバを作成します。apollo-server ではこれらを schema, resolvers に記述して設定し、express へ紐付けて立ち上げるというフローになります；
 
-```typescript:title=./src.index.ts
+```typescript:./src.index.ts
 import express from 'express';
 import cors from 'cors';
 import { ApolloServer, gql } from 'apollo-server-express';
@@ -83,7 +83,7 @@ app.listen({ port: 23456 }, () => {
 
 `yarn dev` で起動するように package.json へ記述しておきます；
 
-```json:title=package.json
+```json:package.json
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts"
   }
@@ -102,7 +102,7 @@ server on http://localhost:23456/graphql
 
 http://localhost:23456/graphql へアクセスすると、**apollo-server に付属している GraphQL Playground が起動します。**ここから API を叩けるようになっていますので、下記の query を入力して実行すれば、レスポンスが表示されるはずです；
 
-```graphql:title=query
+```graphql:query
 {
   me {
     username
@@ -110,7 +110,7 @@ http://localhost:23456/graphql へアクセスすると、**apollo-server に付
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "me": {
@@ -137,7 +137,7 @@ http://localhost:23456/graphql へアクセスすると、**apollo-server に付
 
 interface と、サンプルデータを定義します。me は user の id=1 ということにしてみましょう；
 
-```typescript:title=./src/index.ts
+```typescript:./src/index.ts
 interface User {
   id: string;
   username: string;
@@ -157,7 +157,7 @@ const me = users[1];
 
 Query として user 全体と単体をそれぞれリクエストできるものを追加し、User には先ほど定義した id フィールドを追加します；
 
-```typescript{4-5,9}:title=./src/index.ts
+```typescript{4-5,9}:./src/index.ts
 const schema = gql`
   type Query {
     me: User
@@ -179,7 +179,7 @@ const schema = gql`
 
 User エンティティを取得するための、具体的な実装を記述していきます；
 
-```typescript{1,6-7}:title=./src/index.ts
+```typescript{1,6-7}:./src/index.ts
 import { ApolloServer, gql, IResolvers } from 'apollo-server-express';
 
 const resolvers: IResolvers = {
@@ -198,7 +198,7 @@ const resolvers: IResolvers = {
 
 作成した users, user(id) をそれぞれ実行してみます。GraphQL なら複数のクエリを同時に発行しても OK なので、まとめてテストしてみます；
 
-```graphql:title=query
+```graphql:query
 {
   users {
     username
@@ -213,7 +213,7 @@ const resolvers: IResolvers = {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "users": [
@@ -266,7 +266,7 @@ const resolvers: IResolvers = {
 };
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "users": [
@@ -283,7 +283,7 @@ const resolvers: IResolvers = {
 
 上記の例では具体的なメリットはありませんが、たとえば username を firstName と lastName の合成結果にする例を作成してみましょう；
 
-```typescript{5-6,12-13,17-18,23}:title=./src/index.ts
+```typescript{5-6,12-13,17-18,23}:./src/index.ts
 const schema = gql`
   type User {
     id: ID!
@@ -311,7 +311,7 @@ const resolvers: IResolvers = {
 };
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "users": [
@@ -339,7 +339,7 @@ resolver に渡される引数は全部で 4 つあります；
 
 **第 3 引数 context を利用すると、リゾルバ全体で共有したい情報を伝えることができます。**ここではログインユーザ（me）の情報を伝えてみます；
 
-```typescript{3,10}:title=./src/index.ts
+```typescript{3,10}:./src/index.ts
 const resolvers: IResolvers = {
   Query: {
     me: (parent, args, { me }) => me,
@@ -429,7 +429,7 @@ const resolvers: IResolvers = {
 
 Message に user フィールドを定義します。引数で受けた親エンティティ（Message）の userId をもとに、users データから当該 user を検索して、フィールドを解決しています。
 
-```graphql:title=query
+```graphql:query
 {
   messages {
     id
@@ -442,7 +442,7 @@ Message に user フィールドを定義します。引数で受けた親エン
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "messages": [
@@ -500,7 +500,7 @@ const resolvers: IResolvers = {
 };
 ```
 
-```graphql:title=query
+```graphql:query
 {
   me {
     id
@@ -513,7 +513,7 @@ const resolvers: IResolvers = {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "me": {

@@ -47,7 +47,7 @@ $ yarn add -DW @babel/core @babel/preset-env @babel/preset-react @babel/preset-t
 - **presets**: React(JSX)と TypeScript を変換するように指定します
 - **babelrcRoots**: Jest で実行する Babel に対して、monorepo 構成であることを伝えます
 
-```javascript:title=/babel.config.js
+```javascript:/babel.config.js
 module.exports = {
   presets: [
     ['@babel/preset-env', { targets: { node: 'current' }, modules: 'commonjs' }],
@@ -62,7 +62,7 @@ module.exports = {
 
 **[projects オプション](https://jestjs.io/docs/ja/configuration#projects-array-string-projectconfig)**を指定して、Jest が複数のプロジェクトを独立して扱えるようにします。`<rootDir>/[packages-dir]/*` を指定すると、packages-dir 配下のすべてのプロジェクトがテスト対象となり、Jest コマンドによって並行してテストされるようになります；
 
-```javascript:title=/jest.config.js
+```javascript:/jest.config.js
 module.exports = {
   projects: ['<rootDir>/src/*'],
 };
@@ -80,7 +80,7 @@ create-react-app 環境には、デフォルトで src/App.test.tsx がありま
 - **testMatch**: テスト対象のファイル名を正規表現で指定します
 - **moduleNameMapper**: import などで指定したファイルが、テストにおいて邪魔になる場合、それを別のモジュールに置き換えることができる設定です。assets と styles を、それぞれダミーデータに置き換えさせています
 
-```javascript:title=/src/client/jest.config.js
+```javascript:/src/client/jest.config.js
 module.exports = {
   name: 'client',
   displayName: 'client',
@@ -102,7 +102,7 @@ module.exports = {
 
 **babel-jest** で JS ファイルを変換します。この変換において使用する Babel オプションをここで指定できます；
 
-```javascript:title=/src/client/.jest/transform.js
+```javascript:/src/client/.jest/transform.js
 module.exports = require('babel-jest').createTransformer({
   presets: [
     ['@babel/preset-env', { targets: { node: 'current' }, modules: 'commonjs' }],
@@ -117,11 +117,11 @@ module.exports = require('babel-jest').createTransformer({
 
 **[Jest の例に載っているモックファイル](https://jestjs.io/docs/ja/webpack#%E9%9D%99%E7%9A%84%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88%E3%81%AE%E7%AE%A1%E7%90%86)**をそのまま利用します。
 
-```javascript:title=/src/client/.jest/__mocks__/file.js
+```javascript:/src/client/.jest/__mocks__/file.js
 module.exports = 'test-file-stub';
 ```
 
-```javascript:title=/src/client/.jest/__mocks__/style.js
+```javascript:/src/client/.jest/__mocks__/style.js
 module.exports = {};
 ```
 
@@ -129,7 +129,7 @@ module.exports = {};
 
 以上で Jest 実行環境が整いましたので、package.json にテストコマンドを追加して、実行してみます；
 
-```json:title=package.json
+```json:package.json
   "scripts": {
     "test": "NODE_ENV=test jest"
   },
@@ -169,7 +169,7 @@ $ yarn add -DW @storybook/addon-storyshots react-test-renderer babel-plugin-requ
 
 - **setupFiles**: Jest の初期化関数を追加します
 
-```javascript{3}:title=/src/client/jest.config.js
+```javascript{3}:/src/client/jest.config.js
 module.exports = {
   ...
   setupFiles: ['<rootDir>/.jest/setup.js'],
@@ -180,7 +180,7 @@ module.exports = {
 
 Storybook の初期化時に使用している require.context を Jest でも使用できるようにします（[※参照文献](https://github.com/storybookjs/storybook/tree/master/addons/storyshots/storyshots-core#configure-jest-to-work-with-webpacks-requirecontext)）。babel-plugin-require-context-hook を使います；
 
-```javascript{3}:title=/src/client/.jest/setup.js
+```javascript{3}:/src/client/.jest/setup.js
 const registerRequireContextHook = require('babel-plugin-require-context-hook/register');
 registerRequireContextHook();
 ```
@@ -192,7 +192,7 @@ Jest が Storyshots の起点とするテストファイルで、ここで Story
 - **configPath**: Storybook の config を指定
 - **test**: どのようなスナップショットを出力するかを指定します。ここでは multiSnapshotWithOptions を指定することで、コンポーネントごとに 1 つずつスナップショットファイルを生成するようにしています
 
-```javascript{3}:title=/src/client/src/components/storyshots.test.js
+```javascript{3}:/src/client/src/components/storyshots.test.js
 import initStoryshots, { multiSnapshotWithOptions } from '@storybook/addon-storyshots'; // eslint-disable-line import/no-extraneous-dependencies
 import path from 'path';
 
@@ -228,7 +228,7 @@ Ran all test suites.
 
 スナップショットテストが正しく動作しているかをチェックするために、簡単にデグレを起こしてみましょう；
 
-```javascript{7}:title=/src/client/src/components/organisms/BlogPost/index.tsx
+```javascript{7}:/src/client/src/components/organisms/BlogPost/index.tsx
 export const BlogPost = ({ post }: BlogPostPresenterProps) => (
   <Container>
     <Header as="h1">{post.title}</Header>
@@ -315,7 +315,7 @@ Storyshots のテストを行うファイルを、通常のテストファイル
 
 通常の jest.config.js から、Storyshots のテストを行うための設定を分離します。具体的には testMatch を、Storyshots のテストを行うファイルのみをマッチさせるように上書きします；
 
-```javascript:title=/src/client/jest.config.storyshots.js
+```javascript:/src/client/jest.config.storyshots.js
 const baseConfig = require('./jest.config');
 
 module.exports = {
@@ -328,7 +328,7 @@ module.exports = {
 
 テストを実行するスクリプトを、ロジック・Storyshots に分割します。Storyshots のテストについては、さきほと作成した config ファイルを使用するように変更しました；
 
-```json{6-7}:title=/src/client/package.json
+```json{6-7}:/src/client/package.json
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -343,7 +343,7 @@ module.exports = {
 
 ルートの package.json も変更します。storyshots を実行するコマンドを、yarn workspace 経由で直接呼び出すように変更しました；
 
-```json{8-9}:title=/package.json
+```json{8-9}:/package.json
   "scripts": {
     "cl:start": "yarn workspace client start",
     "sr:start": "yarn workspace server start",

@@ -14,7 +14,7 @@ status: 'published'
 
 タグを指定するカラムを、md ファイルの先頭に追加します。前回トップ画像情報を追加したときと同じ手法です。
 
-```yaml{3}:title=index.md
+```yaml{3}:index.md
 ---
 ...
 tags: ['gatsby', 'tag']
@@ -29,7 +29,7 @@ tags: ['gatsby', 'tag']
 
 markdown からタグを抽出します；
 
-```javascript{7}:title=BlogPost/index.js
+```javascript{7}:BlogPost/index.js
 export const pageQuery = graphql`
   query {
     ...
@@ -43,7 +43,7 @@ export const pageQuery = graphql`
 
 このタグ情報を表示するコンポーネントを作成します；
 
-```javascript:title=Tags/index.js
+```javascript:Tags/index.js
 import React from 'react';
 import { Link } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
@@ -82,7 +82,7 @@ export default Tags;
 
 記事情報を取得する query の frontmatter に tags を追加し、md ファイルからタグ情報を取得しておきます；
 
-```javascript{8}:title=gatsby-node.js
+```javascript{8}:gatsby-node.js
 const result = await graphql(`
 {
   allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
@@ -97,7 +97,7 @@ const result = await graphql(`
 
 記事情報を取得できたら、そこからタグ情報を抽出し、重複を取り除きます。得られたタグ配列を使用して、createPage でタグ毎のページを出力させます；
 
-```javascript:title=gatsby-node.js
+```javascript:gatsby-node.js
   const posts = result.data.allMarkdownRemark.edges;
   const tags = posts.reduce((tags, edge) => {
     const edgeTags = get(edge, 'node.frontmatter.tags');
@@ -124,7 +124,7 @@ createPage で生成するタグページのテンプレートです。
 
 `gatsby-node.js`から受け取った`context.tag`を query の filter 条件に利用することで、そのタグが紐ついている md ファイルのみを抽出することができるようになります；
 
-```javascript{2,9}:title=templates/Tags/index.js
+```javascript{2,9}:templates/Tags/index.js
 export const pageQuery = graphql`
   query($tag: String) {
     site {
@@ -145,7 +145,7 @@ export const pageQuery = graphql`
 
 query で取得した記事情報をもとに、記事一覧を表示します；
 
-```javascript{12-16}:title=templates/Tags/index.js
+```javascript{12-16}:templates/Tags/index.js
 const Tags = ({ location, pageContext, data }) => {
   const { tag } = pageContext;
   const { edges, totalCount } = data.allMarkdownRemark;
@@ -184,7 +184,7 @@ const Tags = ({ location, pageContext, data }) => {
 `group`を利用することで、tag で groupby をかけた結果を得ることができます。totalCount を受け取って、記事の総数も表示できるようにしましょう；
 https://www.gatsbyjs.org/docs/graphql-reference/#group
 
-```javascript:title=pages/tags.js
+```javascript:pages/tags.js
 export const pageQuery = graphql`
   query {
     site {
@@ -206,7 +206,7 @@ export const pageQuery = graphql`
 
 groupby した結果をもとに、タグ一覧を表示します；
 
-```javascript:title=pages/tags.js
+```javascript:pages/tags.js
 const TagsPage = ({
   location,
   data: {

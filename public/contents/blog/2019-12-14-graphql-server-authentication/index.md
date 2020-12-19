@@ -25,7 +25,7 @@ https://github.com/suzukalight/study-graphql-apollo-server/tree/master/src/06-au
 
 User のモデルとスキーマに、email, password を追加します；
 
-```typescript{5-6,12-28}:title=src/05-authentication/src/models/user.ts
+```typescript{5-6,12-28}:src/05-authentication/src/models/user.ts
 class User extends Model {
   public id!: number;
   public lastName!: string;
@@ -61,7 +61,7 @@ User.init(
 );
 ```
 
-```typescript{9}:title=src/05-authentication/src/schema/user.ts
+```typescript{9}:src/05-authentication/src/schema/user.ts
 const schema = gql`
   # ...
 
@@ -78,7 +78,7 @@ const schema = gql`
 
 seeder にもメルパスを追加します；
 
-```typescript{5-6,12-13}:title=src/05-authentication/src/seed.ts
+```typescript{5-6,12-13}:src/05-authentication/src/seed.ts
 export const createUsersWithMessages = async (models: Models) => {
   await models.User.create({
     firstName: 'masahiko',
@@ -98,7 +98,7 @@ export const createUsersWithMessages = async (models: Models) => {
 
 データが登録できたか、クエリを発行して確認してみます；
 
-```graphql:title=query
+```graphql:query
 {
   users {
     id
@@ -108,7 +108,7 @@ export const createUsersWithMessages = async (models: Models) => {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "users": [
@@ -133,7 +133,7 @@ email が返ってきました。成功です。
 
 実際にサインアップを行うために、`signUp` のスキーマとリゾルバを追加しましょう；
 
-```typescript{4-10}:title=src/05-authentication/src/schema/user.ts
+```typescript{4-10}:src/05-authentication/src/schema/user.ts
 const schema = gql`
   # ...
 
@@ -147,7 +147,7 @@ const schema = gql`
 `;
 ```
 
-```typescript{1,6-11}:title=src/05-authentication/src/resolvers/user.ts
+```typescript{1,6-11}:src/05-authentication/src/resolvers/user.ts
 const createToken = async (user: User) => 'dummy';
 
 const resolvers: IResolvers<User, ResolverContext> = {
@@ -166,7 +166,7 @@ const resolvers: IResolvers<User, ResolverContext> = {
 
 実装した Mutation を実行してみます；
 
-```graphql:title=mutation
+```graphql:mutation
 mutation {
   signUp(lastName: "new", firstName: "user", email: "newuser@email.com", password: "newuser") {
     token
@@ -174,7 +174,7 @@ mutation {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "signUp": {
@@ -199,7 +199,7 @@ $ yarn workspace 05-authentication add -D @types/bcrypt
 
 入力されたパスワードを自動的に暗号化するために、**Sequelize の Hooks 関数**を利用します。Hooks はエンティティに対するイベントが発生した際に自動的に実行される関数のことで、今回はユーザエンティティの生成時にフックして呼び出される関数 **beforeCreate** を使用しました；
 
-```typescript{1,3-6,15-19}:title=src/05-authentication/src/resolvers/user.ts
+```typescript{1,3-6,15-19}:src/05-authentication/src/resolvers/user.ts
 import bcrypt from 'bcrypt';
 
 const generatePasswordHash = async (user: User) => {
@@ -244,14 +244,14 @@ $ yarn workspace 05-authentication add dotenv
 
 .env ファイルに、シークレットキーと有効期限を記述します。このファイルは gitignore して、リポジトリやコードには公開されないようにしておきましょう；
 
-```env:title=src/05-authentication/.env
+```env:src/05-authentication/.env
 JWT_SECRET="your_jwt_secret_phrase"
 JWT_EXPIRES_IN="30m"
 ```
 
 index.ts で、環境変数として取り込み、context に流し込みます；
 
-```typescript{4-7}:title=src/05-authentication/src/resolvers/typings.ts
+```typescript{4-7}:src/05-authentication/src/resolvers/typings.ts
 export interface ResolverContext {
   me: User;
   models: Models;
@@ -264,7 +264,7 @@ export interface ResolverContext {
 
 dotenv パッケージの `config` 関数を利用すると、`process.env` に .env の内容が展開されて利用できるようになります；
 
-```typescript{1,3,9}:title=src/05-authentication/src/index.ts
+```typescript{1,3,9}:src/05-authentication/src/index.ts
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -280,7 +280,7 @@ const server = new ApolloServer({
 
 シークレットキーと有効期限の情報をもとに、JWT トークンを発行します；
 
-```typescript{1,3-6,10-13}:title=src/05-authentication/src/resolvers/user.ts
+```typescript{1,3-6,10-13}:src/05-authentication/src/resolvers/user.ts
 import jwt from 'jsonwebtoken';
 
 const createToken = async (user: User, secret: string, expiresIn: string) => {
@@ -307,7 +307,7 @@ const resolvers: IResolvers<User, ResolverContext> = {
 **User スキーマ**  
 mutation として signIn 関数を追加します；
 
-```typescript{6}:title=src/05-authentication/src/schema/user.ts
+```typescript{6}:src/05-authentication/src/schema/user.ts
 const schema = gql`
   # ...
 
@@ -321,7 +321,7 @@ const schema = gql`
 **User モデル**  
 サインインするユーザを検索するためのクエリ関数（findByEmail）と、入力したパスワードの有効性を確認する関数（validatePassword）を追加していきます；
 
-```typescript{4-5,8-12}:title=src/05-authentication/src/models/user.ts
+```typescript{4-5,8-12}:src/05-authentication/src/models/user.ts
 class User extends Model {
   // ...
 
@@ -343,7 +343,7 @@ User.prototype.validatePassword = async function(password: string) {
 **User リゾルバ**  
 User モデルの関数と、JWT 発行関数とを利用して、サインイン処理を完成させます；
 
-```typescript{1,7-15}:title=src/05-authentication/src/resolvers/user.ts
+```typescript{1,7-15}:src/05-authentication/src/resolvers/user.ts
 import { IResolvers, UserInputError, AuthenticationError } from 'apollo-server-express';
 
 const resolvers: IResolvers<User, ResolverContext> = {
@@ -369,7 +369,7 @@ const resolvers: IResolvers<User, ResolverContext> = {
 
 では signIn Mutation を実行してみます；
 
-```graphql:title=mutation
+```graphql:mutation
 mutation {
   signIn(email: "suzukalight@email.com", password: "suzukalight") {
     token
@@ -377,7 +377,7 @@ mutation {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "signIn": {
@@ -397,7 +397,7 @@ mutation {
 
 サインイン処理によって発行された JWT トークンには、id と email が載っています。**この情報をクライアントで保管し、サーバアクセス時に送信してもらう**ことで、クライアントがどのユーザでサインインしているかを判定します。
 
-```typescript{1,3-12,14-23}:title=src/06-authorization/src/index.ts
+```typescript{1,3-12,14-23}:src/06-authorization/src/index.ts
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 
 const getMe = async (req: Request) => {
@@ -442,7 +442,7 @@ $ yarn workspace 06-authorization add -D @types/graphql-resolvers
 
 ログインユーザ情報が存在するかを確認する、`isAuthenticated`関数を切り出してみましょう；
 
-```typescript:title=src/06-authorization/src/resolvers/authorization.ts
+```typescript:src/06-authorization/src/resolvers/authorization.ts
 import { skip } from 'graphql-resolvers';
 import { ForbiddenError } from 'apollo-server-express';
 import { ResolverContext } from './typings';
@@ -455,7 +455,7 @@ me 情報の有無で、ログインしているかどうかを確認してい�
 
 これを既存の createMessage リゾルバに連結してみます；
 
-```typescript{1,3,7-12}:title=src/06-authorization/src/resolvers/message.ts
+```typescript{1,3,7-12}:src/06-authorization/src/resolvers/message.ts
 import { combineResolvers } from 'graphql-resolvers';
 
 import { isAuthenticated } from './authorization';
@@ -490,7 +490,7 @@ const resolvers: IResolvers<User, ResolverContext> = {
 
 authorization リゾルバ集に、メッセージのオーナーであるかどうかで認可を行う、`isMessageOwner` を追加します；
 
-```typescript{2,6-16}:title=src/06-authorization/src/resolvers/authorization.ts
+```typescript{2,6-16}:src/06-authorization/src/resolvers/authorization.ts
 // ...
 import Message from '../models/message';
 
@@ -511,7 +511,7 @@ export const isMessageOwner = async (
 
 これを deleteMessage リゾルバで使用してみましょう；
 
-```typescript{1,7-14}:title=src/06-authorization/src/resolvers/message.ts
+```typescript{1,7-14}:src/06-authorization/src/resolvers/message.ts
 import { isAuthenticated, isMessageOwner } from './authorization';
 
 const resolvers: IResolvers<User, ResolverContext> = {
@@ -544,7 +544,7 @@ const resolvers: IResolvers<User, ResolverContext> = {
 
 前置きはここまでで、実装に移ってまいりましょう。まずは User エンティティに Role を追加します；
 
-```typescript{1,5,10-12}:title=src/06-authorization/src/models/user.ts
+```typescript{1,5,10-12}:src/06-authorization/src/models/user.ts
 export type Role = 'member' | 'admin';
 
 class User extends Model {
@@ -561,7 +561,7 @@ User.init({
 
 seeder にはユーザごとに権限を分けて設定してみます；
 
-```typescript{4,9}:title=src/06-authorization/src/seed.ts
+```typescript{4,9}:src/06-authorization/src/seed.ts
 export const createUsersWithMessages = async (models: Models) => {
   await models.User.create({
     // ...
@@ -577,7 +577,7 @@ export const createUsersWithMessages = async (models: Models) => {
 
 スキーマにも role を追加するとともに、ユーザを削除できる mutation である deleteUser を追加します；
 
-```typescript{4,9}:title=src/06-authorization/src/schema/user.ts
+```typescript{4,9}:src/06-authorization/src/schema/user.ts
 const schema = gql`
   extend type Mutation {
     # ...
@@ -593,14 +593,14 @@ const schema = gql`
 
 Role-based な認可のリゾルバとして、ログインユーザが管理者権限かを調べる isAdmin を追加します。me はログインしていない場合には null になりますので、**Optional Chaining `me?.role` で null チェックします**；
 
-```typescript{4,9}:title=src/06-authorization/src/resolvers/authorization.ts
+```typescript{4,9}:src/06-authorization/src/resolvers/authorization.ts
 export const isAdmin = (parent: any, args: any, { me }: ResolverContext) =>
   me?.role === 'admin' ? skip : new ForbiddenError('Not authorized as admin');
 ```
 
 各素材を使って deleteUser リゾルバを記述しましょう；
 
-```typescript{1,3,6-7,13-15}:title=src/06-authorization/src/resolvers/user.ts
+```typescript{1,3,6-7,13-15}:src/06-authorization/src/resolvers/user.ts
 import { combineResolvers } from 'graphql-resolvers';
 
 import { isAdmin } from './authorization';
@@ -626,7 +626,7 @@ const resolvers: IResolvers<User, ResolverContext> = {
 
 では実際に deleteUser を実行してみます。先に signUp でメンバーを 1 人追加しておき、role=admin のメンバーでサインインして、そのメンバー（id:3）を削除してみましょう；
 
-```graphql:title=mutation
+```graphql:mutation
 mutation {
   signUp(lastName: "new", firstName: "user", email: "newuser@email.com", password: "newuser") {
     token
@@ -644,7 +644,7 @@ mutation {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "data": {
     "deleteUser": true
@@ -656,7 +656,7 @@ mutation {
 
 次に、role=member のメンバーでサインインした場合はどうでしょうか？
 
-```graphql:title=mutation
+```graphql:mutation
 mutation {
   signUp(lastName: "new", firstName: "user", email: "newuser@email.com", password: "newuser") {
     token
@@ -674,7 +674,7 @@ mutation {
 }
 ```
 
-```json:title=response
+```json:response
 {
   "errors": [
     {

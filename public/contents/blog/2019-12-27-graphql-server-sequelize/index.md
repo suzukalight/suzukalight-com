@@ -56,7 +56,7 @@ module.exports = {
 
 ## TypeScript による型定義
 
-```typescript:title=src/models/user.ts
+```typescript:src/models/user.ts
 import { Model, Association, DataTypes, HasManyCreateAssociationMixin } from 'sequelize';
 
 import Message from './message';
@@ -203,7 +203,7 @@ User.prototype.validatePassword = async function (password: string) {
 
 実行環境によって設定を切り替えられるように、config.json に複数の設定値を記述しておき、それをもとに初期化させます；
 
-```json:title=src/infrastructure/sequelize/config.json
+```json:src/infrastructure/sequelize/config.json
 {
   "development": {
     "dialect": "sqlite",
@@ -218,7 +218,7 @@ User.prototype.validatePassword = async function (password: string) {
 }
 ```
 
-```typescript:title=src/infrastructure/sequelize/index.ts
+```typescript:src/infrastructure/sequelize/index.ts
 import path from 'path';
 import { Sequelize } from 'sequelize';
 
@@ -230,7 +230,7 @@ export const sequelize = new Sequelize(config);
 
 ## サーバとの連携
 
-```typescript:title=src/domain/models/index.ts
+```typescript:src/domain/models/index.ts
 import { sequelize } from '../../infrastructure/sequelize';
 import User from './user';
 import Message from './message';
@@ -247,7 +247,7 @@ export type Models = typeof models;
 export default models;
 ```
 
-```typescript:title=src/index.ts
+```typescript:src/index.ts
 import models, { sequelize } from './domain/models';
 
 const server = new ApolloServer({
@@ -275,7 +275,7 @@ sequelize.sync().then(async () => {
 
 ## リゾルバでの CRUD 操作実行
 
-```typescript:title=src/application/resolvers/user.ts
+```typescript:src/application/resolvers/user.ts
 import User from '../models/user';
 
 const resolvers: IResolvers<User, ResolverContext> = {
@@ -317,7 +317,7 @@ $ npx sequelize-cli migration:generate --name user
 - up: 適用したい変更を記述します
 - down: 適用した変更を元に戻す方法を記述します
 
-```javascript:title=src/infrastructure/sequelize/migrations/20191222094216-user.js
+```javascript:src/infrastructure/sequelize/migrations/20191222094216-user.js
 'use strict';
 
 module.exports = {
@@ -395,7 +395,7 @@ $ yarn sequelize-cli seed:generate --name user
 
 ## seeding
 
-```javascript:title=src/infrastructure/sequelize/seeders/20191227020432-user.js
+```javascript:src/infrastructure/sequelize/seeders/20191227020432-user.js
 'use strict';
 
 const bcrypt = require('bcrypt');

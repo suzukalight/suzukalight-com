@@ -34,7 +34,7 @@ https://circleci.com/signup/
 - `.circleci/config.yml` として、上のテンプレートを保存
 - `package.json` の `test` を `yarn lint` に変更（動作確認用）
 
-```javascript{3}:title=package.json
+```javascript{3}:package.json
 {
   "scripts": {
     "test": "yarn lint",
@@ -80,7 +80,7 @@ https://circleci.com/signup/
 
 CircleCI がデプロイに使用するための SSH 鍵を新規に生成します；
 
-```bash:title=bash
+```bash:bash
 $ ssh-keygen -t rsa -b 4096 -C "circleci@suzukalight.com" -f ~/.ssh/circleci-suzukalight
 $ pbcopy < ~/.ssh/circleci-suzukalight
 ```
@@ -109,7 +109,7 @@ USER_NAME               : circleci
 
 **Settings -> Deploy keys -> Add Deploy Key** に、先程の秘密鍵に対する公開鍵を GitHub 側に登録します；
 
-```bash:title=bash
+```bash:bash
 $ pbcopy < ~/.ssh/circleci-suzukalight.pub
 ```
 
@@ -125,7 +125,7 @@ CircleCI で実行するデプロイコマンドを追加します。CircleCI �
 
 ### config.yml
 
-```yml:title=.circleci/config.yml
+```yml:.circleci/config.yml
       # run deploy
       - add_ssh_keys:
           fingerprints:
@@ -148,7 +148,7 @@ CircleCI で実行するデプロイコマンドを追加します。CircleCI �
 
 独自ドメインを登録している人は、CNAME ファイルを忘れずに追加しましょう。私はこれを忘れていて、デプロイのたびにリセットされてしまいました。
 
-```text:title=static/CNAME
+```text:static/CNAME
 study-gatsby-contentful.suzukalight.com
 ```
 

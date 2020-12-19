@@ -37,7 +37,7 @@ starter は [typography.js](https://kyleamathews.github.io/typography.js/) で�
 
 query に`tableOfContents`を追加すると、目次情報の HTML を取得することができる；
 
-```javascript{5}:title=templates/BlogPost/index.js
+```javascript{5}:templates/BlogPost/index.js
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -71,7 +71,7 @@ export const pageQuery = graphql`
 
 プラグイン自体は、すでに starter に入っています。`gatsby-config.js`を書き換えるだけで OK です；
 
-```javascript{4}:title=gatsby-config.js
+```javascript{4}:gatsby-config.js
 {
   resolve: `gatsby-plugin-google-analytics`,
   options: {
@@ -90,7 +90,7 @@ starter でデフォルト有効です。`/rss.xml` で配信されます。
 
 sitemap プラグインをインストールし、サイト情報とオプションを設定すれば OK です；
 
-```javascript{2,6-9}:title=gatsby-config.js
+```javascript{2,6-9}:gatsby-config.js
 siteMetadata: {
   siteUrl: `https://suzukalight.com`,
 },

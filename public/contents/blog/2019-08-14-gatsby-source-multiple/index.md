@@ -53,7 +53,7 @@ Content メニューから、Article を 1 つ準備します。
 
 filesystem と contentful では、記事ページを作成する起点となる GraphQL のクエリが異なりますので、export する pageQuery を変えるために、テンプレートファイルを分割しました；
 
-```javascript{4-9}:title=gatsby-node.js
+```javascript{4-9}:gatsby-node.js
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -69,7 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 Contentful を source とするテンプレートファイルは、下記のようになりました（**contentful + モデル名**）；
 
-```javascript{15-33}:title=components/templates/BlogPost/source-contentful.js
+```javascript{15-33}:components/templates/BlogPost/source-contentful.js
 import { graphql } from 'gatsby';
 
 import BlogPost from './';
@@ -213,7 +213,7 @@ filesystem(markdownRemark) と contentful(contentfulArticle) では、GraphQL �
 
 filesystem/contentful の両方で `group` キーワードが使用できます。`markdown.frontmatter.category` と `contentful.category` の両方で、カテゴリをそれぞれ groupBy しておきます；
 
-```javascript{9,15}:title=pages/categories.js
+```javascript{9,15}:pages/categories.js
 export const pageQuery = graphql`
   query {
     site {
@@ -239,7 +239,7 @@ export const pageQuery = graphql`
 
 その結果を手計算で合成することで、全体としてのカテゴリ一覧を生成します；
 
-```javascript{4,6-10}:title=pages/categories.js
+```javascript{4,6-10}:pages/categories.js
 const Categories = ({ location, data, pageContext }) => {
   const { site, allMarkdownRemark, allContentfulArticle } = data || {};
 
@@ -268,7 +268,7 @@ const Categories = ({ location, data, pageContext }) => {
 
 カテゴリに所属する記事の総数を取得したいため、`totalCount` を追加しておきます。このデータを手計算で合計することで、カテゴリに所属する記事の総数を表示します；
 
-```javascript{14,18}:title=pages/categories.js
+```javascript{14,18}:pages/categories.js
 const CategoryPage = ({ data }) => {
   const { site, allMarkdownRemark, allContentfulArticle } = data || {};
   const totalCount = allMarkdownRemark.totalCount + allContentfulArticle.totalCount;
@@ -317,7 +317,7 @@ https://suzukalight.com/2019-08-12-gatsby-source-contentful-document-sample/
 
 意外と厄介なのが、Contentful の RichText の処理です。記事データが JSON で構造化された状態で渡されるため、それを HTML に変換してやる必要があります。
 
-```javascript:title=utils/contentful.jsx
+```javascript:utils/contentful.jsx
 import React from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
@@ -358,7 +358,7 @@ export const contentfulArticleToReactComponents = json => {
 };
 ```
 
-```javascript:title=components/templates/BlogPost/index.js
+```javascript:components/templates/BlogPost/index.js
 const BlogPostTemplate = ({ location, siteMetadata, head, body, richTextJson, pageContext }) => (
   ...
       {richTextJson && (
@@ -367,7 +367,7 @@ const BlogPostTemplate = ({ location, siteMetadata, head, body, richTextJson, pa
   ...
 ```
 
-```scss:title=components/templates/BlogPost/index.module.scss
+```scss:components/templates/BlogPost/index.module.scss
   & p[class='contentful-paragraph'] {
     white-space: pre-wrap;
   }
@@ -383,7 +383,7 @@ const BlogPostTemplate = ({ location, siteMetadata, head, body, richTextJson, pa
 
 gatsby-node.js は Node 環境向けのファイルなので、そのままだと import 構文は利用できません。いくつか対策はあると思いますが、[こちらの Issue](https://github.com/gatsbyjs/gatsby/issues/7810)を参考に、`esm`モジュールを利用して対応しました；
 
-```javascript:title=gatsby-node.js
+```javascript:gatsby-node.js
 require = require('esm')(module);
 module.exports = require('./gatsby-node.esm.js');
 ```
@@ -394,13 +394,13 @@ frontmatter で `date(formatString: "YYYY/M/D")` として拾ってきても構�
 
 かわりに`moment`などのライブラリで変換を行えば OK なのですが、最近は`date-fns`を採用する例も増えてきているので、これを素振りしました；
 
-```javascript:title=日付のフォーマット
+```javascript:日付のフォーマット
 import format from 'date-fns/format';
 
 format(date, 'YYYY/M/D');
 ```
 
-```javascript:title=日付の比較（ソート）
+```javascript:日付の比較（ソート）
 import differenceInMilliseconds from 'date-fns/difference_in_milliseconds';
 
 export const sortByDate = data => data.sort((a, b) => differenceInMilliseconds(b, a));

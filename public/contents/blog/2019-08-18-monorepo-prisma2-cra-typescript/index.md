@@ -50,7 +50,7 @@ $ git init
 $ yarn init -y
 ```
 
-```text:title=.gitignore
+```text:.gitignore
 # dependencies
 node_modules
 
@@ -67,7 +67,7 @@ yarn workspace で Monorepo 環境を構築する場合は、package.json に `p
 - `packages:` ワークスペースの対象となるディレクトリを指定します。ワイルドカード指定が可能です。
 - `nohoist:` 指定した npm モジュールを、子ワークスペースごとで個別に管理させることができるようになります。指定していなかった npm モジュールは、ワークスペース間で共用利用になり、ディスク容量が削減できるなどのメリットを得ることができます。
 
-```json:title=package.json
+```json:package.json
 {
   "name": "monorepo-react-prisma2",
   "version": "1.0.0",
@@ -111,7 +111,7 @@ $ yarn workspace client add node-sass
 
 成功すると、client 側の package.json にのみ、設定が追加されます；
 
-```json:title=/src/client/package.json
+```json:/src/client/package.json
 {
   "dependencies": {
     "node-sass": "^4.12.0",
@@ -125,7 +125,7 @@ $ yarn workspace client add node-sass
 
 この仕組みを利用して、ルートの package.json に、client の dev-server 起動コマンドを追加します；
 
-```json:title=package.json
+```json:package.json
 {
   "scripts": {
     "cl:start": "yarn workspace client start",
@@ -228,7 +228,7 @@ $ yarn seed
 
 ルートの package.json に、サーバ起動コマンドを追加します；
 
-```json:title=package.json
+```json:package.json
 {
   "scripts": {
     "sr:start": "yarn workspace server start",
@@ -269,7 +269,7 @@ $ yarn add -D -W @typescript-eslint/eslint-plugin @typescript-eslint/parser
 
 Lint+Prettier を行うスクリプトを、ルートの package.json に記述しておきます；
 
-```json:title=package.json
+```json:package.json
 {
   "scripts": {
     "lint": "yarn cl:lint && yarn sr:lint",
@@ -287,7 +287,7 @@ Lint+Prettier を行うスクリプトを、ルートの package.json に記述�
 
 .prettierc は、ルートに同じ内容を配置しました；
 
-```json:title=.prettierrc
+```json:.prettierrc
 {
   "printWidth": 100,
   "tabWidth": 2,
@@ -303,13 +303,13 @@ tsconfig.json は client と server で異なります。いずれもすでに�
 
 ルートディレクトリの tsconfig.json には、共通設定を置くのですが、ここは無指定とします（配置しないと lint 時にエラーが出たため、ダミーとして配置しています）；
 
-```json:title=tsconfig.json
+```json:tsconfig.json
 {}
 ```
 
 client 側は、create-react-app が提供しているファイルをそのまま利用します。React を意識した設定です；
 
-```json:title=src/client/tsconfig.json
+```json:src/client/tsconfig.json
 {
   "compilerOptions": {
     "target": "es5",
@@ -339,7 +339,7 @@ client 側は、create-react-app が提供しているファイルをそのま�
 
 server 側は、Prisma2 が提供しているファイルをそのまま利用します。ts-node を意識した設定です；
 
-```json:title=src/server/tsconfig.json
+```json:src/server/tsconfig.json
 {
   "compilerOptions": {
     "sourceMap": true,
@@ -361,7 +361,7 @@ server 側は、Prisma2 が提供しているファイルをそのまま利用�
 
 基本設定は以下の通りとしました；
 
-```json:title=.eslintrc.json
+```json:.eslintrc.json
 {
   "extends": [
     "eslint:recommended",
@@ -387,7 +387,7 @@ server 側は、Prisma2 が提供しているファイルをそのまま利用�
 
 これとは別に、client 側の lint 設定に、React 関係のプラグイン設定を追加し、配置しました；
 
-```json:title=src/client/.eslintrc.json
+```json:src/client/.eslintrc.json
 {
   "extends": [
     "eslint:recommended",
@@ -435,7 +435,7 @@ $ yarn lint
 
 エラーが出ている部分を修正します。create-react-app の自動生成部分なので、それを信じて握りつぶします…。
 
-```javascript{6,18}:title=src/client/src/serviceWorker.ts
+```javascript{6,18}:src/client/src/serviceWorker.ts
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
@@ -482,7 +482,7 @@ $ yarn add -D -W husky lint-staged
 
 package.json に husky と lint-staged の設定を追加します；
 
-```json:title=package.json
+```json:package.json
 {
   "husky": {
     "hooks": {
@@ -502,7 +502,7 @@ package.json に husky と lint-staged の設定を追加します；
 
 lint の通らないファイルがコミットに失敗するかをテストします。App.tsx の 7 行目に `<>` だけを追加してみます；
 
-```javascript{7}:title=src/client/src/App.tsx
+```javascript{7}:src/client/src/App.tsx
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -539,7 +539,7 @@ husky > pre-commit (node v10.16.0)
 
 Prettier によって自動整形される例もテストします。さきほどの App.tsx の `<>` を空行に置き換えます；
 
-```javascript{7}:title=src/client/src/App.tsx
+```javascript{7}:src/client/src/App.tsx
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';

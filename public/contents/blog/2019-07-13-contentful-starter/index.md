@@ -133,7 +133,7 @@ You can now view gatsby-contentful-starter in the browser.⠀
 
 デフォルトの URL 設定から、GitHub Pages 向けの設定に変更しておきます。具体的には `pathPrefix` を除去し、独自のサブドメインをセットしました；
 
-```javascript{4-5}:title=gatsby-config.js
+```javascript{4-5}:gatsby-config.js
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Contentful starter',

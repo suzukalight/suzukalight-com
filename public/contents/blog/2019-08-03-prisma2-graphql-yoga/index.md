@@ -91,7 +91,7 @@ $ yarn
 
 Prisma2 Preview では、ORM として **nexus** を使用しています。PhotonJS のサンプルでは、それをプラグインとして利用する **@prisma/nexus** がインストールされています；
 
-```javascript{3,5}:title=package.json
+```javascript{3,5}:package.json
 {
   "dependencies": {
     "@prisma/nexus": "^0.0.1",
@@ -105,7 +105,7 @@ Prisma2 Preview では、ORM として **nexus** を使用しています。Phot
 
 マッピングするモデルを、Nexus の指定する形式で記述します；
 
-```prisma:title=prisma/schema.prisma
+```prisma:prisma/schema.prisma
 model Race {
   id            Int @id
   raceId        String @unique

@@ -47,7 +47,7 @@ $ yarn workspace client add -D @storybook/react @storybook/theming @storybook/ad
 - `/.stories.tsx?$/` にマッチするファイルすべてを対象にするように設定
 - Storybook のテーマを設定
 
-```javascript:title=src/client/.storybook/config.js
+```javascript:src/client/.storybook/config.js
 import { configure, addParameters } from '@storybook/react';
 import { create } from '@storybook/theming';
 
@@ -73,7 +73,7 @@ configure(loadStories, module);
 
 viewport のアドオンを追加します；
 
-```javascript:title=src/client/.storybook/addons.js
+```javascript:src/client/.storybook/addons.js
 import '@storybook/addon-viewport/register';
 ```
 
@@ -93,7 +93,7 @@ $ yarn workspace client add node-sass semantic-ui-react semantic-ui-css date-fns
 
 Prisma2 が自動生成した **src/server/generated/nexus-typegen.ts から抜き出した**ものです。便利ですね！
 
-```javascript:title=src/client/src/types/data.d.ts
+```javascript:src/client/src/types/data.d.ts
 export interface User {
   email: string; // String!
   id: string; // ID!
@@ -115,7 +115,7 @@ export interface Post {
 
 semantic-ui-react と date-fns を利用してマークアップしていきます；
 
-```javascript:title=src/client/src/components/organisms/BlogPost/index.tsx
+```javascript:src/client/src/components/organisms/BlogPost/index.tsx
 import React from 'react';
 import format from 'date-fns/format';
 import { Container, Header, Message, Icon } from 'semantic-ui-react';
@@ -159,14 +159,14 @@ export default BlogPost;
 
 本文欄の改行を有効にするスタイルを追加するものです。CSS Modules の仕組みを利用しています。create-react-app がデフォルトで対応しているので、webpack の面倒を自分で見る必要がなく、とても楽です。
 
-```scss:title=src/client/src/components/organisms/BlogPost/index.module.scss
+```scss:src/client/src/components/organisms/BlogPost/index.module.scss
 .content {
   margin: 32px 0;
   white-space: pre-wrap;
 }
 ```
 
-```javascript{3}:title=src/client/.storybook/config.js
+```javascript{3}:src/client/.storybook/config.js
 import { create } from '@storybook/theming';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -174,7 +174,7 @@ import 'semantic-ui-css/semantic.min.css';
 addParameters({
 ```
 
-```javascript{3}:title=src/client/src/App.tsx
+```javascript{3}:src/client/src/App.tsx
 import logo from './logo.svg';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -186,7 +186,7 @@ import './App.css';
 
 ダミーデータを用意して、Story で表示させています；
 
-```javascript:title=src/client/src/components/organisms/RaceListSmall/storybook/index.stories.tsx
+```javascript:src/client/src/components/organisms/RaceListSmall/storybook/index.stories.tsx
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -221,7 +221,7 @@ storiesOf('organisms/BlogPost', module).add('BlogPost', () => <BlogPost post={po
 
 package.json に Storybook の起動コマンドを書いておきます。`yarn workspace [ws-name] [command]` 構文が利用できます。これで `yarn storybook` というシンプルなコマンドで、Storybook を実行可能になります；
 
-```json:title=package.json
+```json:package.json
 {
   "scripts": {
     "storybook": "yarn workspace client start-storybook"
@@ -263,7 +263,7 @@ $ yarn workspace client add -D @storybook/addon-info react-docgen-typescript-loa
 
 Storybook 用のカスタム Config を作成します；
 
-```json:title=src/client/.storybook/webpack.config.js
+```json:src/client/.storybook/webpack.config.js
 module.exports = ({ config }) => {
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
@@ -282,7 +282,7 @@ module.exports = ({ config }) => {
 
 **withInfo** をすることで、Story にコンポーネントに関する情報を表示させることができるようになります。このなかに「Prop Types」ブロックがあるのですが、ここが react-docgen-typescript-loader によって拡張され、TypeScript で指定した型情報が表示されるようになります；
 
-```javascript{3,28-29}:title=src/client/src/components/organisms/BlogPost/__stories__/index.stories.tsx
+```javascript{3,28-29}:src/client/src/components/organisms/BlogPost/__stories__/index.stories.tsx
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';

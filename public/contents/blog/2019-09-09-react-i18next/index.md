@@ -60,7 +60,7 @@ $ yarn add i18next react-i18next
 
 **t('key')** で、翻訳対象となる文字列を指定します。key といっても別に英字列である必要はないので、**むしろ日本語でジャンジャン書いてしまうほうが、メイン開発者層にとって優しい開発環境になります；**
 
-```javascript{4,6}:title=/src/App.tsx
+```javascript{4,6}:/src/App.tsx
 return (
   <div className="App">
     <header className="App-header">
@@ -84,7 +84,7 @@ return (
 - **fallbackLng**: 選択した言語に関する辞書情報がない場合に、かわりに表示する言語です。
 - interpolation: 各種の補間設定です。
 
-```javascript:title=/src/App.tsx
+```javascript:/src/App.tsx
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
@@ -113,7 +113,7 @@ i18n.use(initReactI18next).init({
 
 **i18n.changeLanguage(lang)** を行うと、指定した言語に切り替えることができます。React なので State と Hooks によって切り替え操作を実現してみます；
 
-```javascript:title=/src/App.tsx
+```javascript:/src/App.tsx
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -153,14 +153,14 @@ $ yarn start
 
 日本語と英語の 2 種類について作成してみましょう；
 
-```json:title=/src/locales/ja.json
+```json:/src/locales/ja.json
 {
   "ようこそ React と react-i18next へ。": "ようこそ React と react-i18next へ。",
   "言語を切り替え": "言語を切り替え"
 }
 ```
 
-```json:title=/src/locales/en.json
+```json:/src/locales/en.json
 {
   "ようこそ React と react-i18next へ。": "Welcome to React and react-i18next.",
   "言語を切り替え": "Change language"
@@ -171,7 +171,7 @@ $ yarn start
 
 webpack に頼って、JSON ファイルをインポートしてみます；
 
-```javascript{6-7}:title=/src/App.tsx
+```javascript{6-7}:/src/App.tsx
 import enJson from './locales/en.json';
 import jaJson from './locales/ja.json';
 
@@ -208,7 +208,7 @@ babel プラグインとしての設定を記述します。設定した項目�
 - **locales**: 書き出しを行う言語セットです。
 - **outputPath**: 書き出すファイル名のパターンです。さきほどの手動辞書と同じ規則にしています。
 
-```json{8-9}:title=/package.json
+```json{8-9}:/package.json
 {
   "babel": {
     "presets": ["react-app"],
@@ -227,7 +227,7 @@ babel プラグインとしての設定を記述します。設定した項目�
 
 書き出しを行うスクリプトを package.json へ追加します。引数に key を検索する対象ファイルのパターンを指定します；
 
-```json{3}:title=/package.json
+```json{3}:/package.json
 {
   "scripts": {
     "i18next-extract": "NODE_ENV=development babel './src/**/*.{js,jsx,ts,tsx}'"
@@ -239,7 +239,7 @@ babel プラグインとしての設定を記述します。設定した項目�
 
 実際に key を抜き出してくれるかを実験するために、ひとつ key を追加してみます；
 
-```javascript{5}:title=/src/App.tsx
+```javascript{5}:/src/App.tsx
 return (
   <div className="App">
     <header className="App-header">
@@ -255,7 +255,7 @@ return (
 
 i18next の設定も、少し変更します；
 
-```javascript{8-9}:title=/src/App.tsx
+```javascript{8-9}:/src/App.tsx
 i18n.use(initReactI18next).init({
   debug: true,
   resources: {
@@ -274,7 +274,7 @@ i18n.use(initReactI18next).init({
 $ yarn i18next-extract
 ```
 
-```json{3}:title=/src/locales/ja.json
+```json{3}:/src/locales/ja.json
 {
   "ようこそ React と react-i18next へ。": "ようこそ React と react-i18next へ。",
   "定義していない文字列": "",
@@ -282,7 +282,7 @@ $ yarn i18next-extract
 }
 ```
 
-```json{3}:title=/src/locales/en.json
+```json{3}:/src/locales/en.json
 {
   "ようこそ React と react-i18next へ。": "Welcome to React and react-i18next.",
   "定義していない文字列": "",

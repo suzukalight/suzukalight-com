@@ -61,7 +61,7 @@ master ブランチは公開ファイル用なので、gatsby システム全体
 
 以下のデプロイコマンドを package.json に追記する；
 
-```json{3-4}:title=package.json
+```json{3-4}:package.json
 {
   "scripts": {
     "push": "gh-pages -d public -b master",
