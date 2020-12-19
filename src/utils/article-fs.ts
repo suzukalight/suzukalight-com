@@ -14,8 +14,10 @@ export const defaultBlogDir = path.join(root, publicBlogDir);
  */
 export const getDirNamesThatHaveMdx = (blogRootDir = defaultBlogDir) => {
   const dirNames = fs.readdirSync(blogRootDir);
-  const dirNamesThatHaveMdx = dirNames.filter((dir) =>
-    fs.existsSync(`${blogRootDir}/${dir}/index.md`),
+  const dirNamesThatHaveMdx = dirNames.filter(
+    (dir) =>
+      fs.existsSync(`${blogRootDir}/${dir}/index.md`) ||
+      fs.existsSync(`${blogRootDir}/${dir}/index.mdx`),
   );
   const paths = dirNamesThatHaveMdx.map((dir) => dir.replace(/\.mdx?/, ''));
 
@@ -28,6 +30,12 @@ export const getDirNamesThatHaveMdx = (blogRootDir = defaultBlogDir) => {
  * @param blogRootDir コンテンツが格納されている親ディレクトリ
  */
 export const getMdxSource = (slug: string, blogRootDir = defaultBlogDir) => {
-  const source = fs.readFileSync(path.join(blogRootDir, `${slug}/index.md`), 'utf8');
-  return source;
+  const dir = path.join(blogRootDir, slug);
+  if (fs.existsSync(`${dir}/index.md`)) {
+    return fs.readFileSync(`${dir}/index.md`, 'utf8');
+  }
+  if (fs.existsSync(`${dir}/index.mdx`)) {
+    return fs.readFileSync(`${dir}/index.mdx`, 'utf8');
+  }
+  return '';
 };

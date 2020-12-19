@@ -67,8 +67,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
             objectFit="cover"
           />
         ) : (
-          <Center boxSize={24} borderRadius={8} flexShrink={0} mr={4} backgroundColor="gray.100">
-            <Icon as={FaPen} boxSize={12} color="gray.500" />
+          <Center boxSize={20} borderRadius={8} flexShrink={0} ml={6} backgroundColor="gray.100">
+            <Icon as={FaPen} boxSize={8} color="gray.500" />
           </Center>
         )}
       </Flex>
