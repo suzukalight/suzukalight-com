@@ -106,7 +106,22 @@ export async function getStaticProps({ params }) {
       img: (props) => <img {...props} src={`${blogContentsUrl}/${params.slug}/${props.src}`} />,
     },
     mdxOptions: {
-      remarkPlugins: [remarkSlug, remarkAutolinkHeadings, remarkCodeTitles],
+      remarkPlugins: [
+        remarkSlug,
+        [
+          remarkAutolinkHeadings,
+          {
+            content: {
+              type: 'element',
+              tagName: 'span',
+              properties: {
+                className: ['icon', 'icon-link', 'remark-autolink-headings'],
+              },
+            },
+          },
+        ],
+        remarkCodeTitles,
+      ],
       rehypePlugins: [rehypePrism],
     },
   });

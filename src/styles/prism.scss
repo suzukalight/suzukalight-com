@@ -1,3 +1,4 @@
+/* Code */
 code[class*='language-'],
 pre[class*='language-'] {
   color: black;
@@ -135,4 +136,55 @@ pre[class*='language-'] {
 
 .token.entity {
   cursor: help;
+}
+
+/* Code Title */
+.remark-code-title {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 100%;
+  margin-bottom: -1.375em;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  background: #f5f2f0;
+  color: #1a202c;
+  font-size: 0.75em;
+  line-height: 0.25;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Autolink Headings */
+.remark-autolink-headings {
+  margin-left: -24px;
+  padding-right: 6px;
+  width: 24px;
+  height: 18px;
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' version='1.1' width='20' height='20' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  visibility: hidden;
+
+  &:hover {
+    visibility: visible;
+  }
+}
+
+article {
+  h1,
+  h2,
+  h3,
+  h4 {
+    &:hover {
+      a {
+        .remark-autolink-headings {
+          visibility: visible;
+        }
+      }
+    }
+  }
 }

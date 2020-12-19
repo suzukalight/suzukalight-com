@@ -2,7 +2,7 @@ import React from 'react';
 import { AppProps } from 'next/app';
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 
-import '../styles/prism.css';
+import '../styles/prism.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
