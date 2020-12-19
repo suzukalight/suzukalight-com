@@ -61,11 +61,8 @@ export async function getStaticProps() {
 
     return {
       slug,
-      title: data.title,
       excerpt: content.substr(0, 128),
-      date: data.date || null,
-      hero: data.hero || null,
-      tags: data.tags || null,
+      ...data,
     } as ArticleData;
   });
 

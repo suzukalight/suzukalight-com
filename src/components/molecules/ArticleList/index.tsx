@@ -25,6 +25,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   date,
   tags,
   hero,
+  emoji,
   blogRootUrl,
   blogContentsUrl,
 }) => (
@@ -68,7 +69,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           />
         ) : (
           <Center boxSize={20} borderRadius={8} flexShrink={0} ml={6} backgroundColor="gray.100">
-            <Icon as={FaPen} boxSize={8} color="gray.500" />
+            {emoji ? (
+              <Text fontSize="3xl">{emoji}</Text>
+            ) : (
+              <Icon as={FaPen} boxSize={8} color="gray.500" />
+            )}
           </Center>
         )}
       </Flex>

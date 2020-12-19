@@ -3,7 +3,7 @@
 import React from 'react';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
-import { Heading, Box, Text, Icon } from '@chakra-ui/react';
+import { Heading, Center, Box, Text, Icon } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
@@ -47,6 +47,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
         <Box m="1em">
           <Box maxW="640px" mx="auto">
             {frontMatter.hero && <img src={`${contentBaseUrl}/${frontMatter.hero}`} />}
+            {frontMatter.emoji && (
+              <Center w="100%" h={48} borderRadius={8} flexShrink={0} backgroundColor="gray.100">
+                <Text fontSize="6xl">{frontMatter.emoji}</Text>
+              </Center>
+            )}
 
             <Heading as="h1" mt={8} mb={2} wordBreak="break-all">
               {frontMatter.title}

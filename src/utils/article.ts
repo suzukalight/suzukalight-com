@@ -12,6 +12,7 @@ export type ArticleFrontMatter = {
   date: string | null;
   tags: string[] | null;
   hero?: string | null;
+  emoji?: string | null;
 };
 
 export type ArticleData = ArticleFrontMatter & {
