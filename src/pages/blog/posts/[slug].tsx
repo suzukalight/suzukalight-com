@@ -5,6 +5,10 @@ import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import { Heading, Box, Text, Icon } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
+import remarkAutolinkHeadings from 'remark-autolink-headings';
+import remarkSlug from 'remark-slug';
+import remarkCodeTitles from 'remark-code-titles';
+import rehypePrism from '@mapbox/rehype-prism';
 
 import {
   ArticleFrontMatter,
@@ -100,6 +104,10 @@ export async function getStaticProps({ params }) {
   const mdxSource = await renderToString(content, {
     components: {
       img: (props) => <img {...props} src={`${blogContentsUrl}/${params.slug}/${props.src}`} />,
+    },
+    mdxOptions: {
+      remarkPlugins: [remarkSlug, remarkAutolinkHeadings, remarkCodeTitles],
+      rehypePlugins: [rehypePrism],
     },
   });
 
