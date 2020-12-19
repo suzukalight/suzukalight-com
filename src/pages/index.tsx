@@ -17,8 +17,6 @@ export default function Home(props) {
         title="suzukalight.com"
         subtitle={`"なければ作ればいいじゃない"`}
         image="images/hero/01.jpg"
-        ctaText="My Outputs"
-        ctaLink="/outputs"
       />
 
       <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32} mx={8}>

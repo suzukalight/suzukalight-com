@@ -8,8 +8,6 @@ type HeroProps = {
   title: string;
   subtitle: string;
   image: string;
-  ctaLink: string;
-  ctaText: string;
 
   [key: string]: any;
 };
@@ -54,23 +52,6 @@ export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
         >
           {subtitle}
         </Heading>
-
-        {/* 
-      <Link href={ctaLink}>
-        <Button
-          size="md"
-          rounded="md"
-          color={['teal.500', 'teal.500', 'white', 'white']}
-          bg={['white', 'white', 'teal.500', 'teal.500']}
-          _hover={{
-            bg: ['teal.100', 'teal.100', 'teal.600', 'teal.600'],
-          }}
-          rightIcon={<ArrowRightIcon />}
-        >
-          {ctaText}
-        </Button>
-      </Link> 
-      */}
 
         <Text>
           <Link to="https://twitter.com/suzukalight" chakraProps={{ mr: 3 }}>
