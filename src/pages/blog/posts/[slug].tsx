@@ -8,7 +8,7 @@ import { FaHome, FaPencilAlt } from 'react-icons/fa';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
 import remarkCodeTitles from 'remark-code-titles';
-import rehypePrism from '@mapbox/rehype-prism';
+import remarkPrism from 'remark-prism';
 
 import {
   ArticleFrontMatter,
@@ -121,8 +121,8 @@ export async function getStaticProps({ params }) {
           },
         ],
         remarkCodeTitles,
+        remarkPrism,
       ],
-      rehypePlugins: [rehypePrism],
     },
   });
 

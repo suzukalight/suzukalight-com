@@ -1,4 +1,6 @@
-/* Code */
+/*
+ * Code syntax highlight
+ */
 code[class*='language-'],
 pre[class*='language-'] {
   color: black;
@@ -138,16 +140,18 @@ pre[class*='language-'] {
   cursor: help;
 }
 
-/* Code Title */
+/*
+ * Code Title
+ */
 .remark-code-title {
   display: inline-block;
   overflow: hidden;
   max-width: 100%;
-  margin-bottom: -1.375em;
+  margin-bottom: -0.75em;
   border-radius: 8px 8px 0 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1em;
-  background: #f5f2f0;
+  background: #f2f2f2;
   color: #1a202c;
   font-size: 0.75em;
   line-height: 0.25;
@@ -157,7 +161,9 @@ pre[class*='language-'] {
   text-overflow: ellipsis;
 }
 
-/* Autolink Headings */
+/*
+ * Autolink Headings
+ */
 .remark-autolink-headings {
   margin-left: -24px;
   padding-right: 6px;
@@ -185,6 +191,40 @@ article {
           visibility: visible;
         }
       }
+    }
+  }
+}
+
+/*
+ * Highlight line 
+ */
+.remark-highlight-code-line {
+  background-color: rgb(79, 209, 197, 0.1);
+  display: block;
+  margin-right: -1rem;
+  margin-left: -1rem;
+  padding-right: 1rem;
+  padding-left: 0.75rem;
+  border-left: 0.25rem solid rgb(79, 209, 197, 0.75);
+}
+
+.remark-highlight {
+  background-color: #f2f2f2;
+  border-radius: 0.25rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  overflow: auto;
+
+  & pre[class*='language-'] {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    overflow: initial;
+    float: left;
+    min-width: 100%;
+
+    &.line-numbers {
+      padding-left: 2.75rem;
     }
   }
 }
