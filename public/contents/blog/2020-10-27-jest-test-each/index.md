@@ -11,7 +11,7 @@ Jest で関数の引数を複数パターンチェックしたい場合、ベタ
 
 # Jest の `test.each` とは
 
-https://jestjs.io/docs/ja/api#testeachtablename-fn-timeout
+https://jestjs.io/docs/ja/api#testeachtablename-fn-timeout  
 **Jest で Parameterized test を行うことができるメソッドです**。関数の「引数と期待値」を複数個与えることができ、Jest はそれをとりかえながら、すべて実行してくれます；
 
 ```ts
