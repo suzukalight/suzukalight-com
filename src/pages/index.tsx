@@ -27,17 +27,17 @@ export default function Home(props) {
             description="Blogs and Documents"
           />
         </Link>
-        <Link to="/outputs#products">
+        <Link to="/outputs">
           <Card
             image={<Icon as={FaCode} boxSize={16} color="teal.500" />}
-            title="My Outputs"
+            title="Outputs"
             description="Products and Examples"
           />
         </Link>
         <Link to="/about">
           <Card
             image={<Icon as={FaUser} boxSize={16} color="teal.500" />}
-            title="Skill & Bio"
+            title="About"
             description="Skill map, Awards and Biography"
           />
         </Link>
