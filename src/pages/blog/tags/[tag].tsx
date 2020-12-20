@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { Box, Heading, Divider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
@@ -16,7 +17,6 @@ import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs'
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-import { GetStaticPaths, GetStaticProps } from 'next';
 
 type IndexPageProps = {
   tag: string;

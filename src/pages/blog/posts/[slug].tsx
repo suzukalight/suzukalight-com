@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 
 import React from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import { Heading, Center, Box, Text, Divider } from '@chakra-ui/react';
@@ -88,7 +89,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
 
 export default BlogPost;
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const dirNamesThatHaveMdx = getDirNamesThatHaveMdx();
   const paths = dirNamesThatHaveMdx.map((dir) => ({ params: { slug: dir.replace(/\.mdx?/, '') } }));
 
@@ -96,10 +97,10 @@ export async function getStaticPaths() {
     fallback: false,
     paths,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
-  const source = getMdxSource(params.slug);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const source = getMdxSource(params.slug as string);
   const { data, content } = getMdxDataAndContent(source);
   const mdxSource = await renderToString(content, {
     components: {
@@ -133,4 +134,4 @@ export async function getStaticProps({ params }) {
       slug: params.slug,
     } as BlogPostProps,
   };
-}
+};

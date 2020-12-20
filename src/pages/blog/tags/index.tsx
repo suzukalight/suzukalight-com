@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetStaticProps } from 'next';
 import { Flex, Box, Heading, Divider, Text } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
@@ -77,7 +78,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
 
 export default IndexPage;
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const mdxDirs = getDirNamesThatHaveMdx();
   const articles = mdxDirs.map((slug) => {
     const source = getMdxSource(slug);
@@ -94,5 +95,5 @@ export async function getStaticProps() {
   const sortByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const sortByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);
 
-  return { props: { sortByName, sortByCount } };
-}
+  return { props: { sortByName, sortByCount } as IndexPageProps };
+};

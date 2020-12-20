@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetStaticProps } from 'next';
 import { Box, Heading, Divider, Flex, Text } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
@@ -58,7 +59,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
 
 export default IndexPage;
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const mdxDirs = getDirNamesThatHaveMdx();
   const articles = mdxDirs.map((slug) => {
     const source = getMdxSource(slug);
@@ -72,4 +73,4 @@ export async function getStaticProps() {
   });
 
   return { props: { articles: sortArticlesByDateDesc(articles) } };
-}
+};
