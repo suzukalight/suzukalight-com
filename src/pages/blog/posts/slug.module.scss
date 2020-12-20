@@ -99,6 +99,11 @@ $mq-sm: 639px;
     margin-left: 1em;
     margin-bottom: 0.25em;
     line-height: 2em;
+
+    & > p,
+    & > ul {
+      margin: 0;
+    }
   }
 
   & strong {
