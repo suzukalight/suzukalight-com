@@ -2,7 +2,7 @@
 title: GatsbyでGitHubとContentfulの複数ソースを実現する
 date: '2019-08-14T20:00:00'
 category: Technology
-tags: ['gatsby', 'contentful', 'github pages']
+tags: ['gatsby', 'contentful', 'gituhb-pages']
 hero: ./gatsbyjs.jpg
 status: 'published'
 ---
