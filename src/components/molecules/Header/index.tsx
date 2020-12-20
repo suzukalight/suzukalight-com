@@ -12,17 +12,17 @@ type MenuItemProps = {
 };
 
 const MenuItems: React.FC<MenuItemProps> = ({ children, to, isLast, ...rest }) => (
-  <Link to={to} chakraProps={{ w: { base: '100%', sm: 'auto' } }}>
-    <Text
-      mb={{ base: isLast ? 0 : 8, sm: 0 }}
-      mr={{ base: 0, sm: isLast ? 0 : 8 }}
-      display="block"
-      textAlign="center"
-      {...rest}
-    >
-      {children}
-    </Text>
-  </Link>
+  <Box
+    w={{ base: '100%', sm: 'auto' }}
+    mb={{ base: isLast ? 0 : 8, sm: 0 }}
+    mr={{ base: 0, sm: isLast ? 0 : 8 }}
+  >
+    <Link to={to}>
+      <Text display="block" textAlign="center" {...rest}>
+        {children}
+      </Text>
+    </Link>
+  </Box>
 );
 
 export const Header: React.FC = (props) => {
