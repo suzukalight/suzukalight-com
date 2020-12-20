@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Heading, Text, Icon } from '@chakra-ui/react';
+import { Box, Heading, Text, Icon, Divider } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
 import { ArticleList } from '../../components/molecules/ArticleList';
@@ -37,6 +37,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
               blogContentsUrl={blogContentsUrl}
             />
           </Box>
+
+          <Divider mt={12} mb={8} />
 
           <Box mb={16}>
             <Link to="/">
