@@ -38,10 +38,10 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
           </Heading>
 
           <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
-            {sortByName.map((tagAndCount) => (
-              <Box key={tagAndCount.tag} mr={4}>
-                <Link to={`/blog/tags/${tagAndCount.tag}`}>
-                  <Text as="span">{`#${tagAndCount.tag} (${tagAndCount.count})`}</Text>
+            {sortByName.map(({ tag, count }) => (
+              <Box key={tag} mr={4}>
+                <Link to={`/blog/tags/${encodeURIComponent(tag)}`}>
+                  <Text as="span">{`#${tag} (${count})`}</Text>
                 </Link>
               </Box>
             ))}
@@ -52,10 +52,10 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
           </Heading>
 
           <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
-            {sortByCount.map((tagAndCount) => (
-              <Box key={tagAndCount.tag} mr={4}>
-                <Link to={`/blog/tags/${tagAndCount.tag}`}>
-                  <Text as="span">{`#${tagAndCount.tag} (${tagAndCount.count})`}</Text>
+            {sortByCount.map(({ tag, count }) => (
+              <Box key={tag} mr={4}>
+                <Link to={`/blog/tags/${encodeURIComponent(tag)}`}>
+                  <Text as="span">{`#${tag} (${count})`}</Text>
                 </Link>
               </Box>
             ))}

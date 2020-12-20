@@ -16,6 +16,7 @@ import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs'
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 type IndexPageProps = {
   tag: string;
@@ -62,7 +63,7 @@ export const TagPage: React.FC<IndexPageProps> = ({ tag, articles }) => {
 
 export default TagPage;
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const dirNamesThatHaveMdx = getDirNamesThatHaveMdx();
   const articles = dirNamesThatHaveMdx.map((slug) => {
     const source = getMdxSource(slug);
@@ -75,15 +76,15 @@ export async function getStaticPaths() {
     } as ArticleData;
   });
   const tags = getTagsIncludedInArticles(articles);
-  const paths = tags.map((tag) => ({ params: { tag } }));
+  const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
 
   return {
     fallback: false,
     paths,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const mdxDirs = getDirNamesThatHaveMdx();
   const articles = mdxDirs.map((slug) => {
     const source = getMdxSource(slug);
@@ -97,6 +98,6 @@ export async function getStaticProps({ params }) {
   });
 
   const { tag } = params;
-  const articlesFilteredByTag = filterArticleByTag(articles, tag);
+  const articlesFilteredByTag = filterArticleByTag(articles, tag as string);
   return { props: { tag, articles: sortArticlesByDateDesc(articlesFilteredByTag) } };
-}
+};
