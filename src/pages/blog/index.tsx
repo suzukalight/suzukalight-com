@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Heading, Text, Icon, Divider } from '@chakra-ui/react';
+import { Box, Heading, Divider } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
 import { ArticleList } from '../../components/molecules/ArticleList';
@@ -13,7 +13,7 @@ import {
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../utils/article-fs';
 import DefaultLayout from '../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../components/atoms/HtmlHead';
-import { Link } from '../../components/atoms/Link';
+import { BackLinks } from '../../components/molecules/BackLinks';
 
 type IndexPageProps = {
   articles: ArticleData[];
@@ -40,13 +40,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
 
           <Divider mt={12} mb={8} />
 
-          <Box mb={16}>
-            <Link to="/">
-              <Text py={2}>
-                ← <Icon as={FaHome} boxSize={4} /> Back to Home
-              </Text>
-            </Link>
-          </Box>
+          <BackLinks links={[{ to: '/', icon: FaHome, label: 'Back to Home' }]} />
         </Box>
       </Box>
     </Box>

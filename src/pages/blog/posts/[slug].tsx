@@ -3,7 +3,7 @@
 import React from 'react';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
-import { Heading, Center, Box, Text, Icon } from '@chakra-ui/react';
+import { Heading, Center, Box, Text, Divider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
@@ -19,7 +19,7 @@ import {
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
-import { Link } from '../../../components/atoms/Link';
+import { BackLinks } from '../../../components/molecules/BackLinks';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
@@ -71,19 +71,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
 
             <article className={styles.article}>{content}</article>
 
-            <Box mb={16}>
-              <Link to="/blog">
-                <Text py={2}>
-                  ← <Icon as={FaPencilAlt} boxSize={4} /> Back to Blog List
-                </Text>
-              </Link>
+            <Divider mt={12} mb={8} />
 
-              <Link to="/">
-                <Text py={2}>
-                  ← <Icon as={FaHome} boxSize={4} /> Back to Home
-                </Text>
-              </Link>
-            </Box>
+            <BackLinks
+              links={[
+                { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog List' },
+                { to: '/', icon: FaHome, label: 'Back to Home' },
+              ]}
+            />
           </Box>
         </Box>
       </Box>

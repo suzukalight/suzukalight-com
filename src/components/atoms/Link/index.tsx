@@ -10,9 +10,9 @@ type LinkProps = {
 };
 
 export const Link: React.FC<LinkProps> = ({ children, to, as, chakraProps, nextProps }) => (
-  <ChakraLink href={to} {...chakraProps}>
-    <NextLink href={to} as={as} {...nextProps}>
+  <NextLink href={to} as={as} {...nextProps}>
+    <ChakraLink href={to} {...chakraProps}>
       {children}
-    </NextLink>
-  </ChakraLink>
+    </ChakraLink>
+  </NextLink>
 );

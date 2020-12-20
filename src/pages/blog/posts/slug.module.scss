@@ -33,17 +33,6 @@ $mq-sm: 639px;
   font-size: 16px;
   line-height: 2;
 
-  &:after {
-    content: '.　.　.　.　.　.　.';
-    position: absolute;
-    bottom: -3em;
-    width: 100%;
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-    color: #666;
-  }
-
   & p {
     margin: 0 0 2em;
     padding: 0;
