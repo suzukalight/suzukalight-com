@@ -4,8 +4,6 @@ import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import {
   ArticleData,
-  // blogContentsUrl,
-  blogRootUrl,
   comparatorTagCount,
   comparatorTagName,
   getArrayOfTagAndCountFromTable,
@@ -42,7 +40,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
           <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
             {sortByName.map((tagAndCount) => (
               <Box key={tagAndCount.tag} mr={4}>
-                <Link to={`${blogRootUrl}/tags/${tagAndCount.tag}`}>
+                <Link to={`/blog/tags/${tagAndCount.tag}`}>
                   <Text as="span">{`#${tagAndCount.tag} (${tagAndCount.count})`}</Text>
                 </Link>
               </Box>
@@ -56,7 +54,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
           <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
             {sortByCount.map((tagAndCount) => (
               <Box key={tagAndCount.tag} mr={4}>
-                <Link to={`${blogRootUrl}/tags/${tagAndCount.tag}`}>
+                <Link to={`/blog/tags/${tagAndCount.tag}`}>
                   <Text as="span">{`#${tagAndCount.tag} (${tagAndCount.count})`}</Text>
                 </Link>
               </Box>
