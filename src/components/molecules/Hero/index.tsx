@@ -1,5 +1,15 @@
 import React from 'react';
-import { Center, Flex, Image, Heading, Stack, Text, Icon } from '@chakra-ui/react';
+import {
+  Center,
+  Flex,
+  Image,
+  Heading,
+  Stack,
+  Text,
+  HStack,
+  Icon,
+  ChakraProps,
+} from '@chakra-ui/react';
 import { FaTwitter, FaGithub, FaFacebookF } from 'react-icons/fa';
 
 import { Link } from '../../atoms/Link';
@@ -8,11 +18,10 @@ type HeroProps = {
   title: string;
   subtitle: string;
   image: string;
-
-  [key: string]: any;
+  chakraProps?: ChakraProps;
 };
 
-export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
+export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
   <Center>
     <Flex
       align="center"
@@ -24,7 +33,7 @@ export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
       px={8}
       mt={[8, 8, 0]}
       mb={16}
-      {...rest}
+      {...chakraProps}
     >
       <Stack
         spacing={4}
@@ -41,8 +50,8 @@ export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
           {title}
         </Heading>
 
-        <Heading
-          as="h2"
+        <Text
+          as="em"
           size="md"
           color="teal.800"
           opacity="0.8"
@@ -51,20 +60,21 @@ export const Hero = ({ title, subtitle, image, ...rest }: HeroProps) => (
           textAlign={['center', 'center', 'left', 'left']}
         >
           {subtitle}
-        </Heading>
+        </Text>
 
-        <Text>
-          <Link to="https://twitter.com/suzukalight" chakraProps={{ mr: 3 }}>
-            <Icon as={FaTwitter} boxSize={6} color="teal.800" />
+        <HStack spacing={3}>
+          <Link to="https://twitter.com/suzukalight" chakraProps={{ isExternal: true }}>
+            <Icon as={FaTwitter} boxSize={6} color="teal.800" _hover={{ color: 'teal.500' }} />
           </Link>
-          <Link to="https://www.facebook.com/masahiko.kubara/" chakraProps={{ mr: 3 }}>
-            <Icon as={FaFacebookF} boxSize={6} color="teal.800" />
+          <Link to="https://www.facebook.com/masahiko.kubara/">
+            <Icon as={FaFacebookF} boxSize={6} color="teal.800" _hover={{ color: 'teal.500' }} />
           </Link>
           <Link to="https://github.com/suzukalight">
-            <Icon as={FaGithub} boxSize={6} color="teal.800" />
+            <Icon as={FaGithub} boxSize={6} color="teal.800" _hover={{ color: 'teal.500' }} />
           </Link>
-        </Text>
+        </HStack>
       </Stack>
+
       <Image
         src={image}
         alt="hero image"
