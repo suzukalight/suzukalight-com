@@ -12,11 +12,12 @@ type MenuItemProps = {
 };
 
 const MenuItems: React.FC<MenuItemProps> = ({ children, to, isLast, ...rest }) => (
-  <Link to={to}>
+  <Link to={to} chakraProps={{ w: { base: '100%', sm: 'auto' } }}>
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       display="block"
+      textAlign="center"
       {...rest}
     >
       {children}
