@@ -4,27 +4,24 @@ import { Box, Heading, Divider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleList } from '../../../components/molecules/ArticleList';
-import {
-  ArticleData,
-  blogContentsUrl,
-  blogRootUrl,
-  filterArticleByTag,
-  getMdxDataAndContent,
-  getTagsIncludedInArticles,
-  sortArticlesByDateDesc,
-} from '../../../utils/article';
-import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
+import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../../utils/article/entity';
+import { getArticles } from '../../../utils/article/file-system';
+import { getTagsIncludedInArticles } from '../../../utils/article/tag';
+import { filterArticleByTag } from '../../../utils/article/filter';
+import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
+
 type IndexPageProps = {
   tag: string;
-  articles: ArticleData[];
+  articles: ArticleDTO[];
 };
 
-export const TagPage: React.FC<IndexPageProps> = ({ tag, articles }) => {
+export const TagPage: React.FC<IndexPageProps> = ({ tag, articles: articleDTOs }) => {
   const title = `"${tag}"に関する記事一覧`;
+  const articles = articleDTOs.map((dto) => Article.fromDTO(dto));
 
   return (
     <DefaultLayout backgroundColor="gray.50">
@@ -64,17 +61,7 @@ export const TagPage: React.FC<IndexPageProps> = ({ tag, articles }) => {
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dirNamesThatHaveMdx = getDirNamesThatHaveMdx();
-  const articles = dirNamesThatHaveMdx.map((slug) => {
-    const source = getMdxSource(slug);
-    const { data, content } = getMdxDataAndContent(source);
-
-    return {
-      slug,
-      excerpt: content.substr(0, 128),
-      ...data,
-    } as ArticleData;
-  });
+  const articles = getArticles();
   const tags = getTagsIncludedInArticles(articles);
   const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
 
@@ -85,19 +72,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const mdxDirs = getDirNamesThatHaveMdx();
-  const articles = mdxDirs.map((slug) => {
-    const source = getMdxSource(slug);
-    const { data, content } = getMdxDataAndContent(source);
+  const articles = getArticles();
+  const tag = params.tag as string;
+  const articlesFilteredByTag = filterArticleByTag(articles, tag);
 
-    return {
-      slug,
-      excerpt: content.substr(0, 128),
-      ...data,
-    } as ArticleData;
-  });
-
-  const { tag } = params;
-  const articlesFilteredByTag = filterArticleByTag(articles, tag as string);
-  return { props: { tag, articles: sortArticlesByDateDesc(articlesFilteredByTag) } };
+  return {
+    props: { tag, articles: sortArticlesByDateDesc(articlesFilteredByTag).map((a) => a.toDTO()) },
+  };
 };

@@ -11,13 +11,8 @@ import remarkSlug from 'remark-slug';
 import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
 
-import {
-  ArticleFrontMatter,
-  blogContentsUrl,
-  getArticleDate,
-  getMdxDataAndContent,
-} from '../../../utils/article';
-import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
+import { Article, ArticleDTO, blogContentsUrl } from '../../../utils/article/entity';
+import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article/file-system';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
@@ -26,15 +21,17 @@ import { BackLinks } from '../../../components/molecules/BackLinks';
 import styles from './slug.module.scss';
 
 type BlogPostProps = {
-  mdxSource: string;
-  frontMatter: ArticleFrontMatter;
-  slug: string;
+  article: ArticleDTO;
+  contentHtml: string;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug }) => {
+export const BlogPost: React.FC<BlogPostProps> = ({ article: articleDTO, contentHtml }) => {
+  const article = Article.fromDTO(articleDTO);
+  const slug = article.getSlug();
+  const { title, tags, hero, emoji } = article.getFrontMatter();
   const contentBaseUrl = `${blogContentsUrl}/${slug}`;
 
-  const content = hydrate(mdxSource, {
+  const content = hydrate(contentHtml, {
     components: {
       img: (props) => (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -46,33 +43,33 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
 
   return (
     <DefaultLayout>
-      <HtmlHead title={frontMatter.title} />
+      <HtmlHead title={title} />
 
       <Box>
         <Box m="1em">
           <Box maxW="640px" mx="auto">
             <Center>
-              {frontMatter.hero && <img src={`${contentBaseUrl}/${frontMatter.hero}`} />}
-              {frontMatter.emoji && (
+              {hero && <img src={`${contentBaseUrl}/${hero}`} />}
+              {emoji && (
                 <Center w="100%" h={48} borderRadius={8} flexShrink={0} backgroundColor="gray.100">
-                  <Text fontSize="6xl">{frontMatter.emoji}</Text>
+                  <Text fontSize="6xl">{emoji}</Text>
                 </Center>
               )}
             </Center>
 
             <Heading as="h1" mt={8} mb={2} wordBreak="break-all">
-              {frontMatter.title}
+              {title}
             </Heading>
 
             <Box mb={8}>
               <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
-                {(frontMatter.tags || []).map((tag) => (
+                {(tags || []).map((tag) => (
                   <Text as="span" key={tag} mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
                 ))}
               </Box>
 
               <Text fontSize="sm" color="gray.400" opacity="0.8">
-                {getArticleDate(frontMatter.date)}
+                {article.getDateFormatted()}
               </Text>
             </Box>
 
@@ -106,9 +103,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const source = getMdxSource(params.slug as string);
-  const { data, content } = getMdxDataAndContent(source);
-  const mdxSource = await renderToString(content, {
+  const slug = params.slug as string;
+  const source = getMdxSource(slug);
+  const article = Article.fromMdxSource(source, slug);
+
+  const contentHtml = await renderToString(article.getContent(), {
     components: {
       img: (props) => (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -137,11 +136,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
 
-  return {
-    props: {
-      mdxSource,
-      frontMatter: data,
-      slug: params.slug,
-    } as BlogPostProps,
-  };
+  return { props: { article: article.toDTO(), contentHtml } };
 };

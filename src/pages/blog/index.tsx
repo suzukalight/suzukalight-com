@@ -4,21 +4,17 @@ import { Box, Heading, Divider, Flex, Text } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
 import { ArticleList } from '../../components/molecules/ArticleList';
-import {
-  ArticleData,
-  blogContentsUrl,
-  blogRootUrl,
-  getMdxDataAndContent,
-  sortArticlesByDateDesc,
-} from '../../utils/article';
-import { getDirNamesThatHaveMdx, getMdxSource } from '../../utils/article-fs';
 import DefaultLayout from '../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { Link } from '../../components/atoms/Link';
 
+import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../utils/article/entity';
+import { getArticles } from '../../utils/article/file-system';
+import { sortArticlesByDateDesc } from '../../utils/article/sorter';
+
 type IndexPageProps = {
-  articles: ArticleData[];
+  articles: ArticleDTO[];
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
@@ -42,7 +38,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
 
           <Box mb={8}>
             <ArticleList
-              articles={articles}
+              articles={articles.map((dto) => Article.fromDTO(dto))}
               blogRootUrl={blogRootUrl}
               blogContentsUrl={blogContentsUrl}
             />
@@ -60,17 +56,6 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const mdxDirs = getDirNamesThatHaveMdx();
-  const articles = mdxDirs.map((slug) => {
-    const source = getMdxSource(slug);
-    const { data, content } = getMdxDataAndContent(source);
-
-    return {
-      slug,
-      excerpt: content.substr(0, 128),
-      ...data,
-    } as ArticleData;
-  });
-
-  return { props: { articles: sortArticlesByDateDesc(articles) } };
+  const articles = getArticles();
+  return { props: { articles: sortArticlesByDateDesc(articles).map((a) => a.toDTO()) } };
 };

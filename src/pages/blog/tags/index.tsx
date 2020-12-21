@@ -3,20 +3,19 @@ import { GetStaticProps } from 'next';
 import { Flex, Box, Heading, Divider, Text } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-import {
-  ArticleData,
-  comparatorTagCount,
-  comparatorTagName,
-  getArrayOfTagAndCountFromTable,
-  getMdxDataAndContent,
-  getTableWithTagAndCountIncludedInArticles,
-  TagAndCount,
-} from '../../../utils/article';
-import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article-fs';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { Link } from '../../../components/atoms/Link';
+
+import { getArticles } from '../../../utils/article/file-system';
+import {
+  comparatorTagCount,
+  comparatorTagName,
+  getArrayOfTagAndCountFromTable,
+  getTableWithTagAndCountIncludedInArticles,
+  TagAndCount,
+} from '../../../utils/article/tag';
 
 type IndexPageProps = {
   sortByName: TagAndCount[];
@@ -79,18 +78,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const mdxDirs = getDirNamesThatHaveMdx();
-  const articles = mdxDirs.map((slug) => {
-    const source = getMdxSource(slug);
-    const { data, content } = getMdxDataAndContent(source);
-
-    return {
-      slug,
-      excerpt: content.substr(0, 128),
-      ...data,
-    } as ArticleData;
-  });
-
+  const articles = getArticles();
   const tagAndCountTable = getTableWithTagAndCountIncludedInArticles(articles);
   const sortByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const sortByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);
