@@ -3,6 +3,7 @@ import format from 'date-fns/format';
 
 import { ValidationError } from '../errors/Validation';
 import { PropertyRequiredError } from '../errors/PropertyRequired';
+import { isDate } from 'date-fns';
 
 /** 記事URL */
 export const blogRootUrl = '/blog/posts';
@@ -38,20 +39,22 @@ export type ArticleContent = string;
  * 不正な frontMatter であった場合、エラーを throw する
  * @param frontMatter ArticleFrontMatter 形式のオブジェクト
  */
-export const denyInvalidFrontMatter = (frontMatter: any) => {
+export const denyInvalidFrontMatter = (frontMatter: Record<string, unknown>) => {
   if (!frontMatter) throw new ValidationError('frontMatterが見つかりません');
-  if (!frontMatter.title) throw new PropertyRequiredError('title');
-  if (!frontMatter.date) throw new PropertyRequiredError('date');
-  if (!frontMatter.status) throw new PropertyRequiredError('status');
+  if (!('title' in frontMatter)) throw new PropertyRequiredError('title');
+  if (!('date' in frontMatter)) throw new PropertyRequiredError('date');
+  if (!('status' in frontMatter)) throw new PropertyRequiredError('status');
+
   if (frontMatter.tags && !Array.isArray(frontMatter.tags))
     throw new ValidationError('tagsが配列ではありません');
+  if (isDate(frontMatter.date)) throw new ValidationError('dateは変換可能な形式ではありません');
 };
 
 /**
  * 正しい形式の frontMatter であるかを返す
  * @param frontMatter ArticleFrontMatter 形式のオブジェクト
  */
-export const isValidFrontMatter = (frontMatter: any) => {
+export const isValidFrontMatter = (frontMatter: Record<string, unknown>) => {
   try {
     denyInvalidFrontMatter(frontMatter);
   } catch (e) {
@@ -64,13 +67,13 @@ export const isValidFrontMatter = (frontMatter: any) => {
  * 不正な DTO であった場合、エラーを throw する
  * @param dto ArticleDTO 形式のオブジェクト
  */
-export const denyInvalidArticleDTO = (dto: any) => {
+export const denyInvalidArticleDTO = (dto: Record<string, unknown>) => {
   if (!dto) throw new ValidationError('DTOが見つかりません');
   if (!('frontMatter' in dto)) throw new PropertyRequiredError('frontMatter');
   if (!('content' in dto)) throw new PropertyRequiredError('content');
   if (!('slug' in dto)) throw new PropertyRequiredError('slug');
 
-  denyInvalidFrontMatter(dto.frontMatter);
+  denyInvalidFrontMatter(dto.frontMatter as ArticleDTO);
 };
 
 /**
@@ -116,9 +119,11 @@ export class Article {
   }
 
   /** DTOからエンティティを生成 */
-  static fromDTO(dto: any) {
+  static fromDTO(dto: Record<string, unknown>) {
     denyInvalidArticleDTO(dto);
-    return new Article(dto.frontMatter, dto.content, dto.slug);
+
+    const articleDTO = dto as ArticleDTO;
+    return new Article(articleDTO.frontMatter, articleDTO.content, articleDTO.slug);
   }
 
   /** MDXデータとslugからエンティティを生成 */
