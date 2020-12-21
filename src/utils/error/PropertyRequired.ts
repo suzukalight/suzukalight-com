@@ -5,6 +5,8 @@ export class PropertyRequiredError extends ValidationError {
 
   constructor(property: string) {
     super(`${property} は必須のパラメータです`);
+
+    Object.setPrototypeOf(this, PropertyRequiredError.prototype);
     this.name = 'PropertyRequiredError';
     this.property = property;
   }
