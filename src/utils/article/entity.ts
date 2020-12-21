@@ -1,9 +1,9 @@
 import matter from 'gray-matter';
 import format from 'date-fns/format';
 
-import { ValidationError } from '../errors/Validation';
-import { PropertyRequiredError } from '../errors/PropertyRequired';
-import { isDate } from 'date-fns';
+import { ValidationError } from '../error/Validation';
+import { PropertyRequiredError } from '../error/PropertyRequired';
+import { isValidISODate } from '../date/is-valid';
 
 /** 記事URL */
 export const blogRootUrl = '/blog/posts';
@@ -40,14 +40,17 @@ export type ArticleContent = string;
  * @param frontMatter ArticleFrontMatter 形式のオブジェクト
  */
 export const denyInvalidFrontMatter = (frontMatter: Record<string, unknown>) => {
-  if (!frontMatter) throw new ValidationError('frontMatterが見つかりません');
+  if (!frontMatter) throw new ValidationError('frontMatter が見つかりません');
   if (!('title' in frontMatter)) throw new PropertyRequiredError('title');
   if (!('date' in frontMatter)) throw new PropertyRequiredError('date');
   if (!('status' in frontMatter)) throw new PropertyRequiredError('status');
 
   if (frontMatter.tags && !Array.isArray(frontMatter.tags))
-    throw new ValidationError('tagsが配列ではありません');
-  if (isDate(frontMatter.date)) throw new ValidationError('dateは変換可能な形式ではありません');
+    throw new ValidationError('tags が配列ではありません');
+  if (!isValidISODate(frontMatter.date as string))
+    throw new ValidationError('date は変換可能な形式ではありません');
+  if (frontMatter.status !== 'published' && frontMatter.status !== 'draft')
+    throw new ValidationError('status の値が誤っています');
 };
 
 /**
@@ -97,6 +100,8 @@ export class Article {
   private slug: string;
 
   constructor(frontMatter: ArticleFrontMatter, content: ArticleContent, slug: string) {
+    denyInvalidFrontMatter(frontMatter);
+
     this.frontMatter = frontMatter;
     this.content = content;
     this.slug = slug;
