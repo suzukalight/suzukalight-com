@@ -36,7 +36,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
 
   const content = hydrate(mdxSource, {
     components: {
-      img: (props) => <img {...props} src={`${contentBaseUrl}/${props.src}`} />,
+      img: (props) => (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <img {...props} src={`${contentBaseUrl}/${props.src}`} />
+        </div>
+      ),
     },
   });
 
@@ -47,12 +51,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({ mdxSource, frontMatter, slug
       <Box>
         <Box m="1em">
           <Box maxW="640px" mx="auto">
-            {frontMatter.hero && <img src={`${contentBaseUrl}/${frontMatter.hero}`} />}
-            {frontMatter.emoji && (
-              <Center w="100%" h={48} borderRadius={8} flexShrink={0} backgroundColor="gray.100">
-                <Text fontSize="6xl">{frontMatter.emoji}</Text>
-              </Center>
-            )}
+            <Center>
+              {frontMatter.hero && <img src={`${contentBaseUrl}/${frontMatter.hero}`} />}
+              {frontMatter.emoji && (
+                <Center w="100%" h={48} borderRadius={8} flexShrink={0} backgroundColor="gray.100">
+                  <Text fontSize="6xl">{frontMatter.emoji}</Text>
+                </Center>
+              )}
+            </Center>
 
             <Heading as="h1" mt={8} mb={2} wordBreak="break-all">
               {frontMatter.title}
@@ -104,7 +110,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data, content } = getMdxDataAndContent(source);
   const mdxSource = await renderToString(content, {
     components: {
-      img: (props) => <img {...props} src={`${blogContentsUrl}/${params.slug}/${props.src}`} />,
+      img: (props) => (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <img {...props} src={`${blogContentsUrl}/${params.slug}/${props.src}`} />
+        </div>
+      ),
     },
     mdxOptions: {
       remarkPlugins: [

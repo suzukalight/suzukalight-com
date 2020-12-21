@@ -90,6 +90,13 @@ $mq-sm: 639px;
     background-color: #f2f2f2;
   }
 
+  & blockquote {
+    border-left: 4px solid rgba(26, 32, 44, 0.5);
+    color: rgba(26, 32, 44, 0.75);
+    margin: 0 0 1.75em;
+    padding: 0 0 0 calc(0.875em - 1px);
+  }
+
   & ul,
   & ol {
     margin-bottom: 2em;
