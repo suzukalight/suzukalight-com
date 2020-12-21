@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-import { blogContentsUrl } from './article';
+import { Article, blogContentsUrl, getArticleFromMdxSource } from './entity';
 
 const root = process.cwd();
 
@@ -38,4 +38,39 @@ export const getMdxSource = (slug: string, blogRootDir = defaultBlogDir) => {
     return fs.readFileSync(`${dir}/index.mdx`, 'utf8');
   }
   return '';
+};
+
+type GetArticlesFromDirOption = {
+  includesDraft?: boolean;
+};
+
+/**
+ * 指定したディレクトリ群に格納されているMDX?ファイルをすべて返す
+ * @param mdxDirs コンテンツが格納されているディレクトリ群
+ * @param options
+ */
+export const getArticlesFromDir = (mdxDirs: string[], options?: GetArticlesFromDirOption) => {
+  return mdxDirs.reduce((articles, slug) => {
+    const source = getMdxSource(slug);
+    const article = getArticleFromMdxSource(source, slug);
+
+    if (article.isPublished() || options?.includesDraft) articles.push(article);
+
+    return articles;
+  }, [] as Article[]);
+};
+
+type GetArticlesOption = GetArticlesFromDirOption & {
+  rootDir?: string;
+};
+
+/**
+ * 指定した親ディレクトリに格納されているMDX?ファイルをすべて返す
+ * @param blogRootDir コンテンツが格納されている親ディレクトリ
+ * @param options
+ */
+export const getArticles = (options?: GetArticlesOption) => {
+  const { rootDir, ...restOptions } = options || {};
+  const mdxDirs = getDirNamesThatHaveMdx(rootDir || publicBlogDir);
+  return getArticlesFromDir(mdxDirs, restOptions);
 };
