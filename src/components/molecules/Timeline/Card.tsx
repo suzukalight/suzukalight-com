@@ -26,6 +26,8 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
     minW={['208px', '208px', '312px']}
     maxW={['208px', '208px', '312px']}
     minH={['128px', '128px', '192px']}
+    maxH={['128px', '128px', '192px']}
+    overflow="hidden"
     p={4}
     borderRadius={3}
     backgroundColor="gray.100"
@@ -35,13 +37,20 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
     </Heading>
 
     {description && (
-      <Text flexGrow={1} mt={2} fontSize="sm" color="gray.500">
+      <Text
+        flexGrow={1}
+        mt={2}
+        fontSize="sm"
+        color="gray.500"
+        overflowY="hidden"
+        whiteSpace="pre-wrap"
+      >
         {description}
       </Text>
     )}
 
     {period && (
-      <Box flexShrink={0} color="gray.100">
+      <Box flexShrink={0} color="gray.400">
         {period?.from && (
           <Text as="small" fontSize="sm">
             {formatJpYYYYM(period.from)}
