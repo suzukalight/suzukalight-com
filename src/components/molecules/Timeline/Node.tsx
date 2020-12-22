@@ -4,14 +4,15 @@ import { IconType } from 'react-icons';
 import { FaCircle } from 'react-icons/fa';
 
 import { TimelineCardData, TimelineCard } from './Card';
+import { formatJpYYYYM } from '../../../utils/date/format';
 
 type TimelineNodeProps = {
   icon?: IconType;
   name?: string;
   role?: string;
   period: {
-    from?: string;
-    to?: string;
+    from?: Date;
+    to?: Date;
   };
   isNow?: boolean;
   isLast?: boolean;
@@ -76,13 +77,13 @@ export const TimelineNode: React.FC<TimelineNodeProps> = ({
       position={['relative', 'relative', 'absolute']}
       display="block"
       top={['auto', 'auto', 0]}
-      left={['auto', 'auto', '-180px']}
-      width={['auto', 'auto', '72px']}
+      left={['auto', 'auto', '-192px']}
+      width={['auto', 'auto', '84px']}
       textAlign={['left', 'left', 'right']}
     >
       {period?.from && (
         <Text as="small" fontSize="sm">
-          {period.from}
+          {formatJpYYYYM(period.from)}
         </Text>
       )}
       {(period?.from || period?.to) && (
@@ -92,7 +93,7 @@ export const TimelineNode: React.FC<TimelineNodeProps> = ({
       )}
       {period?.to && (
         <Text as="small" fontSize="sm">
-          {period.to}
+          {formatJpYYYYM(period.to)}
         </Text>
       )}
       {isNow && <Badge colorScheme="teal">現在</Badge>}

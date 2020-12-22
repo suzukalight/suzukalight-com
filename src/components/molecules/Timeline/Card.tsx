@@ -1,14 +1,16 @@
 import React, { ReactNode } from 'react';
 import { Box, Flex, Text, Heading } from '@chakra-ui/react';
 
+import { formatJpYYYYM } from '../../../utils/date/format';
+
 export type TimelineCardData = {
   title: string;
   image?: ReactNode;
   url?: string;
   description?: string;
   period?: {
-    from?: string;
-    to?: string;
+    from?: Date;
+    to?: Date;
   };
 };
 
@@ -26,14 +28,14 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
     minH={['128px', '128px', '192px']}
     p={4}
     borderRadius={3}
-    backgroundColor="teal.500"
+    backgroundColor="gray.100"
   >
-    <Heading as="h3" flexShrink={0} fontSize={['md', 'md', 'lg']} color="white">
+    <Heading as="h3" flexShrink={0} fontSize={['md', 'md', 'lg']} color="gray.800">
       {title}
     </Heading>
 
     {description && (
-      <Text flexGrow={1} mt={2} fontSize="sm" color="white">
+      <Text flexGrow={1} mt={2} fontSize="sm" color="gray.500">
         {description}
       </Text>
     )}
@@ -42,17 +44,17 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
       <Box flexShrink={0} color="gray.100">
         {period?.from && (
           <Text as="small" fontSize="sm">
-            {period.from}
+            {formatJpYYYYM(period.from)}
           </Text>
         )}
-        {(period?.from || period?.to) && (
+        {period?.from && period?.to && (
           <Text as="small" fontSize="sm">
             {' - '}
           </Text>
         )}
         {period?.to && (
           <Text as="small" fontSize="sm">
-            {period.to}
+            {formatJpYYYYM(period.to)}
           </Text>
         )}
       </Box>
