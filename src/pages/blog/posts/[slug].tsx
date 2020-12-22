@@ -10,6 +10,7 @@ import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
 import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
+import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 import { Article, ArticleDTO, blogContentsUrl } from '../../../utils/article/entity';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article/file-system';
@@ -37,6 +38,12 @@ export const BlogPost: React.FC<BlogPostProps> = ({ article: articleDTO, content
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <img {...props} src={`${contentBaseUrl}/${props.src}`} />
         </div>
+      ),
+      TwitterEmbed: (props) => (
+        <TwitterTweetEmbed
+          tweetId={props.tweetId}
+          options={props.options || { conversation: 'none' }}
+        />
       ),
     },
   });
@@ -113,6 +120,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <img {...props} src={`${blogContentsUrl}/${params.slug}/${props.src}`} />
         </div>
+      ),
+      TwitterEmbed: (props) => (
+        <TwitterTweetEmbed
+          tweetId={props.tweetId}
+          options={props.options || { conversation: 'none' }}
+        />
       ),
     },
     mdxOptions: {
