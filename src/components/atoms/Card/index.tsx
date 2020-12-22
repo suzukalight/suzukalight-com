@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Center, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Center, Heading, Text } from '@chakra-ui/react';
 
 type CardProps = {
   image: React.ReactNode;
@@ -8,12 +8,19 @@ type CardProps = {
 };
 
 export const Card: React.FC<CardProps> = ({ image, title, description }) => (
-  <Box borderWidth="1px" borderRadius="lg" overflowX="hidden">
-    <Center w="100%" h="180px">
+  <Flex
+    direction={['row', 'column']}
+    overflowX="hidden"
+    minH="100%"
+    borderWidth="1px"
+    borderRadius="lg"
+    p={4}
+  >
+    <Center flexShrink={0} w={[16, '100%']} minH={['100%', '180px']}>
       {image}
     </Center>
 
-    <Box p={6}>
+    <Box flexGrow={1}>
       <Heading as="h3" size="md" textAlign="center">
         {title}
       </Heading>
@@ -30,5 +37,5 @@ export const Card: React.FC<CardProps> = ({ image, title, description }) => (
         {description}
       </Text>
     </Box>
-  </Box>
+  </Flex>
 );

@@ -22,21 +22,21 @@ export default function Home(props) {
       <SimpleGrid columns={[1, 2, 3]} gap={4} mb={32} mx={8}>
         <Link to="/blog">
           <Card
-            image={<Icon as={FaPen} boxSize={16} color="teal.500" />}
+            image={<Icon as={FaPen} boxSize={[8, 16]} color="teal.500" />}
             title="Writings"
             description="Blogs and Documents"
           />
         </Link>
         <Link to="/outputs">
           <Card
-            image={<Icon as={FaCode} boxSize={16} color="teal.500" />}
+            image={<Icon as={FaCode} boxSize={[8, 16]} color="teal.500" />}
             title="Outputs"
             description="Products and Examples"
           />
         </Link>
         <Link to="/about">
           <Card
-            image={<Icon as={FaUser} boxSize={16} color="teal.500" />}
+            image={<Icon as={FaUser} boxSize={[8, 16]} color="teal.500" />}
             title="About"
             description="Skill map, Awards and Biography"
           />
