@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Heading, Divider } from '@chakra-ui/react';
-import { FaHome, FaBuilding, FaUniversity, FaUserGraduate } from 'react-icons/fa';
+import { FaHome, FaBuilding, FaUniversity, FaUserGraduate, FaUser } from 'react-icons/fa';
 
 import DefaultLayout from '../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../components/atoms/HtmlHead';
@@ -129,7 +129,12 @@ export const IndexPage: React.FC = () => (
 
           <Divider mt={12} mb={8} />
 
-          <BackLinks links={[{ to: '/', icon: FaHome, label: 'Back to Home' }]} />
+          <BackLinks
+            links={[
+              { to: '/about', icon: FaUser, label: 'Back to About' },
+              { to: '/', icon: FaHome, label: 'Back to Home' },
+            ]}
+          />
         </Box>
       </Box>
     </Box>

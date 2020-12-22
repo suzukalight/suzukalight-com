@@ -96,7 +96,11 @@ export const TimelineNode: React.FC<TimelineNodeProps> = ({
           {formatJpYYYYM(period.to)}
         </Text>
       )}
-      {isNow && <Badge colorScheme="teal">現在</Badge>}
+      {isNow && (
+        <Badge color="teal.500" backgroundColor="teal.50">
+          現在
+        </Badge>
+      )}
     </Box>
 
     <HStack my={4} spacing={4} alignItems="flex-start" minW="100%" overflowX="auto">
