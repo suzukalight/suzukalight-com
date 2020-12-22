@@ -9,7 +9,7 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
 import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../../utils/article/entity';
-import { getArticles } from '../../../utils/article/file-system';
+import { getArticles } from '../../../utils/article/file-system.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';

@@ -10,7 +10,7 @@ import { BackLinks } from '../../components/molecules/BackLinks';
 import { Link } from '../../components/atoms/Link';
 
 import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../utils/article/entity';
-import { getArticles } from '../../utils/article/file-system';
+import { getArticles } from '../../utils/article/file-system.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 
 type IndexPageProps = {

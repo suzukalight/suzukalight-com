@@ -13,7 +13,7 @@ import remarkPrism from 'remark-prism';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 import { Article, ArticleDTO, blogContentsUrl } from '../../../utils/article/entity';
-import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article/file-system';
+import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article/file-system.server';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
