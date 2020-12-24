@@ -44,7 +44,7 @@ test.each`
 https://github.com/suzukalight/sample-jest-test-each  
 上記の URL にサンプルを Push していますので、clone してお試しください。
 
-```bash:bash
+```bash
 git clone https://github.com/suzukalight/sample-jest-test-each
 cd sample-jest-test-each
 yarn
@@ -105,7 +105,7 @@ export const getTheaterTicketPrice = (watchDateTime: Date, birthday: Date) => {
 
 ## パッケージをインストール
 
-```bash:bash
+```bash
 yarn add -D jest ts-jest @types/jest
 yarn add date-fns
 ```
@@ -154,7 +154,7 @@ describe("getTheaterTicketPrice", () => {
 
 ## テストを実行
 
-```bash:bash
+```bash
 $ yarn test
  PASS  src/__tests__/getTheaterTicketPrice.ts
   getTheaterTicketPrice

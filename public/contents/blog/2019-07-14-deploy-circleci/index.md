@@ -80,7 +80,7 @@ https://circleci.com/signup/
 
 CircleCI がデプロイに使用するための SSH 鍵を新規に生成します；
 
-```bash:bash
+```bash
 $ ssh-keygen -t rsa -b 4096 -C "circleci@suzukalight.com" -f ~/.ssh/circleci-suzukalight
 $ pbcopy < ~/.ssh/circleci-suzukalight
 ```
@@ -109,7 +109,7 @@ USER_NAME               : circleci
 
 **Settings -> Deploy keys -> Add Deploy Key** に、先程の秘密鍵に対する公開鍵を GitHub 側に登録します；
 
-```bash:bash
+```bash
 $ pbcopy < ~/.ssh/circleci-suzukalight.pub
 ```
 
