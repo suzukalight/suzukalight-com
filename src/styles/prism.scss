@@ -144,21 +144,23 @@ pre[class*='language-'] {
  * Code Title
  */
 .remark-code-title {
-  display: inline-block;
+  display: block;
   overflow: hidden;
-  max-width: 100%;
-  margin-bottom: -0.75em;
-  border-radius: 8px 8px 0 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1em;
+  width: 100%;
+  padding: 1.5em 1.125em 0.5em;
   background: #f2f2f2;
-  color: #1a202c;
-  font-size: 0.75em;
+  color: #690;
+  font-size: 0.875em;
   line-height: 0.25;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  &::before {
+    display: inline-block;
+    content: '// ';
+    width: 1.75em;
+  }
 }
 
 /*
@@ -199,20 +201,20 @@ article {
  * Highlight line 
  */
 .remark-highlight-code-line {
-  background-color: rgb(79, 209, 197, 0.1);
+  background-color: rgb(79, 209, 197, 0.125);
   display: block;
-  margin-right: -1rem;
-  margin-left: -1rem;
-  padding-right: 1rem;
-  padding-left: 0.75rem;
-  border-left: 0.25rem solid rgb(79, 209, 197, 0.75);
+  margin-right: -1.125em;
+  margin-left: -1.125em;
+  padding-right: 1.125em;
+  padding-left: 1.125em;
+  // border-left: 0.25em solid rgb(79, 209, 197, 0.75);
 }
 
 .remark-highlight {
   background-color: #f2f2f2;
-  border-radius: 0.25rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
+  border-radius: 0.25em;
+  margin-bottom: 2em;
+  padding: 1em;
   overflow: auto;
 
   & pre[class*='language-'] {
@@ -224,7 +226,7 @@ article {
     min-width: 100%;
 
     &.line-numbers {
-      padding-left: 2.75rem;
+      padding-left: 2.75em;
     }
   }
 }
