@@ -1,28 +1,34 @@
-$mq-lg: 1279px;
-$mq-md: 959px;
-$mq-sp: 767px;
-$mq-sm: 639px;
+$mq-lg: 992px;
+$mq-md: 768px;
+$mq-sp: 640px;
+$mq-sm: 480px;
 
 @mixin mq($size) {
-  @media screen and (max-width: $size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin mq-lg {
+  @media screen and (min-width: $mq-lg) {
     @content;
   }
 }
 
 @mixin mq-md {
-  @media screen and (max-width: $mq-md) {
+  @media screen and (min-width: $mq-md) {
     @content;
   }
 }
 
 @mixin mq-sp {
-  @media screen and (max-width: $mq-sp) {
+  @media screen and (min-width: $mq-sp) {
     @content;
   }
 }
 
 @mixin mq-sm {
-  @media screen and (max-width: $mq-sm) {
+  @media screen and (min-width: $mq-sm) {
     @content;
   }
 }
@@ -74,6 +80,66 @@ $mq-sm: 639px;
   & h3 {
     margin: 2em 0;
     font-size: 1em;
+  }
+
+  & h1[id='目次'] {
+    display: none;
+    background-color: gray;
+
+    & + ul {
+      display: none;
+
+      @include mq-lg() {
+        display: block;
+        position: fixed;
+        overflow-x: hidden;
+        overflow-y: auto;
+        right: calc((100vw - 640px - 16em) / 2 - 6em);
+        width: 16em;
+        top: 120px;
+        max-height: calc(100vh - 180px);
+        margin-left: calc(100% + 1em);
+        padding: 1em;
+        background-color: white;
+        font-size: 0.75em;
+
+        &::before {
+          content: '目次';
+          display: block;
+          width: 100%;
+          height: 2em;
+          font-size: 1.125em;
+          font-weight: bold;
+        }
+
+        & li {
+          list-style: none;
+          margin: 0;
+
+          & > ul {
+            margin-left: 1em;
+          }
+
+          & a {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            height: 2em;
+            color: rgba(26, 32, 44);
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          & a[class='reading'] {
+            background-color: #f5f2f0;
+          }
+        }
+      }
+    }
   }
 
   & p[class='contentful-paragraph'] {
@@ -128,11 +194,11 @@ $mq-sm: 639px;
     margin: 0 0 2em;
     border: 0;
     padding: 0;
-    font-size: 0.875em;
+    font-size: 0.75em;
     line-height: 1.5;
 
     @include mq-sp() {
-      font-size: 0.75em;
+      font-size: 0.875em;
     }
   }
 
@@ -155,7 +221,7 @@ $mq-sm: 639px;
 
   & > p > code {
     padding: 0.5rem;
-    background-color: #EDF2F7;
+    background-color: #edf2f7;
     word-break: break-all;
   }
 }

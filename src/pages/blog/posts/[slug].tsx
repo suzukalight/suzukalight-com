@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 
-import React from 'react';
+import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
@@ -10,7 +10,9 @@ import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
 import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
+import remarkToc from 'remark-toc';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
+import { useInView } from 'react-intersection-observer';
 
 import { Article, ArticleDTO, blogContentsUrl } from '../../../utils/article/entity';
 import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article/file-system.server';
@@ -22,11 +24,57 @@ import { BackLinks } from '../../../components/molecules/BackLinks';
 import styles from './slug.module.scss';
 
 type BlogPostProps = {
-  article: ArticleDTO;
+  articleDTO: ArticleDTO;
   contentHtml: string;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ article: articleDTO, contentHtml }) => {
+type HeadingWithIntersectionProps = {
+  as: string;
+};
+
+const HeadingWithIntersection = ({ as: As, inViewHeading, ...props }) => {
+  const ref = useRef();
+  const [inViewRef, inView, entry] = useInView();
+
+  const setRefs = useCallback(
+    (node) => {
+      ref.current = node;
+      inViewRef(node);
+    },
+    [inViewRef],
+  );
+
+  useEffect(() => {
+    inViewHeading(entry?.target?.id, inView, As);
+  }, [inView, entry]);
+
+  useLayoutEffect(() => {
+    if (!entry?.target?.id) return;
+
+    const href = encodeURIComponent(entry.target.id);
+    const nodes = document.querySelectorAll(`ul li a[href^="#${href}"]`);
+    if (!nodes.length) return;
+
+    const node = nodes[0];
+    node.setAttribute('class', inView ? 'reading' : '');
+  }, [inView]);
+
+  return <As ref={setRefs} {...props} />;
+};
+
+export const BlogPost: React.FC<BlogPostProps> = ({ articleDTO, contentHtml }) => {
+  const [idsInView, setIdsInView] = useState([]);
+
+  const inViewHeading = (id, inView) => {
+    if (!id) return;
+
+    if (inView) {
+      setIdsInView((prev) => [...prev, id]);
+    } else {
+      setIdsInView((prev) => [...prev.filter((i) => i !== id)]);
+    }
+  };
+
   const article = Article.fromDTO(articleDTO);
   const slug = article.getSlug();
   const { title, tags, hero, emoji } = article.getFrontMatter();
@@ -45,6 +93,30 @@ export const BlogPost: React.FC<BlogPostProps> = ({ article: articleDTO, content
           options={props.options || { conversation: 'none' }}
         />
       ),
+      h1: (props) => (
+        <HeadingWithIntersection
+          as="h1"
+          idsInView={idsInView}
+          inViewHeading={inViewHeading}
+          {...props}
+        />
+      ),
+      h2: (props) => (
+        <HeadingWithIntersection
+          as="h2"
+          idsInView={idsInView}
+          inViewHeading={inViewHeading}
+          {...props}
+        />
+      ),
+      h3: (props) => (
+        <HeadingWithIntersection
+          as="h3"
+          idsInView={idsInView}
+          inViewHeading={inViewHeading}
+          {...props}
+        />
+      ),
     },
   });
 
@@ -54,7 +126,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({ article: articleDTO, content
 
       <Box>
         <Box m="1em">
-          <Box maxW="640px" mx="auto">
+          <Box
+            maxW={['640px', '640px', '640px', '840px']}
+            mx={'auto'}
+            pr={['0', '0', '0', '200px']}
+          >
             <Center>
               {hero && <img src={`${contentBaseUrl}/${hero}`} />}
               {emoji && (
@@ -145,9 +221,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         ],
         remarkCodeTitles,
         remarkPrism,
+        [remarkToc, { heading: '目次' }],
       ],
     },
   });
 
-  return { props: { article: article.toDTO(), contentHtml } };
+  return { props: { articleDTO: article.toDTO(), contentHtml } };
 };
