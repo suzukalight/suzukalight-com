@@ -51,12 +51,12 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
                     as="small"
                     key={tag}
                     mr={2}
-                    color="gray.400"
-                    fontSize="sm"
+                    color="gray.700"
+                    fontSize="xs"
                   >{`#${tag}`}</Text>
                 ))}
               </Box>
-              <Text as="small" fontSize="sm" color="gray.400" opacity="0.8">
+              <Text as="small" fontSize="xs" color="gray.700" opacity="0.8">
                 {article.getDateFormatted()}
               </Text>
             </Flex>
