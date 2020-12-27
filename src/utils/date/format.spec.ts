@@ -1,21 +1,10 @@
-import { formatJpYYYYM, formatJpYYYYMM, formatYYYYMM } from './format';
+import { formatJpYYYYM } from './format';
 
 describe('utils/date', () => {
-  describe('formatYYYYMM', () => {
-    test('OK', () => {
-      expect(formatYYYYMM(new Date('2020-01-01'))).toBe('2020.01');
-    });
-  });
-
-  describe('formatYYYYMM', () => {
+  describe('formatJpYYYYM', () => {
     test('OK', () => {
       expect(formatJpYYYYM(new Date('2020-01-01'))).toBe('2020年1月');
-    });
-  });
-
-  describe('formatYYYYMM', () => {
-    test('OK', () => {
-      expect(formatJpYYYYMM(new Date('2020-01-01'))).toBe('2020年01月');
+      expect(formatJpYYYYM(new Date('2020-12-01'))).toBe('2020年12月');
     });
   });
 });
