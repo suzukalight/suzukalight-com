@@ -7,6 +7,8 @@ hero: ./apollo-graphql.png
 status: 'published'
 ---
 
+# 目次
+
 Apollo-Server を使った GraphQL サーバのハンズオン実装シリーズ。今回は**認証と認可（Authentication/Authorization）**を扱います。
 
 前半は、メールアドレス・パスワードによる認証と、サインアップ処理を追加する手順です。**JWT(jsonwebtoken)**、**bcrypt** による暗号化、**beforeCreate などの Sequelize Hooks** などを使用しています。

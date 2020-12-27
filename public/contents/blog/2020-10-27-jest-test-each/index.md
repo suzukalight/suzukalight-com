@@ -9,6 +9,8 @@ status: 'published'
 
 Jest で関数の引数を複数パターンチェックしたい場合、ベタに書く方法のほかに、**`test.each` でテーブルとして記述する方法があります**。テストの視認性が良くなるため、オススメの記法です。今回はこちらをご紹介するとともに、いくつかの実践問題も提示します。
 
+# 目次
+
 # Jest の `test.each` とは
 
 https://jestjs.io/docs/ja/api#testeachtablename-fn-timeout  

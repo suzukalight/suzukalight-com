@@ -7,6 +7,8 @@ hero: ./apollo-graphql.png
 status: 'published'
 ---
 
+# 目次
+
 突然ですが、[@suzukalight](http://twitter.com/suzukalight) は来年からジョブチェンジして、バックエンドエンジニアとして働くことになりました！
 
 弊社の開発環境としては、Node, GraphQL, koa, apollo-server, RxJS などを採用しているのですが、順次キャッチアップするとして、まずは基本中の基本からしっかり押さえておきたいと思い、GraphQL の素振りを始めています。
