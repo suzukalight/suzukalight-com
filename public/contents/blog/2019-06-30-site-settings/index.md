@@ -48,7 +48,7 @@ export const pageQuery = graphql`
 
 あとはこれをマークアップしつつ表示すれば OK；
 
-```javascript
+```jsx
 <section className={styles.toc}>
   <h1 className={styles.tocHeader}>目次</h1>
   <div className={styles.tocBody} dangerouslySetInnerHTML={{ __html: post.tableOfContents }} />
