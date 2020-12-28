@@ -123,6 +123,10 @@ export class Article {
     return this.content.substr(0, 128);
   }
 
+  getTags() {
+    return this.frontMatter.tags;
+  }
+
   /** DTOからエンティティを生成 */
   static fromDTO(dto: Record<string, unknown>) {
     denyInvalidArticleDTO(dto);
