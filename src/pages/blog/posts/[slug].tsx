@@ -12,21 +12,32 @@ import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 
-import { Article, ArticleDTO, blogContentsUrl } from '../../../utils/article/entity';
-import { getDirNamesThatHaveMdx, getMdxSource } from '../../../utils/article/file-system.server';
+// NOTE: markdownのHTMLにCSSを直接あてることにする
+import styles from './slug.module.scss';
+
+import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../../utils/article/entity';
+import {
+  getArticles,
+  getDirNamesThatHaveMdx,
+  getMdxSource,
+} from '../../../utils/article/file-system.server';
+import { getRelatedArticles } from '../../../utils/article/related';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-
-// NOTE: markdownのHTMLにCSSを直接あてることにする
-import styles from './slug.module.scss';
+import { ArticleList } from '../../../components/molecules/ArticleList';
 
 type BlogPostProps = {
   article: ArticleDTO;
   contentHtml: string;
+  relatedArticlesDTO: ArticleDTO[];
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ article: articleDTO, contentHtml }) => {
+export const BlogPost: React.FC<BlogPostProps> = ({
+  article: articleDTO,
+  contentHtml,
+  relatedArticlesDTO,
+}) => {
   const article = Article.fromDTO(articleDTO);
   const slug = article.getSlug();
   const { title, tags, hero, emoji } = article.getFrontMatter();
@@ -81,6 +92,25 @@ export const BlogPost: React.FC<BlogPostProps> = ({ article: articleDTO, content
             </Box>
 
             <article className={styles.article}>{content}</article>
+
+            <Divider mt={12} mb={8} />
+
+            <Box my={12}>
+              <Heading as="h1" fontSize="2xl" mb={8}>
+                Related Articles
+              </Heading>
+              {relatedArticlesDTO.length > 0 ? (
+                <ArticleList
+                  articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
+                  blogRootUrl={blogRootUrl}
+                  blogContentsUrl={blogContentsUrl}
+                />
+              ) : (
+                <Text as="small" color="gray.500">
+                  関連する記事は見つかりませんでした。
+                </Text>
+              )}
+            </Box>
 
             <Divider mt={12} mb={8} />
 
@@ -149,5 +179,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
 
-  return { props: { article: article.toDTO(), contentHtml } };
+  const articles = getArticles();
+  const relatedArticles = getRelatedArticles(article, articles);
+  const relatedArticlesDTO = relatedArticles.map((a) => a.toDTO());
+
+  return { props: { article: article.toDTO(), contentHtml, relatedArticlesDTO } };
 };
