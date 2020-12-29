@@ -114,17 +114,19 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                   Tags
                 </Heading>
 
-                <Box wordBreak="break-all">
+                <Box>
                   {(tags || []).map((tag) => (
                     <Link to={`${blogTagsUrl}/${encodeURIComponent(tag)}`} key={tag}>
                       <Text
                         as="span"
                         fontSize="md"
+                        display="inline-block"
                         mr={2}
+                        mb={2}
                         px={2}
-                        py={1}
                         borderRadius={8}
                         backgroundColor="gray.100"
+                        lineHeight="2"
                       >{`#${tag}`}</Text>
                     </Link>
                   ))}
