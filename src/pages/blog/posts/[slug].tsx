@@ -43,7 +43,7 @@ type BlogPostProps = {
 };
 
 const MarkdownImg = (srcBaseUrl: string) => (props) => (
-  <div
+  <span
     style={{
       display: 'flex',
       justifyContent: 'center',
@@ -54,9 +54,10 @@ const MarkdownImg = (srcBaseUrl: string) => (props) => (
     <img
       {...props}
       src={`${srcBaseUrl}/${props.src}`}
+      alt={props.alt || props.src}
       style={{ objectFit: 'contain', width: '100%', height: '16em' }}
     />
-  </div>
+  </span>
 );
 
 export const BlogPost: React.FC<BlogPostProps> = ({
@@ -126,7 +127,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                       display="inline-block"
                       mr={2}
                       mb={1}
-                      color="gray.400"
+                      color="gray.600"
                       fontSize="sm"
                       lineHeight="1"
                       _hover={{ textDecoration: 'underline' }}
@@ -135,7 +136,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                 ))}
               </Box>
 
-              <Text fontSize="sm" color="gray.400" my={1}>
+              <Text fontSize="sm" color="gray.600" my={1}>
                 {article.getDateFormatted()}
               </Text>
             </Box>

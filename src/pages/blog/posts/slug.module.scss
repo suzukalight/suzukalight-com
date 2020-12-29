@@ -119,8 +119,12 @@ $mq-sm: 639px;
 
   & a {
     text-decoration: underline;
-    color: #319795;
+    color: #285e61;
     word-break: break-all;
+
+    &:hover {
+      color: #4fd1c5;
+    }
   }
 
   & table {
@@ -155,7 +159,7 @@ $mq-sm: 639px;
 
   & > p > code {
     padding: 0.5rem;
-    background-color: #EDF2F7;
+    background-color: #edf2f7;
     word-break: break-all;
   }
 }
