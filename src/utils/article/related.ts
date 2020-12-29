@@ -1,4 +1,5 @@
 import { Article } from './entity';
+import { sortArticlesByDateDesc } from './sorter';
 
 /**
  * 対象の記事に類似している記事を返す
@@ -24,11 +25,25 @@ export const getRelatedArticlesByTags = (src: Article, articles: Article[], coun
       // タグの一致数を数える
       const matchedTagCount = article
         .getTags()
-        ?.reduce((count, t) => (src.getTags().some((tt) => tt === t) ? count + 1 : count), 0);
+        .reduce((count, t) => (src.getTags().some((tt) => tt === t) ? count + 1 : count), 0);
       return { article, matchedTagCount };
     })
     .filter((a) => a.matchedTagCount) // 1つ以上タグがマッチしているものだけを対象にする
     .sort((a, b) => b.matchedTagCount - a.matchedTagCount) // マッチ数で並べ替える
     .slice(0, count) // ピックアップ数ぶんで絞る
     .map((s) => s.article); // Article だけ返す
+};
+
+/**
+ * 対象の記事の、前の記事と次の記事を返す
+ * @param src 当該記事
+ * @param articles 検索対象の記事（並べ替えはしなくて良い）
+ */
+export const getPrevAndNextArticle = (src: Article, articles: Article[]) => {
+  const articlesOrderByDate = sortArticlesByDateDesc(articles);
+  const articleIndex = articlesOrderByDate.findIndex((a) => a.getSlug() === src.getSlug());
+  const prevArticle = articlesOrderByDate[articleIndex - 1];
+  const nextArticle = articlesOrderByDate[articleIndex + 1];
+
+  return { prevArticle, nextArticle };
 };
