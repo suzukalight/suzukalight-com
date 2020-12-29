@@ -21,22 +21,26 @@ import {
   getDirNamesThatHaveMdx,
   getMdxSource,
 } from '../../../utils/article/file-system.server';
-import { getRelatedArticles } from '../../../utils/article/related';
+import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { ArticleList } from '../../../components/molecules/ArticleList';
 
 type BlogPostProps = {
-  article: ArticleDTO;
+  articleDTO: ArticleDTO;
   contentHtml: string;
   relatedArticlesDTO: ArticleDTO[];
+  prevArticleDTO?: ArticleDTO;
+  nextArticleDTO?: ArticleDTO;
 };
 
 export const BlogPost: React.FC<BlogPostProps> = ({
-  article: articleDTO,
+  articleDTO,
   contentHtml,
   relatedArticlesDTO,
+  prevArticleDTO,
+  nextArticleDTO,
 }) => {
   const article = Article.fromDTO(articleDTO);
   const slug = article.getSlug();
@@ -93,26 +97,38 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
             <article className={styles.article}>{content}</article>
 
-            <Divider mt={12} mb={8} />
+            <Divider my={12} />
 
-            <Box my={12}>
-              <Heading as="h1" fontSize="2xl" mb={8}>
-                Related Articles
-              </Heading>
-              {relatedArticlesDTO.length > 0 ? (
-                <ArticleList
-                  articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
-                  blogRootUrl={blogRootUrl}
-                  blogContentsUrl={blogContentsUrl}
-                />
-              ) : (
-                <Text as="small" color="gray.500">
-                  関連する記事は見つかりませんでした。
-                </Text>
-              )}
-            </Box>
+            <Heading as="h1" fontSize="xl" my={8}>
+              Related Articles
+            </Heading>
 
-            <Divider mt={12} mb={8} />
+            {relatedArticlesDTO.length > 0 ? (
+              <ArticleList
+                articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
+                blogRootUrl={blogRootUrl}
+                blogContentsUrl={blogContentsUrl}
+              />
+            ) : (
+              <Text as="small" color="gray.500">
+                関連する記事は見つかりませんでした
+              </Text>
+            )}
+
+            <Heading as="h1" fontSize="xl" mt={16} mb={8}>
+              Prev/Next Article
+            </Heading>
+
+            <ArticleList
+              articles={[
+                prevArticleDTO && Article.fromDTO(prevArticleDTO),
+                nextArticleDTO && Article.fromDTO(nextArticleDTO),
+              ].filter((a) => a)}
+              blogRootUrl={blogRootUrl}
+              blogContentsUrl={blogContentsUrl}
+            />
+
+            <Divider my={12} />
 
             <BackLinks
               links={[
@@ -180,8 +196,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   });
 
   const articles = getArticles();
+
   const relatedArticles = getRelatedArticles(article, articles);
   const relatedArticlesDTO = relatedArticles.map((a) => a.toDTO());
 
-  return { props: { article: article.toDTO(), contentHtml, relatedArticlesDTO } };
+  const { prevArticle, nextArticle } = getPrevAndNextArticle(article, articles);
+
+  return {
+    props: {
+      articleDTO: article.toDTO(),
+      contentHtml,
+      relatedArticlesDTO,
+      prevArticleDTO: prevArticle?.toDTO() ?? null,
+      nextArticleDTO: nextArticle?.toDTO() ?? null,
+    },
+  };
 };

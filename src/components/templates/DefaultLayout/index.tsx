@@ -10,8 +10,10 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children, ...props
   <Flex direction="column" align="center" minH="100vh" m="0 auto" {...props}>
     <Header />
 
-    <Box flexGrow={1} w="100%" maxW="80em" mt={16}>
-      {children}
+    <Box flexGrow={1} w="100%" mt={16} overflowX="hidden">
+      <Box maxW="80em" m="0 auto">
+        {children}
+      </Box>
     </Box>
 
     <Footer />
