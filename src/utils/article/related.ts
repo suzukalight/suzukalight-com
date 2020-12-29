@@ -13,7 +13,7 @@ export const getRelatedArticles = (src: Article, articles: Article[], count = 4)
 };
 
 /**
- * 対象のタグをより多く含んでいる記事を順序付けて返す
+ * 対象の記事につけられたタグを、より多く含んでいる記事を順序付けて返す
  * @param src 当該記事
  * @param articles 検索対象の記事
  * @param count ピックアップする数
@@ -39,11 +39,15 @@ export const getRelatedArticlesByTags = (src: Article, articles: Article[], coun
  * @param src 当該記事
  * @param articles 検索対象の記事（並べ替えはしなくて良い）
  */
-export const getPrevAndNextArticle = (src: Article, articles: Article[]) => {
+export const getPrevAndNextArticle = (
+  src: Article,
+  articles: Article[],
+): { prevArticle: Article | null; nextArticle: Article | null } => {
   const articlesOrderByDate = sortArticlesByDateDesc(articles);
   const articleIndex = articlesOrderByDate.findIndex((a) => a.getSlug() === src.getSlug());
-  const prevArticle = articlesOrderByDate[articleIndex - 1];
-  const nextArticle = articlesOrderByDate[articleIndex + 1];
+  if (articleIndex < 0) return { prevArticle: null, nextArticle: null };
 
+  const prevArticle = articlesOrderByDate[articleIndex - 1] ?? null;
+  const nextArticle = articlesOrderByDate[articleIndex + 1] ?? null;
   return { prevArticle, nextArticle };
 };
