@@ -4,7 +4,7 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
-import { Heading, Center, Box, Text, Divider } from '@chakra-ui/react';
+import { Heading, Center, Box, Text, Divider, VStack } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
@@ -15,7 +15,13 @@ import { TwitterTweetEmbed } from 'react-twitter-embed';
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
 
-import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../../utils/article/entity';
+import {
+  Article,
+  ArticleDTO,
+  blogContentsUrl,
+  blogRootUrl,
+  blogTagsUrl,
+} from '../../../utils/article/entity';
 import {
   getArticles,
   getDirNamesThatHaveMdx,
@@ -26,6 +32,7 @@ import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { ArticleList } from '../../../components/molecules/ArticleList';
+import { Link } from '../../../components/atoms/Link';
 
 type BlogPostProps = {
   articleDTO: ArticleDTO;
@@ -86,7 +93,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             <Box mb={8}>
               <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
                 {(tags || []).map((tag) => (
-                  <Text as="span" key={tag} mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
+                  <Link to={`${blogTagsUrl}/${encodeURIComponent(tag)}`} key={tag}>
+                    <Text as="span" mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
+                  </Link>
                 ))}
               </Box>
 
@@ -97,38 +106,66 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
             <article className={styles.article}>{content}</article>
 
-            <Divider my={12} />
+            <Divider mt={16} />
 
-            <Heading as="h1" fontSize="xl" my={8}>
-              Related Articles
-            </Heading>
+            <VStack as="aside" spacing={16} my={16} align="stretch">
+              <Box>
+                <Heading as="h1" fontSize="xl" mb={8}>
+                  Tags
+                </Heading>
 
-            {relatedArticlesDTO.length > 0 ? (
-              <ArticleList
-                articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
-                blogRootUrl={blogRootUrl}
-                blogContentsUrl={blogContentsUrl}
-              />
-            ) : (
-              <Text as="small" color="gray.500">
-                関連する記事は見つかりませんでした
-              </Text>
-            )}
+                <Box wordBreak="break-all">
+                  {(tags || []).map((tag) => (
+                    <Link to={`${blogTagsUrl}/${encodeURIComponent(tag)}`} key={tag}>
+                      <Text
+                        as="span"
+                        fontSize="md"
+                        mr={2}
+                        px={2}
+                        py={1}
+                        borderRadius={8}
+                        backgroundColor="gray.100"
+                      >{`#${tag}`}</Text>
+                    </Link>
+                  ))}
+                </Box>
+              </Box>
 
-            <Heading as="h1" fontSize="xl" mt={16} mb={8}>
-              Prev/Next Article
-            </Heading>
+              <Box>
+                <Heading as="h1" fontSize="xl" mb={8}>
+                  Related Articles
+                </Heading>
 
-            <ArticleList
-              articles={[
-                prevArticleDTO && Article.fromDTO(prevArticleDTO),
-                nextArticleDTO && Article.fromDTO(nextArticleDTO),
-              ].filter((a) => a)}
-              blogRootUrl={blogRootUrl}
-              blogContentsUrl={blogContentsUrl}
-            />
+                {relatedArticlesDTO.length > 0 ? (
+                  <ArticleList
+                    articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
+                    blogRootUrl={blogRootUrl}
+                    blogContentsUrl={blogContentsUrl}
+                  />
+                ) : (
+                  <Text as="small" color="gray.500">
+                    関連する記事は見つかりませんでした
+                  </Text>
+                )}
+              </Box>
 
-            <Divider my={12} />
+              <Box>
+                <Heading as="h1" fontSize="xl" mb={8}>
+                  Prev/Next Article
+                </Heading>
+
+                <ArticleList
+                  articles={[
+                    prevArticleDTO && Article.fromDTO(prevArticleDTO),
+                    nextArticleDTO && Article.fromDTO(nextArticleDTO),
+                  ].filter((a) => a)}
+                  blogRootUrl={blogRootUrl}
+                  blogContentsUrl={blogContentsUrl}
+                />
+              </Box>
+            </VStack>
+
+            <Divider mb={16} />
 
             <BackLinks
               links={[

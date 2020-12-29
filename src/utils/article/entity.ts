@@ -7,6 +7,7 @@ import { isValidISODate } from '../date/is-valid';
 
 /** 記事URL */
 export const blogRootUrl = '/blog/posts';
+export const blogTagsUrl = '/blog/tags';
 
 /** 記事を格納しているディレクトリ（public内） */
 export const blogContentsUrl = '/contents/blog';

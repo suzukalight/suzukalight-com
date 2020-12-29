@@ -35,7 +35,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           <Flex flexGrow={1} direction="column">
             <Text
               as="strong"
-              size="sm"
+              fontSize="md"
               lineHeight={1.25}
               maxH="2.5em"
               overflowY="hidden"
