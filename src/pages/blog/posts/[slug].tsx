@@ -4,7 +4,7 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
-import { Heading, Center, Box, Text, Divider, VStack } from '@chakra-ui/react';
+import { Image, Heading, Center, Box, Text, Divider, VStack } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
@@ -42,6 +42,23 @@ type BlogPostProps = {
   nextArticleDTO?: ArticleDTO;
 };
 
+const MarkdownImg = (srcBaseUrl: string) => (props) => (
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#f7fafc',
+    }}
+  >
+    <img
+      {...props}
+      src={`${srcBaseUrl}/${props.src}`}
+      style={{ objectFit: 'contain', width: '100%', height: '16em' }}
+    />
+  </div>
+);
+
 export const BlogPost: React.FC<BlogPostProps> = ({
   articleDTO,
   contentHtml,
@@ -56,11 +73,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
   const content = hydrate(contentHtml, {
     components: {
-      img: (props) => (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <img {...props} src={`${contentBaseUrl}/${props.src}`} />
-        </div>
-      ),
+      img: MarkdownImg(contentBaseUrl),
       TwitterEmbed: (props) => (
         <TwitterTweetEmbed
           tweetId={props.tweetId}
@@ -78,10 +91,24 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <Box m="1em">
           <Box maxW="640px" mx="auto">
             <Center>
-              {hero && <img src={`${contentBaseUrl}/${hero}`} />}
+              {hero && (
+                <Image
+                  src={`${contentBaseUrl}/${hero}`}
+                  alt="hero image"
+                  fit="cover"
+                  w="100%"
+                  h={['16em', '16em', '20em']}
+                />
+              )}
               {emoji && (
-                <Center w="100%" h={48} borderRadius={8} flexShrink={0} backgroundColor="gray.100">
-                  <Text fontSize="6xl">{emoji}</Text>
+                <Center
+                  w="100%"
+                  h={['16em', '16em', '20em']}
+                  borderRadius={8}
+                  flexShrink={0}
+                  backgroundColor="gray.100"
+                >
+                  <Text fontSize={['5em', '5em', '6em']}>{emoji}</Text>
                 </Center>
               )}
             </Center>
@@ -91,15 +118,24 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </Heading>
 
             <Box mb={8}>
-              <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
+              <Box>
                 {(tags || []).map((tag) => (
                   <Link to={`${blogTagsUrl}/${encodeURIComponent(tag)}`} key={tag}>
-                    <Text as="span" mr={2} color="gray.400" fontSize="sm">{`#${tag}`}</Text>
+                    <Text
+                      as="span"
+                      display="inline-block"
+                      mr={2}
+                      mb={1}
+                      color="gray.400"
+                      fontSize="sm"
+                      lineHeight="1"
+                      _hover={{ textDecoration: 'underline' }}
+                    >{`#${tag}`}</Text>
                   </Link>
                 ))}
               </Box>
 
-              <Text fontSize="sm" color="gray.400" opacity="0.8">
+              <Text fontSize="sm" color="gray.400" my={1}>
                 {article.getDateFormatted()}
               </Text>
             </Box>
@@ -127,6 +163,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                         borderRadius={8}
                         backgroundColor="gray.100"
                         lineHeight="2"
+                        _hover={{ textDecoration: 'underline' }}
                       >{`#${tag}`}</Text>
                     </Link>
                   ))}
@@ -201,11 +238,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const contentHtml = await renderToString(article.getContent(), {
     components: {
-      img: (props) => (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <img {...props} src={`${blogContentsUrl}/${params.slug}/${props.src}`} />
-        </div>
-      ),
+      img: MarkdownImg(`${blogContentsUrl}/${params.slug}`),
       TwitterEmbed: (props) => (
         <TwitterTweetEmbed
           tweetId={props.tweetId}

@@ -159,7 +159,7 @@ export class Article {
    * 投稿日時を整形して返す
    * @param dateFormat 日付フォーマット
    */
-  getDateFormatted(dateFormat = 'yyyy.MM.dd') {
+  getDateFormatted(dateFormat = 'yyyy/MM/dd') {
     return format(new Date(this.frontMatter.date), dateFormat);
   }
 }
