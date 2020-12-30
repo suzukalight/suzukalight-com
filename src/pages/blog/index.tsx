@@ -9,7 +9,7 @@ import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { Link } from '../../components/atoms/Link';
 
-import { urlContentsBlog, urlBlogRoot } from '../url.json';
+import { urlContentsBlog, urlBlogPosts } from '../url.json';
 import { Article, ArticleDTO } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs-blog.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
@@ -40,7 +40,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
           <Box mb={8}>
             <ArticleList
               articles={articles.map((dto) => Article.fromDTO(dto))}
-              urlBlogRoot={urlBlogRoot}
+              urlBlogPosts={urlBlogPosts}
               urlContentsBlog={urlContentsBlog}
             />
           </Box>

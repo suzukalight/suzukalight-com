@@ -7,7 +7,7 @@ import { FaHome, FaPencilAlt } from 'react-icons/fa';
 import styles from './slug.module.scss';
 
 import { Article, ArticleDTO } from '../../../utils/article/entity';
-import { urlContentsBlog, urlBlogRoot, urlBlogTags } from '../../url.json';
+import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
 import {
   getArticles,
   getDirNamesThatHaveMdx,
@@ -139,7 +139,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                 {relatedArticlesDTO.length > 0 ? (
                   <ArticleList
                     articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
-                    urlBlogRoot={urlBlogRoot}
+                    urlBlogPosts={urlBlogPosts}
                     urlContentsBlog={urlContentsBlog}
                   />
                 ) : (
@@ -159,7 +159,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                     prevArticleDTO && Article.fromDTO(prevArticleDTO),
                     nextArticleDTO && Article.fromDTO(nextArticleDTO),
                   ].filter((a) => a)}
-                  urlBlogRoot={urlBlogRoot}
+                  urlBlogPosts={urlBlogPosts}
                   urlContentsBlog={urlContentsBlog}
                 />
               </Box>

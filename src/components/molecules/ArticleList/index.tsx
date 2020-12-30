@@ -16,21 +16,21 @@ import { Article } from '../../../utils/article/entity';
 
 type ArticleCardProps = {
   article: Article;
-  urlBlogRoot: string;
+  urlBlogPosts: string;
   urlContentsBlog: string;
 };
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   article,
-  urlBlogRoot,
+  urlBlogPosts,
   urlContentsBlog,
 }) => {
   const slug = article.getSlug();
   const { title, tags, hero, emoji } = article.getFrontMatter();
 
   return (
-    <Link href={`${urlBlogRoot}/[slug]`} as={`${urlBlogRoot}/${slug}`}>
-      <ChakraLink overflow="hidden" href={`${urlBlogRoot}/${slug}`}>
+    <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
+      <ChakraLink overflow="hidden" href={`${urlBlogPosts}/${slug}`}>
         <Flex direction="row" maxH={24} overflow="hidden">
           <Flex flexGrow={1} direction="column">
             <Text
@@ -90,13 +90,13 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
 type ArticleListProps = {
   articles: Article[];
-  urlBlogRoot: string;
+  urlBlogPosts: string;
   urlContentsBlog: string;
 };
 
 export const ArticleList: React.FC<ArticleListProps> = ({
   articles,
-  urlBlogRoot,
+  urlBlogPosts,
   urlContentsBlog,
 }) => (
   <SimpleGrid columns={[1, 1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[12, 12, 16]}>
@@ -104,7 +104,7 @@ export const ArticleList: React.FC<ArticleListProps> = ({
       <ArticleCard
         key={article.getSlug()}
         article={article}
-        urlBlogRoot={urlBlogRoot}
+        urlBlogPosts={urlBlogPosts}
         urlContentsBlog={urlContentsBlog}
       />
     ))}
