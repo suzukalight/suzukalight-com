@@ -5,6 +5,7 @@ import styles from '../../../styles/article.module.scss';
 
 import { Article } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 type KnowledgeItemProps = {
   article: Article;
@@ -24,9 +25,10 @@ export const KnowledgeItem: React.FC<KnowledgeItemProps> = ({
   const content = hydrate(contentHtml, contentBaseUrl);
 
   return (
-    <Stack direction={['column', 'column', 'row']} spacing={[2, 2, 8]}>
+    <Stack direction={['column', 'column', 'row']} spacing={[2, 2, 8]} w="100%">
       <Stack
         direction={['row', 'row', 'column']}
+        flexWrap="wrap"
         flexShrink={0}
         w={['100%', '100%', 32]}
         spacing={2}
@@ -40,6 +42,7 @@ export const KnowledgeItem: React.FC<KnowledgeItemProps> = ({
             fontSize="sm"
             display="inline-block"
             px={2}
+            mb={[2, 2, 0]}
             borderRadius={8}
             backgroundColor="gray.100"
             lineHeight="2"
@@ -61,9 +64,30 @@ export const KnowledgeItem: React.FC<KnowledgeItemProps> = ({
           <Collapse startingHeight="16em" in={show}>
             <article className={styles.article}>{content}</article>
           </Collapse>
-          <Button size="sm" onClick={handleToggle} mt={4} mx={0} px={0}>
-            <Text decoration="underline">{show ? '閉じる' : '全文を表示'}</Text>
-          </Button>
+
+          {show ? (
+            <Button
+              size="sm"
+              mt={2}
+              leftIcon={<FaChevronUp />}
+              colorScheme="black"
+              variant="link"
+              onClick={handleToggle}
+            >
+              閉じる
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              mt={2}
+              leftIcon={<FaChevronDown />}
+              colorScheme="black"
+              variant="link"
+              onClick={handleToggle}
+            >
+              全文を表示
+            </Button>
+          )}
         </Box>
       </Box>
     </Stack>

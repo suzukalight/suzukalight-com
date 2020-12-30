@@ -22,7 +22,7 @@ type IndexPageProps = {
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
-  <DefaultLayout backgroundColor="gray.50">
+  <DefaultLayout>
     <HtmlHead title="Knowledge" />
 
     <Box py={8}>
