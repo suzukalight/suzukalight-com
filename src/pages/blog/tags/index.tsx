@@ -18,11 +18,11 @@ import {
 } from '../../../utils/article/tag';
 
 type IndexPageProps = {
-  sortByName: TagAndCount[];
-  sortByCount: TagAndCount[];
+  orderByName: TagAndCount[];
+  orderByCount: TagAndCount[];
 };
 
-export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount }) => (
+export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount }) => (
   <DefaultLayout backgroundColor="gray.50">
     <HtmlHead title="Blog" />
 
@@ -38,7 +38,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
           </Heading>
 
           <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
-            {sortByName.map(({ tag, count }) => (
+            {orderByName.map(({ tag, count }) => (
               <Box key={tag} mr={4}>
                 <Link to={`/blog/tags/${encodeURIComponent(tag)}`}>
                   <Text as="span">{`#${tag} (${count})`}</Text>
@@ -52,7 +52,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ sortByName, sortByCount })
           </Heading>
 
           <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
-            {sortByCount.map(({ tag, count }) => (
+            {orderByCount.map(({ tag, count }) => (
               <Box key={tag} mr={4}>
                 <Link to={`/blog/tags/${encodeURIComponent(tag)}`}>
                   <Text as="span">{`#${tag} (${count})`}</Text>
@@ -80,8 +80,8 @@ export default IndexPage;
 export const getStaticProps: GetStaticProps = async () => {
   const articles = getArticles();
   const tagAndCountTable = getTableWithTagAndCountIncludedInArticles(articles);
-  const sortByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
-  const sortByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);
+  const orderByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
+  const orderByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);
 
-  return { props: { sortByName, sortByCount } as IndexPageProps };
+  return { props: { orderByName, orderByCount } as IndexPageProps };
 };
