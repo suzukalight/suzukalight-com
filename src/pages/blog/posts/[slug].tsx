@@ -1,16 +1,7 @@
-/* eslint-disable react/display-name */
-
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import renderToString from 'next-mdx-remote/render-to-string';
-import hydrate from 'next-mdx-remote/hydrate';
 import { Image, Heading, Center, Box, Text, Divider, VStack } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
-import remarkAutolinkHeadings from 'remark-autolink-headings';
-import remarkSlug from 'remark-slug';
-import remarkCodeTitles from 'remark-code-titles';
-import remarkPrism from 'remark-prism';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
@@ -27,6 +18,8 @@ import {
   getDirNamesThatHaveMdx,
   getMdxSource,
 } from '../../../utils/article/file-system.server';
+import { hydrate } from '../../../utils/article/markdown';
+import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
@@ -42,24 +35,6 @@ type BlogPostProps = {
   nextArticleDTO?: ArticleDTO;
 };
 
-const MarkdownImg = (srcBaseUrl: string) => (props) => (
-  <span
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#f7fafc',
-    }}
-  >
-    <img
-      {...props}
-      src={`${srcBaseUrl}/${props.src}`}
-      alt={props.alt || props.src}
-      style={{ objectFit: 'contain', width: '100%', height: '16em' }}
-    />
-  </span>
-);
-
 export const BlogPost: React.FC<BlogPostProps> = ({
   articleDTO,
   contentHtml,
@@ -72,17 +47,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const { title, tags, hero, emoji } = article.getFrontMatter();
   const contentBaseUrl = `${blogContentsUrl}/${slug}`;
 
-  const content = hydrate(contentHtml, {
-    components: {
-      img: MarkdownImg(contentBaseUrl),
-      TwitterEmbed: (props) => (
-        <TwitterTweetEmbed
-          tweetId={props.tweetId}
-          options={props.options || { conversation: 'none' }}
-        />
-      ),
-    },
-  });
+  const content = hydrate(contentHtml, contentBaseUrl);
 
   return (
     <DefaultLayout>
@@ -237,36 +202,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const source = getMdxSource(slug);
   const article = Article.fromMdxSource(source, slug);
 
-  const contentHtml = await renderToString(article.getContent(), {
-    components: {
-      img: MarkdownImg(`${blogContentsUrl}/${params.slug}`),
-      TwitterEmbed: (props) => (
-        <TwitterTweetEmbed
-          tweetId={props.tweetId}
-          options={props.options || { conversation: 'none' }}
-        />
-      ),
-    },
-    mdxOptions: {
-      remarkPlugins: [
-        remarkSlug,
-        [
-          remarkAutolinkHeadings,
-          {
-            content: {
-              type: 'element',
-              tagName: 'span',
-              properties: {
-                className: ['icon', 'icon-link', 'remark-autolink-headings'],
-              },
-            },
-          },
-        ],
-        remarkCodeTitles,
-        remarkPrism,
-      ],
-    },
-  });
+  const contentHtml = await renderToString(
+    article.getContent(),
+    `${blogContentsUrl}/${params.slug}`,
+  );
 
   const articles = getArticles();
 
