@@ -29,6 +29,7 @@ $mq-sm: 639px;
 
 .article {
   position: relative;
+  max-width: calc(100vw - 2em);
   margin: 2em 0 6em;
   font-size: 16px;
   line-height: 2;
