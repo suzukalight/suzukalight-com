@@ -18,7 +18,7 @@ status: 'published'
 }
 ```
 
-# 具体的な方法
+### 具体的な方法
 
 ```html
 <div class="content">
@@ -49,6 +49,6 @@ status: 'published'
 
 `position: static` のままで問題なく機能する。
 
-# references
+### references
 
 - https://haniwaman.com/inner-over/

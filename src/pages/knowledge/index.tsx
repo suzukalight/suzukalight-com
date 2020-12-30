@@ -27,7 +27,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 
     <Box py={8}>
       <Box m="1em">
-        <Box maxW="40em" mx="auto">
+        <Box maxW="50em" mx="auto">
           <Heading as="h1" mb={8}>
             Knowledge
           </Heading>
