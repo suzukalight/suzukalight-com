@@ -1,10 +1,10 @@
-import React, { ReactDOM } from 'react';
+import React, { ReactNode } from 'react';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './article.module.scss';
 
 type ArticleDetailProps = {
-  contentHtml: ReactDOM;
+  contentHtml: ReactNode;
 };
 
 export const ArticleDetail: React.FC<ArticleDetailProps> = ({ contentHtml }) => (
