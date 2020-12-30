@@ -1,49 +1,50 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Heading, Divider, Flex, Text } from '@chakra-ui/react';
+import { Box, Heading, Text, Divider, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
-import { ArticleList } from '../../components/molecules/ArticleList';
-import DefaultLayout from '../../components/templates/DefaultLayout';
+import { ArticleListItem } from '../../components/molecules/ArticleListItem';
+import { DefaultLayout } from '../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
-import { Link } from '../../components/atoms/Link';
 
-import { urlContentsBlog, urlBlogPosts } from '../url.json';
 import { Article, ArticleDTO } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
+import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../url.json';
 
 type IndexPageProps = {
-  articles: ArticleDTO[];
+  articlesDTO: ArticleDTO[];
 };
 
-export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
-  <DefaultLayout backgroundColor="gray.50">
+export const IndexPage: React.FC<IndexPageProps> = ({ articlesDTO }) => (
+  <DefaultLayout>
     <HtmlHead title="Blog" />
 
     <Box py={8}>
       <Box m="1em">
-        <Box maxW="64em" mx="auto">
+        <Box maxW="50em" mx="auto">
           <Heading as="h1" mb={2}>
             Blog
           </Heading>
+          <Text as="p" fontSize="md" color="gray.500" mb={12}>
+            技術調査や素振り、競馬や一口馬主、ほかに旅行やゲームの話などの中で、文量のあるもの。
+          </Text>
 
-          <Flex mb={8}>
-            <Box flexShrink={0}>
-              <Link to="/blog/tags">
-                <Text as="span">タグから探す →</Text>
-              </Link>
-            </Box>
-          </Flex>
-
-          <Box mb={8}>
-            <ArticleList
-              articles={articles.map((dto) => Article.fromDTO(dto))}
-              urlBlogPosts={urlBlogPosts}
-              urlContentsBlog={urlContentsBlog}
-            />
-          </Box>
+          <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
+            {articlesDTO
+              .map((a) => Article.fromDTO(a))
+              .map((article) => (
+                <ArticleListItem
+                  key={article.getSlug()}
+                  article={article}
+                  contentBaseUrl={`${urlContentsBlog}/${article.getSlug()}`}
+                  tagBaseUrl={urlBlogTags}
+                  postBaseUrl={urlBlogPosts}
+                  showContentLink
+                />
+              ))}
+          </VStack>
 
           <Divider mt={12} mb={8} />
 
@@ -58,5 +59,5 @@ export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const articles = getArticles(urlContentsBlog);
-  return { props: { articles: sortArticlesByDateDesc(articles).map((a) => a.toDTO()) } };
+  return { props: { articlesDTO: sortArticlesByDateDesc(articles).map((a) => a.toDTO()) } };
 };

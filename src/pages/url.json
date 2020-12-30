@@ -3,6 +3,7 @@
   "urlBlogPosts": "/blog/posts",
   "urlBlogTags": "/blog/tags",
   "urlKnowledgeRoot": "/knowledge",
+  "urlKnowledgePosts": "/knowledge/posts",
   "urlKnowledgeTags": "/knowledge/tags",
   "urlContentsBlog": "/contents/blog",
   "urlContentsKnowledge": "/contents/knowledge"
