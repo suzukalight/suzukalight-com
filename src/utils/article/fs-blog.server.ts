@@ -1,11 +1,12 @@
 import path from 'path';
 import fs from 'fs';
 
-import { Article, blogContentsUrl, getArticleFromMdxSource } from './entity';
+import { Article, getArticleFromMdxSource } from './entity';
+import { urlContentsBlog } from '../../pages/url.json';
 
 const root = process.cwd();
 
-export const publicBlogDir = `public/${blogContentsUrl}`;
+export const publicBlogDir = `public/${urlContentsBlog}`;
 export const defaultBlogDir = path.join(root, publicBlogDir);
 
 /**
