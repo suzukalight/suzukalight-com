@@ -12,6 +12,7 @@ export const Footer: React.FC = () => (
           </Text>
           <Link to="/blog">blog</Link>
           <Link to="/blog">textbook</Link>
+          <Link to="/knowledge">knowledge</Link>
         </VStack>
 
         <VStack>
@@ -20,7 +21,6 @@ export const Footer: React.FC = () => (
           </Text>
           <Link to="/outputs">products</Link>
           <Link to="/outputs">examples</Link>
-          <Link to="/outputs">knowledge</Link>
         </VStack>
 
         <VStack>
