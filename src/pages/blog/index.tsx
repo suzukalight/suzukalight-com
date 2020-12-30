@@ -9,8 +9,9 @@ import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { Link } from '../../components/atoms/Link';
 
-import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../utils/article/entity';
-import { getArticles } from '../../utils/article/file-system.server';
+import { urlContentsBlog, urlBlogRoot } from '../url.json';
+import { Article, ArticleDTO } from '../../utils/article/entity';
+import { getArticles } from '../../utils/article/fs-blog.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 
 type IndexPageProps = {
@@ -39,8 +40,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
           <Box mb={8}>
             <ArticleList
               articles={articles.map((dto) => Article.fromDTO(dto))}
-              blogRootUrl={blogRootUrl}
-              blogContentsUrl={blogContentsUrl}
+              urlBlogRoot={urlBlogRoot}
+              urlContentsBlog={urlContentsBlog}
             />
           </Box>
 

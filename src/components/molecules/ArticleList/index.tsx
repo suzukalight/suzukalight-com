@@ -16,21 +16,21 @@ import { Article } from '../../../utils/article/entity';
 
 type ArticleCardProps = {
   article: Article;
-  blogRootUrl: string;
-  blogContentsUrl: string;
+  urlBlogRoot: string;
+  urlContentsBlog: string;
 };
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   article,
-  blogRootUrl,
-  blogContentsUrl,
+  urlBlogRoot,
+  urlContentsBlog,
 }) => {
   const slug = article.getSlug();
   const { title, tags, hero, emoji } = article.getFrontMatter();
 
   return (
-    <Link href={`${blogRootUrl}/[slug]`} as={`${blogRootUrl}/${slug}`}>
-      <ChakraLink overflow="hidden" href={`${blogRootUrl}/${slug}`}>
+    <Link href={`${urlBlogRoot}/[slug]`} as={`${urlBlogRoot}/${slug}`}>
+      <ChakraLink overflow="hidden" href={`${urlBlogRoot}/${slug}`}>
         <Flex direction="row" maxH={24} overflow="hidden">
           <Flex flexGrow={1} direction="column">
             <Text
@@ -64,7 +64,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
           {hero ? (
             <Img
-              src={`${blogContentsUrl}/${slug}/${hero}`}
+              src={`${urlContentsBlog}/${slug}/${hero}`}
               alt={slug}
               boxSize={20}
               borderRadius={8}
@@ -90,22 +90,22 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
 type ArticleListProps = {
   articles: Article[];
-  blogRootUrl: string;
-  blogContentsUrl: string;
+  urlBlogRoot: string;
+  urlContentsBlog: string;
 };
 
 export const ArticleList: React.FC<ArticleListProps> = ({
   articles,
-  blogRootUrl,
-  blogContentsUrl,
+  urlBlogRoot,
+  urlContentsBlog,
 }) => (
   <SimpleGrid columns={[1, 1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[12, 12, 16]}>
     {articles.map((article) => (
       <ArticleCard
         key={article.getSlug()}
         article={article}
-        blogRootUrl={blogRootUrl}
-        blogContentsUrl={blogContentsUrl}
+        urlBlogRoot={urlBlogRoot}
+        urlContentsBlog={urlContentsBlog}
       />
     ))}
   </SimpleGrid>

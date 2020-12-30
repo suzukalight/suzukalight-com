@@ -1,0 +1,8 @@
+{
+  "urlBlogRoot": "/blog",
+  "urlBlogTags": "/blog/tags",
+  "urlKnowledgeRoot": "/knowledge",
+  "urlKnowledgeTags": "/knowledge/tags",
+  "urlContentsBlog": "/contents/blog",
+  "urlContentsKnowledge": "/contents/knowledge"
+}

@@ -8,7 +8,7 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { Link } from '../../../components/atoms/Link';
 
-import { getArticles } from '../../../utils/article/file-system.server';
+import { getArticles } from '../../../utils/article/fs-blog.server';
 import {
   comparatorTagCount,
   comparatorTagName,

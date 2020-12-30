@@ -8,8 +8,9 @@ import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
-import { Article, ArticleDTO, blogContentsUrl, blogRootUrl } from '../../../utils/article/entity';
-import { getArticles } from '../../../utils/article/file-system.server';
+import { urlContentsBlog, urlBlogRoot } from '../../url.json';
+import { Article, ArticleDTO } from '../../../utils/article/entity';
+import { getArticles } from '../../../utils/article/fs-blog.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
@@ -37,8 +38,8 @@ export const TagPage: React.FC<IndexPageProps> = ({ tag, articles: articleDTOs }
             <Box mb={8}>
               <ArticleList
                 articles={articles}
-                blogRootUrl={blogRootUrl}
-                blogContentsUrl={blogContentsUrl}
+                urlBlogRoot={urlBlogRoot}
+                urlContentsBlog={urlContentsBlog}
               />
             </Box>
 

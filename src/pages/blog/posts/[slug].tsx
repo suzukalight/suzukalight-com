@@ -6,18 +6,13 @@ import { FaHome, FaPencilAlt } from 'react-icons/fa';
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './slug.module.scss';
 
-import {
-  Article,
-  ArticleDTO,
-  blogContentsUrl,
-  blogRootUrl,
-  blogTagsUrl,
-} from '../../../utils/article/entity';
+import { Article, ArticleDTO } from '../../../utils/article/entity';
+import { urlContentsBlog, urlBlogRoot, urlBlogTags } from '../../url.json';
 import {
   getArticles,
   getDirNamesThatHaveMdx,
   getMdxSource,
-} from '../../../utils/article/file-system.server';
+} from '../../../utils/article/fs-blog.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
@@ -45,7 +40,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const article = Article.fromDTO(articleDTO);
   const slug = article.getSlug();
   const { title, tags, hero, emoji } = article.getFrontMatter();
-  const contentBaseUrl = `${blogContentsUrl}/${slug}`;
+  const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
 
@@ -86,7 +81,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             <Box mb={8}>
               <Box>
                 {(tags || []).map((tag) => (
-                  <Link to={`${blogTagsUrl}/${encodeURIComponent(tag)}`} key={tag}>
+                  <Link to={`${urlBlogTags}/${encodeURIComponent(tag)}`} key={tag}>
                     <Text
                       as="span"
                       display="inline-block"
@@ -118,7 +113,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
                 <Box>
                   {(tags || []).map((tag) => (
-                    <Link to={`${blogTagsUrl}/${encodeURIComponent(tag)}`} key={tag}>
+                    <Link to={`${urlBlogTags}/${encodeURIComponent(tag)}`} key={tag}>
                       <Text
                         as="span"
                         fontSize="md"
@@ -144,8 +139,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                 {relatedArticlesDTO.length > 0 ? (
                   <ArticleList
                     articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
-                    blogRootUrl={blogRootUrl}
-                    blogContentsUrl={blogContentsUrl}
+                    urlBlogRoot={urlBlogRoot}
+                    urlContentsBlog={urlContentsBlog}
                   />
                 ) : (
                   <Text as="small" color="gray.500">
@@ -164,8 +159,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                     prevArticleDTO && Article.fromDTO(prevArticleDTO),
                     nextArticleDTO && Article.fromDTO(nextArticleDTO),
                   ].filter((a) => a)}
-                  blogRootUrl={blogRootUrl}
-                  blogContentsUrl={blogContentsUrl}
+                  urlBlogRoot={urlBlogRoot}
+                  urlContentsBlog={urlContentsBlog}
                 />
               </Box>
             </VStack>
@@ -204,7 +199,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const contentHtml = await renderToString(
     article.getContent(),
-    `${blogContentsUrl}/${params.slug}`,
+    `${urlContentsBlog}/${params.slug}`,
   );
 
   const articles = getArticles();
