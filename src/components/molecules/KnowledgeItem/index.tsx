@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Heading, Text, Stack, Collapse, Button } from '@chakra-ui/react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { Box, Heading, Text, Stack, Collapse } from '@chakra-ui/react';
 
 import { ArticleDetail } from '../ArticleDetail';
+import { ReadMoreButton } from '../../atoms/ReadMoreButton';
 import { Article } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
 
@@ -64,29 +64,7 @@ export const KnowledgeItem: React.FC<KnowledgeItemProps> = ({
             <ArticleDetail contentHtml={content} />
           </Collapse>
 
-          {show ? (
-            <Button
-              size="sm"
-              mt={2}
-              leftIcon={<FaChevronUp />}
-              colorScheme="black"
-              variant="link"
-              onClick={handleToggle}
-            >
-              閉じる
-            </Button>
-          ) : (
-            <Button
-              size="sm"
-              mt={2}
-              leftIcon={<FaChevronDown />}
-              colorScheme="black"
-              variant="link"
-              onClick={handleToggle}
-            >
-              全文を表示
-            </Button>
-          )}
+          <ReadMoreButton show={show} onToggle={handleToggle} />
         </Box>
       </Box>
     </Stack>
