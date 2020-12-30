@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Heading, Divider, VStack, StackDivider } from '@chakra-ui/react';
+import { Box, Heading, Text, Divider, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
 import { KnowledgeItem } from '../../components/molecules/KnowledgeItem';
@@ -28,9 +28,12 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
     <Box py={8}>
       <Box m="1em">
         <Box maxW="50em" mx="auto">
-          <Heading as="h1" mb={8}>
+          <Heading as="h1" mb={2}>
             Knowledge
           </Heading>
+          <Text as="p" fontSize="md" color="gray.500" mb={12}>
+            技術系の調べ物や、素振りの結果などを書き留めたメモ。同じところで悩む誰かの役に立てれば。
+          </Text>
 
           <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
             {data.map((d) => (
