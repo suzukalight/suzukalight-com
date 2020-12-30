@@ -8,7 +8,8 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { Link } from '../../../components/atoms/Link';
 
-import { getArticles } from '../../../utils/article/fs-blog.server';
+import { urlContentsBlog } from '../../url.json';
+import { getArticles } from '../../../utils/article/fs.server';
 import {
   comparatorTagCount,
   comparatorTagName,
@@ -78,7 +79,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = getArticles();
+  const articles = getArticles(urlContentsBlog);
   const tagAndCountTable = getTableWithTagAndCountIncludedInArticles(articles);
   const orderByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const orderByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);

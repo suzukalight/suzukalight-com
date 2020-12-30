@@ -10,7 +10,7 @@ import { BackLinks } from '../../../components/molecules/BackLinks';
 
 import { urlContentsBlog, urlBlogPosts } from '../../url.json';
 import { Article, ArticleDTO } from '../../../utils/article/entity';
-import { getArticles } from '../../../utils/article/fs-blog.server';
+import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
@@ -62,7 +62,7 @@ export const TagPage: React.FC<IndexPageProps> = ({ tag, articles: articleDTOs }
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = getArticles();
+  const articles = getArticles(urlContentsBlog);
   const tags = getTagsIncludedInArticles(articles);
   const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
 
@@ -73,7 +73,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const articles = getArticles();
+  const articles = getArticles(urlContentsBlog);
   const tag = params.tag as string;
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
 

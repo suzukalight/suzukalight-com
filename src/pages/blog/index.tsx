@@ -11,7 +11,7 @@ import { Link } from '../../components/atoms/Link';
 
 import { urlContentsBlog, urlBlogPosts } from '../url.json';
 import { Article, ArticleDTO } from '../../utils/article/entity';
-import { getArticles } from '../../utils/article/fs-blog.server';
+import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 
 type IndexPageProps = {
@@ -57,6 +57,6 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = getArticles();
+  const articles = getArticles(urlContentsBlog);
   return { props: { articles: sortArticlesByDateDesc(articles).map((a) => a.toDTO()) } };
 };

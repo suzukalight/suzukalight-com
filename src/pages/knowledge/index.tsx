@@ -9,7 +9,7 @@ import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
 import { Article, ArticleDTO } from '../../utils/article/entity';
-import { getArticles } from '../../utils/article/fs-knowledge.server';
+import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 import { renderToString } from '../../utils/article/markdown.server';
 import { urlContentsKnowledge } from '../url.json';
@@ -55,7 +55,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = getArticles();
+  const articles = getArticles(urlContentsKnowledge);
   const data = await Promise.all(
     sortArticlesByDateDesc(articles).map(async (a) => ({
       article: a.toDTO(),

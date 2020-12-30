@@ -12,7 +12,7 @@ import {
   getArticles,
   getDirNamesThatHaveMdx,
   getMdxSource,
-} from '../../../utils/article/fs-blog.server';
+} from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
@@ -183,7 +183,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 export default BlogPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dirNamesThatHaveMdx = getDirNamesThatHaveMdx();
+  const dirNamesThatHaveMdx = getDirNamesThatHaveMdx(urlContentsBlog);
   const paths = dirNamesThatHaveMdx.map((dir) => ({ params: { slug: dir.replace(/\.mdx?/, '') } }));
 
   return {
@@ -194,7 +194,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
-  const source = getMdxSource(slug);
+  const source = getMdxSource(urlContentsBlog, slug);
   const article = Article.fromMdxSource(source, slug);
 
   const contentHtml = await renderToString(
@@ -202,7 +202,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     `${urlContentsBlog}/${params.slug}`,
   );
 
-  const articles = getArticles();
+  const articles = getArticles(urlContentsBlog);
 
   const relatedArticles = getRelatedArticles(article, articles);
   const relatedArticlesDTO = relatedArticles.map((a) => a.toDTO());
