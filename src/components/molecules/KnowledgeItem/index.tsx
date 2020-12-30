@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Heading, Text, Stack, Collapse, Button } from '@chakra-ui/react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-import styles from '../../../styles/article.module.scss';
-
+import { ArticleDetail } from '../ArticleDetail';
 import { Article } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 type KnowledgeItemProps = {
   article: Article;
@@ -62,7 +61,7 @@ export const KnowledgeItem: React.FC<KnowledgeItemProps> = ({
 
         <Box>
           <Collapse startingHeight="16em" in={show}>
-            <article className={styles.article}>{content}</article>
+            <ArticleDetail contentHtml={content} />
           </Collapse>
 
           {show ? (

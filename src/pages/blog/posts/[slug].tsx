@@ -3,9 +3,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Image, Heading, Center, Box, Text, Divider, VStack } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-// NOTE: markdownのHTMLにCSSを直接あてることにする
-import styles from '../../../styles/article.module.scss';
-
 import { Article, ArticleDTO } from '../../../utils/article/entity';
 import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
 import {
@@ -21,6 +18,7 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { ArticleList } from '../../../components/molecules/ArticleList';
 import { Link } from '../../../components/atoms/Link';
+import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 
 type BlogPostProps = {
   articleDTO: ArticleDTO;
@@ -101,7 +99,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               </Text>
             </Box>
 
-            <article className={styles.article}>{content}</article>
+            <ArticleDetail contentHtml={content} />
 
             <Divider mt={16} />
 
