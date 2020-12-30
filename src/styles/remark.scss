@@ -76,6 +76,7 @@ article {
   margin-bottom: 2em;
   padding: 1em;
   overflow: auto;
+  max-width: calc(100vw - 2em);
 
   & pre[class*='language-'] {
     // background-color: transparent;

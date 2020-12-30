@@ -4,7 +4,7 @@ import { Image, Heading, Center, Box, Text, Divider, VStack } from '@chakra-ui/r
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 // NOTE: markdownのHTMLにCSSを直接あてることにする
-import styles from './slug.module.scss';
+import styles from '../../../styles/article.module.scss';
 
 import { Article, ArticleDTO } from '../../../utils/article/entity';
 import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
