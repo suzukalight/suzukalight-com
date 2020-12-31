@@ -1,11 +1,10 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Box, Heading, Divider, VStack, StackDivider } from '@chakra-ui/react';
+import { Divider, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
+import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
 import { ArticleListItem } from '../../../components/molecules/ArticleListItem';
-import DefaultLayout from '../../../components/templates/DefaultLayout';
-import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
 import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
@@ -25,42 +24,30 @@ export const TagPage: React.FC<IndexPageProps> = ({ tag, articles: articleDTOs }
   const articles = articleDTOs.map((dto) => Article.fromDTO(dto));
 
   return (
-    <DefaultLayout>
-      <HtmlHead title={title} />
+    <ArticleListLayout title={title}>
+      <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
+        {articles.map((article) => (
+          <ArticleListItem
+            key={article.getSlug()}
+            article={article}
+            contentBaseUrl={`${urlContentsBlog}/${article.getSlug()}`}
+            tagBaseUrl={urlBlogTags}
+            postBaseUrl={urlBlogPosts}
+            showContentLink
+          />
+        ))}
+      </VStack>
 
-      <Box py={8}>
-        <Box m="1em">
-          <Box maxW="50em" mx="auto">
-            <Heading as="h1" mb={12}>
-              {title}
-            </Heading>
+      <Divider mt={12} mb={8} />
 
-            <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
-              {articles.map((article) => (
-                <ArticleListItem
-                  key={article.getSlug()}
-                  article={article}
-                  contentBaseUrl={`${urlContentsBlog}/${article.getSlug()}`}
-                  tagBaseUrl={urlBlogTags}
-                  postBaseUrl={urlBlogPosts}
-                  showContentLink
-                />
-              ))}
-            </VStack>
-
-            <Divider mt={12} mb={8} />
-
-            <BackLinks
-              links={[
-                { to: '/blog/tags', icon: FaPencilAlt, label: 'Back to TagList' },
-                { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog Index' },
-                { to: '/', icon: FaHome, label: 'Back to Home' },
-              ]}
-            />
-          </Box>
-        </Box>
-      </Box>
-    </DefaultLayout>
+      <BackLinks
+        links={[
+          { to: '/blog/tags', icon: FaPencilAlt, label: 'Back to TagList' },
+          { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog Index' },
+          { to: '/', icon: FaHome, label: 'Back to Home' },
+        ]}
+      />
+    </ArticleListLayout>
   );
 };
 
