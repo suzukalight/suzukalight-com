@@ -138,7 +138,7 @@ const Timeline = () => (
 );
 
 export const IndexPage: React.FC = () => (
-  <DefaultLayout backgroundColor="gray.50">
+  <DefaultLayout>
     <HtmlHead title="Resume" />
 
     <Box py={8}>

@@ -1,28 +1,16 @@
-$mq-lg: 1279px;
-$mq-md: 959px;
-$mq-sp: 767px;
-$mq-sm: 639px;
-
-@mixin mq($size) {
-  @media screen and (max-width: $size) {
-    @content;
-  }
-}
+$mq-xl: 80em;
+$mq-lg: 62em;
+$mq-md: 48em;
+$mq-sm: 30em;
 
 @mixin mq-md {
-  @media screen and (max-width: $mq-md) {
-    @content;
-  }
-}
-
-@mixin mq-sp {
-  @media screen and (max-width: $mq-sp) {
+  @media screen and (min-width: $mq-md) {
     @content;
   }
 }
 
 @mixin mq-sm {
-  @media screen and (max-width: $mq-sm) {
+  @media screen and (min-width: $mq-sm) {
     @content;
   }
 }
@@ -30,9 +18,12 @@ $mq-sm: 639px;
 .article {
   position: relative;
   max-width: calc(100vw - 2em);
-  margin: 2em 0 6em;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 2;
+
+  @include mq-md() {
+    font-size: 16px;
+  }
 
   & p {
     margin: 0 0 1.75em;
@@ -49,10 +40,15 @@ $mq-sm: 639px;
 
   & h1 {
     position: relative;
-    margin: 6em 0 1.75em;
+    margin: 6em 0 1.5em;
     padding: 0;
-    font-size: 1.75em;
+    font-size: 1.375em;
     line-height: 1;
+
+    @include mq-md() {
+      margin: 6em 0 1.75em;
+      font-size: 1.75em;
+    }
 
     &:before {
       content: '.　.　.';
@@ -66,16 +62,26 @@ $mq-sm: 639px;
   }
 
   & h2 {
-    margin: 2.5em 0 1.25em;
+    margin: 2em 0 1em;
     padding: 0;
-    font-size: 1.5em;
+    font-size: 1.125em;
     line-height: 1;
+
+    @include mq-md() {
+      margin: 2.5em 0 1.25em;
+      font-size: 1.5em;
+    }
   }
 
   & h3 {
-    margin: 2.5em 0 0.75em;
+    margin: 2em 0 0.5em;
     padding: 0;
-    font-size: 1.25em;
+    font-size: 1em;
+    
+    @include mq-md() {
+      margin: 2.5em 0 0.75em;
+      font-size: 1.25em;
+    }
   }
 
   & p[class='contentful-paragraph'] {
@@ -134,11 +140,11 @@ $mq-sm: 639px;
     margin: 0 0 1.75em;
     border: 0;
     padding: 0;
-    font-size: 0.875em;
+    font-size: 0.75em;
     line-height: 1.5;
 
-    @include mq-sp() {
-      font-size: 0.75em;
+    @include mq-md() {
+      font-size: 0.875em;
     }
   }
 
