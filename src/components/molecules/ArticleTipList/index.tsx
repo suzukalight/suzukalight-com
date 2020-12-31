@@ -13,14 +13,15 @@ import {
 import { FaPen } from 'react-icons/fa';
 
 import { Article } from '../../../utils/article/entity';
+import { getInlineTextTagStyle, TagList } from '../TagList';
 
-type ArticleCardProps = {
+type ArticleTipProps = {
   article: Article;
   urlBlogPosts: string;
   urlContentsBlog: string;
 };
 
-export const ArticleCard: React.FC<ArticleCardProps> = ({
+export const ArticleTip: React.FC<ArticleTipProps> = ({
   article,
   urlBlogPosts,
   urlContentsBlog,
@@ -46,16 +47,17 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
             <Flex flexGrow={1} direction="column" justifyContent="flex-end" mt={1}>
               <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
-                {(tags || []).map((tag) => (
-                  <Text
-                    as="small"
-                    key={tag}
-                    mr={2}
-                    color="gray.700"
-                    fontSize="xs"
-                  >{`#${tag}`}</Text>
-                ))}
+                <TagList
+                  tags={tags}
+                  tagItemProps={{
+                    ...getInlineTextTagStyle(),
+                    fontSize: 'xs',
+                    mb: 0,
+                    _hover: { textDecoration: 'inherit' },
+                  }}
+                />
               </Box>
+
               <Text as="small" fontSize="xs" color="gray.700" opacity="0.8">
                 {article.getDateFormatted()}
               </Text>
@@ -88,20 +90,20 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   );
 };
 
-type ArticleListProps = {
+type ArticleTipListProps = {
   articles: Article[];
   urlBlogPosts: string;
   urlContentsBlog: string;
 };
 
-export const ArticleList: React.FC<ArticleListProps> = ({
+export const ArticleTipList: React.FC<ArticleTipListProps> = ({
   articles,
   urlBlogPosts,
   urlContentsBlog,
 }) => (
   <SimpleGrid columns={[1, 1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[12, 12, 16]}>
     {articles.map((article) => (
-      <ArticleCard
+      <ArticleTip
         key={article.getSlug()}
         article={article}
         urlBlogPosts={urlBlogPosts}

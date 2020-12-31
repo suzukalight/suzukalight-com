@@ -16,7 +16,7 @@ import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/articl
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-import { ArticleList } from '../../../components/molecules/ArticleList';
+import { ArticleTipList } from '../../../components/molecules/ArticleTipList';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import {
   getDefaultTagStyle,
@@ -119,7 +119,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                 </Heading>
 
                 {relatedArticlesDTO.length > 0 ? (
-                  <ArticleList
+                  <ArticleTipList
                     articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
                     urlBlogPosts={urlBlogPosts}
                     urlContentsBlog={urlContentsBlog}
@@ -136,7 +136,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                   Prev/Next Article
                 </Heading>
 
-                <ArticleList
+                <ArticleTipList
                   articles={[
                     prevArticleDTO && Article.fromDTO(prevArticleDTO),
                     nextArticleDTO && Article.fromDTO(nextArticleDTO),

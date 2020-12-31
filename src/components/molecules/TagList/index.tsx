@@ -63,7 +63,7 @@ export const TagList: React.FC<TagListProps> = ({
           <Tag tag={tag} chakraProps={tagItemProps} />
         </Link>
       ) : (
-        <Tag key={tag} tag={tag} />
+        <Tag key={tag} tag={tag} chakraProps={tagItemProps} />
       ),
     )}
   </>
