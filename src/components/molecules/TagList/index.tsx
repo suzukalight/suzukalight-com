@@ -7,6 +7,7 @@ import { Link } from '../../atoms/Link';
 const defaultTagStyle: ChakraProps = {
   display: 'inline-block',
   mb: [2, 2, 0],
+  mr: [0, 0, 2],
   borderRadius: 8,
   px: 2,
   backgroundColor: 'gray.100',

@@ -28,7 +28,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articlesDTO }) => (
             Blog
           </Heading>
           <Text as="p" fontSize="md" color="gray.500" mb={12}>
-            技術調査や素振り、競馬や一口馬主、ほかに旅行やゲームの話などの中で、文量のあるもの。
+            技術調査や素振り、競馬や一口馬主、ほかに旅行やゲームの話など。
           </Text>
 
           <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
