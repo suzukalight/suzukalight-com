@@ -6,5 +6,6 @@
   "urlKnowledgePosts": "/knowledge/posts",
   "urlKnowledgeTags": "/knowledge/tags",
   "urlContentsBlog": "/contents/blog",
-  "urlContentsKnowledge": "/contents/knowledge"
+  "urlContentsKnowledge": "/contents/knowledge",
+  "urlContentsAbout": "/contents/about"
 }

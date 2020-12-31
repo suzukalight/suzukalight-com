@@ -24,9 +24,11 @@ export const Footer: React.FC = () => (
         </VStack>
 
         <VStack>
-          <Text size="sm" fontWeight="bold">
-            About
-          </Text>
+          <Link to="/about">
+            <Text size="sm" fontWeight="bold">
+              About
+            </Text>
+          </Link>
           <Link to="/about">skill map</Link>
           <Link to="/resume">resume</Link>
           <Link to="/about">awards</Link>
