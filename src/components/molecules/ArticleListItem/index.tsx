@@ -1,30 +1,12 @@
 import React, { ReactNode, useState } from 'react';
-import { ChakraProps, Box, Heading, Text, Stack, Collapse } from '@chakra-ui/react';
+import { Box, Heading, Text, Stack, Collapse } from '@chakra-ui/react';
 
 import { ArticleDetail } from '../ArticleDetail';
 import { ReadMoreButton } from '../../atoms/ReadMoreButton';
 import { Article } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
 import { Link } from '../../atoms/Link';
-
-type TagProps = {
-  tag: string;
-  chakraProps?: ChakraProps;
-};
-
-const Tag: React.FC<TagProps> = ({ tag, chakraProps }) => (
-  <Text
-    {...chakraProps}
-    as="span"
-    fontSize="sm"
-    display="inline-block"
-    px={2}
-    mb={[2, 2, 0]}
-    borderRadius={8}
-    backgroundColor="gray.100"
-    lineHeight="2"
-  >{`#${tag}`}</Text>
-);
+import { TagList } from '../TagList';
 
 type BodyProps = {
   title: string;
@@ -88,15 +70,7 @@ export const ArticleListItem: React.FC<ArticleListItemProps> = ({
         py={[0, 0, 2]}
         align="left"
       >
-        {(tags || []).map((tag) =>
-          tagBaseUrl ? (
-            <Link key={tag} to={`${tagBaseUrl}/${encodeURIComponent(tag)}`}>
-              <Tag tag={tag} chakraProps={{ _hover: { textDecoration: 'underline' } }} />
-            </Link>
-          ) : (
-            <Tag key={tag} tag={tag} />
-          ),
-        )}
+        <TagList tags={tags} tagBaseUrl={tagBaseUrl} />
       </Stack>
 
       <Box flexGrow={1}>

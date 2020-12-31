@@ -19,6 +19,7 @@ import { BackLinks } from '../../../components/molecules/BackLinks';
 import { ArticleList } from '../../../components/molecules/ArticleList';
 import { Link } from '../../../components/atoms/Link';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
+import { getInlineTextTagStyle, TagList } from '../../../components/molecules/TagList';
 
 type BlogPostProps = {
   articleDTO: ArticleDTO;
@@ -78,20 +79,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
             <Box mb={8}>
               <Box>
-                {(tags || []).map((tag) => (
-                  <Link to={`${urlBlogTags}/${encodeURIComponent(tag)}`} key={tag}>
-                    <Text
-                      as="span"
-                      display="inline-block"
-                      mr={2}
-                      mb={1}
-                      color="gray.600"
-                      fontSize="sm"
-                      lineHeight="1"
-                      _hover={{ textDecoration: 'underline' }}
-                    >{`#${tag}`}</Text>
-                  </Link>
-                ))}
+                <TagList
+                  tags={tags}
+                  tagBaseUrl={urlBlogTags}
+                  tagItemProps={getInlineTextTagStyle()}
+                />
               </Box>
 
               <Text fontSize="sm" color="gray.600" my={1}>
