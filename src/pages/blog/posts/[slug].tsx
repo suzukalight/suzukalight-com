@@ -60,13 +60,13 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                   alt="hero image"
                   fit="cover"
                   w="100%"
-                  h={['16em', '16em', '20em']}
+                  h={['12em', '12em', '16em']}
                 />
               )}
               {emoji && (
                 <Center
                   w="100%"
-                  h={['16em', '16em', '20em']}
+                  h={['12em', '12em', '16em']}
                   borderRadius={8}
                   flexShrink={0}
                   backgroundColor="gray.100"
