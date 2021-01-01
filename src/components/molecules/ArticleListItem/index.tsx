@@ -26,7 +26,7 @@ const Body: React.FC<BodyProps> = ({ title, article, contentHtml, show, content 
       {article.getDateFormatted()}
     </Text>
 
-    <Collapse startingHeight={contentHtml ? '11em' : '6em'} in={show}>
+    <Collapse startingHeight={contentHtml ? '11em' : '6.5em'} in={show}>
       <Box py={[4, 4, 2]}>
         <ArticleDetail contentHtml={content} />
       </Box>
