@@ -29,9 +29,9 @@ export const Footer: React.FC = () => (
               About
             </Text>
           </Link>
-          <Link to="/about#スキルマップ">skill map</Link>
-          <Link to="/about#略歴">resume</Link>
-          <Link to="/about#受賞歴">awards</Link>
+          <Link to="/about">skill map</Link>
+          <Link to="/about">resume</Link>
+          <Link to="/about">awards</Link>
         </VStack>
       </SimpleGrid>
     </Box>
