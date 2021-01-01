@@ -59,11 +59,11 @@ RELATIONS 株式会社のような**ベンチャー企業に属するエンジ�
 
 ## UI/Design
 
-```
-- Design Tools:      Sketch, Zeplin
-- Design Catalog:    Storybook, StoryShots
-- Design Framework:  Atomic Design
-```
+| type             | name                  |
+| ---------------- | --------------------- |
+| Design Tools     | Sketch, Zeplin        |
+| Design Catalog   | Storybook, StoryShots |
+| Design Framework | Atomic Design         |
 
 デザインとエンジニアリングの間のフローとしては、まずデザイナーに Sketch を使って Zeplin で Web 上にデザインを配置してもらいます。それに対して、プロダクトオーナーやエンジニアが質問やツッコミをペタペタ貼り付けていくスタイルを取っています。
 
@@ -81,17 +81,17 @@ RELATIONS 株式会社のような**ベンチャー企業に属するエンジ�
 
 ## フロントエンド
 
-```
-- Language:    ES6
-- Transpiler:  Babel
-- UI Library:  React
-- Stylesheet:  Stylus
-- Framework:   Redux, Redux-Saga, normalizr, reselect, Apollo Client
-- API Layer:   GraphQL, graphql-subscription
-- Build Tool:  webpack, Workbox
-- Testing:     Jest, StoryShots
-- Linting:     ESLint, Prettier
-```
+| type       | name                                                  |
+| ---------- | ----------------------------------------------------- |
+| Language   | ES6                                                   |
+| Transpiler | Babel                                                 |
+| UI Library | React                                                 |
+| Stylesheet | Stylus                                                |
+| Framework  | Redux, Redux-Saga, normalizr, reselect, Apollo Client |
+| API Layer  | GraphQL, graphql-subscription                         |
+| Build Tool | webpack, Workbox                                      |
+| Testing    | Jest, StoryShots                                      |
+| Linting    | ESLint, Prettier                                      |
 
 **API は GraphQL を採用しています。**リクエストの変化（≒UX 改善）に強く、フロント担当者だけでクエリを改変することもできました。加えて graphql-subscription を採用しており、バックエンドのデータ更新をトリガーに、ソケット経由でのリアルタイム同期を実現できました。
 
@@ -101,12 +101,12 @@ RELATIONS 株式会社のような**ベンチャー企業に属するエンジ�
 
 ## インフラ
 
-```
-- IaaS:            AWS
-- BaaS:            Firebase
-- CI:              Circle CI
-- Virtualization:  Docker
-```
+| type           | name      |
+| -------------- | --------- |
+| IaaS           | AWS       |
+| BaaS           | Firebase  |
+| CI             | Circle CI |
+| Virtualization | Docker    |
 
 特に試作的なリリースを行うときは、DB に RDB ではなく**Firebase**を使う場合もあります。バックエンドシステムの用意が不要なことや、データモデルがドキュメントベースのため、フロント担当者だけで改造を完結できることなどが利点です。
 
@@ -116,14 +116,14 @@ RELATIONS 株式会社のような**ベンチャー企業に属するエンジ�
 
 ## SaaS
 
-```
-- Communication:   Intercom
-- Onboarding:      Appcues
-- Error Tracking:  Sentry
-- Payment:         Stripe
-- Mailing:         SendGrid
-- Analytics:       Google Analytics, Amplitude w/Segment
-```
+| type           | name                                  |
+| -------------- | ------------------------------------- |
+| Communication  | Intercom                              |
+| Onboarding     | Appcues                               |
+| Error Tracking | Sentry                                |
+| Payment        | Stripe                                |
+| Mailing        | SendGrid                              |
+| Analytics      | Google Analytics, Amplitude w/Segment |
 
 **カスタマーサクセス（CS）チームに喜ばれているのが Intercom の導入で**、プロダクトにメッセンジャー機能やマニュアル掲示などのヘルプセンター機能を簡単に載せることができました。これによって顧客との距離が大幅に縮まっており、プロダクトの魅力をより伝えやすくなっています。
 
@@ -138,3 +138,7 @@ RELATIONS のフロントエンド技術スタックと、フロントエンド�
 今回のご紹介では漏れてしまいましたが、他の開発事例として、**ReactNative（Expo）**, **react-navigation**, **native-base**, **styled-components**, **Firebase**なスマホアプリなども開発しています。逆にランディングページではバリバリ jQuery を選択したり…。
 
 その他の事例共有・失敗談・情報交換なども出来ると思いますので、ぜひランチなどいかがでしょうか！　お気軽にどうぞ！
+
+```
+
+```
