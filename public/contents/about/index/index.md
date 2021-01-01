@@ -40,25 +40,27 @@ status: 'published'
 
 - Markup: HTML5, CSS(**SCSS**, Stylus, **BEM**), CSS-in-JS(**styled-components**), CSS Modules
 - Frontend: **TypeScript**, JavaScript, **React**, **Next**, Gatsby, **GraphQL**, ApolloClient, Vue, MaterialUI, ChakraUI, formik, jQuery
-- Backend: **Node.js**(Express, Koa, **ApolloServer**, WebSocket), PHP(CakePHP, Laravel), Java
+- Backend: **Node.js**(Express, Koa, **ApolloServer**, WebSocket, GraphQL), PHP(CakePHP, Laravel), Java
 - Mobile: **ReactNative**(Expo), Cordova, AndroidJava
 - DB: RDB(**MySQL**, Oracle, SQLite, etc.), NoSQL(**Firebase**, DynamoDB), SQL, ORM(**Sequelize**, **TypeORM**, Laravel)
-- Infra: **AWS**, GCP, Vercel, Heroku, Auth0, Stripe, Sentry, Intercom, Slack, Terraform, Docker
-- CI/CD: **ESLint**, **Prettier**, Jest, CircleCI, Webpack, gulp, monorepo
+- Infra: **AWS**, GCP, Vercel, Heroku, Terraform, Docker
+- xaaS: Auth0, Stripe, Sentry, Intercom, Slack
+- CI/CD: **ESLint**, **Prettier**, Jest, CircleCI, Webpack, Gulp, monorepo
 
 ### 基礎技術
 
 - **情報科学**: **修士号**。データ構造とアルゴリズム、ネットワーク基礎、代数学、etc.
 - **電子工学**: 回路設計、部材選定、基板実装、etc.
 - 開発手法: **Clean Architecture**, OOP(GoF), SPA, PWA
-- デザイン: **デザインシステム**, **Atomic Design**, Figma
-- コミュニケーション: **git**, **slack**, Jira, Product Board, Miro,
+- デザイン: **デザインシステム**, **Atomic Design**, Figma, Sketch
+- コミュニケーション: **Git**, **GitHub**, **Slack**, Jira, Product Board, Miro, etc.
 
 ### ソフトスキル
 
 - **テックリード**（技術共有、育成指導、レビューなど）
 - **スクラムマスター**（PO と話し合いながら、プロダクトにとって最も良い優先度付けを行い、スプリントを管理し、完遂する）
 - **ティーチング**（プログラミング講師、その他講師経験）
+- エンジニアリングマネージャー（採用、育成、フィードバック、評価など）
 - ホラクラシー
 
 ## 受賞歴
