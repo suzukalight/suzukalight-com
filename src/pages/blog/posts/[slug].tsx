@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Image, Heading, Center, Box, Text, Divider, VStack } from '@chakra-ui/react';
+import { Heading, Box, Text, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { Article, ArticleDTO } from '../../../utils/article/entity';
@@ -16,13 +16,10 @@ import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/articl
 import DefaultLayout from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-import { ArticleTipList } from '../../../components/molecules/ArticleTipList';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
-import {
-  getDefaultTagStyle,
-  getInlineTextTagStyle,
-  TagList,
-} from '../../../components/molecules/TagList';
+import { RelatedArticles } from '../../../components/organisms/RelatedArticles';
+import { getInlineTextTagStyle, TagList } from '../../../components/molecules/TagList';
+import { CoverImage } from '../../../components/atoms/CoverImage';
 
 type BlogPostProps = {
   articleDTO: ArticleDTO;
@@ -52,109 +49,45 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
       <Box>
         <Box m="1em">
-          <Box maxW="640px" mx="auto">
-            <Center>
-              {hero && (
-                <Image
-                  src={`${contentBaseUrl}/${hero}`}
-                  alt="hero image"
-                  fit="cover"
-                  w="100%"
-                  h={['12em', '12em', '16em']}
-                />
-              )}
-              {emoji && (
-                <Center
-                  w="100%"
-                  h={['12em', '12em', '16em']}
-                  borderRadius={8}
-                  flexShrink={0}
-                  backgroundColor="gray.100"
-                >
-                  <Text fontSize={['5em', '5em', '6em']}>{emoji}</Text>
-                </Center>
-              )}
-            </Center>
+          <Box maxW="40em" mx="auto">
+            <VStack divider={<StackDivider />} spacing={12} align="left">
+              <Box w="100%">
+                <CoverImage hero={hero} emoji={emoji} contentBaseUrl={contentBaseUrl} />
 
-            <Heading as="h1" mt={8} mb={2} wordBreak="break-all">
-              {title}
-            </Heading>
+                <Heading as="h1" fontSize={['2xl', '2xl', '3xl']} mt={8} mb={2}>
+                  {title}
+                </Heading>
 
-            <Box mb={8}>
-              <Box>
                 <TagList
                   tags={tags}
                   tagBaseUrl={urlBlogTags}
                   tagItemProps={getInlineTextTagStyle()}
                 />
+
+                <Text fontSize="sm" color="gray.600" mt={1} mb={8}>
+                  {article.getDateFormatted()}
+                </Text>
+
+                <ArticleDetail contentHtml={content} />
               </Box>
 
-              <Text fontSize="sm" color="gray.600" my={1}>
-                {article.getDateFormatted()}
-              </Text>
-            </Box>
+              <RelatedArticles
+                tags={tags}
+                relatedArticlesDTO={relatedArticlesDTO}
+                prevArticleDTO={prevArticleDTO}
+                nextArticleDTO={nextArticleDTO}
+                urlContentsBlog={urlContentsBlog}
+                urlBlogPosts={urlBlogPosts}
+                urlBlogTags={urlBlogTags}
+              />
 
-            <ArticleDetail contentHtml={content} />
-
-            <Divider mt={16} />
-
-            <VStack as="aside" spacing={16} my={16} align="stretch">
-              <Box>
-                <Heading as="h1" fontSize="xl" mb={8}>
-                  Tags
-                </Heading>
-
-                <Box>
-                  <TagList
-                    tags={tags}
-                    tagBaseUrl={urlBlogTags}
-                    tagItemProps={{ ...getDefaultTagStyle(), fontSize: 'md', mr: 2 }}
-                  />
-                </Box>
-              </Box>
-
-              <Box>
-                <Heading as="h1" fontSize="xl" mb={8}>
-                  Related Articles
-                </Heading>
-
-                {relatedArticlesDTO.length > 0 ? (
-                  <ArticleTipList
-                    articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
-                    urlBlogPosts={urlBlogPosts}
-                    urlContentsBlog={urlContentsBlog}
-                  />
-                ) : (
-                  <Text as="small" color="gray.500">
-                    関連する記事は見つかりませんでした
-                  </Text>
-                )}
-              </Box>
-
-              <Box>
-                <Heading as="h1" fontSize="xl" mb={8}>
-                  Prev/Next Article
-                </Heading>
-
-                <ArticleTipList
-                  articles={[
-                    prevArticleDTO && Article.fromDTO(prevArticleDTO),
-                    nextArticleDTO && Article.fromDTO(nextArticleDTO),
-                  ].filter((a) => a)}
-                  urlBlogPosts={urlBlogPosts}
-                  urlContentsBlog={urlContentsBlog}
-                />
-              </Box>
+              <BackLinks
+                links={[
+                  { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog List' },
+                  { to: '/', icon: FaHome, label: 'Back to Home' },
+                ]}
+              />
             </VStack>
-
-            <Divider mb={16} />
-
-            <BackLinks
-              links={[
-                { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog List' },
-                { to: '/', icon: FaHome, label: 'Back to Home' },
-              ]}
-            />
           </Box>
         </Box>
       </Box>
