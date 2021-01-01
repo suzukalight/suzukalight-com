@@ -13,24 +13,28 @@ import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
+import { stripMarkdown } from '../../../utils/article/markdown';
 
 type IndexPageProps = {
   tag: string;
-  articles: ArticleDTO[];
+  data: {
+    article: ArticleDTO;
+    contentText: string;
+  }[];
 };
 
-export const TagPage: React.FC<IndexPageProps> = ({ tag, articles: articleDTOs }) => {
+export const TagPage: React.FC<IndexPageProps> = ({ tag, data }) => {
   const title = `#${tag} タグの付いた Blog`;
-  const articles = articleDTOs.map((dto) => Article.fromDTO(dto));
 
   return (
     <ArticleListLayout title={title}>
       <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
-        {articles.map((article) => (
+        {data.map((d) => (
           <ArticleListItem
-            key={article.getSlug()}
-            article={article}
-            contentBaseUrl={`${urlContentsBlog}/${article.getSlug()}`}
+            key={d.article.slug}
+            article={Article.fromDTO(d.article)}
+            contentText={d.contentText}
+            contentBaseUrl={`${urlContentsBlog}/${d.article.slug}`}
             tagBaseUrl={urlBlogTags}
             postBaseUrl={urlBlogPosts}
             showContentLink
@@ -69,7 +73,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const tag = params.tag as string;
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
 
+  const data = await Promise.all(
+    sortArticlesByDateDesc(articlesFilteredByTag).map(async (a) => ({
+      article: a.toDTO(),
+      contentText: await stripMarkdown(a.getContent()),
+    })),
+  );
+
   return {
-    props: { tag, articles: sortArticlesByDateDesc(articlesFilteredByTag).map((a) => a.toDTO()) },
+    props: { tag, data },
   };
 };
