@@ -10,7 +10,7 @@ status: 'published'
 
 - RELATIONS 株式会社　 Web エンジニア
   - **テックリード・スクラムマスター・フロントエンドエンジニア**など
-  - 「[技術選定したスタックと、大事にした判断基準](/blog/posts/2018-12-08-frontend-technology-selection)」
+  - 「[技術選定で大事にした判断基準](/blog/posts/2018-12-08-frontend-technology-selection)」「[2020 年フロントエンド技術スタック](/blog/posts/2020-12-30-react-tech-stack)」
 - G&E ビジネススクール　プログラミング講師
   - **講師として、教育・カリキュラム作成**。C 言語、DirectX、ハードウェア制作など
   - 使用したテキスト「C 言語プログラミング」「DirectX プログラミング」
