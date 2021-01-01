@@ -3,6 +3,8 @@
 import React from 'react';
 import nmrHydrate from 'next-mdx-remote/hydrate';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
+import remark from 'remark';
+import strip from 'strip-markdown';
 
 export const MarkdownImg = (srcBaseUrl: string) => (props) => (
   <span
@@ -39,5 +41,16 @@ export type MdOptions = {
 export const hydrate = (content: string, imgRootDir: string, options?: MdOptions) => {
   return nmrHydrate(content, {
     components: options?.components || getDefaultComponents(imgRootDir),
+  });
+};
+
+export const stripMarkdown = (content: string) => {
+  return new Promise<string>((resolve, reject) => {
+    remark()
+      .use(strip)
+      .process(content, (err, file) => {
+        if (err) reject(err);
+        return resolve(file.toString());
+      });
   });
 };

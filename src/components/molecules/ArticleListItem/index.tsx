@@ -38,6 +38,7 @@ type ArticleListItemProps = {
   article: Article;
   contentBaseUrl: string;
   contentHtml?: string;
+  contentText?: string;
   tagBaseUrl?: string;
   postBaseUrl?: string;
   showReadMore?: boolean;
@@ -48,6 +49,7 @@ export const ArticleListItem: React.FC<ArticleListItemProps> = ({
   article,
   contentBaseUrl,
   contentHtml,
+  contentText,
   tagBaseUrl,
   postBaseUrl,
   showReadMore,
@@ -57,9 +59,7 @@ export const ArticleListItem: React.FC<ArticleListItemProps> = ({
   const handleToggle = () => setShow(!show);
 
   const { title, tags } = article.getFrontMatter();
-  const content = contentHtml
-    ? hydrate(contentHtml, contentBaseUrl)
-    : article.getContent().slice(0, 256);
+  const content = contentHtml ? hydrate(contentHtml, contentBaseUrl) : contentText;
 
   return (
     <Stack direction={['column', 'column', 'row']} spacing={[2, 2, 8]} w="100%">

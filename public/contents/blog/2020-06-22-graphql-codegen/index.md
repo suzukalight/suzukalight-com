@@ -7,13 +7,9 @@ hero: Untitled.png
 status: 'published'
 ---
 
-![Untitled%201.png](Untitled%201.png)
+![](Untitled%201.png)
 
-[GraphQL Code Generator | GraphQL Code Generator](https://graphql-code-generator.com/)
-
-GraphQL code generator は、**シンプルな CLI を使用して、GraphQL スキーマから型情報などのコードを生成することができるツールです。**
-
-今回は GraphQL スキーマから TypeScript の型情報を取得する目的で利用しています。
+[GraphQL Code Generator](https://graphql-code-generator.com/) は、**シンプルな CLI を使用して、GraphQL スキーマから型情報などのコードを生成することができるツールです。**
 
 ### 特徴
 
@@ -27,7 +23,7 @@ GraphQL code generator は、**シンプルな CLI を使用して、GraphQL ス
 
 # 具体例
 
-![Untitled%202.png](Untitled%202.png)
+![](Untitled%202.png)
 
 解説のための具体例として、下記の機能を考えます；
 
@@ -245,13 +241,13 @@ const variables: GetMemberActionsQueryVariables = {
 
 クエリの引数である variables に対して型情報が付与できます。型情報を頼ることで、**必要な引数がサジェストされ、不要な引数は型エラーになることから、DX が大幅に向上します！**
 
-![Untitled%203.png](Untitled%203.png)
+![](Untitled%203.png)
 
-![Untitled%204.png](Untitled%204.png)
+![](Untitled%204.png)
 
 もうひとつ嬉しい点は、**GraphQL で定義した enum を、型として利用できる**点です。誤ったオプションを指定してしまう可能性がさらに減少します；
 
-![Untitled%205.png](Untitled%205.png)
+![](Untitled%205.png)
 
 誤った引数指定に起因するサーバエラーも減らせそうですね。
 
@@ -268,9 +264,9 @@ const { data, loading, error, refetch } = useQuery<
 
 useQuery のジェネリクスでクエリの戻り値型を指定できることから、**クエリの実行結果 data にも型が付与されます。**以下のスクリーンショットから、戻り値にも型がついていることがわかります；
 
-![Untitled%206.png](Untitled%206.png)
+![](Untitled%206.png)
 
-![Untitled.png](Untitled.png)
+![](Untitled.png)
 
 開発者体験が大幅に向上することは明白ですね。
 
@@ -280,7 +276,7 @@ codegen で得られる戻り値型情報は、そのままバックエンドの
 
 もしスキーマに変更ができてしまった場合（ないほうが嬉しいですが…）、その変更は型エラーという結果でフロントエンドに伝わってきます。コンポーネントやロジックの修正が必要になるということが一瞬でわかるため、デグレが起きてしまう期間を極めて小さくできます。
 
-![Untitled%207.png](Untitled%207.png)
+![](Untitled%207.png)
 
 presenter コンポーネントも、スキーマ提供の型情報（今回だと Action など）を使って組んでいれば、同様にエラー検知できますので、デグレもだいぶ怖くなくなります！
 
