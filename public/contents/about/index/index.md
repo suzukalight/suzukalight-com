@@ -39,10 +39,10 @@ status: 'published'
 ### 技術スタック
 
 - Markup: HTML5, CSS(**SCSS**, Stylus, **BEM**), CSS-in-JS(**styled-components**), CSS Modules
-- Frontend: **TypeScript**, JavaScript, **React**, **Next**, Gatsby, **GraphQL**, ApolloClient, Vue, MaterialUI, ChakraUI, formik, jQuery
+- Frontend: **TypeScript**, JavaScript, **React**, **Next**, **Gatsby**, **GraphQL**, ApolloClient, Vue, MaterialUI, ChakraUI, formik, jQuery
 - Backend: **Node.js**(Express, Koa, **ApolloServer**, WebSocket, GraphQL), PHP(CakePHP, Laravel), Java
 - Mobile: **ReactNative**(Expo), Cordova, AndroidJava
-- DB: RDB(**MySQL**, Oracle, SQLite, etc.), NoSQL(**Firebase**, DynamoDB), SQL, ORM(**Sequelize**, **TypeORM**, Laravel)
+- DB: RDB(**MySQL**, Oracle, SQLite, etc.), NoSQL(**Firebase**, DynamoDB), ORM(**Sequelize**, **TypeORM**, Laravel), SQL
 - Infra: **AWS**, GCP, Vercel, Heroku, Terraform, Docker
 - xaaS: Auth0, Stripe, Sentry, Intercom, Slack
 - CI/CD: **ESLint**, **Prettier**, Jest, CircleCI, Webpack, Gulp, monorepo
@@ -58,7 +58,7 @@ status: 'published'
 ### ソフトスキル
 
 - **テックリード**（技術共有、育成指導、レビューなど）
-- **スクラムマスター**（PO と話し合いながら、プロダクトにとって最も良い優先度付けを行い、スプリントを管理し、完遂する）
+- **スクラムマスター**（PO との連携、優先度付け支援、スプリント管理、振り返り）
 - **ティーチング**（プログラミング講師、その他講師経験）
 - エンジニアリングマネージャー（採用、育成、フィードバック、評価など）
 - ホラクラシー
