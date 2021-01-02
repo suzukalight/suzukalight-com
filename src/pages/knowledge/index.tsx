@@ -8,7 +8,12 @@ import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { ArticleExcerptItem } from '../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
-import { urlKnowledgeRoot, urlContentsKnowledge } from '../url.json';
+import {
+  urlKnowledgeRoot,
+  urlKnowledgeTags,
+  urlKnowledgePosts,
+  urlContentsKnowledge,
+} from '../url.json';
 import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
@@ -35,6 +40,9 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
           article={d.article}
           contentHtml={d.contentHtml}
           contentBaseUrl={`${urlContentsKnowledge}/${d.article.slug}`}
+          tagBaseUrl={urlKnowledgeTags}
+          postBaseUrl={urlKnowledgePosts}
+          showContentLink
           showReadMore
         />
       ))}

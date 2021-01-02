@@ -34,7 +34,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
     <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
       {orderByName.map(({ tag, count }) => (
         <Box key={tag} mr={4}>
-          <Link to={`/blog/tags/${encodeURIComponent(tag)}`}>
+          <Link to={`${urlKnowledgeTags}/${encodeURIComponent(tag)}`}>
             <Text as="span">{`#${tag} (${count})`}</Text>
           </Link>
         </Box>
@@ -48,7 +48,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
     <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
       {orderByCount.map(({ tag, count }) => (
         <Box key={tag} mr={4}>
-          <Link to={`/blog/tags/${encodeURIComponent(tag)}`}>
+          <Link to={`${urlKnowledgeTags}/${encodeURIComponent(tag)}`}>
             <Text as="span">{`#${tag} (${count})`}</Text>
           </Link>
         </Box>
