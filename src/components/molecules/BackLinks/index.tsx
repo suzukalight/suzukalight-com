@@ -7,7 +7,7 @@ type BackLinksProps = {
   links: Array<{
     to: string;
     label: string;
-    icon?: any;
+    icon?: React.ElementType;
   }>;
 };
 

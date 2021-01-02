@@ -34,8 +34,8 @@ export const getDefaultComponents = (imgRootDir: string) => ({
 });
 
 export type MdOptions = {
-  components?: any;
-  mdxOptions?: any;
+  components?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  mdxOptions?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 };
 
 export const hydrate = (content: string, imgRootDir: string, options?: MdOptions) => {
