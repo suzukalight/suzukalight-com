@@ -8,33 +8,29 @@ import { ArticleListItem } from '../../../components/molecules/ArticleListItem';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
 import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
-import { Article, ArticleDTO } from '../../../utils/article/entity';
+import { Article } from '../../../utils/article/entity';
 import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
-import { stripMarkdown } from '../../../utils/article/markdown';
 
-type IndexPageProps = {
+type TagPageProps = {
   tag: string;
-  data: {
-    article: ArticleDTO;
-    contentText: string;
-  }[];
+  articles: Article[];
 };
 
-export const TagPage: React.FC<IndexPageProps> = ({ tag, data }) => {
+export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
   const title = `#${tag} タグの付いた Blog`;
 
   return (
     <ArticleListLayout title={title}>
       <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
-        {data.map((d) => (
+        {articles.map((a) => (
           <ArticleListItem
-            key={d.article.slug}
-            article={Article.fromDTO(d.article)}
-            contentText={d.contentText}
-            contentBaseUrl={`${urlContentsBlog}/${d.article.slug}`}
+            key={a.slug}
+            article={a}
+            contentText={a.excerpt}
+            contentBaseUrl={`${urlContentsBlog}/${a.slug}`}
             tagBaseUrl={urlBlogTags}
             postBaseUrl={urlBlogPosts}
             showContentLink
@@ -58,7 +54,7 @@ export const TagPage: React.FC<IndexPageProps> = ({ tag, data }) => {
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = getArticles(urlContentsBlog);
+  const articles = await getArticles(urlContentsBlog);
   const tags = getTagsIncludedInArticles(articles);
   const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
 
@@ -69,18 +65,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const articles = getArticles(urlContentsBlog);
   const tag = params.tag as string;
+
+  const articles = await getArticles(urlContentsBlog);
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
+  const articlesSorted = sortArticlesByDateDesc(articlesFilteredByTag);
 
-  const data = await Promise.all(
-    sortArticlesByDateDesc(articlesFilteredByTag).map(async (a) => ({
-      article: a.toDTO(),
-      contentText: await stripMarkdown(a.getContent()),
-    })),
-  );
-
-  return {
-    props: { tag, data },
-  };
+  return { props: { tag, articles: articlesSorted } as TagPageProps };
 };

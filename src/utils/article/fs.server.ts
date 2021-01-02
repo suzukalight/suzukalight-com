@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-import { Article, getArticleFromMdxSource } from './entity';
+import { getArticleFromMdxSource, isPublished } from './entity';
 
 const root = process.cwd();
 
@@ -49,19 +49,22 @@ type GetArticlesFromDirOption = {
  * @param mdxDirs コンテンツが格納されているディレクトリ群
  * @param options
  */
-export const getArticlesFromDir = (
+export const getArticlesFromDir = async (
   contentsUrl: string,
   mdxDirs: string[],
   options?: GetArticlesFromDirOption,
 ) => {
-  return mdxDirs.reduce((articles, slug) => {
-    const source = getMdxSource(contentsUrl, slug);
-    const article = getArticleFromMdxSource(source, slug);
+  const articles = await Promise.all(
+    mdxDirs.map(async (slug) => {
+      const source = getMdxSource(contentsUrl, slug);
+      const article = await getArticleFromMdxSource(source, slug);
 
-    if (article.isPublished() || options?.includesDraft) articles.push(article);
+      if (!isPublished(article) && !options?.includesDraft) return null;
+      return article;
+    }),
+  );
 
-    return articles;
-  }, [] as Article[]);
+  return articles.filter((a) => a);
 };
 
 /**
@@ -69,7 +72,7 @@ export const getArticlesFromDir = (
  * @param contentsUrl コンテンツのURL
  * @param options
  */
-export const getArticles = (contentsUrl: string, options?: GetArticlesFromDirOption) => {
+export const getArticles = async (contentsUrl: string, options?: GetArticlesFromDirOption) => {
   const mdxDirs = getDirNamesThatHaveMdx(contentsUrl);
   return getArticlesFromDir(contentsUrl, mdxDirs, options);
 };

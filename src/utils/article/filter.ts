@@ -6,5 +6,5 @@ import { Article } from './entity';
  * @param tag
  */
 export const filterArticleByTag = (articles: Article[], tag: string) => {
-  return articles.filter((a) => a.getFrontMatter().tags.some((t) => t === tag));
+  return articles.filter((a) => a.frontMatter.tags.some((t) => t === tag));
 };

@@ -4,13 +4,13 @@ import { Heading, Box, Text, VStack } from '@chakra-ui/react';
 import { ArticleTipList } from '../../../components/molecules/ArticleTipList';
 import { getDefaultTagStyle, TagList } from '../../../components/molecules/TagList';
 
-import { Article, ArticleDTO } from '../../../utils/article/entity';
+import { Article } from '../../../utils/article/entity';
 
 type RelatedArticlesProps = {
   tags: string[];
-  relatedArticlesDTO: ArticleDTO[];
-  prevArticleDTO: ArticleDTO;
-  nextArticleDTO: ArticleDTO;
+  relatedArticles: Article[];
+  prevArticle: Article;
+  nextArticle: Article;
   urlContentsBlog: string;
   urlBlogPosts: string;
   urlBlogTags: string;
@@ -18,9 +18,9 @@ type RelatedArticlesProps = {
 
 export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
   tags,
-  relatedArticlesDTO,
-  prevArticleDTO,
-  nextArticleDTO,
+  relatedArticles,
+  prevArticle,
+  nextArticle,
   urlContentsBlog,
   urlBlogPosts,
   urlBlogTags,
@@ -45,9 +45,9 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
         Related Articles
       </Heading>
 
-      {relatedArticlesDTO.length > 0 ? (
+      {relatedArticles.length > 0 ? (
         <ArticleTipList
-          articles={relatedArticlesDTO.map((r) => Article.fromDTO(r))}
+          articles={relatedArticles}
           urlBlogPosts={urlBlogPosts}
           urlContentsBlog={urlContentsBlog}
         />
@@ -64,10 +64,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
       </Heading>
 
       <ArticleTipList
-        articles={[
-          prevArticleDTO && Article.fromDTO(prevArticleDTO),
-          nextArticleDTO && Article.fromDTO(nextArticleDTO),
-        ].filter((a) => a)}
+        articles={[prevArticle, nextArticle].filter((a) => a)}
         urlBlogPosts={urlBlogPosts}
         urlContentsBlog={urlContentsBlog}
       />

@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { FaPen } from 'react-icons/fa';
 
-import { Article } from '../../../utils/article/entity';
+import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { getInlineTextTagStyle, TagList } from '../TagList';
 
 type ArticleTipProps = {
@@ -26,8 +26,8 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
   urlBlogPosts,
   urlContentsBlog,
 }) => {
-  const slug = article.getSlug();
-  const { title, tags, hero, emoji } = article.getFrontMatter();
+  const slug = article.slug;
+  const { title, tags, hero, emoji } = article.frontMatter;
 
   return (
     <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
@@ -59,7 +59,7 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
               </Box>
 
               <Text as="small" fontSize="xs" color="gray.700" opacity="0.8">
-                {article.getDateFormatted()}
+                {getDateFormatted(article)}
               </Text>
             </Flex>
           </Flex>
@@ -104,7 +104,7 @@ export const ArticleTipList: React.FC<ArticleTipListProps> = ({
   <SimpleGrid columns={[1, 1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[12, 12, 16]}>
     {articles.map((article) => (
       <ArticleTip
-        key={article.getSlug()}
+        key={article.slug}
         article={article}
         urlBlogPosts={urlBlogPosts}
         urlContentsBlog={urlContentsBlog}

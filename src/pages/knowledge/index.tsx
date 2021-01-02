@@ -7,7 +7,7 @@ import { ArticleListLayout } from '../../components/templates/ArticleListLayout'
 import { ArticleListItem } from '../../components/molecules/ArticleListItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
-import { Article, ArticleDTO } from '../../utils/article/entity';
+import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 import { renderToString } from '../../utils/article/markdown.server';
@@ -15,7 +15,7 @@ import { urlContentsKnowledge } from '../url.json';
 
 type IndexPageProps = {
   data: {
-    article: ArticleDTO;
+    article: Article;
     contentHtml: string;
   }[];
 };
@@ -29,7 +29,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
       {data.map((d) => (
         <ArticleListItem
           key={d.article.slug}
-          article={Article.fromDTO(d.article)}
+          article={d.article}
           contentHtml={d.contentHtml}
           contentBaseUrl={`${urlContentsKnowledge}/${d.article.slug}`}
           showReadMore
@@ -46,13 +46,13 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = getArticles(urlContentsKnowledge);
+  const articles = await getArticles(urlContentsKnowledge);
   const data = await Promise.all(
-    sortArticlesByDateDesc(articles).map(async (a) => ({
-      article: a.toDTO(),
-      contentHtml: await renderToString(a.getContent(), `${urlContentsKnowledge}/${a.getSlug()}`),
+    sortArticlesByDateDesc(articles).map(async ({ content, ...article }) => ({
+      article,
+      contentHtml: await renderToString(content, `${urlContentsKnowledge}/${article.slug}`),
     })),
   );
 
-  return { props: { data } };
+  return { props: { data } as IndexPageProps };
 };

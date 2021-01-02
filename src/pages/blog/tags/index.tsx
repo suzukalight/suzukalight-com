@@ -66,7 +66,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = getArticles(urlContentsBlog);
+  const articles = await getArticles(urlContentsBlog);
   const tagAndCountTable = getTableWithTagAndCountIncludedInArticles(articles);
   const orderByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const orderByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);

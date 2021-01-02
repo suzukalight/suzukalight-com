@@ -4,6 +4,7 @@ import format from 'date-fns/format';
 import { ValidationError } from '../error/Validation';
 import { PropertyRequiredError } from '../error/PropertyRequired';
 import { isValidISODate } from '../date/is-valid';
+import { stripMarkdown } from './markdown';
 
 /** 記事の公開状態 */
 export type ArticleStatus = 'published' | 'draft';
@@ -19,15 +20,18 @@ export type ArticleFrontMatter = {
   emoji?: string;
 };
 
-/** ArticleエンティティのDTO */
-export type ArticleDTO = {
-  frontMatter: ArticleFrontMatter;
-  content: ArticleContent;
-  slug: string;
-};
-
 /** MDXからfrontMatterを取り除いた本文 */
 export type ArticleContent = string;
+
+/**
+ * 記事エンティティ
+ */
+export class Article {
+  slug: string;
+  frontMatter: ArticleFrontMatter;
+  excerpt: string;
+  content?: ArticleContent;
+}
 
 /**
  * 不正な frontMatter であった場合、エラーを throw する
@@ -70,7 +74,16 @@ export const denyInvalidArticleDTO = (dto: Record<string, unknown>) => {
   if (!('content' in dto)) throw new PropertyRequiredError('content');
   if (!('slug' in dto)) throw new PropertyRequiredError('slug');
 
-  denyInvalidFrontMatter(dto.frontMatter as ArticleDTO);
+  denyInvalidFrontMatter(dto.frontMatter as ArticleFrontMatter);
+};
+
+/**
+ * 記事から装飾を取り除き、さらに一定の長さにして返す
+ * @param content 記事の内容
+ * @param length 切り出す長さ
+ */
+export const createExcerpt = async (content: string, length = 256) => {
+  return stripMarkdown(content.slice(0, length));
 };
 
 /**
@@ -78,81 +91,33 @@ export const denyInvalidArticleDTO = (dto: Record<string, unknown>) => {
  * @param source MDXファイルの内容
  * @param slug このArticleのslug
  */
-export const getArticleFromMdxSource = (source: string, slug: string) => {
+export const getArticleFromMdxSource = async (source: string, slug: string) => {
   const { data, content } = matter(source);
   denyInvalidFrontMatter(data);
 
-  return new Article(data as ArticleFrontMatter, content, slug);
+  return {
+    slug,
+    excerpt: await createExcerpt(content),
+    frontMatter: data,
+    content,
+  } as Article;
 };
 
 /**
- * 記事エンティティ
+ * 投稿日時を整形して返す
+ * @param dateFormat 日付フォーマット
  */
-export class Article {
-  private frontMatter: ArticleFrontMatter;
-  private content: ArticleContent;
-  private slug: string;
+export const getDateFormatted = (article: Article, dateFormat = 'yyyy/MM/dd') => {
+  return format(new Date(article.frontMatter.date), dateFormat);
+};
 
-  constructor(frontMatter: ArticleFrontMatter, content: ArticleContent, slug: string) {
-    denyInvalidFrontMatter(frontMatter);
+/** 記事が公開済みかどうか */
+export const isPublished = (article: Article) => {
+  return article.frontMatter.status === 'published';
+};
 
-    this.frontMatter = frontMatter;
-    this.content = content;
-    this.slug = slug;
-  }
-
-  getFrontMatter() {
-    return this.frontMatter;
-  }
-
-  getContent() {
-    return this.content;
-  }
-
-  getSlug() {
-    return this.slug;
-  }
-
-  getExcerpt() {
-    return this.content.substr(0, 128);
-  }
-
-  getTags() {
-    return this.frontMatter.tags;
-  }
-
-  /** DTOからエンティティを生成 */
-  static fromDTO(dto: Record<string, unknown>) {
-    denyInvalidArticleDTO(dto);
-
-    const articleDTO = dto as ArticleDTO;
-    return new Article(articleDTO.frontMatter, articleDTO.content, articleDTO.slug);
-  }
-
-  /** MDXデータとslugからエンティティを生成 */
-  static fromMdxSource(source: string, slug: string) {
-    return getArticleFromMdxSource(source, slug);
-  }
-
-  /** DTOに変換 */
-  toDTO() {
-    return {
-      frontMatter: this.frontMatter,
-      content: this.content,
-      slug: this.slug,
-    };
-  }
-
-  /** 記事が公開済みかどうか */
-  isPublished() {
-    return this.frontMatter.status === 'published';
-  }
-
-  /**
-   * 投稿日時を整形して返す
-   * @param dateFormat 日付フォーマット
-   */
-  getDateFormatted(dateFormat = 'yyyy/MM/dd') {
-    return format(new Date(this.frontMatter.date), dateFormat);
-  }
-}
+export const stripContent = (article: Article) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { content, ...rest } = article;
+  return rest as Article;
+};

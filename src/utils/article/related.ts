@@ -20,12 +20,13 @@ export const getRelatedArticles = (src: Article, articles: Article[], count = 4)
  */
 export const getRelatedArticlesByTags = (src: Article, articles: Article[], count: number) => {
   return articles
-    .filter((a) => a.getSlug() !== src.getSlug()) // 自分と同じ記事は外す
+    .filter((a) => a.slug !== src.slug) // 自分と同じ記事は外す
     .map((article) => {
       // タグの一致数を数える
-      const matchedTagCount = article
-        .getTags()
-        .reduce((count, t) => (src.getTags().some((tt) => tt === t) ? count + 1 : count), 0);
+      const matchedTagCount = article.frontMatter.tags.reduce(
+        (count, t) => (src.frontMatter.tags.some((tt) => tt === t) ? count + 1 : count),
+        0,
+      );
       return { article, matchedTagCount };
     })
     .filter((a) => a.matchedTagCount) // 1つ以上タグがマッチしているものだけを対象にする
@@ -44,7 +45,7 @@ export const getPrevAndNextArticle = (
   articles: Article[],
 ): { prevArticle: Article | null; nextArticle: Article | null } => {
   const articlesOrderByDate = sortArticlesByDateDesc(articles);
-  const articleIndex = articlesOrderByDate.findIndex((a) => a.getSlug() === src.getSlug());
+  const articleIndex = articlesOrderByDate.findIndex((a) => a.slug === src.slug);
   if (articleIndex < 0) return { prevArticle: null, nextArticle: null };
 
   const prevArticle = articlesOrderByDate[articleIndex - 1] ?? null;

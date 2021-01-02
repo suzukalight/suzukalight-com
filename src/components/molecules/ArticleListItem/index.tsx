@@ -3,7 +3,7 @@ import { Box, Heading, Text, Stack, Collapse } from '@chakra-ui/react';
 
 import { ArticleDetail } from '../ArticleDetail';
 import { ReadMoreButton } from '../../atoms/ReadMoreButton';
-import { Article } from '../../../utils/article/entity';
+import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
 import { Link } from '../../atoms/Link';
 import { TagList } from '../TagList';
@@ -23,7 +23,7 @@ const Body: React.FC<BodyProps> = ({ title, article, contentHtml, show, content 
     </Heading>
 
     <Text fontSize="sm" color="gray.600" my={1}>
-      {article.getDateFormatted()}
+      {getDateFormatted(article)}
     </Text>
 
     <Collapse startingHeight={contentHtml ? '11em' : '6.5em'} in={show}>
@@ -58,7 +58,7 @@ export const ArticleListItem: React.FC<ArticleListItemProps> = ({
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
-  const { title, tags } = article.getFrontMatter();
+  const { title, tags } = article.frontMatter;
   const content = contentHtml ? hydrate(contentHtml, contentBaseUrl) : contentText;
 
   return (
@@ -77,7 +77,7 @@ export const ArticleListItem: React.FC<ArticleListItemProps> = ({
 
       <Box flexGrow={1}>
         {showContentLink ? (
-          <Link to={`${postBaseUrl}/${encodeURIComponent(article.getSlug())}`}>
+          <Link to={`${postBaseUrl}/${encodeURIComponent(article.slug)}`}>
             <Body
               title={title}
               article={article}

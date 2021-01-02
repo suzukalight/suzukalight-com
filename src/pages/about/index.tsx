@@ -9,13 +9,12 @@ import { BackLinks } from '../../components/molecules/BackLinks';
 import { ArticleDetail } from '../../components/molecules/ArticleDetail';
 
 import { urlContentsAbout } from '../url.json';
-import { Article, ArticleDTO } from '../../utils/article/entity';
+import { getArticleFromMdxSource } from '../../utils/article/entity';
 import { getMdxSource } from '../../utils/article/fs.server';
 import { hydrate } from '../../utils/article/markdown';
 import { renderToString } from '../../utils/article/markdown.server';
 
 type IndexPageProps = {
-  articlesDTO: ArticleDTO[];
   contentHtml: string;
 };
 
@@ -74,9 +73,8 @@ export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const source = getMdxSource(urlContentsAbout, 'index');
-  const article = Article.fromMdxSource(source, 'index');
+  const { content, ...article } = await getArticleFromMdxSource(source, 'index');
+  const contentHtml = await renderToString(content, `${urlContentsAbout}/index`);
 
-  const contentHtml = await renderToString(article.getContent(), `${urlContentsAbout}/index`);
-
-  return { props: { articleDTO: article.toDTO(), contentHtml } };
+  return { props: { article, contentHtml } as IndexPageProps };
 };

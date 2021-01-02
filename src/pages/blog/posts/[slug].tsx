@@ -3,7 +3,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Heading, Box, Text, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-import { Article, ArticleDTO } from '../../../utils/article/entity';
+import {
+  Article,
+  getArticleFromMdxSource,
+  getDateFormatted,
+  stripContent,
+} from '../../../utils/article/entity';
 import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
 import {
   getArticles,
@@ -22,23 +27,22 @@ import { getInlineTextTagStyle, TagList } from '../../../components/molecules/Ta
 import { CoverImage } from '../../../components/atoms/CoverImage';
 
 type BlogPostProps = {
-  articleDTO: ArticleDTO;
+  article: Article;
   contentHtml: string;
-  relatedArticlesDTO: ArticleDTO[];
-  prevArticleDTO?: ArticleDTO;
-  nextArticleDTO?: ArticleDTO;
+  relatedArticles: Article[];
+  prevArticle?: Article;
+  nextArticle?: Article;
 };
 
 export const BlogPost: React.FC<BlogPostProps> = ({
-  articleDTO,
+  article,
   contentHtml,
-  relatedArticlesDTO,
-  prevArticleDTO,
-  nextArticleDTO,
+  relatedArticles,
+  prevArticle,
+  nextArticle,
 }) => {
-  const article = Article.fromDTO(articleDTO);
-  const slug = article.getSlug();
-  const { title, tags, hero, emoji } = article.getFrontMatter();
+  const { slug } = article;
+  const { title, tags, hero, emoji } = article.frontMatter;
   const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
@@ -65,7 +69,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                 />
 
                 <Text fontSize="sm" color="gray.600" mt={1} mb={8}>
-                  {article.getDateFormatted()}
+                  {getDateFormatted(article)}
                 </Text>
 
                 <ArticleDetail contentHtml={content} />
@@ -73,9 +77,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
               <RelatedArticles
                 tags={tags}
-                relatedArticlesDTO={relatedArticlesDTO}
-                prevArticleDTO={prevArticleDTO}
-                nextArticleDTO={nextArticleDTO}
+                relatedArticles={relatedArticles}
+                prevArticle={prevArticle}
+                nextArticle={nextArticle}
                 urlContentsBlog={urlContentsBlog}
                 urlBlogPosts={urlBlogPosts}
                 urlBlogTags={urlBlogTags}
@@ -110,27 +114,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
   const source = getMdxSource(urlContentsBlog, slug);
-  const article = Article.fromMdxSource(source, slug);
+  const { content, ...article } = await getArticleFromMdxSource(source, slug);
 
-  const contentHtml = await renderToString(
-    article.getContent(),
-    `${urlContentsBlog}/${params.slug}`,
-  );
+  const contentHtml = await renderToString(content, `${urlContentsBlog}/${params.slug}`);
 
-  const articles = getArticles(urlContentsBlog);
-
-  const relatedArticles = getRelatedArticles(article, articles);
-  const relatedArticlesDTO = relatedArticles.map((a) => a.toDTO());
+  const articles = await getArticles(urlContentsBlog);
+  const _relatedArticles = getRelatedArticles(article, articles);
+  const relatedArticles = _relatedArticles.map((r) => stripContent(r));
 
   const { prevArticle, nextArticle } = getPrevAndNextArticle(article, articles);
 
   return {
     props: {
-      articleDTO: article.toDTO(),
+      article,
       contentHtml,
-      relatedArticlesDTO,
-      prevArticleDTO: prevArticle?.toDTO() ?? null,
-      nextArticleDTO: nextArticle?.toDTO() ?? null,
+      relatedArticles,
+      prevArticle,
+      nextArticle,
     },
   };
 };

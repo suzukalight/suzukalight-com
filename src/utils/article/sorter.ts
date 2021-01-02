@@ -7,8 +7,8 @@ import { Article } from './entity';
  * 記事を日付降順で並べ替える comparator
  */
 export const comparatorDateDesc = (a: Article, b: Article) => {
-  const dateA = new Date(a.getFrontMatter().date);
-  const dateB = new Date(b.getFrontMatter().date);
+  const dateA = new Date(a.frontMatter.date);
+  const dateB = new Date(b.frontMatter.date);
 
   if (isEqual(dateA, dateB)) return 0;
   return isAfter(dateA, dateB) ? -1 : 1;

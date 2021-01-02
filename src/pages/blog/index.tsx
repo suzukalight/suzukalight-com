@@ -8,30 +8,26 @@ import { ArticleListItem } from '../../components/molecules/ArticleListItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
 import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../url.json';
-import { Article, ArticleDTO } from '../../utils/article/entity';
+import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
-import { stripMarkdown } from '../../utils/article/markdown';
 
 type IndexPageProps = {
-  data: {
-    article: ArticleDTO;
-    contentText: string;
-  }[];
+  articles: Article[];
 };
 
-export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
+export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
   <ArticleListLayout
     title="Blog"
     subtitle="技術調査や素振り、競馬や一口馬主、ほかに旅行やゲームの話など。"
   >
     <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
-      {data.map((d) => (
+      {articles.map((a) => (
         <ArticleListItem
-          key={d.article.slug}
-          article={Article.fromDTO(d.article)}
-          contentText={d.contentText}
-          contentBaseUrl={`${urlContentsBlog}/${d.article.slug}`}
+          key={a.slug}
+          article={a}
+          contentText={a.excerpt}
+          contentBaseUrl={`${urlContentsBlog}/${a.slug}`}
           tagBaseUrl={urlBlogTags}
           postBaseUrl={urlBlogPosts}
           showContentLink
@@ -48,13 +44,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = getArticles(urlContentsBlog);
-  const data = await Promise.all(
-    sortArticlesByDateDesc(articles).map(async (a) => ({
-      article: a.toDTO(),
-      contentText: await stripMarkdown(a.getContent()),
-    })),
-  );
+  const articles = await getArticles(urlContentsBlog);
+  const articlesSorted = sortArticlesByDateDesc(articles);
 
-  return { props: { data } };
+  return { props: { articles: articlesSorted } as IndexPageProps };
 };

@@ -1,6 +1,6 @@
 import { PropertyRequiredError } from '../error/PropertyRequired';
 import { ValidationError } from '../error/Validation';
-import { Article, ArticleFrontMatter } from './entity';
+import { ArticleFrontMatter, denyInvalidArticleDTO } from './entity';
 
 describe('ArticleEntity', () => {
   describe('constructor', () => {
@@ -13,10 +13,8 @@ describe('ArticleEntity', () => {
     const slug = 'md-sample';
 
     test('OK: エンティティを生成できた', () => {
-      const article = new Article(frontMatter, content, slug);
-      expect(article.getFrontMatter().title).toBe(frontMatter.title);
-      expect(article.getContent()).toBe(content);
-      expect(article.getSlug()).toBe(slug);
+      denyInvalidArticleDTO({ frontMatter, content, slug });
+      expect(true).toBe(true);
     });
 
     test('NG: title が不足しているため、失敗した', () => {
@@ -25,7 +23,9 @@ describe('ArticleEntity', () => {
         status: frontMatter.status,
       } as ArticleFrontMatter;
 
-      expect(() => new Article(illegalFrontMatter, content, slug)).toThrow(PropertyRequiredError);
+      expect(() =>
+        denyInvalidArticleDTO({ frontMatter: illegalFrontMatter, content, slug }),
+      ).toThrow(PropertyRequiredError);
     });
 
     test('NG: tags が配列ではないため、失敗した', () => {
@@ -36,7 +36,9 @@ describe('ArticleEntity', () => {
         tags: 'tag-not-array',
       } as unknown) as ArticleFrontMatter;
 
-      expect(() => new Article(illegalFrontMatter, content, slug)).toThrow(ValidationError);
+      expect(() =>
+        denyInvalidArticleDTO({ frontMatter: illegalFrontMatter, content, slug }),
+      ).toThrow(ValidationError);
     });
 
     test('NG: date が正しくないため、失敗した', () => {
@@ -46,7 +48,9 @@ describe('ArticleEntity', () => {
         status: frontMatter.status,
       } as ArticleFrontMatter;
 
-      expect(() => new Article(illegalFrontMatter, content, slug)).toThrow(ValidationError);
+      expect(() =>
+        denyInvalidArticleDTO({ frontMatter: illegalFrontMatter, content, slug }),
+      ).toThrow(ValidationError);
     });
 
     test('NG: status が正しくないため、失敗した', () => {
@@ -56,7 +60,9 @@ describe('ArticleEntity', () => {
         status: 'invalidStatus',
       } as unknown) as ArticleFrontMatter;
 
-      expect(() => new Article(illegalFrontMatter, content, slug)).toThrow(ValidationError);
+      expect(() =>
+        denyInvalidArticleDTO({ frontMatter: illegalFrontMatter, content, slug }),
+      ).toThrow(ValidationError);
     });
   });
 });

@@ -5,7 +5,7 @@ import { Article } from './entity';
  * @param articles 記事
  */
 export const getTagsIncludedInArticles = (articles: Article[]) => {
-  const tags = articles.reduce((p, c) => p.concat(c.getFrontMatter().tags), [] as string[]);
+  const tags = articles.reduce((p, c) => p.concat(c.frontMatter.tags), [] as string[]);
   return Array.from(new Set(tags));
 };
 
@@ -15,7 +15,7 @@ export const getTagsIncludedInArticles = (articles: Article[]) => {
  */
 export const getTableWithTagAndCountIncludedInArticles = (articles: Article[]) => {
   return articles
-    .map((a) => Array.from(new Set(a.getFrontMatter().tags)))
+    .map((a) => Array.from(new Set(a.frontMatter.tags)))
     .reduce((p, tags) => {
       tags.forEach((tag) => (tag in p ? p[tag]++ : (p[tag] = 1)));
       return p;
