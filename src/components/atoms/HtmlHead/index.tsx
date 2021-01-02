@@ -1,28 +1,43 @@
 import React from 'react';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
-import { OpenGraph } from 'next-seo/lib/types';
+import { NextSeoProps } from 'next-seo/lib/types';
 
-type HtmlHeadProps = {
+export type SeoProps = {
   title?: string;
   description?: string;
+  url?: string;
   image?: string;
 };
+type HtmlHeadProps = SeoProps;
 
-export const siteName = 'suzukalight.com';
+export const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'website';
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com/';
 export const defaultDescription =
-  "suzukalight's website. blog, documents, my outputs, skill map and biography";
+  'A website created by Masahiko Kubara(suzukalight). Web engineering knowledges, Horse Racing and Gaming blog';
 
-export const HtmlHead: React.FC<HtmlHeadProps> = ({ title, description, image }) => {
-  const titleMerged = title ? `${title} | ${siteName}` : siteName;
-  const openGraph: OpenGraph = image ? { images: [{ url: image }] } : null;
+export const HtmlHead: React.FC<HtmlHeadProps> = ({ title, description, url, image }) => {
+  const seoProps: NextSeoProps = {
+    title: title ? `${title} | ${siteName}` : siteName,
+    description: description || defaultDescription,
+    openGraph: {
+      title,
+      description,
+    },
+  };
+  if (url) {
+    seoProps.openGraph.url = new URL(url, siteUrl).toString();
+  }
+  if (url && image) {
+    seoProps.openGraph.images = [{ url: new URL(image, siteUrl).toString() }];
+  }
 
   return (
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NextSeo title={titleMerged} description={description || defaultDescription} {...openGraph} />
+      <NextSeo {...seoProps} />
     </>
   );
 };

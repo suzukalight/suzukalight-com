@@ -1,4 +1,7 @@
 export default {
+  title: 'suzukalight.com',
+  description:
+    'A website created by Masahiko Kubara(suzukalight). Web engineering knowledges, Horse Racing and Gaming blog',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
@@ -7,9 +10,9 @@ export default {
     images: [
       {
         url: 'https://suzukalight-com.vercel.app/tarako.jpg',
-        width: 180,
-        height: 180,
-        alt: 'tarako | og-image',
+        // width: 180,
+        // height: 180,
+        // alt: 'tarako | og-image',
       },
     ],
   },

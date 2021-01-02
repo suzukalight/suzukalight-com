@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
 import DefaultLayout from '../../../components/templates/DefaultLayout';
-import { HtmlHead } from '../../../components/atoms/HtmlHead';
 
 type ArticleListLayoutProps = {
   title: string;
@@ -15,8 +14,6 @@ export const ArticleListLayout: React.FC<ArticleListLayoutProps> = ({
   children,
 }) => (
   <DefaultLayout>
-    <HtmlHead title={title} />
-
     <Box py={8}>
       <Box m="1em">
         <Box maxW="50em" mx="auto">
