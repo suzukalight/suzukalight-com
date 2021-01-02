@@ -4,6 +4,7 @@ import { StackDivider, Avatar, Icon, VStack, HStack, Box, Text } from '@chakra-u
 import { FaHome, FaTwitter, FaGithub, FaFacebookF } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
+import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { Link } from '../../components/atoms/Link';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { ArticleDetail } from '../../components/molecules/ArticleDetail';
@@ -24,6 +25,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
 
   return (
     <ArticleListLayout title="About">
+      <HtmlHead title="About" url="/about" />
+
       <VStack spacing={8} align="left" divider={<StackDivider borderColor="gray.200" />}>
         <VStack spacing={2} align="left">
           <HStack justifyContent="center" align="center" w="100%" spacing={8} mb={8}>

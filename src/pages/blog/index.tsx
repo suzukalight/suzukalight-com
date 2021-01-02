@@ -4,10 +4,11 @@ import { Divider, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
+import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { ArticleListItem } from '../../components/molecules/ArticleListItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
-import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../url.json';
+import { urlBlogRoot, urlContentsBlog, urlBlogPosts, urlBlogTags } from '../url.json';
 import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
@@ -21,6 +22,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
     title="Blog"
     subtitle="技術調査や素振り、競馬や一口馬主、ほかに旅行やゲームの話など。"
   >
+    <HtmlHead title="Blog" url={urlBlogRoot} />
+
     <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
       {articles.map((a) => (
         <ArticleListItem

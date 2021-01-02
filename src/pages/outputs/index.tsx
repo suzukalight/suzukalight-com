@@ -8,7 +8,7 @@ import { BackLinks } from '../../components/molecules/BackLinks';
 
 export const IndexPage: React.FC = () => (
   <DefaultLayout backgroundColor="gray.50">
-    <HtmlHead title="Blog" />
+    <HtmlHead title="Blog" url="/outputs" />
 
     <Box py={8}>
       <Box m="1em">

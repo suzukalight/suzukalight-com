@@ -4,14 +4,15 @@ import { Divider, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
+import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { ArticleListItem } from '../../components/molecules/ArticleListItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
+import { urlKnowledgeRoot, urlContentsKnowledge } from '../url.json';
 import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 import { renderToString } from '../../utils/article/markdown.server';
-import { urlContentsKnowledge } from '../url.json';
 
 type IndexPageProps = {
   data: {
@@ -25,6 +26,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
     title="Knowledge"
     subtitle="主に技術系の単発ネタを書き留めたメモ。同じところで悩む誰かの役に立てれば。"
   >
+    <HtmlHead title="Knowledge" url={urlKnowledgeRoot} />
+
     <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
       {data.map((d) => (
         <ArticleListItem

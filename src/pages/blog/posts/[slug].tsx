@@ -43,13 +43,15 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero, emoji } = article.frontMatter;
+  const blogUrl = `${urlBlogPosts}/${slug}`;
   const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
+  const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
 
   return (
     <DefaultLayout>
-      <HtmlHead title={title} />
+      <HtmlHead title={title} description={article.excerpt} url={blogUrl} {...ogImage} />
 
       <Box>
         <Box m="1em">

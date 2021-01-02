@@ -4,10 +4,11 @@ import { Flex, Box, Heading, Divider, Text } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
+import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { Link } from '../../../components/atoms/Link';
 
-import { urlContentsBlog } from '../../url.json';
+import { urlContentsBlog, urlBlogTags } from '../../url.json';
 import { getArticles } from '../../../utils/article/fs.server';
 import {
   comparatorTagCount,
@@ -24,6 +25,8 @@ type IndexPageProps = {
 
 export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount }) => (
   <ArticleListLayout title="Tags">
+    <HtmlHead title="Tags" url={urlBlogTags} />
+
     <Heading as="h2" fontSize="2xl" mb={8}>
       by Name
     </Heading>

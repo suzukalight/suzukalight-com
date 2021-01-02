@@ -139,7 +139,7 @@ const Timeline = () => (
 
 export const IndexPage: React.FC = () => (
   <DefaultLayout>
-    <HtmlHead title="Resume" />
+    <HtmlHead title="Resume" url="/resume" />
 
     <Box py={8}>
       <Box m="1em">

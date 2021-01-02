@@ -4,6 +4,7 @@ import { Divider, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
+import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { ArticleListItem } from '../../../components/molecules/ArticleListItem';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
@@ -21,9 +22,12 @@ type TagPageProps = {
 
 export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
   const title = `#${tag} タグの付いた Blog`;
+  const tagUrl = `${urlBlogTags}/${encodeURIComponent(tag)}`;
 
   return (
     <ArticleListLayout title={title}>
+      <HtmlHead title={title} url={tagUrl} />
+
       <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
         {articles.map((a) => (
           <ArticleListItem
