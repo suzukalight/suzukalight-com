@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Center, Box, Flex, Text, Button } from '@chakra-ui/react';
+import { Center, Box, Flex, Text } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
@@ -75,9 +75,9 @@ export const Header: React.FC = (props) => {
           >
             <MenuItems to="/">Home</MenuItems>
             <MenuItems to="/blog">Blog</MenuItems>
-            <MenuItems to="/outputs">Outputs</MenuItems>
+            <MenuItems to="/knowledge">Knowledge</MenuItems>
             <MenuItems to="/about">About</MenuItems>
-            <MenuItems to="/contact" isLast>
+            {/* <MenuItems to="/contact" isLast>
               <Button
                 size="sm"
                 rounded="md"
@@ -87,7 +87,7 @@ export const Header: React.FC = (props) => {
               >
                 Contact
               </Button>
-            </MenuItems>
+            </MenuItems> */}
           </Flex>
         </Box>
       </Flex>

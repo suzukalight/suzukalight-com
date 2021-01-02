@@ -1,5 +1,7 @@
 import React from 'react';
-import { Flex, Center, Box, SimpleGrid, Divider, Text, VStack } from '@chakra-ui/react';
+import { Flex, Center, Box, SimpleGrid, Divider, Text, VStack, Icon } from '@chakra-ui/react';
+import { FaTwitter, FaGithub } from 'react-icons/fa';
+
 import { Link } from '../../atoms/Link';
 
 export const Footer: React.FC = () => (
@@ -8,20 +10,38 @@ export const Footer: React.FC = () => (
       <SimpleGrid columns={[2, 2, 3]} gap={12}>
         <VStack>
           <Text size="sm" fontWeight="bold">
-            Writings
+            suzukalight
           </Text>
-          <Link to="/blog">blog</Link>
-          <Link to="/blog">textbook</Link>
-          <Link to="/knowledge">knowledge</Link>
+          <Link to="https://twitter.com/suzukalight" chakraProps={{ isExternal: true }}>
+            <Box _hover={{ color: 'teal.500' }}>
+              <Icon as={FaTwitter} boxSize={4} mr={1} />
+              <Text as="span">suzukalight</Text>
+            </Box>
+          </Link>
+          <Link to="https://github.com/suzukalight">
+            <Box _hover={{ color: 'teal.500' }}>
+              <Icon as={FaGithub} boxSize={4} mr={1} />
+              <Text as="span">suzukalight</Text>
+            </Box>
+          </Link>
         </VStack>
 
         <VStack>
+          <Text size="sm" fontWeight="bold">
+            Writings
+          </Text>
+          <Link to="/blog">blog</Link>
+          {/* <Link to="/blog">textbook</Link> */}
+          <Link to="/knowledge">knowledge</Link>
+        </VStack>
+
+        {/* <VStack>
           <Text size="sm" fontWeight="bold">
             Outputs
           </Text>
           <Link to="/outputs">products</Link>
           <Link to="/outputs">examples</Link>
-        </VStack>
+        </VStack> */}
 
         <VStack>
           <Link to="/about">
