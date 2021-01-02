@@ -9,7 +9,7 @@ import {
   getDateFormatted,
   stripContent,
 } from '../../../utils/article/entity';
-import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
+import { urlContentsKnowledge, urlKnowledgePosts, urlKnowledgeTags } from '../../url.json';
 import {
   getArticles,
   getDirNamesThatHaveMdx,
@@ -27,7 +27,7 @@ import { getInlineTextTagStyle, TagList } from '../../../components/molecules/Ta
 import { CoverImage } from '../../../components/atoms/CoverImage';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 
-type BlogPostProps = {
+type KnowledgePostProps = {
   article: Article;
   contentHtml: string;
   relatedArticles: Article[];
@@ -35,7 +35,7 @@ type BlogPostProps = {
   nextArticle?: Article;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({
+export const KnowledgePost: React.FC<KnowledgePostProps> = ({
   article,
   contentHtml,
   relatedArticles,
@@ -44,15 +44,15 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero, emoji } = article.frontMatter;
-  const blogUrl = `${urlBlogPosts}/${slug}`;
-  const contentBaseUrl = `${urlContentsBlog}/${slug}`;
+  const KnowledgeUrl = `${urlKnowledgePosts}/${slug}`;
+  const contentBaseUrl = `${urlContentsKnowledge}/${slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
   const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
 
   return (
     <DefaultLayout>
-      <HtmlHead title={title} description={article.excerpt} url={blogUrl} {...ogImage} />
+      <HtmlHead title={title} description={article.excerpt} url={KnowledgeUrl} {...ogImage} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
@@ -63,7 +63,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               {title}
             </Heading>
 
-            <TagList tags={tags} tagBaseUrl={urlBlogTags} tagItemProps={getInlineTextTagStyle()} />
+            <TagList
+              tags={tags}
+              tagBaseUrl={urlKnowledgeTags}
+              tagItemProps={getInlineTextTagStyle()}
+            />
 
             <Text fontSize="sm" color="gray.600" mt={1} mb={8}>
               {getDateFormatted(article)}
@@ -77,14 +81,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             relatedArticles={relatedArticles}
             prevArticle={prevArticle}
             nextArticle={nextArticle}
-            urlContentsBlog={urlContentsBlog}
-            urlBlogPosts={urlBlogPosts}
-            urlBlogTags={urlBlogTags}
+            urlContentsBlog={urlContentsKnowledge}
+            urlBlogPosts={urlKnowledgePosts}
+            urlBlogTags={urlKnowledgeTags}
           />
 
           <BackLinks
             links={[
-              { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog List' },
+              { to: '/Knowledge', icon: FaPencilAlt, label: 'Back to Knowledge List' },
               { to: '/', icon: FaHome, label: 'Back to Home' },
             ]}
           />
@@ -94,10 +98,10 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   );
 };
 
-export default BlogPost;
+export default KnowledgePost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dirNamesThatHaveMdx = getDirNamesThatHaveMdx(urlContentsBlog);
+  const dirNamesThatHaveMdx = getDirNamesThatHaveMdx(urlContentsKnowledge);
   const paths = dirNamesThatHaveMdx.map((dir) => ({ params: { slug: dir.replace(/\.mdx?/, '') } }));
 
   return {
@@ -108,12 +112,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
-  const source = getMdxSource(urlContentsBlog, slug);
+  const source = getMdxSource(urlContentsKnowledge, slug);
   const { content, ...article } = await getArticleFromMdxSource(source, slug);
 
-  const contentHtml = await renderToString(content, `${urlContentsBlog}/${params.slug}`);
+  const contentHtml = await renderToString(content, `${urlContentsKnowledge}/${params.slug}`);
 
-  const articles = await getArticles(urlContentsBlog);
+  const articles = await getArticles(urlContentsKnowledge);
   const _relatedArticles = getRelatedArticles(article, articles);
   const relatedArticles = _relatedArticles.map((r) => stripContent(r));
 
