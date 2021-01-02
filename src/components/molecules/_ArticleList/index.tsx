@@ -1,9 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
-import { Flex, Center, Icon, Img, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
+import {
+  Flex,
+  Box,
+  Center,
+  Icon,
+  Img,
+  Text,
+  SimpleGrid,
+  Link as ChakraLink,
+} from '@chakra-ui/react';
 import { FaPen } from 'react-icons/fa';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
+import { getInlineTextTagStyle, TagList } from '../TagList';
 
 type ArticleTipProps = {
   article: Article;
@@ -17,33 +27,12 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
   urlContentsBlog,
 }) => {
   const slug = article.slug;
-  const { title, hero, emoji } = article.frontMatter;
+  const { title, tags, hero, emoji } = article.frontMatter;
 
   return (
     <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
       <ChakraLink overflow="hidden" href={`${urlBlogPosts}/${slug}`}>
         <Flex direction="row" maxH={24} overflow="hidden">
-          {hero ? (
-            <Img
-              src={`${urlContentsBlog}/${slug}/${hero}`}
-              alt={slug}
-              boxSize={8}
-              borderRadius={4}
-              flexShrink={0}
-              mr={4}
-              backgroundColor="gray.100"
-              objectFit="cover"
-            />
-          ) : (
-            <Center boxSize={8} borderRadius={4} flexShrink={0} mr={4} backgroundColor="#71809610">
-              {emoji ? (
-                <Text fontSize="xl">{emoji}</Text>
-              ) : (
-                <Icon as={FaPen} boxSize={4} color="gray.500" />
-              )}
-            </Center>
-          )}
-
           <Flex flexGrow={1} direction="column">
             <Text
               as="strong"
@@ -57,11 +46,44 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
             </Text>
 
             <Flex flexGrow={1} direction="column" justifyContent="flex-end" mt={1}>
+              <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
+                <TagList
+                  tags={tags}
+                  tagItemProps={{
+                    ...getInlineTextTagStyle(),
+                    fontSize: 'xs',
+                    mb: 0,
+                    _hover: { textDecoration: 'inherit' },
+                  }}
+                />
+              </Box>
+
               <Text as="small" fontSize="xs" color="gray.700" opacity="0.8">
                 {getDateFormatted(article)}
               </Text>
             </Flex>
           </Flex>
+
+          {hero ? (
+            <Img
+              src={`${urlContentsBlog}/${slug}/${hero}`}
+              alt={slug}
+              boxSize={20}
+              borderRadius={8}
+              flexShrink={0}
+              ml={6}
+              backgroundColor="gray.100"
+              objectFit="cover"
+            />
+          ) : (
+            <Center boxSize={20} borderRadius={8} flexShrink={0} ml={6} backgroundColor="gray.100">
+              {emoji ? (
+                <Text fontSize="3xl">{emoji}</Text>
+              ) : (
+                <Icon as={FaPen} boxSize={8} color="gray.500" />
+              )}
+            </Center>
+          )}
         </Flex>
       </ChakraLink>
     </Link>
@@ -79,7 +101,7 @@ export const ArticleTipList: React.FC<ArticleTipListProps> = ({
   urlBlogPosts,
   urlContentsBlog,
 }) => (
-  <SimpleGrid columns={[1, 1, 2]} rowGap={[4, 4, 6]} columnGap={[4, 4, 6]}>
+  <SimpleGrid columns={[1, 1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[12, 12, 16]}>
     {articles.map((article) => (
       <ArticleTip
         key={article.slug}
