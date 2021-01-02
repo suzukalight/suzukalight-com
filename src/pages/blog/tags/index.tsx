@@ -8,7 +8,7 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { Link } from '../../../components/atoms/Link';
 
-import { urlContentsBlog, urlBlogTags } from '../../url.json';
+import { urlContentsBlog, urlBlogRoot, urlBlogTags } from '../../url.json';
 import { getArticles } from '../../../utils/article/fs.server';
 import {
   comparatorTagCount,
@@ -59,7 +59,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 
     <BackLinks
       links={[
-        { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog Index' },
+        { to: urlBlogRoot, icon: FaPencilAlt, label: 'Back to Blog Index' },
         { to: '/', icon: FaHome, label: 'Back to Home' },
       ]}
     />

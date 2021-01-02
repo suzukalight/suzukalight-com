@@ -9,7 +9,12 @@ import {
   getDateFormatted,
   stripContent,
 } from '../../../utils/article/entity';
-import { urlContentsKnowledge, urlKnowledgePosts, urlKnowledgeTags } from '../../url.json';
+import {
+  urlContentsKnowledge,
+  urlKnowledgeRoot,
+  urlKnowledgePosts,
+  urlKnowledgeTags,
+} from '../../url.json';
 import {
   getArticles,
   getDirNamesThatHaveMdx,
@@ -88,7 +93,7 @@ export const KnowledgePost: React.FC<KnowledgePostProps> = ({
 
           <BackLinks
             links={[
-              { to: '/Knowledge', icon: FaPencilAlt, label: 'Back to Knowledge List' },
+              { to: urlKnowledgeRoot, icon: FaPencilAlt, label: 'Back to Knowledge List' },
               { to: '/', icon: FaHome, label: 'Back to Home' },
             ]}
           />

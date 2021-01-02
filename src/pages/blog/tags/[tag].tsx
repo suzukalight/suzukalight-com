@@ -8,7 +8,7 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { ArticleExcerptItem } from '../../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
-import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
+import { urlContentsBlog, urlBlogRoot, urlBlogPosts, urlBlogTags } from '../../url.json';
 import { Article } from '../../../utils/article/entity';
 import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
@@ -46,8 +46,8 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 
       <BackLinks
         links={[
-          { to: '/blog/tags', icon: FaPencilAlt, label: 'Back to TagList' },
-          { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog Index' },
+          { to: urlBlogTags, icon: FaPencilAlt, label: 'Back to TagList' },
+          { to: urlBlogRoot, icon: FaPencilAlt, label: 'Back to Blog Index' },
           { to: '/', icon: FaHome, label: 'Back to Home' },
         ]}
       />

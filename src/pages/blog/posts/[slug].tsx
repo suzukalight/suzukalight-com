@@ -9,7 +9,7 @@ import {
   getDateFormatted,
   stripContent,
 } from '../../../utils/article/entity';
-import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
+import { urlContentsBlog, urlBlogRoot, urlBlogPosts, urlBlogTags } from '../../url.json';
 import {
   getArticles,
   getDirNamesThatHaveMdx,
@@ -84,7 +84,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
           <BackLinks
             links={[
-              { to: '/blog', icon: FaPencilAlt, label: 'Back to Blog List' },
+              { to: urlBlogRoot, icon: FaPencilAlt, label: 'Back to Blog List' },
               { to: '/', icon: FaHome, label: 'Back to Home' },
             ]}
           />
