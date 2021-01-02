@@ -5,7 +5,7 @@ import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
-import { ArticleListItem } from '../../../components/molecules/ArticleListItem';
+import { ArticleExcerptItem } from '../../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
 import { urlContentsBlog, urlBlogPosts, urlBlogTags } from '../../url.json';
@@ -30,7 +30,7 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 
       <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
         {articles.map((a) => (
-          <ArticleListItem
+          <ArticleExcerptItem
             key={a.slug}
             article={a}
             contentText={a.excerpt}

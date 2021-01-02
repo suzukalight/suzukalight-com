@@ -5,7 +5,7 @@ import { FaHome } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../components/atoms/HtmlHead';
-import { ArticleListItem } from '../../components/molecules/ArticleListItem';
+import { ArticleExcerptItem } from '../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
 import { urlKnowledgeRoot, urlContentsKnowledge } from '../url.json';
@@ -30,7 +30,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 
     <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
       {data.map((d) => (
-        <ArticleListItem
+        <ArticleExcerptItem
           key={d.article.slug}
           article={d.article}
           contentHtml={d.contentHtml}
