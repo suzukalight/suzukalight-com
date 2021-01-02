@@ -1,5 +1,15 @@
 import React from 'react';
-import { Flex, Center, Box, SimpleGrid, Divider, Text, VStack, Icon } from '@chakra-ui/react';
+import {
+  Flex,
+  Center,
+  Box,
+  SimpleGrid,
+  Divider,
+  Text,
+  VStack,
+  Icon,
+  HStack,
+} from '@chakra-ui/react';
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 
 import { Link } from '../../atoms/Link';
@@ -59,7 +69,14 @@ export const Footer: React.FC = () => (
     <Divider mt={8} mb={2} />
 
     <Center mb={8}>
-      <Text as="small">©︎ suzukalight</Text>
+      <HStack spacing={8}>
+        <Link to="/">
+          <Text as="small" textDecoration="underline">
+            Home
+          </Text>
+        </Link>
+        <Text as="small">©︎ suzukalight</Text>
+      </HStack>
     </Center>
   </Flex>
 );
