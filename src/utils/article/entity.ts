@@ -83,7 +83,8 @@ export const denyInvalidArticleDTO = (dto: Record<string, unknown>) => {
  * @param length 切り出す長さ
  */
 export const createExcerpt = async (content: string, length = 256) => {
-  return stripMarkdown(content.slice(0, length));
+  const excerpt = await stripMarkdown(content.slice(0, length));
+  return excerpt.replace(/\s+/g, '');
 };
 
 /**
