@@ -11,9 +11,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children, ...props
     <Header />
 
     <Box flexGrow={1} w="100%" mt={16} overflowX="hidden">
-      <Box maxW="80em" m="0 auto">
-        {children}
-      </Box>
+      <Box m="0 auto">{children}</Box>
     </Box>
 
     <Footer />
