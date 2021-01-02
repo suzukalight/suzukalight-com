@@ -29,7 +29,7 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
       direction={{ base: 'column-reverse', md: 'row' }}
       wrap="nowrap"
       w={['100%', '100%', '100%', '90%']}
-      h="70vh"
+      h={['70vh', '70vh', '60vh', '50vh']}
       px={8}
       mt={[8, 8, 0]}
       mb={16}
