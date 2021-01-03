@@ -28,24 +28,25 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
       justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
       direction={{ base: 'column-reverse', md: 'row' }}
       wrap="nowrap"
-      w={['100%', '100%', '100%', '90%']}
+      w={['100%', '100%', '100%', '100%']}
       h={['70vh', '70vh', '60vh', '50vh']}
-      px={8}
+      px={0}
       mt={[8, 8, 0]}
       mb={16}
       {...chakraProps}
     >
       <Stack
         spacing={4}
-        w={['100%', '100%', '50%']}
-        align={['center', 'center', 'flex-start', 'flex-start']}
+        w={['100%', '100%', '45%']}
+        pl={[0, 0, 8, 16, 24]}
+        align={['center', 'center', 'flex-start']}
       >
         <Heading
           as="h1"
           size="xl"
           fontWeight="bold"
           color="teal.800"
-          textAlign={['center', 'center', 'left', 'left']}
+          textAlign={['center', 'center', 'left']}
         >
           {title}
         </Heading>
@@ -57,7 +58,7 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
           opacity="0.8"
           fontWeight="normal"
           lineHeight={1.5}
-          textAlign={['center', 'center', 'left', 'left']}
+          textAlign={['center', 'center', 'left']}
         >
           {subtitle}
         </Text>
@@ -79,10 +80,9 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
         src={image}
         alt="hero image"
         fit="cover"
-        w={['100%', '100%', '50%']}
+        w={['100%', '100%', '55%']}
         h={['16em', '16em', '20em']}
-        mb={{ base: 12, md: 0 }}
-        rounded={{ base: '0.5em', md: '1rem' }}
+        mb={[12, 12, 0]}
         shadow="2xl"
       />
     </Flex>
