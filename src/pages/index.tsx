@@ -52,7 +52,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, knowledgeArtic
                 urlContentsBlog={urlContentsBlog}
               />
             ) : (
-              <Text as="small" color="gray.500">
+              <Text as="small" color="gray.600">
                 関連する記事は見つかりませんでした
               </Text>
             )}
@@ -78,7 +78,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, knowledgeArtic
                 urlContentsBlog={urlContentsKnowledge}
               />
             ) : (
-              <Text as="small" color="gray.500">
+              <Text as="small" color="gray.600">
                 関連する記事は見つかりませんでした
               </Text>
             )}

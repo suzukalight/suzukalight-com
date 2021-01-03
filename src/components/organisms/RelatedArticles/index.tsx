@@ -52,7 +52,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
           urlContentsBlog={urlContentsBlog}
         />
       ) : (
-        <Text as="small" color="gray.500">
+        <Text as="small" color="gray.600">
           関連する記事は見つかりませんでした
         </Text>
       )}

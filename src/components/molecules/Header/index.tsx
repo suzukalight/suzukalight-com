@@ -44,7 +44,6 @@ export const Header: React.FC = (props) => {
       mb={4}
       p={4}
       bg="white"
-      color="teal.700"
       zIndex="banner"
       boxShadow={['md', 'md', 'sm', 'sm']}
       visibility={showMenu ? 'visible' : 'hidden'}
@@ -83,7 +82,7 @@ export const Header: React.FC = (props) => {
                 rounded="md"
                 color="white"
                 bg="teal.500"
-                _hover={{ bg: 'teal.600' }}
+                _hover={{ bg: 'teal.800' }}
               >
                 Contact
               </Button>

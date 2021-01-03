@@ -41,7 +41,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
         flexGrow={1}
         mt={2}
         fontSize="sm"
-        color="gray.500"
+        color="gray.600"
         overflowY="hidden"
         whiteSpace="pre-wrap"
       >
