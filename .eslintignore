@@ -10,6 +10,7 @@ node_modules/**
 **/migration/*
 **/lib/*
 **/build/*
+**/public/*
 **/.next/*
 **/_generated/*
 **/coverage/*
