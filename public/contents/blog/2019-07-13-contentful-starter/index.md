@@ -16,7 +16,7 @@ Gatsby でこれを利用することで、コンテンツは SaaS 側に載せ�
 
 早速、Contentful で Gatsby を素振りしてみました。公式のこれにしたがって、Web サイトを 1 つ作ってみます；
 
-https://www.contentful.com/r/knowledgebase/gatsbyjs-and-contentful-in-five-minutes/
+https://www.contentful.com/r/snippetbase/gatsbyjs-and-contentful-in-five-minutes/
 
 # gatsby-contentful-starter
 

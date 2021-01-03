@@ -9,10 +9,10 @@ import { ArticleExcerptItem } from '../../../components/molecules/ArticleExcerpt
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
 import {
-  urlContentsKnowledge,
-  urlKnowledgePosts,
-  urlKnowledgeTags,
-  urlKnowledgeRoot,
+  urlContentsSnippet,
+  urlSnippetPosts,
+  urlSnippetTags,
+  urlSnippetRoot,
 } from '../../url.json';
 import { Article } from '../../../utils/article/entity';
 import { getArticles } from '../../../utils/article/fs.server';
@@ -26,8 +26,8 @@ type TagPageProps = {
 };
 
 export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
-  const title = `#${tag} タグの付いた Knowledge`;
-  const tagUrl = `${urlKnowledgeTags}/${encodeURIComponent(tag)}`;
+  const title = `#${tag} タグの付いた Snippet`;
+  const tagUrl = `${urlSnippetTags}/${encodeURIComponent(tag)}`;
 
   return (
     <ArticleListLayout title={title}>
@@ -39,9 +39,9 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
             key={a.slug}
             article={a}
             contentText={a.excerpt}
-            contentBaseUrl={`${urlContentsKnowledge}/${a.slug}`}
-            tagBaseUrl={urlKnowledgeTags}
-            postBaseUrl={urlKnowledgePosts}
+            contentBaseUrl={`${urlContentsSnippet}/${a.slug}`}
+            tagBaseUrl={urlSnippetTags}
+            postBaseUrl={urlSnippetPosts}
             showContentLink
           />
         ))}
@@ -51,8 +51,8 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 
       <BackLinks
         links={[
-          { to: urlKnowledgeTags, icon: FaPencilAlt, label: 'Back to TagList' },
-          { to: urlKnowledgeRoot, icon: FaPencilAlt, label: 'Back to Knowledge Index' },
+          { to: urlSnippetTags, icon: FaPencilAlt, label: 'Back to TagList' },
+          { to: urlSnippetRoot, icon: FaPencilAlt, label: 'Back to Snippet Index' },
           { to: '/', icon: FaHome, label: 'Back to Home' },
         ]}
       />
@@ -63,7 +63,7 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = await getArticles(urlContentsKnowledge);
+  const articles = await getArticles(urlContentsSnippet);
   const tags = getTagsIncludedInArticles(articles);
   const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
 
@@ -76,7 +76,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const tag = params.tag as string;
 
-  const articles = await getArticles(urlContentsKnowledge);
+  const articles = await getArticles(urlContentsSnippet);
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
   const articlesSorted = sortArticlesByDateDesc(articlesFilteredByTag);
 

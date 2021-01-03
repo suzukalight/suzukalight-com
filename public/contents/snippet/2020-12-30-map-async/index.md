@@ -1,7 +1,7 @@
 ---
 title: Array.map で async/await を使う
 date: '2020-12-30T03:00:00'
-category: Knowledge
+category: Snippet
 tags: ['typescript', 'javascript', 'async-await']
 status: 'published'
 ---

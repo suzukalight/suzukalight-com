@@ -8,7 +8,7 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { Link } from '../../../components/atoms/Link';
 
-import { urlContentsKnowledge, urlKnowledgeTags, urlKnowledgeRoot } from '../../url.json';
+import { urlContentsSnippet, urlSnippetTags, urlSnippetRoot } from '../../url.json';
 import { getArticles } from '../../../utils/article/fs.server';
 import {
   comparatorTagCount,
@@ -25,7 +25,7 @@ type IndexPageProps = {
 
 export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount }) => (
   <ArticleListLayout title="Tags">
-    <HtmlHead title="Tags" url={urlKnowledgeTags} />
+    <HtmlHead title="Tags" url={urlSnippetTags} />
 
     <Heading as="h2" fontSize="2xl" mb={8}>
       by Name
@@ -34,7 +34,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
     <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
       {orderByName.map(({ tag, count }) => (
         <Box key={tag} mr={4}>
-          <Link to={`${urlKnowledgeTags}/${encodeURIComponent(tag)}`}>
+          <Link to={`${urlSnippetTags}/${encodeURIComponent(tag)}`}>
             <Text as="span">{`#${tag} (${count})`}</Text>
           </Link>
         </Box>
@@ -48,7 +48,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
     <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
       {orderByCount.map(({ tag, count }) => (
         <Box key={tag} mr={4}>
-          <Link to={`${urlKnowledgeTags}/${encodeURIComponent(tag)}`}>
+          <Link to={`${urlSnippetTags}/${encodeURIComponent(tag)}`}>
             <Text as="span">{`#${tag} (${count})`}</Text>
           </Link>
         </Box>
@@ -59,7 +59,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 
     <BackLinks
       links={[
-        { to: urlKnowledgeRoot, icon: FaPencilAlt, label: 'Back to Knowledge Index' },
+        { to: urlSnippetRoot, icon: FaPencilAlt, label: 'Back to Snippet Index' },
         { to: '/', icon: FaHome, label: 'Back to Home' },
       ]}
     />
@@ -69,7 +69,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getArticles(urlContentsKnowledge);
+  const articles = await getArticles(urlContentsSnippet);
   const tagAndCountTable = getTableWithTagAndCountIncludedInArticles(articles);
   const orderByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const orderByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);

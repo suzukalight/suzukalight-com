@@ -1,7 +1,7 @@
 ---
 title: 子要素を親要素からはみ出して配置するCSS
 date: '2020-12-30T02:00:00'
-category: Knowledge
+category: Snippet
 tags: ['css']
 status: 'published'
 ---

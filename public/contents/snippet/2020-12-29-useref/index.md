@@ -1,7 +1,7 @@
 ---
 title: useRefの使いどき
 date: '2020-12-29T02:00:00'
-category: Knowledge
+category: Snippet
 tags: ['react', 'react-hooks', 'use-ref']
 status: 'published'
 ---

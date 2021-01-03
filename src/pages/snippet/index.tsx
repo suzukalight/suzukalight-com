@@ -8,12 +8,7 @@ import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { ArticleExcerptItem } from '../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
-import {
-  urlKnowledgeRoot,
-  urlKnowledgeTags,
-  urlKnowledgePosts,
-  urlContentsKnowledge,
-} from '../url.json';
+import { urlSnippetRoot, urlSnippetTags, urlSnippetPosts, urlContentsSnippet } from '../url.json';
 import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
@@ -28,10 +23,10 @@ type IndexPageProps = {
 
 export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
   <ArticleListLayout
-    title="Knowledge"
+    title="Snippet"
     subtitle="主に技術系の単発ネタを書き留めたメモ。同じところで悩む誰かの役に立てれば。"
   >
-    <HtmlHead title="Knowledge" url={urlKnowledgeRoot} />
+    <HtmlHead title="Snippet" url={urlSnippetRoot} />
 
     <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
       {data.map((d) => (
@@ -39,9 +34,9 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
           key={d.article.slug}
           article={d.article}
           contentHtml={d.contentHtml}
-          contentBaseUrl={`${urlContentsKnowledge}/${d.article.slug}`}
-          tagBaseUrl={urlKnowledgeTags}
-          postBaseUrl={urlKnowledgePosts}
+          contentBaseUrl={`${urlContentsSnippet}/${d.article.slug}`}
+          tagBaseUrl={urlSnippetTags}
+          postBaseUrl={urlSnippetPosts}
           showContentLink
           showReadMore
         />
@@ -57,11 +52,11 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getArticles(urlContentsKnowledge);
+  const articles = await getArticles(urlContentsSnippet);
   const data = await Promise.all(
     sortArticlesByDateDesc(articles).map(async ({ content, ...article }) => ({
       article,
-      contentHtml: await renderToString(content, `${urlContentsKnowledge}/${article.slug}`),
+      contentHtml: await renderToString(content, `${urlContentsSnippet}/${article.slug}`),
     })),
   );
 

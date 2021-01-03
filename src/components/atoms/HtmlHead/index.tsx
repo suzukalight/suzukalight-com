@@ -14,7 +14,7 @@ type HtmlHeadProps = SeoProps;
 export const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'website';
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com/';
 export const defaultDescription =
-  'A website created by Masahiko Kubara(suzukalight). Web engineering knowledges, Horse Racing and Gaming blog';
+  'A website created by Masahiko Kubara(suzukalight). Web engineering snippets, Horse Racing and Gaming blog';
 
 export const HtmlHead: React.FC<HtmlHeadProps> = ({ title, description, url, image }) => {
   const seoProps: NextSeoProps = {

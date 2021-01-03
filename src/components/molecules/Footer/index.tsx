@@ -24,7 +24,7 @@ export const Footer: React.FC = () => (
           </Text>
           <Link to="/blog">blog</Link>
           {/* <Link to="/blog">textbook</Link> */}
-          <Link to="/knowledge">knowledge</Link>
+          <Link to="/snippet">snippet</Link>
         </VStack>
         {/* <VStack>
           <Text size="sm" fontWeight="bold">

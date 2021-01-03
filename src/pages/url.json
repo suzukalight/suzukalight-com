@@ -2,10 +2,10 @@
   "urlBlogRoot": "/blog",
   "urlBlogPosts": "/blog/posts",
   "urlBlogTags": "/blog/tags",
-  "urlKnowledgeRoot": "/knowledge",
-  "urlKnowledgePosts": "/knowledge/posts",
-  "urlKnowledgeTags": "/knowledge/tags",
+  "urlSnippetRoot": "/snippet",
+  "urlSnippetPosts": "/snippet/posts",
+  "urlSnippetTags": "/snippet/tags",
   "urlContentsBlog": "/contents/blog",
-  "urlContentsKnowledge": "/contents/knowledge",
+  "urlContentsSnippet": "/contents/snippet",
   "urlContentsAbout": "/contents/about"
 }

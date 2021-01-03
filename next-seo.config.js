@@ -1,7 +1,7 @@
 export default {
   title: 'suzukalight.com',
   description:
-    'A website created by Masahiko Kubara(suzukalight). Web engineering knowledges, Horse Racing and Gaming blog',
+    'A website created by Masahiko Kubara(suzukalight). Web engineering snippets, Horse Racing and Gaming blog',
   openGraph: {
     type: 'website',
     locale: 'ja_JP',

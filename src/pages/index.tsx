@@ -12,9 +12,9 @@ import {
   urlBlogRoot,
   urlContentsBlog,
   urlBlogPosts,
-  urlKnowledgeRoot,
-  urlKnowledgePosts,
-  urlContentsKnowledge,
+  urlSnippetRoot,
+  urlSnippetPosts,
+  urlContentsSnippet,
 } from './url.json';
 import { Article } from '../utils/article/entity';
 import { getArticles } from '../utils/article/fs.server';
@@ -23,10 +23,10 @@ import { Link } from '../components/atoms/Link';
 
 type HomePageProps = {
   blogArticles: Article[];
-  knowledgeArticles: Article[];
+  snippetArticles: Article[];
 };
 
-export const HomePage: React.FC<HomePageProps> = ({ blogArticles, knowledgeArticles }) => {
+export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticles }) => {
   return (
     <DefaultLayout>
       <HtmlHead />
@@ -68,14 +68,14 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, knowledgeArtic
       <Box minH="16em" px={[0, 8, 16, 24]}>
         <CenterMaxW maxWidth="60em">
           <Heading as="h1" fontSize="3xl" mb={8}>
-            Knowledge
+            Snippet
           </Heading>
           <Box mb={6}>
-            {knowledgeArticles.length > 0 ? (
+            {snippetArticles.length > 0 ? (
               <ArticleTipList
-                articles={knowledgeArticles}
-                urlBlogPosts={urlKnowledgePosts}
-                urlContentsBlog={urlContentsKnowledge}
+                articles={snippetArticles}
+                urlBlogPosts={urlSnippetPosts}
+                urlContentsBlog={urlContentsSnippet}
               />
             ) : (
               <Text as="small" color="gray.600">
@@ -84,8 +84,8 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, knowledgeArtic
             )}
           </Box>
           <Box>
-            <Link to={urlKnowledgeRoot}>
-              <Text textDecoration="underline">すべてのKnowledgeを見る→</Text>
+            <Link to={urlSnippetRoot}>
+              <Text textDecoration="underline">すべてのSnippetを見る→</Text>
             </Link>
           </Box>
         </CenterMaxW>
@@ -97,8 +97,8 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, knowledgeArtic
 export default HomePage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const knowledgeArticles = await getArticles(urlContentsKnowledge);
-  const knowledgeArticlesSorted = sortArticlesByDateDesc(knowledgeArticles).slice(0, 6);
+  const snippetArticles = await getArticles(urlContentsSnippet);
+  const snippetArticlesSorted = sortArticlesByDateDesc(snippetArticles).slice(0, 6);
 
   const blogArticles = await getArticles(urlContentsBlog);
   const blogArticlesSorted = sortArticlesByDateDesc(blogArticles).slice(0, 6);
@@ -106,7 +106,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       blogArticles: blogArticlesSorted,
-      knowledgeArticles: knowledgeArticlesSorted,
+      snippetArticles: snippetArticlesSorted,
     } as HomePageProps,
   };
 };
