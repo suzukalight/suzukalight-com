@@ -19,13 +19,17 @@ import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
+import { renderToString } from '../../../utils/article/markdown.server';
 
 type TagPageProps = {
   tag: string;
-  articles: Article[];
+  data: {
+    article: Article;
+    contentHtml: string;
+  }[];
 };
 
-export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
+export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
   const title = `#${tag} タグの付いた Snippet`;
   const tagUrl = `${urlSnippetTags}/${encodeURIComponent(tag)}`;
 
@@ -34,15 +38,16 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
       <HtmlHead title={title} url={tagUrl} />
 
       <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
-        {articles.map((a) => (
+        {data.map((d) => (
           <ArticleExcerptItem
-            key={a.slug}
-            article={a}
-            contentText={a.excerpt}
-            contentBaseUrl={`${urlContentsSnippet}/${a.slug}`}
+            key={d.article.slug}
+            article={d.article}
+            contentHtml={d.contentHtml}
+            contentBaseUrl={`${urlContentsSnippet}/${d.article.slug}`}
             tagBaseUrl={urlSnippetTags}
             postBaseUrl={urlSnippetPosts}
             showContentLink
+            showReadMore
           />
         ))}
       </VStack>
@@ -78,7 +83,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const articles = await getArticles(urlContentsSnippet);
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
-  const articlesSorted = sortArticlesByDateDesc(articlesFilteredByTag);
+  const data = await Promise.all(
+    sortArticlesByDateDesc(articlesFilteredByTag).map(async ({ content, ...article }) => ({
+      article,
+      contentHtml: await renderToString(content, `${urlContentsSnippet}/${article.slug}`),
+    })),
+  );
 
-  return { props: { tag, articles: articlesSorted } as TagPageProps };
+  return { props: { tag, data } as TagPageProps };
 };
