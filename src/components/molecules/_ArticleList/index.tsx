@@ -1,16 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  Flex,
-  Box,
-  Center,
-  Icon,
-  Img,
-  Text,
-  SimpleGrid,
-  Link as ChakraLink,
-} from '@chakra-ui/react';
-import { FaPen } from 'react-icons/fa';
+import { Flex, Box, Center, Img, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { getInlineTextTagStyle, TagList } from '../TagList';
@@ -77,11 +67,7 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
             />
           ) : (
             <Center boxSize={20} borderRadius={8} flexShrink={0} ml={6} backgroundColor="gray.100">
-              {emoji ? (
-                <Text fontSize="3xl">{emoji}</Text>
-              ) : (
-                <Icon as={FaPen} boxSize={8} color="gray.500" />
-              )}
+              <Text fontSize="3xl">{emoji ?? '✏️'}</Text>
             </Center>
           )}
         </Flex>
