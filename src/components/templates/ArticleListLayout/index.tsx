@@ -22,7 +22,7 @@ export const ArticleListLayout: React.FC<ArticleListLayoutProps> = ({
           </Heading>
 
           {subtitle && (
-            <Text as="p" fontSize="md" color="gray.500" mb={12}>
+            <Text as="p" fontSize="sm" color="gray.600" mb={12}>
               {subtitle}
             </Text>
           )}
