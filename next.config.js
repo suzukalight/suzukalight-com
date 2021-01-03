@@ -1,3 +1,5 @@
+const RemoveServiceWorkerPlugin = require('webpack-remove-serviceworker-plugin');
+
 module.exports = {
   async redirects() {
     return [
@@ -17,5 +19,9 @@ module.exports = {
         permanent: true,
       },
     ];
+  },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.plugins.push(new RemoveServiceWorkerPlugin());
+    return config;
   },
 };
