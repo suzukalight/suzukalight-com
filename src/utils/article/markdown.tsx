@@ -6,6 +6,8 @@ import { TwitterTweetEmbed } from 'react-twitter-embed';
 import remark from 'remark';
 import strip from 'strip-markdown';
 
+import { Link } from '../../components/atoms/Link';
+
 export const MarkdownImg = (srcBaseUrl: string) => (props) => (
   <span
     style={{
@@ -28,9 +30,18 @@ export const TwitterEmbed = (props) => (
   <TwitterTweetEmbed tweetId={props.tweetId} options={props.options || { conversation: 'none' }} />
 );
 
+export const LinkWithTargetBlank = (props) => {
+  const { href, ...rest } = props;
+  if (href.match('http'))
+    return <a href={href} target="_blank" rel="noopener noreferrer" {...rest} />;
+
+  return <Link to={href} {...rest} />;
+};
+
 export const getDefaultComponents = (imgRootDir: string) => ({
   img: MarkdownImg(imgRootDir),
   TwitterEmbed,
+  a: LinkWithTargetBlank,
 });
 
 export type MdOptions = {
