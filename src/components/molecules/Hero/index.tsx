@@ -29,10 +29,9 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
       direction={{ base: 'column-reverse', md: 'row' }}
       wrap="nowrap"
       w={['100%', '100%', '100%', '100%']}
-      h={['70vh', '70vh', '60vh', '50vh']}
+      minH={['70vh', '70vh', '60vh']}
       px={0}
-      mt={[8, 8, 0]}
-      mb={16}
+      mb={[8, 8, 16]}
       {...chakraProps}
     >
       <Stack
@@ -81,7 +80,7 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
         alt="hero image"
         fit="cover"
         w={['100%', '100%', '55%']}
-        h={['16em', '16em', '20em']}
+        h={['12em', '16em', '20em']}
         mb={[12, 12, 0]}
         shadow="2xl"
       />

@@ -74,7 +74,7 @@ export const ArticleTipList: React.FC<ArticleTipListProps> = ({
   urlBlogPosts,
   urlContentsBlog,
 }) => (
-  <SimpleGrid columns={[1, 1, 2]} rowGap={[4, 4, 6]} columnGap={[4, 4, 6]}>
+  <SimpleGrid columns={[1, 1, 2]} rowGap={6} columnGap={[8, 12, 16]}>
     {articles.map((article) => (
       <ArticleTip
         key={article.slug}
