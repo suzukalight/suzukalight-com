@@ -68,7 +68,7 @@ export const Footer: React.FC = () => (
             Home
           </Text>
         </Link>
-        <Text as="small" mt={1}>
+        <Text as="small" pt={1}>
           ©︎ suzukalight
         </Text>
       </HStack>
