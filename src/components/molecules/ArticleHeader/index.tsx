@@ -25,7 +25,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article, urlConten
           {title}
         </Heading>
 
-        <HStack>
+        <HStack wrap="wrap">
           <TagList tags={tags} tagBaseUrl={urlTags} tagItemProps={getInlineTextTagStyle()} />
         </HStack>
 
