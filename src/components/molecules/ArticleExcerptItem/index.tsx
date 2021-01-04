@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from 'react';
-import { Box, Heading, Text, Stack, Collapse } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box, Heading, Text, Stack, Collapse, VStack } from '@chakra-ui/react';
 
 import { ArticleDetail } from '../ArticleDetail';
 import { ReadMoreButton } from '../../atoms/ReadMoreButton';
@@ -8,39 +8,13 @@ import { hydrate } from '../../../utils/article/markdown';
 import { Link } from '../../atoms/Link';
 import { TagList } from '../TagList';
 
-type BodyProps = {
-  title: string;
-  article: Article;
-  contentHtml: string;
-  show: boolean;
-  content: ReactNode;
-};
-
-const Body: React.FC<BodyProps> = ({ title, article, contentHtml, show, content }) => (
-  <Box>
-    <Heading as="h1" fontSize="xl" lineHeight={1.5}>
-      {title}
-    </Heading>
-
-    <Text fontSize="sm" color="gray.600" my={1}>
-      {getDateFormatted(article)}
-    </Text>
-
-    <Collapse startingHeight={contentHtml ? '11em' : '6.5em'} in={show}>
-      <Box py={[4, 4, 2]}>
-        <ArticleDetail contentHtml={content} />
-      </Box>
-    </Collapse>
-  </Box>
-);
-
 type ArticleExcerptItemProps = {
   article: Article;
   contentBaseUrl: string;
+  tagBaseUrl: string;
+  postBaseUrl: string;
   contentHtml?: string;
   contentText?: string;
-  tagBaseUrl?: string;
-  postBaseUrl?: string;
   showReadMore?: boolean;
   showContentLink?: boolean;
 };
@@ -48,10 +22,10 @@ type ArticleExcerptItemProps = {
 export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
   article,
   contentBaseUrl,
-  contentHtml,
-  contentText,
   tagBaseUrl,
   postBaseUrl,
+  contentHtml,
+  contentText,
   showReadMore,
   showContentLink,
 }) => {
@@ -75,29 +49,42 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
         <TagList tags={tags} tagBaseUrl={tagBaseUrl} />
       </Stack>
 
-      <Box flexGrow={1}>
-        {showContentLink ? (
+      <VStack flexGrow={1} spacing={4} align="left">
+        <Box>
           <Link to={`${postBaseUrl}/${encodeURIComponent(article.slug)}`}>
-            <Body
-              title={title}
-              article={article}
-              contentHtml={contentHtml}
-              show={show}
-              content={content}
-            />
+            <Heading
+              as="h1"
+              fontSize="xl"
+              lineHeight={1.5}
+              textDecoration="underline"
+              _hover={{ color: 'teal.500' }}
+            >
+              {title}
+            </Heading>
           </Link>
-        ) : (
-          <Body
-            title={title}
-            article={article}
-            contentHtml={contentHtml}
-            show={show}
-            content={content}
-          />
-        )}
+
+          <Text fontSize="sm" color="gray.600" my={1}>
+            {getDateFormatted(article)}
+          </Text>
+
+          <Collapse startingHeight={contentHtml ? '12em' : '6.5em'} in={show}>
+            <Box py={[4, 4, 2]}>
+              <ArticleDetail contentHtml={content} />
+            </Box>
+          </Collapse>
+        </Box>
 
         {showReadMore && <ReadMoreButton show={show} onToggle={handleToggle} />}
-      </Box>
+        {showContentLink && (
+          <Box>
+            <Link to={`${postBaseUrl}/${encodeURIComponent(article.slug)}`}>
+              <Text fontSize="md" textDecoration="underline" _hover={{ color: 'teal.500' }}>
+                全文を読む→
+              </Text>
+            </Link>
+          </Box>
+        )}
+      </VStack>
     </Stack>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button, Box, ButtonProps } from '@chakra-ui/react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 type ReadMoreButtonProps = {
@@ -7,28 +7,34 @@ type ReadMoreButtonProps = {
   onToggle: () => void;
 };
 
+const defaultButtonStyle: ButtonProps = {
+  size: 'sm',
+  mt: 2,
+  colorScheme: 'black',
+  variant: 'link',
+};
+
 export const ReadMoreButton: React.FC<ReadMoreButtonProps> = ({ show, onToggle }) => {
-  return show ? (
-    <Button
-      size="sm"
-      mt={2}
-      leftIcon={<FaChevronUp />}
-      colorScheme="black"
-      variant="link"
-      onClick={onToggle}
+  return (
+    <Box
+      position="relative"
+      zIndex={1}
+      h={12}
+      top={-8}
+      mb={-8}
+      bgGradient="linear(to-b, transparent, white 25%, white)"
     >
-      閉じる
-    </Button>
-  ) : (
-    <Button
-      size="sm"
-      mt={2}
-      leftIcon={<FaChevronDown />}
-      colorScheme="black"
-      variant="link"
-      onClick={onToggle}
-    >
-      全文を表示
-    </Button>
+      <Box position="relative" top={4}>
+        {show ? (
+          <Button {...defaultButtonStyle} leftIcon={<FaChevronUp />} onClick={onToggle}>
+            閉じる
+          </Button>
+        ) : (
+          <Button {...defaultButtonStyle} leftIcon={<FaChevronDown />} onClick={onToggle}>
+            全文を表示
+          </Button>
+        )}
+      </Box>
+    </Box>
   );
 };

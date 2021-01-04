@@ -29,10 +29,10 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
         <ArticleExcerptItem
           key={a.slug}
           article={a}
-          contentText={a.excerpt}
           contentBaseUrl={`${urlContentsBlog}/${a.slug}`}
           tagBaseUrl={urlBlogTags}
           postBaseUrl={urlBlogPosts}
+          contentText={a.excerpt}
           showContentLink
         />
       ))}
