@@ -78,17 +78,6 @@ export const Header: React.FC = (props) => {
             <MenuItems to="/about" isLast>
               About
             </MenuItems>
-            {/* <MenuItems to="/contact" isLast>
-              <Button
-                size="sm"
-                rounded="md"
-                color="white"
-                bg="teal.500"
-                _hover={{ bg: 'teal.800' }}
-              >
-                Contact
-              </Button>
-            </MenuItems> */}
           </Flex>
         </Box>
       </Flex>
