@@ -24,7 +24,7 @@ export const SocialLinksLeftFixed: React.FC<SocialLinksLeftFixedProps> = ({ titl
       top="7em"
       visibility={['hidden', 'hidden', 'hidden', 'visible']}
     >
-      <SlideFade in={showSocialLinks} offsetY="1em">
+      <SlideFade in={showSocialLinks} offsetX="-1em" offsetY={0}>
         <VStack spacing={4} p={4} backgroundColor="gray.50" borderRadius={8}>
           <SocialLinks urlBlog={urlBlog} title={title} />
         </VStack>

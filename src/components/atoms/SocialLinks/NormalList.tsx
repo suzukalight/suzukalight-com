@@ -10,7 +10,7 @@ import {
 } from 'react-share';
 
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
-import { FaFacebookF, FaGetPocket, FaLine, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaGetPocket, FaLine, FaTwitter } from 'react-icons/fa';
 
 type SocialLinksProps = {
   urlBlog: string;
@@ -26,7 +26,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ urlBlog, title }) => {
         <Icon as={FaTwitter} boxSize={6} fill="gray.500" />
       </TwitterShareButton>
       <FacebookShareButton url={url}>
-        <Icon as={FaFacebookF} boxSize={6} fill="gray.500" />
+        <Icon as={FaFacebook} boxSize={6} fill="gray.500" />
       </FacebookShareButton>
       <LineShareButton title={title} url={url}>
         <Icon as={FaLine} boxSize={6} fill="gray.500" />
@@ -35,7 +35,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ urlBlog, title }) => {
         <Icon as={FaGetPocket} boxSize={6} fill="gray.500" />
       </PocketShareButton>
       <HatenaShareButton title={title} url={url}>
-        <HatenaIcon size={32} round bgStyle={{ fill: 'transparent' }} iconFillColor="#718096" />
+        <HatenaIcon size={24} round bgStyle={{ fill: '#718096' }} iconFillColor="white" />
       </HatenaShareButton>
     </>
   );
