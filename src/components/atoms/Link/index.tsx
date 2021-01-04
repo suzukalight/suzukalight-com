@@ -9,16 +9,10 @@ type LinkProps = {
   nextProps?: NextLinkProps;
 };
 
-export const Link: React.FC<LinkProps> = ({ children, to, as, chakraProps, nextProps }) => {
-  const targetOption = to.match('http')
-    ? ({ target: '_blank', rel: 'noopener noreferrer' } as ChakraLinkProps)
-    : null;
-
-  return (
-    <NextLink href={to} as={as} {...nextProps} passHref>
-      <ChakraLink {...targetOption} {...chakraProps}>
-        {children}
-      </ChakraLink>
-    </NextLink>
-  );
-};
+export const Link: React.FC<LinkProps> = ({ children, to, as, chakraProps, nextProps }) => (
+  <NextLink href={to} as={as} {...nextProps} passHref>
+    <ChakraLink {...chakraProps} isExternal={to.startsWith('http')}>
+      {children}
+    </ChakraLink>
+  </NextLink>
+);

@@ -11,7 +11,7 @@ import hydrate from 'next-mdx-remote/hydrate';
 
 export const LinkWithTargetBlank = (props) => {
   const { href, ...rest } = props;
-  if (href.match('http'))
+  if (href.startsWith('http'))
     return <a href={href} target="_blank" rel="noopener noreferrer" {...rest} />;
 
   return <Link to={href} {...rest} />;
@@ -27,6 +27,8 @@ hydrate(content, {
 
 - href が外部リンクの場合は、a タグで展開し、`target="_blank"` や `rel="noopener noreferrer"` を付与する
 - href が内部リンクの場合は、`next/link` で展開する
+
+Chakra UI の Link が使える場合は、target, ref のかわりに `isExternal` を付与するだけで OK。
 
 ### references
 
