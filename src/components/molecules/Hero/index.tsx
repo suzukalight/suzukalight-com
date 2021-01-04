@@ -63,14 +63,32 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
         </Text>
 
         <HStack spacing={3}>
-          <Link to="https://twitter.com/suzukalight" chakraProps={{ isExternal: true }}>
-            <Icon as={FaTwitter} boxSize={6} color="teal.800" _hover={{ color: 'teal.500' }} />
+          <Link to="https://twitter.com/suzukalight">
+            <Icon
+              as={FaTwitter}
+              boxSize={6}
+              color="teal.800"
+              _hover={{ color: 'teal.500' }}
+              xlinkTitle="Twitter"
+            />
           </Link>
           <Link to="https://www.facebook.com/masahiko.kubara/">
-            <Icon as={FaFacebookF} boxSize={6} color="teal.800" _hover={{ color: 'teal.500' }} />
+            <Icon
+              as={FaFacebookF}
+              boxSize={6}
+              color="teal.800"
+              _hover={{ color: 'teal.500' }}
+              xlinkTitle="Facebook"
+            />
           </Link>
           <Link to="https://github.com/suzukalight">
-            <Icon as={FaGithub} boxSize={6} color="teal.800" _hover={{ color: 'teal.500' }} />
+            <Icon
+              as={FaGithub}
+              boxSize={6}
+              color="teal.800"
+              _hover={{ color: 'teal.500' }}
+              xlinkTitle="GitHub"
+            />
           </Link>
         </HStack>
       </Stack>

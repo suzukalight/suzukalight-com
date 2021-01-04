@@ -23,16 +23,9 @@ export const Footer: React.FC = () => (
             Writings
           </Text>
           <Link to="/blog">blog</Link>
-          {/* <Link to="/blog">textbook</Link> */}
           <Link to="/snippet">snippet</Link>
         </VStack>
-        {/* <VStack>
-          <Text size="sm" fontWeight="bold">
-            Outputs
-          </Text>
-          <Link to="/outputs">products</Link>
-          <Link to="/outputs">examples</Link>
-        </VStack> */}
+
         <VStack>
           <Link to="/about">
             <Text size="sm" fontWeight="bold">
@@ -43,16 +36,27 @@ export const Footer: React.FC = () => (
           <Link to="/about">resume</Link>
           <Link to="/about">awards</Link>
         </VStack>
+
         <VStack>
           <Text size="sm" fontWeight="bold">
             Contact
           </Text>
-          <HStack spacing={2}>
-            <Link to="https://twitter.com/suzukalight" chakraProps={{ isExternal: true }}>
-              <Icon as={FaTwitter} boxSize={4} _hover={{ color: 'teal.500' }} />
+          <HStack spacing={4}>
+            <Link to="https://twitter.com/intent/tweet?screen_name=suzukalight">
+              <Icon
+                as={FaTwitter}
+                boxSize={6}
+                _hover={{ color: 'teal.500' }}
+                xlinkTitle="create a mention for me on twitter"
+              />
             </Link>
-            <Link to="https://github.com/suzukalight">
-              <Icon as={FaGithub} boxSize={4} _hover={{ color: 'teal.500' }} />
+            <Link to="https://github.com/suzukalight/suzukalight/issues">
+              <Icon
+                as={FaGithub}
+                boxSize={6}
+                _hover={{ color: 'teal.500' }}
+                xlinkTitle="create an issue to contact me"
+              />
             </Link>
           </HStack>
         </VStack>
