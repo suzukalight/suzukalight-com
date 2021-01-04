@@ -15,6 +15,6 @@ export default {
   },
   twitter: {
     handle: '@suzukalight',
-    cardType: 'summary_large_image',
+    cardType: 'summary',
   },
 };
