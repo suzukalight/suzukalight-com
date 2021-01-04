@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { VStack, StackDivider } from '@chakra-ui/react';
+import { VStack, StackDivider, HStack } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { Article, getArticleFromMdxSource, stripContent } from '../../../utils/article/entity';
@@ -21,6 +21,7 @@ import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { RelatedArticles } from '../../../components/organisms/RelatedArticles';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
+import { SocialLinks, SocialLinksLeftFixed } from '../../../components/atoms/SocialLinks';
 
 type BlogPostProps = {
   article: Article;
@@ -49,11 +50,16 @@ export const BlogPost: React.FC<BlogPostProps> = ({
     <DefaultLayout>
       <HtmlHead title={title} description={article.excerpt} url={blogUrl} {...ogImage} />
 
+      <SocialLinksLeftFixed urlBlog={blogUrl} title={title} />
+
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
           <VStack spacing={8} align="left" w="100%">
             <ArticleHeader article={article} urlContent={urlContentsBlog} urlTags={urlBlogTags} />
             <ArticleDetail contentHtml={content} />
+            <HStack spacing={4}>
+              <SocialLinks urlBlog={blogUrl} title={title} />
+            </HStack>
           </VStack>
 
           <RelatedArticles
