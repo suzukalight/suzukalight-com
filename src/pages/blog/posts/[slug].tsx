@@ -1,14 +1,9 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Heading, Box, Text, VStack, StackDivider } from '@chakra-ui/react';
+import { VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-import {
-  Article,
-  getArticleFromMdxSource,
-  getDateFormatted,
-  stripContent,
-} from '../../../utils/article/entity';
+import { Article, getArticleFromMdxSource, stripContent } from '../../../utils/article/entity';
 import { urlContentsBlog, urlBlogRoot, urlBlogPosts, urlBlogTags } from '../../url.json';
 import {
   getArticles,
@@ -18,14 +13,14 @@ import {
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
-import DefaultLayout from '../../../components/templates/DefaultLayout';
+
+import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { RelatedArticles } from '../../../components/organisms/RelatedArticles';
-import { getInlineTextTagStyle, TagList } from '../../../components/molecules/TagList';
-import { CoverImage } from '../../../components/atoms/CoverImage';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
+import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 
 type BlogPostProps = {
   article: Article;
@@ -43,7 +38,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   nextArticle,
 }) => {
   const { slug } = article;
-  const { title, tags, hero, emoji } = article.frontMatter;
+  const { title, tags, hero } = article.frontMatter;
   const blogUrl = `${urlBlogPosts}/${slug}`;
   const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
@@ -56,21 +51,10 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
-          <Box w="100%">
-            <CoverImage hero={hero} emoji={emoji} contentBaseUrl={contentBaseUrl} />
-
-            <Heading as="h1" fontSize={['2xl', '2xl', '3xl']} mt={8} mb={2}>
-              {title}
-            </Heading>
-
-            <TagList tags={tags} tagBaseUrl={urlBlogTags} tagItemProps={getInlineTextTagStyle()} />
-
-            <Text fontSize="sm" color="gray.600" mt={1} mb={8}>
-              {getDateFormatted(article)}
-            </Text>
-
+          <VStack spacing={8} align="left" w="100%">
+            <ArticleHeader article={article} urlContent={urlContentsBlog} urlTags={urlBlogTags} />
             <ArticleDetail contentHtml={content} />
-          </Box>
+          </VStack>
 
           <RelatedArticles
             tags={tags}
