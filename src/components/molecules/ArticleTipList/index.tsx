@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Flex, Center, Img, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
+import { Box, Flex, Center, Img, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 
@@ -22,36 +22,35 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
     <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
       <ChakraLink overflow="hidden" href={`${urlBlogPosts}/${slug}`}>
         <Flex direction="row" maxH={24} overflow="hidden">
-          {hero ? (
-            <Img
-              src={`${urlContentsBlog}/${slug}/${hero}`}
-              alt={slug}
-              boxSize={8}
-              borderRadius={4}
-              flexShrink={0}
-              mr={4}
-              backgroundColor="gray.100"
-              objectFit="cover"
-            />
-          ) : (
-            <Center boxSize={8} borderRadius={4} flexShrink={0} mr={4}>
-              <Text fontSize="xl">{emoji ?? '📝'}</Text>
-            </Center>
-          )}
+          <Box flexShrink={0} mr={2}>
+            {hero ? (
+              <Img
+                src={`${urlContentsBlog}/${slug}/${hero}`}
+                alt={slug}
+                boxSize={8}
+                borderRadius={4}
+                objectFit="cover"
+              />
+            ) : (
+              <Center boxSize={8} borderRadius={4}>
+                <Text fontSize="xl">{emoji ?? '📝'}</Text>
+              </Center>
+            )}
+          </Box>
 
           <Flex flexGrow={1} direction="column">
             <Text
               as="strong"
+              overflowY="hidden"
+              maxH="2.5em"
               fontSize="md"
               lineHeight={1.25}
-              maxH="2.5em"
-              overflowY="hidden"
               wordBreak="break-all"
             >
               {title}
             </Text>
 
-            <Flex flexGrow={1} direction="column" justifyContent="flex-end" mt={1}>
+            <Flex flexGrow={1} direction="column" justifyContent="flex-end">
               <Text as="small" fontSize="xs" color="gray.700" opacity="0.8">
                 {getDateFormatted(article)}
               </Text>
@@ -74,7 +73,7 @@ export const ArticleTipList: React.FC<ArticleTipListProps> = ({
   urlBlogPosts,
   urlContentsBlog,
 }) => (
-  <SimpleGrid columns={[1, 1, 2]} rowGap={6} columnGap={[8, 12, 16]}>
+  <SimpleGrid columns={[1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[8, 12, 16]}>
     {articles.map((article) => (
       <ArticleTip
         key={article.slug}

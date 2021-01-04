@@ -26,8 +26,8 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
   urlBlogTags,
 }) => (
   <VStack as="aside" spacing={16} align="stretch">
-    <Box>
-      <Heading as="h1" fontSize="xl" mb={8}>
+    <VStack spacing={4} align="left">
+      <Heading as="h1" fontSize="xl">
         Tags
       </Heading>
 
@@ -38,10 +38,10 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
           tagItemProps={{ ...getDefaultTagStyle(), fontSize: 'md', mr: 2 }}
         />
       </Box>
-    </Box>
+    </VStack>
 
-    <Box>
-      <Heading as="h1" fontSize="xl" mb={8}>
+    <VStack spacing={4} align="left">
+      <Heading as="h1" fontSize="xl">
         Related Articles
       </Heading>
 
@@ -56,10 +56,10 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
           関連する記事は見つかりませんでした
         </Text>
       )}
-    </Box>
+    </VStack>
 
-    <Box>
-      <Heading as="h1" fontSize="xl" mb={8}>
+    <VStack spacing={4} align="left">
+      <Heading as="h1" fontSize="xl">
         Prev/Next Article
       </Heading>
 
@@ -68,6 +68,6 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
         urlBlogPosts={urlBlogPosts}
         urlContentsBlog={urlContentsBlog}
       />
-    </Box>
+    </VStack>
   </VStack>
 );

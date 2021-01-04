@@ -1,8 +1,8 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Heading, Text, VStack } from '@chakra-ui/react';
 
-import DefaultLayout from '../components/templates/DefaultLayout';
+import { DefaultLayout } from '../components/templates/DefaultLayout';
 import { HtmlHead } from '../components/atoms/HtmlHead';
 import { Hero } from '../components/molecules/Hero';
 import { CenterMaxW } from '../components/atoms/CenterMaxW';
@@ -39,55 +39,63 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
 
       <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]}>
         <CenterMaxW maxWidth="60em">
-          <Heading as="h1" fontSize="3xl" mb={8}>
-            <Text as="span" mr={4}>
-              Blog
-            </Text>
-          </Heading>
-          <Box mb={6}>
-            {blogArticles.length > 0 ? (
-              <ArticleTipList
-                articles={blogArticles}
-                urlBlogPosts={urlBlogPosts}
-                urlContentsBlog={urlContentsBlog}
-              />
-            ) : (
-              <Text as="small" color="gray.600">
-                関連する記事は見つかりませんでした
+          <VStack spacing={8} align="left">
+            <Heading as="h1" fontSize="3xl">
+              <Text as="span" mr={4}>
+                Blog
               </Text>
-            )}
-          </Box>
-          <Box>
-            <Link to={urlBlogRoot}>
-              <Text textDecoration="underline">すべてのBlogを見る→</Text>
-            </Link>
-          </Box>
+            </Heading>
+
+            <Box>
+              {blogArticles.length > 0 ? (
+                <ArticleTipList
+                  articles={blogArticles}
+                  urlBlogPosts={urlBlogPosts}
+                  urlContentsBlog={urlContentsBlog}
+                />
+              ) : (
+                <Text as="small" color="gray.600">
+                  関連する記事は見つかりませんでした
+                </Text>
+              )}
+            </Box>
+
+            <Box>
+              <Link to={urlBlogRoot}>
+                <Text textDecoration="underline">すべてのBlogを見る→</Text>
+              </Link>
+            </Box>
+          </VStack>
         </CenterMaxW>
       </Box>
 
       <Box minH="16em" px={[0, 8, 16, 24]}>
         <CenterMaxW maxWidth="60em">
-          <Heading as="h1" fontSize="3xl" mb={8}>
-            Snippet
-          </Heading>
-          <Box mb={6}>
-            {snippetArticles.length > 0 ? (
-              <ArticleTipList
-                articles={snippetArticles}
-                urlBlogPosts={urlSnippetPosts}
-                urlContentsBlog={urlContentsSnippet}
-              />
-            ) : (
-              <Text as="small" color="gray.600">
-                関連する記事は見つかりませんでした
-              </Text>
-            )}
-          </Box>
-          <Box>
-            <Link to={urlSnippetRoot}>
-              <Text textDecoration="underline">すべてのSnippetを見る→</Text>
-            </Link>
-          </Box>
+          <VStack spacing={8} align="left">
+            <Heading as="h1" fontSize="3xl">
+              Snippet
+            </Heading>
+
+            <Box>
+              {snippetArticles.length > 0 ? (
+                <ArticleTipList
+                  articles={snippetArticles}
+                  urlBlogPosts={urlSnippetPosts}
+                  urlContentsBlog={urlContentsSnippet}
+                />
+              ) : (
+                <Text as="small" color="gray.600">
+                  関連する記事は見つかりませんでした
+                </Text>
+              )}
+            </Box>
+
+            <Box>
+              <Link to={urlSnippetRoot}>
+                <Text textDecoration="underline">すべてのSnippetを見る→</Text>
+              </Link>
+            </Box>
+          </VStack>
         </CenterMaxW>
       </Box>
     </DefaultLayout>

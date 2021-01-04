@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-  Flex,
   Center,
   Box,
   SimpleGrid,
-  Divider,
+  StackDivider,
   Text,
   VStack,
   Icon,
@@ -15,7 +14,15 @@ import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { Link } from '../../atoms/Link';
 
 export const Footer: React.FC = () => (
-  <Flex direction="column" alignItems="center" w="100%" backgroundColor="gray.100">
+  <VStack
+    spacing={8}
+    divider={<StackDivider />}
+    direction="column"
+    alignItems="center"
+    w="100%"
+    pb={8}
+    backgroundColor="gray.100"
+  >
     <Box w="100%" maxW="80em" mt={12}>
       <SimpleGrid columns={[2, 2, 3]} gap={12}>
         <VStack>
@@ -63,9 +70,7 @@ export const Footer: React.FC = () => (
       </SimpleGrid>
     </Box>
 
-    <Divider mt={8} mb={2} />
-
-    <Center mb={8}>
+    <Center mt={-6}>
       <HStack spacing={8} align="center">
         <Link to="/">
           <Text as="small" textDecoration="underline">
@@ -77,5 +82,5 @@ export const Footer: React.FC = () => (
         </Text>
       </HStack>
     </Center>
-  </Flex>
+  </VStack>
 );
