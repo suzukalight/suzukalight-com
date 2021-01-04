@@ -9,5 +9,3 @@ export const Logo: React.FC = () => (
     </Stack>
   </Box>
 );
-
-export default Logo;

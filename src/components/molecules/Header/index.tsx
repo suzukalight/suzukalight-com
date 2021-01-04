@@ -3,7 +3,7 @@ import { Center, Box, Flex, Text } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
-import Logo from '../../atoms/Logo';
+import { Logo } from '../../atoms/Logo';
 import { Link } from '../../atoms/Link';
 
 type MenuItemProps = {
@@ -95,5 +95,3 @@ export const Header: React.FC = (props) => {
     </Center>
   );
 };
-
-export default Header;

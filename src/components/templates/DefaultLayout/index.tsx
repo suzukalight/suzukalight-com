@@ -17,5 +17,3 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children, ...props
     <Footer />
   </Flex>
 );
-
-export default DefaultLayout;
