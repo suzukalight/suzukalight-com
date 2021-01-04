@@ -15,17 +15,18 @@ const defaultTagStyle: ChakraProps = {
   lineHeight: 2,
   _hover: { textDecoration: 'underline' },
 };
+const inlineTextTagStyle: ChakraProps = {
+  display: 'inline-block',
+  mr: 2,
+  mb: 1,
+  color: 'gray.600',
+  fontSize: 'sm',
+  lineHeight: 1,
+  _hover: { textDecoration: 'underline' },
+};
+
 export const getDefaultTagStyle = () => ({ ...defaultTagStyle });
-export const getInlineTextTagStyle = () =>
-  ({
-    display: 'inline-block',
-    mr: 2,
-    mb: 1,
-    color: 'gray.600',
-    fontSize: 'sm',
-    lineHeight: 1,
-    _hover: { textDecoration: 'underline' },
-  } as ChakraProps);
+export const getInlineTextTagStyle = () => ({ ...inlineTextTagStyle });
 
 type TagItemProps = {
   tag: string;
