@@ -42,10 +42,10 @@ status: 'published'
 - Frontend: **TypeScript**, JavaScript, **React**, **Next**, **Gatsby**, **GraphQL**, ApolloClient, Vue, MaterialUI, ChakraUI, formik, jQuery
 - Backend: **Node.js**(Express, Koa, **ApolloServer**, WebSocket, GraphQL), PHP(CakePHP, Laravel), Java
 - Mobile: **ReactNative**(Expo), Cordova, AndroidJava
-- DB: RDB(**MySQL**, Oracle, SQLite, etc.), NoSQL(**Firebase**, DynamoDB), ORM(**Sequelize**, **TypeORM**, Laravel), SQL
+- DB: RDB(**MySQL**, Oracle, SQLite, etc.), NoSQL(**Firebase**, DynamoDB), ORM(**Sequelize**, **TypeORM**, Sails.js, Laravel), SQL
 - Infra: **AWS**, GCP, Vercel, Heroku, Terraform, Docker
-- xaaS: Auth0, Stripe, Sentry, Intercom, Slack
-- CI/CD: **ESLint**, **Prettier**, Jest, CircleCI, Webpack, Gulp, monorepo
+- xaaS: Auth0, Stripe, Sentry, Intercom, Slack, Twilio
+- etc.: **ESLint**, **Prettier**, Jest, CircleCI, Webpack, Gulp, monorepo
 
 ### 基礎技術
 
@@ -54,6 +54,7 @@ status: 'published'
 - 開発手法: **Clean Architecture**, OOP(GoF), SPA, PWA
 - デザイン: **デザインシステム**, **Atomic Design**, Figma, Sketch
 - コミュニケーション: **Git**, **GitHub**, **Slack**, Jira, Product Board, Miro, etc.
+- プログラミング言語: **TypeScript(JavaScript)**, **C++**, Java, BASIC, PHP
 
 ### ソフトスキル
 
@@ -65,10 +66,10 @@ status: 'published'
 
 ## 受賞歴
 
-1. **Android Application Award 2012 アイデア部門 優秀賞**: "Warasy -Android 端末を利用した歩行リハビリ支援システム-", 2012.04
-1. **電子情報通信学会 ヒューマンコミュニケーション賞**: "聴覚提示を用いた靴型デバイスによる歩行リハビリ活動支援システムの提案と試作", 2010.12
-1. **電子情報通信学会 マルチメディア・仮想環境基礎研究会賞**: "聴覚提示を用いた靴型デバイスによる歩行リハビリ活動支援システムの提案と試作", 2010.05
-1. **平成 18 年度電気関連学会東海支部連合大会 連合大会奨励賞**: "UI における透過性実現のための手法―GUI 間，および GUI・ハードウェア UI 間―", 2006.09
-1. **情報処理学会第 68 回全国大会 学生奨励賞**: "MVC を用いたコンポーネント連携型 UIMS の提案", 2006.03
-1. **中京大学 学長賞**: 2004.03
-1. **第 3 回 JRA-VAN 競馬ソフトコンテスト 佳作**: "競馬予想ソフト Shining Run ver.2", 1998.09
+1. **Android Application Award 2012 アイデア部門 優秀賞**: "Warasy -Android 端末を利用した歩行リハビリ支援システム-", 2012/04
+1. **電子情報通信学会 ヒューマンコミュニケーション賞**: "聴覚提示を用いた靴型デバイスによる歩行リハビリ活動支援システムの提案と試作", 2010/12
+1. **電子情報通信学会 マルチメディア・仮想環境基礎研究会賞**: "聴覚提示を用いた靴型デバイスによる歩行リハビリ活動支援システムの提案と試作", 2010/05
+1. **平成 18 年度電気関連学会東海支部連合大会 連合大会奨励賞**: "UI における透過性実現のための手法―GUI 間，および GUI・ハードウェア UI 間―", 2006/09
+1. **情報処理学会第 68 回全国大会 学生奨励賞**: "MVC を用いたコンポーネント連携型 UIMS の提案", 2006/03
+1. **中京大学 学長賞**: 2004/03
+1. **第 3 回 JRA-VAN 競馬ソフトコンテスト 佳作**: "競馬予想ソフト Shining Run ver.2", 1998/09
