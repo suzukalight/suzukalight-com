@@ -1,8 +1,8 @@
 import React from 'react';
-import { Heading, Text, VStack, HStack } from '@chakra-ui/react';
+import { Heading, Text, VStack } from '@chakra-ui/react';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
-import { getInlineTextTagStyle, TagList } from '../../../components/molecules/TagList';
+import { TagListPlainText } from '../TagList/PlainText';
 import { CoverImage } from '../../../components/atoms/CoverImage';
 
 type ArticleHeaderProps = {
@@ -25,9 +25,7 @@ export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article, urlConten
           {title}
         </Heading>
 
-        <HStack wrap="wrap">
-          <TagList tags={tags} tagBaseUrl={urlTags} tagItemProps={getInlineTextTagStyle()} />
-        </HStack>
+        <TagListPlainText tags={tags} tagBaseUrl={urlTags} />
 
         <Text fontSize="sm" color="gray.600">
           {getDateFormatted(article)}

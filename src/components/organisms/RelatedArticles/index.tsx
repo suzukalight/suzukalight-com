@@ -1,8 +1,8 @@
 import React from 'react';
-import { Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import { Heading, Text, VStack } from '@chakra-ui/react';
 
 import { ArticleTipList } from '../../../components/molecules/ArticleTipList';
-import { getDefaultTagStyle, TagList } from '../../../components/molecules/TagList';
+import { TagListRoundBox } from '../../../components/molecules/TagList';
 
 import { Article } from '../../../utils/article/entity';
 
@@ -31,13 +31,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
         Tags
       </Heading>
 
-      <HStack wrap="wrap">
-        <TagList
-          tags={tags}
-          tagBaseUrl={urlBlogTags}
-          tagItemProps={{ ...getDefaultTagStyle(), fontSize: 'md', mr: 2 }}
-        />
-      </HStack>
+      <TagListRoundBox tags={tags} tagBaseUrl={urlBlogTags} />
     </VStack>
 
     <VStack spacing={4} align="left">

@@ -6,7 +6,7 @@ import { ReadMoreButton } from '../../atoms/ReadMoreButton';
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
 import { Link } from '../../atoms/Link';
-import { TagList } from '../TagList';
+import { TagListRoundBox } from '../TagList';
 
 type ArticleExcerptItemProps = {
   article: Article;
@@ -37,16 +37,8 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
 
   return (
     <Stack direction={['column', 'column', 'row']} spacing={[2, 2, 8]} w="100%">
-      <Stack
-        direction={['row', 'row', 'column']}
-        flexWrap="wrap"
-        flexShrink={0}
-        w={['100%', '100%', 32]}
-        spacing={2}
-        py={[0, 0, 2]}
-        align="left"
-      >
-        <TagList tags={tags} tagBaseUrl={tagBaseUrl} />
+      <Stack flexShrink={0} w={['100%', '100%', 32]} align="left">
+        <TagListRoundBox tags={tags} tagBaseUrl={tagBaseUrl} />
       </Stack>
 
       <VStack flexGrow={1} spacing={4} align="left">

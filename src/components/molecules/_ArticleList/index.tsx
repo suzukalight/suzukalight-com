@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Flex, Box, Center, Img, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
-import { getInlineTextTagStyle, TagList } from '../TagList';
+import { TagListPlainText } from '../TagList';
 
 type ArticleTipProps = {
   article: Article;
@@ -37,10 +37,9 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
 
             <Flex flexGrow={1} direction="column" justifyContent="flex-end" mt={1}>
               <Box maxH="1.25em" overflow="hidden" lineHeight="1.25" wordBreak="break-all">
-                <TagList
+                <TagListPlainText
                   tags={tags}
                   tagItemProps={{
-                    ...getInlineTextTagStyle(),
                     fontSize: 'xs',
                     mb: 0,
                     _hover: { textDecoration: 'inherit' },
