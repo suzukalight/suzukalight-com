@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { VStack, SlideFade, Box } from '@chakra-ui/react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
-import { SocialLinks } from './NormalList';
+import { ShareButtons } from './Buttons';
 
-type SocialLinksLeftFixedProps = {
+type ShareButtonsLeftFixedProps = {
   urlBlog: string;
   title: string;
 };
 
-export const SocialLinksLeftFixed: React.FC<SocialLinksLeftFixedProps> = ({ title, urlBlog }) => {
-  const [showSocialLinks, setShowSocialLinks] = useState(true);
+export const ShareButtonsLeftFixed: React.FC<ShareButtonsLeftFixedProps> = ({ title, urlBlog }) => {
+  const [showShareButtons, setShowShareButtons] = useState(true);
 
   useScrollPosition(({ prevPos, currPos }) => {
     const visible = currPos.y > prevPos.y;
-    setShowSocialLinks(visible);
+    setShowShareButtons(visible);
   }, []);
 
   return (
@@ -24,9 +24,9 @@ export const SocialLinksLeftFixed: React.FC<SocialLinksLeftFixedProps> = ({ titl
       top="7em"
       visibility={['hidden', 'hidden', 'hidden', 'visible']}
     >
-      <SlideFade in={showSocialLinks} offsetX="-1em" offsetY={0}>
+      <SlideFade in={showShareButtons} offsetX="-1em" offsetY={0}>
         <VStack spacing={4} p={4} backgroundColor="gray.50" borderRadius={8}>
-          <SocialLinks urlBlog={urlBlog} title={title} />
+          <ShareButtons urlBlog={urlBlog} title={title} tooltipPlacement="left" />
         </VStack>
       </SlideFade>
     </Box>

@@ -26,7 +26,10 @@ import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { RelatedArticles } from '../../../components/organisms/RelatedArticles';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
-import { SocialLinksHorizontal, SocialLinksLeftFixed } from '../../../components/atoms/SocialLinks';
+import {
+  ShareButtonsHorizontal,
+  ShareButtonsLeftFixed,
+} from '../../../components/atoms/ShareButtons';
 
 type SnippetPostProps = {
   article: Article;
@@ -55,7 +58,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
     <DefaultLayout>
       <HtmlHead title={title} description={article.excerpt} url={snippetUrl} {...ogImage} />
 
-      <SocialLinksLeftFixed urlBlog={snippetUrl} title={title} />
+      <ShareButtonsLeftFixed urlBlog={snippetUrl} title={title} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
@@ -66,7 +69,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
               urlTags={urlSnippetTags}
             />
             <ArticleDetail contentHtml={content} />
-            <SocialLinksHorizontal urlBlog={snippetUrl} title={title} />
+            <ShareButtonsHorizontal urlBlog={snippetUrl} title={title} />
           </VStack>
 
           <RelatedArticles

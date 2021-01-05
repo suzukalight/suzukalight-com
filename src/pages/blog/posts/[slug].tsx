@@ -21,7 +21,10 @@ import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { RelatedArticles } from '../../../components/organisms/RelatedArticles';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
-import { SocialLinksHorizontal, SocialLinksLeftFixed } from '../../../components/atoms/SocialLinks';
+import {
+  ShareButtonsHorizontal,
+  ShareButtonsLeftFixed,
+} from '../../../components/atoms/ShareButtons';
 
 type BlogPostProps = {
   article: Article;
@@ -50,14 +53,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({
     <DefaultLayout>
       <HtmlHead title={title} description={article.excerpt} url={blogUrl} {...ogImage} />
 
-      <SocialLinksLeftFixed urlBlog={blogUrl} title={title} />
+      <ShareButtonsLeftFixed urlBlog={blogUrl} title={title} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
           <VStack spacing={8} align="left" w="100%">
             <ArticleHeader article={article} urlContent={urlContentsBlog} urlTags={urlBlogTags} />
             <ArticleDetail contentHtml={content} />
-            <SocialLinksHorizontal urlBlog={blogUrl} title={title} />
+            <ShareButtonsHorizontal urlBlog={blogUrl} title={title} />
           </VStack>
 
           <RelatedArticles
