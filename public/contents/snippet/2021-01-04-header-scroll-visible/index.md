@@ -6,7 +6,7 @@ tags: ['react', 'UI', 'react-hooks']
 status: 'published'
 ---
 
-```tsx:header.tsx
+```tsx
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 export const Header: React.FC = ({ children }) => {

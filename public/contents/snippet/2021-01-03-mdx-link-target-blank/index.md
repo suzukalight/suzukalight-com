@@ -6,7 +6,7 @@ tags: ['nextjs', 'mdx', 'next-mdx-remote', 'react']
 status: 'published'
 ---
 
-```tsx:markdown.tsx
+```tsx
 import hydrate from 'next-mdx-remote/hydrate';
 
 export const LinkWithTargetBlank = (props) => {
@@ -20,7 +20,7 @@ export const LinkWithTargetBlank = (props) => {
 hydrate(content, {
   components: {
     // ...
-    a: LinkWithTargetBlank
+    a: LinkWithTargetBlank,
   },
 });
 ```
