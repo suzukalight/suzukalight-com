@@ -1,12 +1,14 @@
+import { MdxRemote } from 'next-mdx-remote/types';
+import { Plugin } from 'unified';
 import nmrRenderToString from 'next-mdx-remote/render-to-string';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
 import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
 
-import { getDefaultComponents, MdOptions } from './markdown';
+import { getDefaultComponents } from './markdown';
 
-export const getDefaultMdxOptions = () => ({
+const getDefaultMdxOptions = () => ({
   remarkPlugins: [
     remarkSlug,
     [
@@ -26,7 +28,24 @@ export const getDefaultMdxOptions = () => ({
   ],
 });
 
-export const renderToString = async (content: string, imgRootDir: string, options?: MdOptions) => {
+type RenderToStringOptions = {
+  components?: MdxRemote.Components;
+  mdxOptions?: {
+    remarkPlugins: Plugin[];
+  };
+};
+
+/**
+ * markdown→DOM変換を行う
+ * @param content markdown から frontMatter を取り除いたもの
+ * @param imgRootDir img src の root dir
+ * @param options mdx→JSX変換で使用するコンポーネントマップ、remarkPlugin設定など
+ */
+export const renderToString = async (
+  content: string,
+  imgRootDir: string,
+  options?: RenderToStringOptions,
+) => {
   return await nmrRenderToString(content, {
     components: options?.components || getDefaultComponents(imgRootDir),
     mdxOptions: options?.mdxOptions || getDefaultMdxOptions(),

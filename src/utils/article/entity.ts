@@ -117,6 +117,7 @@ export const isPublished = (article: Article) => {
   return article.frontMatter.status === 'published';
 };
 
+/** Articleからcontentを取り除く（主にデータ容量削減に使う） */
 export const stripContent = (article: Article) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { content, ...rest } = article;
