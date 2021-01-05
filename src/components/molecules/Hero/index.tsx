@@ -63,7 +63,15 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
         </SlideFade>
       </Box>
 
-      <Box w={['100%', '100%', '55%']} h={['12em', '16em', '20em']} mb={[12, 12, 0]} shadow="2xl">
+      <Box
+        w={['100%', '100%', '55%']}
+        h={['12em', '16em', '20em']}
+        mb={[12, 12, 0]}
+        shadow="2xl"
+        transformOrigin={['none', 'none', '0 100%']}
+        overflow="hidden"
+        transform={['none', 'none', 'skew(-15deg)']}
+      >
         <SlideFade in offsetX="4em" offsetY={0}>
           <Image
             src={image}
@@ -72,6 +80,9 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
             w="100%"
             h={['12em', '16em', '20em']}
             fallback={<Box w="100%" h={['12em', '16em', '20em']} backgroundColor="yellow.100" />}
+            transformOrigin={['none', 'none', '0 100%']}
+            overflow="hidden"
+            transform={['none', 'none', 'skew(15deg)']}
           />
         </SlideFade>
       </Box>

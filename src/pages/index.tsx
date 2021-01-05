@@ -34,7 +34,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
       <Hero
         title="suzukalight.com"
         subtitle={`"なければ作ればいいじゃない"`}
-        image="images/hero/01.jpg"
+        image="images/hero/01.webp"
       />
 
       <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]}>
