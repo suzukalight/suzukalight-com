@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { VStack, HStack, StackDivider } from '@chakra-ui/react';
+import { VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { Article, getArticleFromMdxSource, stripContent } from '../../../utils/article/entity';
@@ -26,7 +26,7 @@ import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { RelatedArticles } from '../../../components/organisms/RelatedArticles';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
-import { SocialLinks, SocialLinksLeftFixed } from '../../../components/atoms/SocialLinks';
+import { SocialLinksHorizontal, SocialLinksLeftFixed } from '../../../components/atoms/SocialLinks';
 
 type SnippetPostProps = {
   article: Article;
@@ -66,9 +66,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
               urlTags={urlSnippetTags}
             />
             <ArticleDetail contentHtml={content} />
-            <HStack spacing={4}>
-              <SocialLinks urlBlog={snippetUrl} title={title} />
-            </HStack>
+            <SocialLinksHorizontal urlBlog={snippetUrl} title={title} />
           </VStack>
 
           <RelatedArticles
