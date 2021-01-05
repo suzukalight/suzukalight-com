@@ -22,7 +22,7 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
     <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
       <ChakraLink overflow="hidden" href={`${urlBlogPosts}/${slug}`}>
         <Flex direction="row" maxH={24} overflow="hidden">
-          <Box flexShrink={0} mr={2}>
+          <Box flexShrink={0} mt={1} mr={4}>
             {hero ? (
               <Img
                 src={`${urlContentsBlog}/${slug}/${hero}`}
@@ -32,8 +32,8 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
                 objectFit="cover"
               />
             ) : (
-              <Center boxSize={8} borderRadius={4}>
-                <Text fontSize="xl">{emoji ?? '📝'}</Text>
+              <Center boxSize={8}>
+                <Text fontSize="28px">{emoji ?? '📝'}</Text>
               </Center>
             )}
           </Box>
@@ -43,6 +43,7 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
               as="strong"
               overflowY="hidden"
               maxH="2.5em"
+              mb={1}
               fontSize="md"
               lineHeight={1.25}
               wordBreak="break-all"
@@ -51,7 +52,7 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
             </Text>
 
             <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-              <Text as="small" fontSize="xs" color="gray.700" opacity="0.8">
+              <Text as="small" fontSize="xs" color="gray.700">
                 {getDateFormatted(article)}
               </Text>
             </Flex>

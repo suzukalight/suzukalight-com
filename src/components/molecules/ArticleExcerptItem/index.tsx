@@ -37,9 +37,9 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
 
   return (
     <Stack direction={['column', 'column', 'row']} spacing={[2, 2, 8]} w="100%">
-      <Stack flexShrink={0} w={['100%', '100%', 32]} align="left">
+      <Box flexShrink={0} w={['100%', '100%', 32]}>
         <TagListRoundBox tags={tags} tagBaseUrl={tagBaseUrl} />
-      </Stack>
+      </Box>
 
       <VStack flexGrow={1} spacing={4} align="left">
         <Box>
