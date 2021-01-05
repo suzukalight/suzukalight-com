@@ -1,13 +1,13 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { StackDivider, Avatar, Icon, VStack, HStack, Box, Text } from '@chakra-ui/react';
-import { FaHome, FaTwitter, FaGithub, FaFacebookF } from 'react-icons/fa';
+import { StackDivider, Avatar, VStack, HStack, Box, Text } from '@chakra-ui/react';
+import { FaHome } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../components/atoms/HtmlHead';
-import { Link } from '../../components/atoms/Link';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { ArticleDetail } from '../../components/molecules/ArticleDetail';
+import { SNSLinks } from '../../components/atoms/SNSLinks';
 
 import { urlContentsAbout } from '../url.json';
 import { getArticleFromMdxSource } from '../../utils/article/entity';
@@ -34,41 +34,13 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
             <Avatar src="/images/tarako.jpg" name="suzukalight" size="xl" />
           </HStack>
 
-          <Box>
-            <Text mr={4} display="inline-block" fontWeight="bold">
+          <HStack spacing={4}>
+            <Text display="inline-block" fontWeight="bold">
               Masahiko Kubara (suzukalight)
             </Text>
 
-            <HStack spacing={3} display="inline-block">
-              <Link to="https://twitter.com/suzukalight">
-                <Icon
-                  as={FaTwitter}
-                  boxSize={4}
-                  color="teal.800"
-                  _hover={{ color: 'teal.500' }}
-                  xlinkTitle="Twitter"
-                />
-              </Link>
-              <Link to="https://www.facebook.com/masahiko.kubara/">
-                <Icon
-                  as={FaFacebookF}
-                  boxSize={4}
-                  color="teal.800"
-                  _hover={{ color: 'teal.500' }}
-                  xlinkTitle="Facebook"
-                />
-              </Link>
-              <Link to="https://github.com/suzukalight">
-                <Icon
-                  as={FaGithub}
-                  boxSize={4}
-                  color="teal.800"
-                  _hover={{ color: 'teal.500' }}
-                  xlinkTitle="GitHub"
-                />
-              </Link>
-            </HStack>
-          </Box>
+            <SNSLinks spacing={3} boxSize={4} />
+          </HStack>
 
           <Text>
             テックリード・スクラムマスター・フロントエンドエンジニア。修士（メディア科学）。

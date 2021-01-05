@@ -1,19 +1,7 @@
 import React from 'react';
-import {
-  Center,
-  Flex,
-  Image,
-  Heading,
-  Stack,
-  Text,
-  HStack,
-  Icon,
-  ChakraProps,
-  Tooltip,
-} from '@chakra-ui/react';
-import { FaTwitter, FaGithub, FaFacebookF } from 'react-icons/fa';
+import { Center, Flex, Image, Heading, Stack, Text, ChakraProps } from '@chakra-ui/react';
 
-import { Link } from '../../atoms/Link';
+import { SNSLinks } from '../../atoms/SNSLinks';
 
 type HeroProps = {
   title: string;
@@ -63,41 +51,7 @@ export const Hero = ({ title, subtitle, image, chakraProps }: HeroProps) => (
           {subtitle}
         </Text>
 
-        <HStack spacing={3}>
-          <Link to="https://twitter.com/suzukalight">
-            <Tooltip label="@suzukalight" shouldWrapChildren hasArrow placement="top">
-              <Icon
-                as={FaTwitter}
-                boxSize={6}
-                color="teal.800"
-                _hover={{ color: 'teal.500' }}
-                xlinkTitle="Twitter"
-              />
-            </Tooltip>
-          </Link>
-          <Link to="https://www.facebook.com/masahiko.kubara/">
-            <Tooltip label="masahiko.kubara" shouldWrapChildren hasArrow placement="top">
-              <Icon
-                as={FaFacebookF}
-                boxSize={6}
-                color="teal.800"
-                _hover={{ color: 'teal.500' }}
-                xlinkTitle="Facebook"
-              />
-            </Tooltip>
-          </Link>
-          <Link to="https://github.com/suzukalight">
-            <Tooltip label="suzukalight" shouldWrapChildren hasArrow placement="top">
-              <Icon
-                as={FaGithub}
-                boxSize={6}
-                color="teal.800"
-                _hover={{ color: 'teal.500' }}
-                xlinkTitle="GitHub"
-              />
-            </Tooltip>
-          </Link>
-        </HStack>
+        <SNSLinks spacing={3} boxSize={6} />
       </Stack>
 
       <Image

@@ -13,6 +13,7 @@ import {
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 
 import { Link } from '../../atoms/Link';
+import { SNSLinks } from '../../atoms/SNSLinks';
 
 export const Footer: React.FC = () => (
   <VStack
@@ -86,15 +87,18 @@ export const Footer: React.FC = () => (
     </Box>
 
     <Center mt={-6}>
-      <HStack spacing={8} align="center">
+      <HStack spacing={4} align="center">
         <Link to="/">
           <Text as="small" textDecoration="underline">
             Home
           </Text>
         </Link>
+
         <Text as="small" pt={1}>
           ©︎ suzukalight
         </Text>
+
+        <SNSLinks spacing={3} boxSize={3} color="gray.500" />
       </HStack>
     </Center>
   </VStack>
