@@ -6,7 +6,7 @@ tags: ['nextjs', 'google-analytics', 'react']
 status: 'published'
 ---
 
-```text:.env.production
+```text:.env.production.local
 NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=YOUR_TRACKING_ID
 ```
 
