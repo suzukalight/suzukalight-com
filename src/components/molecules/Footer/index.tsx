@@ -8,6 +8,7 @@ import {
   VStack,
   Icon,
   HStack,
+  Tooltip,
 } from '@chakra-ui/react';
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 
@@ -50,20 +51,34 @@ export const Footer: React.FC = () => (
           </Text>
           <HStack spacing={4}>
             <Link to="https://twitter.com/intent/tweet?screen_name=suzukalight">
-              <Icon
-                as={FaTwitter}
-                boxSize={6}
-                _hover={{ color: 'teal.500' }}
-                xlinkTitle="create a mention for me on twitter"
-              />
+              <Tooltip
+                label="@suzukalight にメッセージを送る"
+                shouldWrapChildren
+                hasArrow
+                placement="top"
+              >
+                <Icon
+                  as={FaTwitter}
+                  boxSize={6}
+                  _hover={{ color: 'teal.500' }}
+                  xlinkTitle="create a mention for me on twitter"
+                />
+              </Tooltip>
             </Link>
             <Link to="https://github.com/suzukalight/suzukalight/issues">
-              <Icon
-                as={FaGithub}
-                boxSize={6}
-                _hover={{ color: 'teal.500' }}
-                xlinkTitle="create an issue to contact me"
-              />
+              <Tooltip
+                label="suzukalight にメッセージを送る"
+                shouldWrapChildren
+                hasArrow
+                placement="top"
+              >
+                <Icon
+                  as={FaGithub}
+                  boxSize={6}
+                  _hover={{ color: 'teal.500' }}
+                  xlinkTitle="create an issue to contact me"
+                />
+              </Tooltip>
             </Link>
           </HStack>
         </VStack>
