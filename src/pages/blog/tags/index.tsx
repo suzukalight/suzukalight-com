@@ -1,12 +1,12 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { Flex, Box, Heading, Divider, Text } from '@chakra-ui/react';
+import { Heading, Divider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-import { Link } from '../../../components/atoms/Link';
+import { TagListWithCount } from '../../../components/molecules/TagList/WithCount';
 
 import { urlContentsBlog, urlBlogRoot, urlBlogTags } from '../../url.json';
 import { getArticles } from '../../../utils/article/fs.server';
@@ -27,33 +27,17 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
   <ArticleListLayout title="Tags">
     <HtmlHead title="Tags" url={urlBlogTags} />
 
-    <Heading as="h2" fontSize="2xl" mb={8}>
+    <Heading as="h2" fontSize="2xl" mb={4}>
       by Name
     </Heading>
 
-    <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
-      {orderByName.map(({ tag, count }) => (
-        <Box key={tag} mr={4}>
-          <Link to={`${urlBlogTags}/${encodeURIComponent(tag)}`}>
-            <Text as="span">{`#${tag} (${count})`}</Text>
-          </Link>
-        </Box>
-      ))}
-    </Flex>
+    <TagListWithCount tagAndCounts={orderByName} tagBaseUrl={urlBlogTags} />
 
-    <Heading as="h2" fontSize="2xl" my={8}>
+    <Heading as="h2" fontSize="2xl" mt={12} mb={4}>
       by Count
     </Heading>
 
-    <Flex direction={['column', 'row']} w="100%" flexWrap="wrap">
-      {orderByCount.map(({ tag, count }) => (
-        <Box key={tag} mr={4}>
-          <Link to={`${urlBlogTags}/${encodeURIComponent(tag)}`}>
-            <Text as="span">{`#${tag} (${count})`}</Text>
-          </Link>
-        </Box>
-      ))}
-    </Flex>
+    <TagListWithCount tagAndCounts={orderByCount} tagBaseUrl={urlBlogTags} />
 
     <Divider mt={12} mb={8} />
 
