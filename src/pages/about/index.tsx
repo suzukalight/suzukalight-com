@@ -10,8 +10,7 @@ import { ArticleDetail } from '../../components/molecules/ArticleDetail';
 import { SNSLinks } from '../../components/atoms/SNSLinks';
 
 import { urlContentsAbout } from '../url.json';
-import { getArticleFromMdxSource } from '../../utils/article/entity';
-import { getMdxSource } from '../../utils/article/fs.server';
+import { getArticle } from '../../utils/article/fs.server';
 import { hydrate } from '../../utils/article/markdown';
 import { renderToString } from '../../utils/article/markdown.server';
 
@@ -60,8 +59,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const source = getMdxSource(urlContentsAbout, 'index');
-  const { content, ...article } = await getArticleFromMdxSource(source, 'index');
+  const { content, ...article } = await getArticle('index', urlContentsAbout);
   const contentHtml = await renderToString(content, `${urlContentsAbout}/index`);
 
   return { props: { article, contentHtml } as IndexPageProps };

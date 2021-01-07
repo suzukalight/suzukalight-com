@@ -3,18 +3,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-import { Article, getArticleFromMdxSource, stripContent } from '../../../utils/article/entity';
 import {
   urlContentsSnippet,
   urlSnippetRoot,
   urlSnippetPosts,
   urlSnippetTags,
 } from '../../url.json';
-import {
-  getArticles,
-  getDirNamesThatHaveMdx,
-  getMdxSource,
-} from '../../../utils/article/fs.server';
+import { Article, stripContent } from '../../../utils/article/entity';
+import { getArticle, getArticles, getDirNamesThatHaveMdx } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
@@ -108,8 +104,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
-  const source = getMdxSource(urlContentsSnippet, slug);
-  const { content, ...article } = await getArticleFromMdxSource(source, slug);
+  const { content, ...article } = await getArticle(slug, urlContentsSnippet);
 
   const contentHtml = await renderToString(content, `${urlContentsSnippet}/${params.slug}`);
 

@@ -24,10 +24,10 @@ export const getDirNamesThatHaveMdx = (urlContents: string) => {
 
 /**
  * 指定した slug にマッチするMDXファイルの内容を返す
- * @param urlContents コンテンツのURL
  * @param slug
+ * @param urlContents コンテンツのURL
  */
-export const getMdxSource = (urlContents: string, slug: string) => {
+export const getMdxSource = (slug: string, urlContents: string) => {
   const contentsDir = path.join(root, 'public', urlContents, slug);
 
   if (fs.existsSync(`${contentsDir}/index.md`)) {
@@ -37,6 +37,16 @@ export const getMdxSource = (urlContents: string, slug: string) => {
     return fs.readFileSync(`${contentsDir}/index.mdx`, 'utf8');
   }
   return '';
+};
+
+/**
+ * 指定した slug にマッチするMDXファイルの内容を Article にして返す
+ * @param slug
+ * @param urlContents コンテンツのURL
+ */
+export const getArticle = async (slug: string, urlContents: string) => {
+  const source = getMdxSource(slug, urlContents);
+  return await getArticleFromMdxSource(source, slug);
 };
 
 type GetArticlesFromDirOption = {
@@ -56,7 +66,7 @@ export const getArticlesFromDirs = async (
 ) => {
   const articles = await Promise.all(
     mdxDirs.map(async (slug) => {
-      const source = getMdxSource(urlContents, slug);
+      const source = getMdxSource(slug, urlContents);
       const article = await getArticleFromMdxSource(source, slug);
 
       if (!isPublished(article) && !options?.includesDraft) return null;
