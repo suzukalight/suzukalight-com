@@ -2,7 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { Box, Flex, Center, Img, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
 
-import { Article, getDateFormatted } from '../../../utils/article/entity';
+import { TagListPlainText } from '../TagList';
+
+import { Article } from '../../../utils/article/entity';
 
 type ArticleTipProps = {
   article: Article;
@@ -16,12 +18,12 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
   urlContentsBlog,
 }) => {
   const slug = article.slug;
-  const { title, hero, emoji } = article.frontMatter;
+  const { title, hero, emoji, tags } = article.frontMatter;
 
   return (
     <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
       <ChakraLink overflow="hidden" href={`${urlBlogPosts}/${slug}`}>
-        <Flex direction="row" maxH={24} overflow="hidden">
+        <Flex direction="row" minH={10} maxH={24} overflow="hidden">
           <Box flexShrink={0} mt={1} mr={4}>
             {hero ? (
               <Img
@@ -40,21 +42,26 @@ export const ArticleTip: React.FC<ArticleTipProps> = ({
 
           <Flex flexGrow={1} direction="column">
             <Text
-              as="strong"
+              as="p"
               overflowY="hidden"
               maxH="2.5em"
               mb={1}
-              fontSize="md"
+              fontSize="sm"
+              fontWeight="600"
               lineHeight={1.25}
+              // textDecoration="underline solid #22543D40"
               wordBreak="break-all"
+              color="teal.800"
             >
               {title}
             </Text>
 
-            <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-              <Text as="small" fontSize="xs" color="gray.700">
-                {getDateFormatted(article)}
-              </Text>
+            <Flex flexGrow={1} maxH={4} overflow="hidden">
+              <TagListPlainText
+                tags={tags}
+                tagWrapProps={{ mb: 0 }}
+                tagItemProps={{ fontSize: 'xs', color: 'gray.400', lineHeight: 1.25 }}
+              />
             </Flex>
           </Flex>
         </Flex>
