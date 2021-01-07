@@ -9,7 +9,7 @@ type CardProps = {
 
 export const Card: React.FC<CardProps> = ({ image, title, supplement }) => {
   return (
-    <VStack spacing={0} overflow="hidden" h={64} borderWidth="1px" borderRadius="lg">
+    <VStack spacing={0} overflow="hidden" h={64} borderWidth="1px" borderRadius="lg" shadow="md">
       <Center flexShrink={0} w="100%" h={32} backgroundColor="gray.100">
         {image}
       </Center>

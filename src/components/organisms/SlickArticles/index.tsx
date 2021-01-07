@@ -48,7 +48,7 @@ export const SlickArticles: React.FC<SlickArticlesProps> = ({
     {articles.length > 0 ? (
       <Slick {...settings}>
         {articles.map((a) => (
-          <Box key={a.slug} px={[2, 4]}>
+          <Box key={a.slug} p={[2, 4]}>
             <ArticleCardWithLink article={a} urlContents={urlContents} urlPosts={urlPosts} />
           </Box>
         ))}
