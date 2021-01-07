@@ -18,8 +18,16 @@ export const ArticleCardWithLink: React.FC<ArticleCardWithLinkProps> = ({
   urlPosts,
 }) => (
   <Link href={`${urlPosts}/[slug]`} as={`${urlPosts}/${article.slug}`}>
-    <ChakraLink overflow="hidden" href={`${urlPosts}/${article.slug}`}>
-      <ArticleCard article={article} urlContents={urlContents} />
+    <ChakraLink
+      overflow="hidden"
+      href={`${urlPosts}/${article.slug}`}
+      _hover={{ textDecoration: 'none' }}
+    >
+      <ArticleCard
+        article={article}
+        urlContents={urlContents}
+        wrapProps={{ _hover: { borderColor: 'teal.300' } }}
+      />
     </ChakraLink>
   </Link>
 );

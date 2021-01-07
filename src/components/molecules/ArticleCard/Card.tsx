@@ -1,5 +1,5 @@
 import React from 'react';
-import { Center, Text, Img } from '@chakra-ui/react';
+import { Center, Text, Img, StackProps } from '@chakra-ui/react';
 
 import { Article } from '../../../utils/article/entity';
 import { Card } from '../../atoms/Card';
@@ -8,9 +8,10 @@ import { TagListPlainText } from '../TagList';
 type ArticleCardProps = {
   article: Article;
   urlContents: string;
+  wrapProps?: StackProps;
 };
 
-export const ArticleCard: React.FC<ArticleCardProps> = ({ article, urlContents }) => {
+export const ArticleCard: React.FC<ArticleCardProps> = ({ article, urlContents, wrapProps }) => {
   const { frontMatter, slug } = article;
   const { title, hero, emoji, tags } = frontMatter;
 
@@ -39,6 +40,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, urlContents }
           tagItemProps={{ mr: 2, fontSize: 'sm' }}
         />
       }
+      wrapProps={wrapProps}
     />
   );
 };
