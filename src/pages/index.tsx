@@ -41,9 +41,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} align="left">
             <Heading as="h1" fontSize="3xl">
-              <Text as="span" mr={4}>
-                Blog
-              </Text>
+              <Text as="span">Blog</Text>
             </Heading>
 
             <Box>
