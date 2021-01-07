@@ -4,9 +4,10 @@ import { Box, Heading, Text, VStack } from '@chakra-ui/react';
 
 import { DefaultLayout } from '../components/templates/DefaultLayout';
 import { HtmlHead } from '../components/atoms/HtmlHead';
+import { Link } from '../components/atoms/Link';
 import { Hero } from '../components/molecules/Hero';
 import { CenterMaxW } from '../components/atoms/CenterMaxW';
-import { ArticleTipList } from '../components/molecules/ArticleTipList';
+import { SlickArticles } from '../components/organisms/SlickArticles';
 
 import {
   urlBlogRoot,
@@ -19,7 +20,6 @@ import {
 import { Article } from '../utils/article/entity';
 import { getArticles } from '../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../utils/article/sorter';
-import { Link } from '../components/atoms/Link';
 
 type HomePageProps = {
   blogArticles: Article[];
@@ -47,17 +47,11 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
             </Heading>
 
             <Box>
-              {blogArticles.length > 0 ? (
-                <ArticleTipList
-                  articles={blogArticles}
-                  urlBlogPosts={urlBlogPosts}
-                  urlContentsBlog={urlContentsBlog}
-                />
-              ) : (
-                <Text as="small" color="gray.600">
-                  関連する記事は見つかりませんでした
-                </Text>
-              )}
+              <SlickArticles
+                articles={blogArticles}
+                urlContents={urlContentsBlog}
+                urlPosts={urlBlogPosts}
+              />
             </Box>
 
             <Box>
@@ -77,17 +71,11 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
             </Heading>
 
             <Box>
-              {snippetArticles.length > 0 ? (
-                <ArticleTipList
-                  articles={snippetArticles}
-                  urlBlogPosts={urlSnippetPosts}
-                  urlContentsBlog={urlContentsSnippet}
-                />
-              ) : (
-                <Text as="small" color="gray.600">
-                  関連する記事は見つかりませんでした
-                </Text>
-              )}
+              <SlickArticles
+                articles={snippetArticles}
+                urlContents={urlContentsSnippet}
+                urlPosts={urlSnippetPosts}
+              />
             </Box>
 
             <Box>
