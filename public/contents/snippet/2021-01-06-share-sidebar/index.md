@@ -3,10 +3,9 @@ title: SNSシェアボタンを上スクロール時のみフェードインさ�
 date: '2021-01-06T01:00:00'
 category: Snippet
 tags: ['react', 'UI', 'chakra-ui', 'react-share', 'react-icons']
+hero: share-sidebar.png
 status: 'published'
 ---
-
-![share-button-sidebar](share-sidebar.png)
 
 ```tsx
 import React, { useState } from 'react';
