@@ -82,7 +82,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <Box>
               <Link to={urlBlogRoot}>
-                <Text textDecoration="underline" _hover={{ color: 'teal.500' }}>
+                <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
                   すべてのBlogを見る→
                 </Text>
               </Link>
@@ -114,7 +114,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <Box>
               <Link to={urlSnippetRoot}>
-                <Text textDecoration="underline" _hover={{ color: 'teal.500' }}>
+                <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
                   すべてのSnippetを見る→
                 </Text>
               </Link>
