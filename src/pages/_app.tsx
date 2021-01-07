@@ -6,6 +6,7 @@ import { DefaultSeo } from 'next-seo';
 
 import '../styles/prism.scss';
 import '../styles/remark.scss';
+import '../styles/slick.scss';
 
 import SEO from '../../next-seo.config';
 import * as gtag from '../utils/analytics/gtag';
