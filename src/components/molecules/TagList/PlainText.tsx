@@ -1,6 +1,12 @@
 import React from 'react';
 import { LinkProps as NextLinkProps } from 'next/link';
-import { ChakraProps, Wrap, WrapItem, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
+import {
+  ChakraProps,
+  Wrap,
+  WrapItem,
+  LinkProps as ChakraLinkProps,
+  WrapProps,
+} from '@chakra-ui/react';
 
 import { Tag } from './Item';
 import { Link } from '../../atoms/Link';
@@ -23,6 +29,7 @@ type TagListPlainTextProps = {
   tagLinkChakraProps?: ChakraLinkProps;
   tagLinkNextProps?: NextLinkProps;
   tagItemProps?: ChakraProps;
+  tagWrapProps?: WrapProps;
 };
 
 export const TagListPlainText: React.FC<TagListPlainTextProps> = ({
@@ -31,8 +38,9 @@ export const TagListPlainText: React.FC<TagListPlainTextProps> = ({
   tagLinkChakraProps,
   tagLinkNextProps,
   tagItemProps,
+  tagWrapProps,
 }) => (
-  <Wrap spacing={2}>
+  <Wrap spacing={2} {...tagWrapProps}>
     {(tags || []).map((tag) => (
       <WrapItem key={tag}>
         {tagBaseUrl ? (
