@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { GetStaticProps } from 'next';
 import { Box, Heading, Text, VStack } from '@chakra-ui/react';
 
@@ -33,6 +33,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   blogArticles,
   snippetArticles,
 }) => {
+  const refBlog = useRef<HTMLDivElement>();
+
   return (
     <DefaultLayout>
       <HtmlHead />
@@ -41,9 +43,10 @@ export const HomePage: React.FC<HomePageProps> = ({
         title="suzukalight.com"
         subtitle={`"なければ作ればいいじゃない"`}
         image="images/hero/01.webp"
+        refBlog={refBlog}
       />
 
-      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]}>
+      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]} ref={refBlog}>
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} align="left">
             <Heading as="h1" fontSize="3xl">
