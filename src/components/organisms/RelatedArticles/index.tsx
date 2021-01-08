@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heading, Text, VStack } from '@chakra-ui/react';
 
-import { ArticleTipList } from '../../../components/molecules/ArticleTipList';
+import { ArticleTipWithThumbList } from '../../../components/molecules/ArticleTipList';
 import { TagListRoundBox } from '../../../components/molecules/TagList';
 
 import { Article } from '../../../utils/article/entity';
@@ -40,7 +40,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
       </Heading>
 
       {relatedArticles.length > 0 ? (
-        <ArticleTipList
+        <ArticleTipWithThumbList
           articles={relatedArticles}
           urlBlogPosts={urlBlogPosts}
           urlContentsBlog={urlContentsBlog}
@@ -57,7 +57,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
         Prev/Next Article
       </Heading>
 
-      <ArticleTipList
+      <ArticleTipWithThumbList
         articles={[prevArticle, nextArticle].filter((a) => a)}
         urlBlogPosts={urlBlogPosts}
         urlContentsBlog={urlContentsBlog}
