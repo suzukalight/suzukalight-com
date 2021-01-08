@@ -8,7 +8,7 @@ import { Link } from '../components/atoms/Link';
 import { Hero } from '../components/molecules/Hero';
 import { CenterMaxW } from '../components/atoms/CenterMaxW';
 import { SlickArticles } from '../components/organisms/SlickArticles';
-import { ArticleTipList } from '../components/molecules/ArticleTipList';
+import { ArticleTipPlainTextList } from '../components/molecules/ArticleTipList';
 
 import {
   urlBlogRoot,
@@ -65,31 +65,27 @@ export const HomePage: React.FC<HomePageProps> = ({
               />
             </Box>
 
-            <Box>
+            <VStack spacing={4} align="left">
               <Heading as="h2" mb={4} fontSize="xl">
                 <Text as="span">Recent Articles</Text>
               </Heading>
 
               {blogArticles.length > 0 ? (
-                <ArticleTipList
-                  articles={blogArticles}
-                  urlBlogPosts={urlBlogPosts}
-                  urlContentsBlog={urlContentsBlog}
-                />
+                <ArticleTipPlainTextList articles={blogArticles} urlBlogPosts={urlBlogPosts} />
               ) : (
                 <Text as="small" color="gray.600">
                   関連する記事は見つかりませんでした
                 </Text>
               )}
-            </Box>
 
-            <Box>
-              <Link to={urlBlogRoot}>
-                <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
-                  すべてのBlogを見る→
-                </Text>
-              </Link>
-            </Box>
+              <Box>
+                <Link to={urlBlogRoot}>
+                  <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
+                    すべてのBlogを見る→
+                  </Text>
+                </Link>
+              </Box>
+            </VStack>
           </VStack>
         </CenterMaxW>
       </Box>
@@ -101,27 +97,28 @@ export const HomePage: React.FC<HomePageProps> = ({
               Snippet
             </Heading>
 
-            <Box>
-              {snippetArticles.length > 0 ? (
-                <ArticleTipList
-                  articles={snippetArticles}
-                  urlBlogPosts={urlSnippetPosts}
-                  urlContentsBlog={urlContentsSnippet}
-                />
-              ) : (
-                <Text as="small" color="gray.600">
-                  関連する記事は見つかりませんでした
-                </Text>
-              )}
-            </Box>
+            <VStack spacing={4} align="left">
+              <Box>
+                {snippetArticles.length > 0 ? (
+                  <ArticleTipPlainTextList
+                    articles={snippetArticles}
+                    urlBlogPosts={urlSnippetPosts}
+                  />
+                ) : (
+                  <Text as="small" color="gray.600">
+                    関連する記事は見つかりませんでした
+                  </Text>
+                )}
+              </Box>
 
-            <Box>
-              <Link to={urlSnippetRoot}>
-                <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
-                  すべてのSnippetを見る→
-                </Text>
-              </Link>
-            </Box>
+              <Box>
+                <Link to={urlSnippetRoot}>
+                  <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
+                    すべてのSnippetを見る→
+                  </Text>
+                </Link>
+              </Box>
+            </VStack>
           </VStack>
         </CenterMaxW>
       </Box>
