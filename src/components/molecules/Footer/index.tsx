@@ -62,7 +62,7 @@ export const Footer: React.FC = () => (
                   as={FaTwitter}
                   boxSize={6}
                   _hover={{ color: 'teal.500' }}
-                  xlinkTitle="create a mention for me on twitter"
+                  aria-label="Twitter で @suzukalight にメッセージを送る"
                 />
               </Tooltip>
             </Link>
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => (
                   as={FaGithub}
                   boxSize={6}
                   _hover={{ color: 'teal.500' }}
-                  xlinkTitle="create an issue to contact me"
+                  aria-label="GitHub で suzukalight にメッセージの Issue を立てる"
                 />
               </Tooltip>
             </Link>

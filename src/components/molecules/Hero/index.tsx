@@ -8,8 +8,7 @@ import {
   Stack,
   Text,
   SlideFade,
-  Button,
-  Icon,
+  IconButton,
   VStack,
 } from '@chakra-ui/react';
 import { FaArrowDown } from 'react-icons/fa';
@@ -102,9 +101,12 @@ export const Hero = ({ title, subtitle, image, refBlog }: HeroProps) => {
       </Center>
 
       <Center h={16} pb={16}>
-        <Button onClick={scrollToBlogHeader}>
-          <Icon as={FaArrowDown} boxSize={6} />
-        </Button>
+        <IconButton
+          aria-label="Scroll to Blog section"
+          icon={<FaArrowDown />}
+          fontSize="2em"
+          onClick={scrollToBlogHeader}
+        />
       </Center>
     </VStack>
   );

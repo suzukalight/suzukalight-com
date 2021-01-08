@@ -19,7 +19,7 @@ export const SNSLinks: React.FC<SNSLinksProps> = ({ spacing, boxSize, color }) =
           boxSize={boxSize}
           color={color ?? 'teal.800'}
           _hover={{ color: 'teal.500' }}
-          xlinkTitle="Twitter"
+          aria-label="Twitter"
         />
       </Tooltip>
     </Link>
@@ -30,7 +30,7 @@ export const SNSLinks: React.FC<SNSLinksProps> = ({ spacing, boxSize, color }) =
           boxSize={boxSize}
           color={color ?? 'teal.800'}
           _hover={{ color: 'teal.500' }}
-          xlinkTitle="Facebook"
+          aria-label="Facebook"
         />
       </Tooltip>
     </Link>
@@ -41,7 +41,7 @@ export const SNSLinks: React.FC<SNSLinksProps> = ({ spacing, boxSize, color }) =
           boxSize={boxSize}
           color={color ?? 'teal.800'}
           _hover={{ color: 'teal.500' }}
-          xlinkTitle="GitHub"
+          aria-label="GitHub"
         />
       </Tooltip>
     </Link>
