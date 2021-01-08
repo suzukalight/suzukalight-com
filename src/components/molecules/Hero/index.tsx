@@ -10,7 +10,6 @@ import {
   SlideFade,
   Button,
   Icon,
-  ChakraProps,
   VStack,
 } from '@chakra-ui/react';
 import { FaArrowDown } from 'react-icons/fa';
@@ -22,10 +21,9 @@ type HeroProps = {
   subtitle: string;
   image: string;
   refBlog: React.MutableRefObject<HTMLDivElement>;
-  chakraProps?: ChakraProps;
 };
 
-export const Hero = ({ title, subtitle, image, refBlog, chakraProps }: HeroProps) => {
+export const Hero = ({ title, subtitle, image, refBlog }: HeroProps) => {
   const scrollToBlogHeader = useCallback(() => {
     refBlog.current.scrollIntoView({
       behavior: 'smooth',
@@ -44,7 +42,6 @@ export const Hero = ({ title, subtitle, image, refBlog, chakraProps }: HeroProps
           w="100%"
           px={0}
           mb={[8, 8, 16]}
-          {...chakraProps}
         >
           <Box w={['100%', '100%', '45%']} pl={[0, 0, 8, 16, 24]}>
             <SlideFade in offsetX="-4em" offsetY={0}>
