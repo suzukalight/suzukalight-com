@@ -33,7 +33,7 @@ export const TimelineNode: React.FC<TimelineNodeProps> = ({
       !isLast && {
         content: '""',
         position: 'absolute',
-        left: ['-25px', '-25px', '-53px'],
+        left: ['-25px', '-25px', '-37px'],
         top: 0,
         bottom: 0,
         width: '2px',
@@ -41,15 +41,15 @@ export const TimelineNode: React.FC<TimelineNodeProps> = ({
       }
     }
     position="relative"
-    ml={[10, 10, '180px']}
+    ml={[10, 10, '164px']}
     pb={6}
   >
     {icon ? (
       <Icon
         as={icon}
-        boxSize={[6, 6, 16]}
+        boxSize={[6, 6, 8]}
         position="absolute"
-        left={['-36px', '-36px', '-84px']}
+        left={['-36px', '-36px', '-52px']}
         backgroundColor="white"
         color="gray.700"
       />
@@ -58,7 +58,7 @@ export const TimelineNode: React.FC<TimelineNodeProps> = ({
         as={FaCircle}
         boxSize={3}
         position="absolute"
-        left={['-30px', '-30px', '-58px']}
+        left={['-30px', '-30px', '-42px']}
         top="6px"
         backgroundColor="white"
       />
@@ -73,11 +73,11 @@ export const TimelineNode: React.FC<TimelineNodeProps> = ({
     {role && <Text fontSize="md">{role}</Text>}
 
     <Box
-      color="gray.400"
+      color="gray.600"
       position={['relative', 'relative', 'absolute']}
       display="block"
       top={['auto', 'auto', 0]}
-      left={['auto', 'auto', '-192px']}
+      left={['auto', 'auto', '-160px']}
       width={['auto', 'auto', '84px']}
       textAlign={['left', 'left', 'right']}
     >
