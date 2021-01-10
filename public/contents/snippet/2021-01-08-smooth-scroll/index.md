@@ -2,7 +2,7 @@
 title: ボタンを押すと滑らかにスクロールしてコンテンツを表示
 date: '2021-01-08T01:00:00'
 category: Snippet
-tags: ['react', 'UI', 'chakra-ui', 'scrollIntoView', 'a11y']
+tags: ['react', 'user-interface', 'chakra-ui', 'scroll-into-view', 'a11y']
 status: 'published'
 ---
 

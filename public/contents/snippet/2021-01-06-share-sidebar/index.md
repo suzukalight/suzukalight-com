@@ -2,7 +2,7 @@
 title: SNSシェアボタンを上スクロール時のみフェードインさせる
 date: '2021-01-06T01:00:00'
 category: Snippet
-tags: ['react', 'UI', 'chakra-ui', 'react-share', 'react-icons']
+tags: ['react', 'user-interface', 'chakra-ui', 'react-share', 'react-icons']
 hero: share-sidebar.png
 status: 'published'
 ---

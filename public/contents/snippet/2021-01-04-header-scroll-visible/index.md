@@ -2,7 +2,7 @@
 title: 上スクロールしたときだけ表示されるヘッダ
 date: '2021-01-04T01:00:00'
 category: Snippet
-tags: ['react', 'UI', 'react-hooks']
+tags: ['react', 'user-interface', 'react-hooks']
 status: 'published'
 ---
 

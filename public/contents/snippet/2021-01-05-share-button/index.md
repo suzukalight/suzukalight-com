@@ -2,7 +2,7 @@
 title: SNSシェアボタンの作成
 date: '2021-01-05T01:00:00'
 category: Snippet
-tags: ['react', 'UI', 'chakra-ui', 'react-share', 'react-icons']
+tags: ['react', 'user-interface', 'chakra-ui', 'react-share', 'react-icons']
 status: 'published'
 ---
 

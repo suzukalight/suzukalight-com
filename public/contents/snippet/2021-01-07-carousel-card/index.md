@@ -2,7 +2,7 @@
 title: カルーセルでカードを表示する
 date: '2021-01-07T01:00:00'
 category: Snippet
-tags: ['react', 'UI', 'react-slick', 'chakra-ui']
+tags: ['react', 'user-interface', 'react-slick', 'chakra-ui']
 hero: carousel-card.png
 status: 'published'
 ---
