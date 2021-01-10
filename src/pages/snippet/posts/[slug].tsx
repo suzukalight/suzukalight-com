@@ -10,7 +10,11 @@ import {
   urlSnippetTags,
 } from '../../url.json';
 import { Article, stripContent } from '../../../utils/article/entity';
-import { getArticle, getArticles, getDirNamesThatHaveMdx } from '../../../utils/article/fs.server';
+import {
+  getArticle,
+  getArticles,
+  getPublicDirNamesThatHaveMdx,
+} from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
@@ -93,7 +97,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 export default SnippetPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dirNamesThatHaveMdx = getDirNamesThatHaveMdx(urlContentsSnippet);
+  const dirNamesThatHaveMdx = getPublicDirNamesThatHaveMdx(urlContentsSnippet);
   const paths = dirNamesThatHaveMdx.map((dir) => ({ params: { slug: dir.replace(/\.mdx?/, '') } }));
 
   return {

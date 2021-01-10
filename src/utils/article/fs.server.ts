@@ -6,10 +6,19 @@ import { getArticleFromMdxSource, isPublished } from './entity';
 const root = process.cwd();
 
 /**
- * contentsRootDir/{$1}/index.mdx? にマッチするMDXを探して、そのディレクトリ一覧を返す
+ * urlContents のディレクトリ一覧を返す
  * @param urlContents コンテンツのURL
  */
-export const getDirNamesThatHaveMdx = (urlContents: string) => {
+export const getPublicDirNames = (urlContents: string) => {
+  const contentsRootDir = path.join(root, 'public', urlContents); // contents は public/path にあるものとする
+  return fs.readdirSync(contentsRootDir);
+};
+
+/**
+ * urlContents/{$1}/index.mdx? にマッチするMDXを探して、そのディレクトリ一覧を返す
+ * @param urlContents コンテンツのURL
+ */
+export const getPublicDirNamesThatHaveMdx = (urlContents: string) => {
   const contentsRootDir = path.join(root, 'public', urlContents); // contents は public/path にあるものとする
   const dirNames = fs.readdirSync(contentsRootDir);
   const dirNamesThatHaveMdx = dirNames.filter(
@@ -83,6 +92,6 @@ export const getArticlesFromDirs = async (
  * @param options
  */
 export const getArticles = async (urlContents: string, options?: GetArticlesFromDirOption) => {
-  const mdxDirs = getDirNamesThatHaveMdx(urlContents);
+  const mdxDirs = getPublicDirNamesThatHaveMdx(urlContents);
   return getArticlesFromDirs(urlContents, mdxDirs, options);
 };
