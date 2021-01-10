@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Flex, Box, Heading, VStack, ListItem, UnorderedList } from '@chakra-ui/react';
+import { Flex, Box, Heading, VStack, ListItem, UnorderedList, Text } from '@chakra-ui/react';
 
 import { urlContentsTextbook, urlTextbookRoot } from '../../url.json';
 import { Article, stripContent } from '../../../utils/article/entity';
@@ -48,7 +48,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
 
   return (
-    <Flex direction="column" align="center" w="100vw" m="0 auto" overflowX="hidden">
+    <Flex direction="column" align="center" w="100%" minH="100vh" m="0 auto" overflowX="hidden">
       <Header />
       <HtmlHead title={title} description={article.excerpt} url={blogUrl} {...ogImage} />
 
@@ -65,16 +65,21 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         px={4}
         align="left"
         shadow="sm"
+        // backgroundColor="gray.50"
       >
         <Heading as="h1" fontSize="md">
           {book.frontMatter.title}
         </Heading>
 
-        <UnorderedList listStyleType="none">
+        <UnorderedList listStyleType="none" spacing={4}>
           {chapters.map((chapter) => (
-            <Link to={`${urlTextbook}/${chapter.slug}`} key={chapter.frontMatter.title}>
-              <ListItem>{chapter.frontMatter.title}</ListItem>
-            </Link>
+            <ListItem key={chapter.frontMatter.title}>
+              <Link to={`${urlTextbook}/${chapter.slug}`}>
+                <Text color="gray.400" fontSize="sm" fontWeight="600">
+                  {chapter.frontMatter.title}
+                </Text>
+              </Link>
+            </ListItem>
           ))}
         </UnorderedList>
       </VStack>
