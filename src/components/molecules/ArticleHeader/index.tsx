@@ -8,7 +8,7 @@ import { CoverImage } from '../../../components/atoms/CoverImage';
 type ArticleHeaderProps = {
   article: Article;
   urlContent: string;
-  urlTags: string;
+  urlTags?: string;
 };
 
 export const ArticleHeader: React.FC<ArticleHeaderProps> = ({ article, urlContent, urlTags }) => {
