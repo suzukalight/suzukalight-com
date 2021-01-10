@@ -71,16 +71,32 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           {book.frontMatter.title}
         </Heading>
 
-        <UnorderedList listStyleType="none" spacing={4}>
-          {chapters.map((chapter) => (
-            <ListItem key={chapter.frontMatter.title}>
-              <Link to={`${urlTextbook}/${chapter.slug}`}>
-                <Text color="gray.400" fontSize="sm" fontWeight="600">
-                  {chapter.frontMatter.title}
-                </Text>
-              </Link>
-            </ListItem>
-          ))}
+        <UnorderedList listStyleType="none" spacing={1}>
+          {chapters.map((chapter) => {
+            const url = `${urlTextbook}/${chapter.slug}`;
+            const match = chapter.slug === article.slug;
+
+            return (
+              <ListItem
+                key={chapter.frontMatter.title}
+                p={2}
+                borderRadius={4}
+                color={match ? 'gray.800' : 'gray.400'}
+                backgroundColor={match ? 'gray.100' : 'inherit'}
+                _hover={{
+                  textDecoration: 'underline',
+                  color: 'gray.800',
+                  backgroundColor: match ? 'gray.200' : 'gray.50',
+                }}
+              >
+                <Link to={url}>
+                  <Text fontSize="sm" fontWeight="600">
+                    {chapter.frontMatter.title}
+                  </Text>
+                </Link>
+              </ListItem>
+            );
+          })}
         </UnorderedList>
       </VStack>
 
