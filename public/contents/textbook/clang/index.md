@@ -1,7 +1,6 @@
 ---
 title: C言語プログラミング
 date: '2012-05-01T01:00:00'
-tags: ['技術選定', 'frontend', 'react', 'storybook', 'atomic-design', 'graphql']
 hero: vc-first-13.png
 status: 'published'
 ---
