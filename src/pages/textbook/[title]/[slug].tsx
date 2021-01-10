@@ -1,9 +1,9 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Flex, Box, Heading, VStack } from '@chakra-ui/react';
+import { Flex, Box, Heading, VStack, ListItem, UnorderedList } from '@chakra-ui/react';
 
 import { urlContentsTextbook, urlTextbookRoot } from '../../url.json';
-import { Article } from '../../../utils/article/entity';
+import { Article, stripContent } from '../../../utils/article/entity';
 import {
   getArticle,
   getArticles,
@@ -19,27 +19,30 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
+import { Link } from '../../../components/atoms/Link';
 
 type BlogPostProps = {
-  bookTitle: string;
+  book: Article;
   urlTextbook: string;
   article: Article;
   contentHtml: string;
+  chapters: Article[];
   prevArticle?: Article;
   nextArticle?: Article;
 };
 
 export const BlogPost: React.FC<BlogPostProps> = ({
-  bookTitle,
+  book,
   urlTextbook,
   article,
   contentHtml,
+  chapters,
 }) => {
   const { slug } = article;
   const { title, hero } = article.frontMatter;
   const blogUrl = `${urlTextbook}/${slug}`;
   const contentBaseUrl = `${urlContentsTextbook}/${urlTextbook}/${slug}`;
-  const urlContentsTextbookTitle = `${urlContentsTextbook}/${bookTitle}`;
+  const urlContentsTextbookTitle = `${urlContentsTextbook}/${book.slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
   const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
@@ -49,25 +52,36 @@ export const BlogPost: React.FC<BlogPostProps> = ({
       <Header />
       <HtmlHead title={title} description={article.excerpt} url={blogUrl} {...ogImage} />
 
-      <Box
+      <VStack
+        spacing={4}
         as="aside"
         flexShrink={0}
         position="fixed"
         left={['-15em', '-15em', '-15em', 0]}
-        top="4em"
+        top={0}
         w="15em"
-        h="calc(100vh - 4em)"
+        h="100vh"
+        pt="5em"
+        px={4}
+        align="left"
+        shadow="sm"
       >
         <Heading as="h1" fontSize="md">
-          {bookTitle}
+          {book.frontMatter.title}
         </Heading>
 
-        {/* <ArticleDetail contentHtml={content} /> */}
-      </Box>
+        <UnorderedList listStyleType="none">
+          {chapters.map((chapter) => (
+            <Link to={`${urlTextbook}/${chapter.slug}`} key={chapter.frontMatter.title}>
+              <ListItem>{chapter.frontMatter.title}</ListItem>
+            </Link>
+          ))}
+        </UnorderedList>
+      </VStack>
 
       <Box ml={[0, 0, 0, '15em']} mt="4em">
         <CenterMaxW maxWidth="40em">
-          <VStack spacing={12} align="left">
+          <VStack spacing={8} align="left">
             <ArticleHeader article={article} urlContent={urlContentsTextbookTitle} />
             <ArticleDetail contentHtml={content} />
           </VStack>
@@ -95,23 +109,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const bookTitle = params.title as string;
+  const bookSlug = params.title as string;
   const slug = params.slug as string;
-  const urlTextbook = `${urlTextbookRoot}/${bookTitle}`;
-  const urlContentsTextbookTitle = `${urlContentsTextbook}/${bookTitle}`;
+  const urlTextbook = `${urlTextbookRoot}/${bookSlug}`;
+  const urlContentsTextbookTitle = `${urlContentsTextbook}/${bookSlug}`;
   const { content, ...article } = await getArticle(slug, urlContentsTextbookTitle);
 
   const contentHtml = await renderToString(content, `${urlContentsTextbookTitle}/${slug}`);
 
-  const articles = await getArticles(urlContentsTextbook);
-  const { prevArticle, nextArticle } = getPrevAndNextArticle(article, articles);
+  const chapters = await getArticles(urlContentsTextbookTitle);
+  const { prevArticle, nextArticle } = getPrevAndNextArticle(article, chapters);
+
+  const book = await getArticle(bookSlug, urlContentsTextbook);
 
   return {
     props: {
-      bookTitle,
+      book: stripContent(book),
       urlTextbook,
       article,
       contentHtml,
+      chapters: chapters.map((c) => stripContent(c)),
       prevArticle,
       nextArticle,
     },
