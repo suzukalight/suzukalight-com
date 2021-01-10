@@ -2,10 +2,12 @@
   "urlBlogRoot": "/blog",
   "urlBlogPosts": "/blog/posts",
   "urlBlogTags": "/blog/tags",
+  "urlTextbookRoot": "/textbook",
   "urlSnippetRoot": "/snippet",
   "urlSnippetPosts": "/snippet/posts",
   "urlSnippetTags": "/snippet/tags",
   "urlContentsBlog": "/contents/blog",
+  "urlContentsTextbook": "/contents/textbook",
   "urlContentsSnippet": "/contents/snippet",
   "urlContentsAbout": "/contents/about"
 }
