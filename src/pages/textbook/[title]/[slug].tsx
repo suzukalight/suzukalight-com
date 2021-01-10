@@ -41,7 +41,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const { slug } = article;
   const { title, hero } = article.frontMatter;
   const blogUrl = `${urlTextbook}/${slug}`;
-  const contentBaseUrl = `${urlContentsTextbook}/${urlTextbook}/${slug}`;
+  const contentBaseUrl = `${urlContentsTextbook}/${book.slug}/${slug}`;
   const urlContentsTextbookTitle = `${urlContentsTextbook}/${book.slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
