@@ -2,17 +2,13 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Flex, Box, Heading, VStack, ListItem, UnorderedList, Text } from '@chakra-ui/react';
 
-import { urlContentsTextbook, urlTextbookRoot } from '../../url.json';
 import { Article, stripContent } from '../../../utils/article/entity';
-import {
-  getArticle,
-  getArticles,
-  getPublicDirNames,
-  getPublicDirNamesThatHaveMdx,
-} from '../../../utils/article/fs.server';
+import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle } from '../../../utils/article/related';
+import { getContentsDirNames } from '../../../utils/path/file.server';
+import { getContentsUrl, UrlTable } from '../../../utils/path/url';
 
 import { Header } from '../../../components/molecules/Header';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
@@ -41,6 +37,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const { slug } = article;
   const { title, hero } = article.frontMatter;
   const blogUrl = `${urlTextbook}/${slug}`;
+  const urlContentsTextbook = getContentsUrl(UrlTable.textbook);
   const contentBaseUrl = `${urlContentsTextbook}/${book.slug}/${slug}`;
   const urlContentsTextbookTitle = `${urlContentsTextbook}/${book.slug}`;
 
@@ -115,10 +112,10 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 export default BlogPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const titles = getPublicDirNames(urlContentsTextbook);
+  const titles = getContentsDirNames(UrlTable.textbook);
   const paths = titles
     .map((title) => {
-      const slugs = getPublicDirNamesThatHaveMdx(`${urlContentsTextbook}/${title}`);
+      const slugs = getSlugs(`${UrlTable.textbook}/${title}`);
       return slugs.map((slug) => ({ params: { title, slug } }));
     })
     .flat();
@@ -132,11 +129,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const bookSlug = params.title as string;
   const slug = params.slug as string;
-  const urlTextbook = `${urlTextbookRoot}/${bookSlug}`;
+  const urlTextbook = `${UrlTable.textbook}/${bookSlug}`;
+  const urlContentsTextbook = getContentsUrl(UrlTable.textbook);
   const urlContentsTextbookTitle = `${urlContentsTextbook}/${bookSlug}`;
   const { content, ...article } = await getArticle(slug, urlContentsTextbookTitle);
 
-  const contentHtml = await renderToString(content, `${urlContentsTextbookTitle}/${slug}`);
+  const contentHtml = await renderToString(content, slug, urlContentsTextbookTitle);
 
   const chapters = await getArticles(urlContentsTextbookTitle);
   const { prevArticle, nextArticle } = getPrevAndNextArticle(article, chapters);
