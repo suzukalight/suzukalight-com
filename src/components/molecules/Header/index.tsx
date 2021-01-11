@@ -15,7 +15,8 @@ const MenuItems: React.FC<MenuItemProps> = ({ children, to, isLast, ...rest }) =
   <Box
     w={{ base: '100%', sm: 'auto' }}
     mb={{ base: isLast ? 0 : 8, sm: 0 }}
-    mr={{ base: 0, sm: isLast ? 0 : 8 }}
+    mr={{ base: 0, sm: isLast ? 0 : 4 }}
+    px={4}
   >
     <Link to={to}>
       <Text display="block" textAlign="center" {...rest}>
