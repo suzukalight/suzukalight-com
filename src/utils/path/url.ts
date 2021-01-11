@@ -4,7 +4,7 @@ export const UrlTable = {
   blog: '/blog',
   blogPosts: '/blog/posts',
   blogTags: '/blog/tags',
-  textbook: '/textbook',
+  course: '/course',
   snippet: '/snippet',
   snippetPosts: '/snippet/posts',
   snippetTags: '/snippet/tags',

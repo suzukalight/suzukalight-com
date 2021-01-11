@@ -11,19 +11,19 @@ type ArticleHeaderProps = {
   article: Article;
   urlRoot: string;
   urlTags?: string;
-  textbook?: Article;
+  course?: Article;
 };
 
 export const ArticleHeader: React.FC<ArticleHeaderProps> = ({
   article,
   urlRoot,
   urlTags,
-  textbook,
+  course,
 }) => {
   const { slug } = article;
   const { title, tags, hero, emoji } = article.frontMatter;
-  const imageSrc = textbook
-    ? `${getContentsUrlWithSlug(slug, mergeUrlAndSlug(textbook.slug, urlRoot))}/${hero}`
+  const imageSrc = course
+    ? `${getContentsUrlWithSlug(slug, mergeUrlAndSlug(course.slug, urlRoot))}/${hero}`
     : `${getContentsUrlWithSlug(slug, urlRoot)}/${hero}`;
 
   return (

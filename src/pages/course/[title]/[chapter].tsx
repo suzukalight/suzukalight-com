@@ -17,28 +17,33 @@ import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { Link } from '../../../components/atoms/Link';
 
-type BlogPostProps = {
-  textbook: Article;
-  article: Article;
+type CourseChapterProps = {
+  course: Article;
+  chapter: Article;
   contentHtml: string;
   chapters: Article[];
   prevArticle?: Article;
   nextArticle?: Article;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ textbook, article, contentHtml, chapters }) => {
-  const { slug } = article;
-  const { title, hero } = article.frontMatter;
-  const urlTextbook = mergeUrlAndSlug(textbook.slug, UrlTable.textbook);
-  const urlChapter = mergeUrlAndSlug(slug, urlTextbook);
+export const CourseChapter: React.FC<CourseChapterProps> = ({
+  course,
+  chapter,
+  contentHtml,
+  chapters,
+}) => {
+  const { slug } = chapter;
+  const { title, hero } = chapter.frontMatter;
+  const urlCourse = mergeUrlAndSlug(course.slug, UrlTable.course);
+  const urlChapter = mergeUrlAndSlug(slug, urlCourse);
 
-  const content = hydrate(contentHtml, slug, urlTextbook);
+  const content = hydrate(contentHtml, slug, urlCourse);
   const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, urlChapter)}/${hero}` } : null;
 
   return (
     <Flex direction="column" align="center" w="100%" minH="100vh" m="0 auto" overflowX="hidden">
       <Header />
-      <HtmlHead title={title} description={article.excerpt} url={urlChapter} {...ogImage} />
+      <HtmlHead title={title} description={chapter.excerpt} url={urlChapter} {...ogImage} />
 
       <VStack
         spacing={4}
@@ -49,24 +54,23 @@ export const BlogPost: React.FC<BlogPostProps> = ({ textbook, article, contentHt
         top={0}
         w="15em"
         h="100vh"
-        pt="5em"
+        pt="7em"
         px={4}
         align="left"
         shadow="sm"
-        // backgroundColor="gray.50"
       >
         <Heading as="h1" fontSize="md">
-          {textbook.frontMatter.title}
+          {course.frontMatter.title}
         </Heading>
 
         <UnorderedList listStyleType="none" spacing={1}>
-          {chapters.map((chapter) => {
-            const url = mergeUrlAndSlug(chapter.slug, urlTextbook);
-            const match = chapter.slug === article.slug;
+          {chapters.map((c) => {
+            const url = mergeUrlAndSlug(c.slug, urlCourse);
+            const match = c.slug === chapter.slug;
 
             return (
               <ListItem
-                key={chapter.frontMatter.title}
+                key={c.frontMatter.title}
                 p={2}
                 borderRadius={4}
                 color={match ? 'gray.800' : 'gray.400'}
@@ -79,7 +83,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ textbook, article, contentHt
               >
                 <Link to={url}>
                   <Text fontSize="sm" fontWeight="600">
-                    {chapter.frontMatter.title}
+                    {c.frontMatter.title}
                   </Text>
                 </Link>
               </ListItem>
@@ -91,7 +95,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ textbook, article, contentHt
       <Box ml={[0, 0, 0, '15em']} mt="4em">
         <CenterMaxW maxWidth="40em">
           <VStack spacing={8} align="left">
-            <ArticleHeader article={article} urlRoot={UrlTable.textbook} textbook={textbook} />
+            <ArticleHeader article={chapter} urlRoot={UrlTable.course} course={course} />
             <ArticleDetail contentHtml={content} />
           </VStack>
         </CenterMaxW>
@@ -100,14 +104,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({ textbook, article, contentHt
   );
 };
 
-export default BlogPost;
+export default CourseChapter;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const titles = getContentsDirNames(UrlTable.textbook);
+  const titles = getContentsDirNames(UrlTable.course);
   const paths = titles
     .map((title) => {
-      const slugs = getSlugs(`${UrlTable.textbook}/${title}`);
-      return slugs.map((slug) => ({ params: { title, slug } }));
+      const slugs = getSlugs(`${UrlTable.course}/${title}`);
+      return slugs.map((chapter) => ({ params: { title, chapter } }));
     })
     .flat();
 
@@ -117,23 +121,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<BlogPostProps> = async ({ params }) => {
-  const textbookSlug = params.title as string;
-  const slug = params.slug as string;
-  const urlTextbook = mergeUrlAndSlug(textbookSlug, UrlTable.textbook);
+export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ params }) => {
+  const courseSlug = params.title as string;
+  const slug = params.chapter as string;
+  const urlCourse = mergeUrlAndSlug(courseSlug, UrlTable.course);
 
-  const { content, ...article } = await getArticle(slug, urlTextbook);
-  const contentHtml = await renderToString(content, slug, urlTextbook);
+  const { content, ...chapter } = await getArticle(slug, urlCourse);
+  const contentHtml = await renderToString(content, slug, urlCourse);
 
-  const chapters = await getArticles(urlTextbook);
-  const { prevArticle, nextArticle } = getPrevAndNextArticle(article, chapters);
+  const chapters = await getArticles(urlCourse);
+  const { prevArticle, nextArticle } = getPrevAndNextArticle(chapter, chapters);
 
-  const textbook = await getArticle(textbookSlug, UrlTable.textbook);
+  const course = await getArticle(courseSlug, UrlTable.course);
 
   return {
     props: {
-      textbook: stripContent(textbook),
-      article,
+      course: stripContent(course),
+      chapter,
       contentHtml,
       chapters: chapters.map((c) => stripContent(c)),
       prevArticle,

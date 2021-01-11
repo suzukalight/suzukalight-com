@@ -6,7 +6,7 @@
 
 - **about**: 自己紹介
 - **blog**: 一般的なブログ
-- **textbook**: 複数の章から構成される本
+- **course**: 複数の章から構成されるコース
 - **snippet**: 再利用可能なコードスニペット
 
 # ファイルの置き方（blog, snippet）
@@ -43,11 +43,11 @@ status: 'published'
 
 基本は blog などと同じです。`index/index.md` のみ有効です。コンテンツはページの後半部分にレンダリングされます。
 
-# ファイルの置き方（textbook）
+# ファイルの置き方（course）
 
 ## introduction
 
-`/public/contents/[title]/index.md(x?)` に markdown を置くと、本の概説部分を提供することができます。本のタイトルなどもここで指定します。
+`/public/contents/course/[title]/index.md(x?)` に markdown を置くと、本の概説部分を提供することができます。本のタイトルなどもここで指定します。
 
 ### frontmatter
 
@@ -67,7 +67,7 @@ status: 'published'
 
 ## chapter
 
-textbook は章構成があるため、各章のファイルパスは `/public/contents/[title]/[chapter]/index.md(x?)` という構成になっています。
+textbook は章構成があるため、各章のファイルパスは `/public/contents/course/[title]/[chapter]/index.md(x?)` という構成になっています。
 
 画面左の目次などは、chapter slug のアルファベット順で列挙するため、ディレクトリ名の先頭に数値などを付加して順序付けておくと良いでしょう。（e.g. `01-variables/index.md`）
 
