@@ -10,24 +10,26 @@ import {
 import { FaFacebook, FaGetPocket, FaLine, FaTwitter } from 'react-icons/fa';
 import { SiHatenabookmark } from 'react-icons/si';
 
-import { SITE_URL, TWITTER_ID } from '../../../utils/env';
-
 type ShareButtonsProps = {
   url: string;
   title: string;
   tooltipPlacement: Placement;
+  indexUrl: string;
+  twitterId?: string;
 };
 
 export const ShareButtons: React.FC<ShareButtonsProps> = ({
   url: _url,
   title,
   tooltipPlacement,
+  indexUrl,
+  twitterId,
 }) => {
-  const url = new URL(_url, SITE_URL).toString();
+  const url = new URL(_url, indexUrl).toString();
 
   return (
     <>
-      <TwitterShareButton url={url} title={title} via={TWITTER_ID}>
+      <TwitterShareButton url={url} title={title} via={twitterId}>
         <Tooltip label="Twitterでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
           <Icon as={FaTwitter} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
         </Tooltip>

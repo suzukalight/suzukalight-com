@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
+import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 import { Article, stripContent } from '../../../utils/article/entity';
 import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
@@ -50,7 +51,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
     <DefaultLayout>
       <HtmlHead title={title} description={article.excerpt} url={url} {...ogImage} />
 
-      <ShareButtonsLeftFixed url={url} title={title} />
+      <ShareButtonsLeftFixed url={url} title={title} indexUrl={SITE_URL} twitterId={TWITTER_ID} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
@@ -61,7 +62,12 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
               urlTags={UrlTable.snippetTags}
             />
             <ArticleDetail contentHtml={content} />
-            <ShareButtonsHorizontal url={url} title={title} />
+            <ShareButtonsHorizontal
+              url={url}
+              title={title}
+              indexUrl={SITE_URL}
+              twitterId={TWITTER_ID}
+            />
           </VStack>
 
           <RelatedArticles

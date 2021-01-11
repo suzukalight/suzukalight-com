@@ -6,10 +6,23 @@ import { ShareButtons } from './Buttons';
 type ShareButtonsHorizontalProps = {
   url: string;
   title: string;
+  indexUrl: string;
+  twitterId?: string;
 };
 
-export const ShareButtonsHorizontal: React.FC<ShareButtonsHorizontalProps> = ({ title, url }) => (
+export const ShareButtonsHorizontal: React.FC<ShareButtonsHorizontalProps> = ({
+  title,
+  url,
+  indexUrl,
+  twitterId,
+}) => (
   <HStack spacing={4}>
-    <ShareButtons url={url} title={title} tooltipPlacement="top" />
+    <ShareButtons
+      url={url}
+      title={title}
+      tooltipPlacement="top"
+      indexUrl={indexUrl}
+      twitterId={twitterId}
+    />
   </HStack>
 );
