@@ -10,17 +10,10 @@ import { CenterMaxW } from '../components/atoms/CenterMaxW';
 import { SlickArticles } from '../components/organisms/SlickArticles';
 import { ArticleTipPlainTextList } from '../components/molecules/ArticleTipList';
 
-import {
-  urlBlogRoot,
-  urlContentsBlog,
-  urlBlogPosts,
-  urlSnippetRoot,
-  urlSnippetPosts,
-  urlContentsSnippet,
-} from './url.json';
 import { Article } from '../utils/article/entity';
 import { getArticle, getArticles } from '../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../utils/article/sorter';
+import { getContentsUrl, UrlTable } from '../utils/path/url';
 
 type HomePageProps = {
   pickupArticles: Article[];
@@ -60,8 +53,8 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <SlickArticles
                 articles={pickupArticles}
-                urlContents={urlContentsBlog}
-                urlPosts={urlBlogPosts}
+                urlContents={getContentsUrl(UrlTable.blog)}
+                urlPosts={UrlTable.blogPosts}
               />
             </Box>
 
@@ -71,7 +64,10 @@ export const HomePage: React.FC<HomePageProps> = ({
               </Heading>
 
               {blogArticles.length > 0 ? (
-                <ArticleTipPlainTextList articles={blogArticles} urlBlogPosts={urlBlogPosts} />
+                <ArticleTipPlainTextList
+                  articles={blogArticles}
+                  urlBlogPosts={UrlTable.blogPosts}
+                />
               ) : (
                 <Text as="small" color="gray.600">
                   関連する記事は見つかりませんでした
@@ -79,7 +75,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               )}
 
               <Box>
-                <Link to={urlBlogRoot}>
+                <Link to={UrlTable.blog}>
                   <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
                     すべてのBlogを見る→
                   </Text>
@@ -102,7 +98,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 {snippetArticles.length > 0 ? (
                   <ArticleTipPlainTextList
                     articles={snippetArticles}
-                    urlBlogPosts={urlSnippetPosts}
+                    urlBlogPosts={UrlTable.snippetPosts}
                   />
                 ) : (
                   <Text as="small" color="gray.600">
@@ -112,7 +108,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </Box>
 
               <Box>
-                <Link to={urlSnippetRoot}>
+                <Link to={UrlTable.snippet}>
                   <Text align="right" textDecoration="underline" _hover={{ color: 'teal.500' }}>
                     すべてのSnippetを見る→
                   </Text>
@@ -129,10 +125,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 export default HomePage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const snippetArticles = await getArticles(urlContentsSnippet);
+  const snippetArticles = await getArticles(UrlTable.snippet);
   const snippetArticlesSorted = sortArticlesByDateDesc(snippetArticles).slice(0, 6);
 
-  const blogArticles = await getArticles(urlContentsBlog);
+  const blogArticles = await getArticles(UrlTable.blog);
   const blogArticlesSorted = sortArticlesByDateDesc(blogArticles).slice(0, 6);
 
   const pickupArticles = await Promise.all(
@@ -143,7 +139,7 @@ export const getStaticProps: GetStaticProps = async () => {
       '2019-09-06-join-carrot-club',
       '2019-02-05-to-release-smartphone-app',
       '2018-12-08-frontend-technology-selection',
-    ].map(async (slug) => await getArticle(slug, urlContentsBlog)),
+    ].map(async (slug) => await getArticle(slug, UrlTable.blog)),
   );
 
   return {
