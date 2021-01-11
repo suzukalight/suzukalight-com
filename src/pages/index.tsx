@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import { Box, Heading, Text, VStack } from '@chakra-ui/react';
 
 import { DefaultLayout } from '../components/templates/DefaultLayout';
-import { HtmlHead } from '../components/atoms/HtmlHead';
+import { HtmlHead } from '../components/molecules/HtmlHead';
 import { Link } from '../components/atoms/Link';
 import { Hero } from '../components/molecules/Hero';
 import { CenterMaxW } from '../components/atoms/CenterMaxW';

@@ -4,7 +4,7 @@ import { Divider, VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
-import { HtmlHead } from '../../../components/atoms/HtmlHead';
+import { HtmlHead } from '../../../components/molecules/HtmlHead';
 import { ArticleExcerptItem } from '../../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 

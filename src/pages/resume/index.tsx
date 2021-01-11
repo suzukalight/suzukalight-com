@@ -3,7 +3,7 @@ import { Box, Heading, Divider } from '@chakra-ui/react';
 import { FaHome, FaBuilding, FaUniversity, FaUserGraduate, FaUser } from 'react-icons/fa';
 
 import { DefaultLayout } from '../../components/templates/DefaultLayout';
-import { HtmlHead } from '../../components/atoms/HtmlHead';
+import { HtmlHead } from '../../components/molecules/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { TimelineNode } from '../../components/molecules/Timeline/Node';
 

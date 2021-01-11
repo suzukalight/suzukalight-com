@@ -11,7 +11,7 @@ import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/articl
 import { getContentsUrlWithSlug, UrlTable } from '../../../utils/path/url';
 
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
-import { HtmlHead } from '../../../components/atoms/HtmlHead';
+import { HtmlHead } from '../../../components/molecules/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { RelatedArticles } from '../../../components/organisms/RelatedArticles';

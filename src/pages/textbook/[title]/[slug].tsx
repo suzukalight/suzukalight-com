@@ -11,7 +11,7 @@ import { getContentsDirNames } from '../../../utils/path/file.server';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
 import { Header } from '../../../components/molecules/Header';
-import { HtmlHead } from '../../../components/atoms/HtmlHead';
+import { HtmlHead } from '../../../components/molecules/HtmlHead';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
