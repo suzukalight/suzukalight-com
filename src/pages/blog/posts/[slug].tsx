@@ -3,16 +3,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-import { urlContentsBlog, urlBlogRoot, urlBlogPosts, urlBlogTags } from '../../url.json';
 import { Article, stripContent } from '../../../utils/article/entity';
-import {
-  getArticle,
-  getArticles,
-  getPublicDirNamesThatHaveMdx,
-} from '../../../utils/article/fs.server';
+import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
+import { getContentsUrl, UrlTable } from '../../../utils/path/url';
 
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
@@ -43,7 +39,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero } = article.frontMatter;
-  const blogUrl = `${urlBlogPosts}/${slug}`;
+  const urlBlog = `${UrlTable.blogPosts}/${slug}`;
+  const urlContentsBlog = getContentsUrl(UrlTable.blog);
   const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
@@ -51,16 +48,20 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
   return (
     <DefaultLayout>
-      <HtmlHead title={title} description={article.excerpt} url={blogUrl} {...ogImage} />
+      <HtmlHead title={title} description={article.excerpt} url={urlBlog} {...ogImage} />
 
-      <ShareButtonsLeftFixed urlBlog={blogUrl} title={title} />
+      <ShareButtonsLeftFixed urlBlog={urlBlog} title={title} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
           <VStack spacing={8} align="left" w="100%">
-            <ArticleHeader article={article} urlContent={urlContentsBlog} urlTags={urlBlogTags} />
+            <ArticleHeader
+              article={article}
+              urlContent={urlContentsBlog}
+              urlTags={UrlTable.blogTags}
+            />
             <ArticleDetail contentHtml={content} />
-            <ShareButtonsHorizontal urlBlog={blogUrl} title={title} />
+            <ShareButtonsHorizontal urlBlog={urlBlog} title={title} />
           </VStack>
 
           <RelatedArticles
@@ -69,13 +70,13 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             prevArticle={prevArticle}
             nextArticle={nextArticle}
             urlContentsBlog={urlContentsBlog}
-            urlBlogPosts={urlBlogPosts}
-            urlBlogTags={urlBlogTags}
+            urlBlogPosts={UrlTable.blogPosts}
+            urlBlogTags={UrlTable.blogTags}
           />
 
           <BackLinks
             links={[
-              { to: urlBlogRoot, icon: FaPencilAlt, label: 'Back to Blog List' },
+              { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog List' },
               { to: '/', icon: FaHome, label: 'Back to Home' },
             ]}
           />
@@ -88,8 +89,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 export default BlogPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dirNamesThatHaveMdx = getPublicDirNamesThatHaveMdx(urlContentsBlog);
-  const paths = dirNamesThatHaveMdx.map((dir) => ({ params: { slug: dir.replace(/\.mdx?/, '') } }));
+  const slugs = getSlugs(UrlTable.blog);
+  const paths = slugs.map((slug) => ({ params: { slug } }));
 
   return {
     fallback: false,
@@ -99,11 +100,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
-  const { content, ...article } = await getArticle(slug, urlContentsBlog);
+  const { content, ...article } = await getArticle(slug, UrlTable.blog);
 
-  const contentHtml = await renderToString(content, `${urlContentsBlog}/${params.slug}`);
+  const contentHtml = await renderToString(content, slug, UrlTable.blog);
 
-  const articles = await getArticles(urlContentsBlog);
+  const articles = await getArticles(UrlTable.blog);
   const _relatedArticles = getRelatedArticles(article, articles);
   const relatedArticles = _relatedArticles.map((r) => stripContent(r));
 

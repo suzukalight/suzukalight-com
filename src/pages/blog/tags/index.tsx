@@ -8,7 +8,6 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { TagListWithCount } from '../../../components/molecules/TagList/WithCount';
 
-import { urlContentsBlog, urlBlogRoot, urlBlogTags } from '../../url.json';
 import { getArticles } from '../../../utils/article/fs.server';
 import {
   comparatorTagCount,
@@ -17,6 +16,7 @@ import {
   getTableWithTagAndCountIncludedInArticles,
   TagAndCount,
 } from '../../../utils/article/tag';
+import { UrlTable } from '../../../utils/path/url';
 
 type IndexPageProps = {
   orderByName: TagAndCount[];
@@ -25,25 +25,25 @@ type IndexPageProps = {
 
 export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount }) => (
   <ArticleListLayout title="Tags">
-    <HtmlHead title="Tags" url={urlBlogTags} />
+    <HtmlHead title="Tags" url={UrlTable.blogTags} />
 
     <Heading as="h2" fontSize="2xl" mb={4}>
       by Name
     </Heading>
 
-    <TagListWithCount tagAndCounts={orderByName} tagBaseUrl={urlBlogTags} />
+    <TagListWithCount tagAndCounts={orderByName} tagBaseUrl={UrlTable.blogTags} />
 
     <Heading as="h2" fontSize="2xl" mt={12} mb={4}>
       by Count
     </Heading>
 
-    <TagListWithCount tagAndCounts={orderByCount} tagBaseUrl={urlBlogTags} />
+    <TagListWithCount tagAndCounts={orderByCount} tagBaseUrl={UrlTable.blogTags} />
 
     <Divider mt={12} mb={8} />
 
     <BackLinks
       links={[
-        { to: urlBlogRoot, icon: FaPencilAlt, label: 'Back to Blog Index' },
+        { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog Index' },
         { to: '/', icon: FaHome, label: 'Back to Home' },
       ]}
     />
@@ -53,7 +53,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getArticles(urlContentsBlog);
+  const articles = await getArticles(UrlTable.blog);
   const tagAndCountTable = getTableWithTagAndCountIncludedInArticles(articles);
   const orderByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const orderByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);

@@ -8,12 +8,12 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { ArticleExcerptItem } from '../../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
-import { urlContentsBlog, urlBlogRoot, urlBlogPosts, urlBlogTags } from '../../url.json';
 import { Article } from '../../../utils/article/entity';
 import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
+import { getContentsUrl, UrlTable } from '../../../utils/path/url';
 
 type TagPageProps = {
   tag: string;
@@ -22,7 +22,7 @@ type TagPageProps = {
 
 export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
   const title = `#${tag} タグの付いた Blog`;
-  const tagUrl = `${urlBlogTags}/${encodeURIComponent(tag)}`;
+  const tagUrl = `${UrlTable.blogTags}/${encodeURIComponent(tag)}`;
 
   return (
     <ArticleListLayout title={title}>
@@ -33,9 +33,9 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
           <ArticleExcerptItem
             key={a.slug}
             article={a}
-            contentBaseUrl={`${urlContentsBlog}/${a.slug}`}
-            tagBaseUrl={urlBlogTags}
-            postBaseUrl={urlBlogPosts}
+            contentBaseUrl={`${getContentsUrl(UrlTable.blog)}/${a.slug}`}
+            tagBaseUrl={UrlTable.blogTags}
+            postBaseUrl={UrlTable.blogPosts}
             contentText={a.excerpt}
             showContentLink
           />
@@ -46,8 +46,8 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 
       <BackLinks
         links={[
-          { to: urlBlogTags, icon: FaPencilAlt, label: 'Back to TagList' },
-          { to: urlBlogRoot, icon: FaPencilAlt, label: 'Back to Blog Index' },
+          { to: UrlTable.blogTags, icon: FaPencilAlt, label: 'Back to TagList' },
+          { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog Index' },
           { to: '/', icon: FaHome, label: 'Back to Home' },
         ]}
       />
@@ -58,7 +58,7 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = await getArticles(urlContentsBlog);
+  const articles = await getArticles(UrlTable.blog);
   const tags = getTagsIncludedInArticles(articles);
   const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
 
@@ -71,7 +71,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const tag = params.tag as string;
 
-  const articles = await getArticles(urlContentsBlog);
+  const articles = await getArticles(UrlTable.blog);
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
   const articlesSorted = sortArticlesByDateDesc(articlesFilteredByTag);
 
