@@ -7,6 +7,7 @@ import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
 
 import { getDefaultComponents } from './markdown';
+import { getContentsDir } from '../path/file.server';
 
 const getDefaultMdxOptions = () => ({
   remarkPlugins: [
@@ -38,16 +39,17 @@ type RenderToStringOptions = {
 /**
  * markdown→DOM変換を行う
  * @param content markdown から frontMatter を取り除いたもの
- * @param imgRootDir img src の root dir
+ * @param url img src の root dir
  * @param options mdx→JSX変換で使用するコンポーネントマップ、remarkPlugin設定など
  */
 export const renderToString = async (
   content: string,
-  imgRootDir: string,
+  slug: string,
+  url: string,
   options?: RenderToStringOptions,
 ) => {
   return await nmrRenderToString(content, {
-    components: options?.components || getDefaultComponents(imgRootDir),
+    components: options?.components || getDefaultComponents(getContentsDir(slug, url)),
     mdxOptions: options?.mdxOptions || getDefaultMdxOptions(),
   });
 };
