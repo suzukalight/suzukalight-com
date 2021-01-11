@@ -1,9 +1,10 @@
 import React from 'react';
 import { Center, Text, Img, StackProps } from '@chakra-ui/react';
 
-import { Article } from '../../../utils/article/entity';
 import { Card } from '../../atoms/Card';
 import { TagListPlainText } from '../TagList';
+
+import { Article } from '../../../utils/article/entity';
 
 type ArticleCardProps = {
   article: Article;

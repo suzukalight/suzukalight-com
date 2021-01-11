@@ -5,6 +5,7 @@ import { Link as ChakraLink } from '@chakra-ui/react';
 import { ArticleCard } from './Card';
 
 import { Article } from '../../../utils/article/entity';
+import { mergeUrlAndSlug } from '../../../utils/path/url';
 
 type ArticleCardWithLinkProps = {
   article: Article;
@@ -17,10 +18,10 @@ export const ArticleCardWithLink: React.FC<ArticleCardWithLinkProps> = ({
   urlContents,
   urlPosts,
 }) => (
-  <Link href={`${urlPosts}/[slug]`} as={`${urlPosts}/${article.slug}`}>
+  <Link href={`${urlPosts}/[slug]`} as={mergeUrlAndSlug(article.slug, urlPosts)}>
     <ChakraLink
       overflow="hidden"
-      href={`${urlPosts}/${article.slug}`}
+      href={mergeUrlAndSlug(article.slug, urlPosts)}
       _hover={{ textDecoration: 'none' }}
     >
       <ArticleCard
