@@ -45,7 +45,7 @@ export const Header: React.FC = (props) => {
       p={4}
       bg="white"
       zIndex="banner"
-      boxShadow={['md', 'md', 'sm', 'sm']}
+      boxShadow="md"
       visibility={showMenu ? 'visible' : 'hidden'}
       transition={`all 200ms ${showMenu ? 'ease-in' : 'ease-out'}`}
       transform={showMenu ? 'none' : 'translate(0, -100%)'}
@@ -54,7 +54,7 @@ export const Header: React.FC = (props) => {
       <Flex w="100%" maxW="80em" align="center" justify="space-between" wrap="wrap">
         <Flex align="center">
           <Link to="/">
-            <Logo />
+            <Logo imageSrc="/tarako.jpg" name="suzukalight" supplement="Masahiko Kubara" />
           </Link>
         </Flex>
 
