@@ -10,3 +10,4 @@ export const UrlTable = {
 };
 
 export const getContentsUrl = (url: string) => `/contents${url}`;
+export const stripPosts = (url: string) => url.replace(/\/posts$/, '');

@@ -64,10 +64,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </Heading>
 
               {blogArticles.length > 0 ? (
-                <ArticleTipPlainTextList
-                  articles={blogArticles}
-                  urlBlogPosts={UrlTable.blogPosts}
-                />
+                <ArticleTipPlainTextList articles={blogArticles} url={UrlTable.blogPosts} />
               ) : (
                 <Text as="small" color="gray.600">
                   関連する記事は見つかりませんでした
@@ -96,10 +93,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <VStack spacing={4} align="left">
               <Box>
                 {snippetArticles.length > 0 ? (
-                  <ArticleTipPlainTextList
-                    articles={snippetArticles}
-                    urlBlogPosts={UrlTable.snippetPosts}
-                  />
+                  <ArticleTipPlainTextList articles={snippetArticles} url={UrlTable.snippetPosts} />
                 ) : (
                   <Text as="small" color="gray.600">
                     関連する記事は見つかりませんでした

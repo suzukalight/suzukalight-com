@@ -5,29 +5,25 @@ import { Box, Flex, Center, Img, Text, SimpleGrid, Link as ChakraLink } from '@c
 import { TagListPlainText } from '../TagList';
 
 import { Article } from '../../../utils/article/entity';
+import { getContentsUrl, stripPosts } from '../../../utils/path/url';
 
 type ArticleTipWithThumbProps = {
   article: Article;
-  urlBlogPosts: string;
-  urlContentsBlog: string;
+  url: string;
 };
 
-export const ArticleTipWithThumb: React.FC<ArticleTipWithThumbProps> = ({
-  article,
-  urlBlogPosts,
-  urlContentsBlog,
-}) => {
+export const ArticleTipWithThumb: React.FC<ArticleTipWithThumbProps> = ({ article, url }) => {
   const slug = article.slug;
   const { title, hero, emoji, tags } = article.frontMatter;
 
   return (
-    <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
-      <ChakraLink overflow="hidden" href={`${urlBlogPosts}/${slug}`}>
+    <Link href={`${url}/[slug]`} as={`${url}/${slug}`}>
+      <ChakraLink overflow="hidden" href={`${url}/${slug}`}>
         <Flex direction="row" minH={10} maxH={24} overflow="hidden">
           <Box flexShrink={0} mt={1} mr={4}>
             {hero ? (
               <Img
-                src={`${urlContentsBlog}/${slug}/${hero}`}
+                src={`${getContentsUrl(stripPosts(url))}/${slug}/${hero}`}
                 alt={slug}
                 boxSize={8}
                 borderRadius={4}
@@ -72,23 +68,16 @@ export const ArticleTipWithThumb: React.FC<ArticleTipWithThumbProps> = ({
 
 type ArticleTipWithThumbListProps = {
   articles: Article[];
-  urlBlogPosts: string;
-  urlContentsBlog: string;
+  url: string;
 };
 
 export const ArticleTipWithThumbList: React.FC<ArticleTipWithThumbListProps> = ({
   articles,
-  urlBlogPosts,
-  urlContentsBlog,
+  url,
 }) => (
   <SimpleGrid columns={[1, 1, 2]} rowGap={[6, 6, 8]} columnGap={[8, 12, 16]}>
     {articles.map((article) => (
-      <ArticleTipWithThumb
-        key={article.slug}
-        article={article}
-        urlBlogPosts={urlBlogPosts}
-        urlContentsBlog={urlContentsBlog}
-      />
+      <ArticleTipWithThumb key={article.slug} article={article} url={url} />
     ))}
   </SimpleGrid>
 );

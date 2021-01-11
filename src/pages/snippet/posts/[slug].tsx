@@ -69,7 +69,6 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
             relatedArticles={relatedArticles}
             prevArticle={prevArticle}
             nextArticle={nextArticle}
-            urlContentsBlog={urlContentsSnippet}
             urlBlogPosts={UrlTable.snippetPosts}
             urlBlogTags={UrlTable.snippetTags}
           />

@@ -69,7 +69,6 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             relatedArticles={relatedArticles}
             prevArticle={prevArticle}
             nextArticle={nextArticle}
-            urlContentsBlog={urlContentsBlog}
             urlBlogPosts={UrlTable.blogPosts}
             urlBlogTags={UrlTable.blogTags}
           />

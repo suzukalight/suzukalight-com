@@ -8,19 +8,16 @@ import { Article, getDateFormatted } from '../../../utils/article/entity';
 
 type ArticleTipPlainTextProps = {
   article: Article;
-  urlBlogPosts: string;
+  url: string;
 };
 
-export const ArticleTipPlainText: React.FC<ArticleTipPlainTextProps> = ({
-  article,
-  urlBlogPosts,
-}) => {
+export const ArticleTipPlainText: React.FC<ArticleTipPlainTextProps> = ({ article, url }) => {
   const slug = article.slug;
   const { title, tags } = article.frontMatter;
 
   return (
-    <Link href={`${urlBlogPosts}/[slug]`} as={`${urlBlogPosts}/${slug}`}>
-      <ChakraLink overflow="hidden" href={`${urlBlogPosts}/${slug}`}>
+    <Link href={`${url}/[slug]`} as={`${url}/${slug}`}>
+      <ChakraLink overflow="hidden" href={`${url}/${slug}`}>
         <Flex direction="row" minH={10} maxH={24} overflow="hidden">
           <Flex flexGrow={1} direction="column">
             <Text
@@ -57,16 +54,16 @@ export const ArticleTipPlainText: React.FC<ArticleTipPlainTextProps> = ({
 
 type ArticleTipPlainTextListProps = {
   articles: Article[];
-  urlBlogPosts: string;
+  url: string;
 };
 
 export const ArticleTipPlainTextList: React.FC<ArticleTipPlainTextListProps> = ({
   articles,
-  urlBlogPosts,
+  url,
 }) => (
   <SimpleGrid columns={[1, 1, 2, 3]} rowGap={[6, 6, 8]} columnGap={[8, 8, 12]}>
     {articles.map((article) => (
-      <ArticleTipPlainText key={article.slug} article={article} urlBlogPosts={urlBlogPosts} />
+      <ArticleTipPlainText key={article.slug} article={article} url={url} />
     ))}
   </SimpleGrid>
 );
