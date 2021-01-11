@@ -9,17 +9,17 @@ import { BackLinks } from '../../components/molecules/BackLinks';
 import { ArticleDetail } from '../../components/molecules/ArticleDetail';
 import { SNSLinks } from '../../components/atoms/SNSLinks';
 
-import { urlContentsAbout } from '../url.json';
 import { getArticle } from '../../utils/article/fs.server';
 import { hydrate } from '../../utils/article/markdown';
 import { renderToString } from '../../utils/article/markdown.server';
+import { getContentsUrl, UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   contentHtml: string;
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
-  const contentBaseUrl = `${urlContentsAbout}/index`;
+  const contentBaseUrl = `${getContentsUrl(UrlTable.about)}/index`;
   const content = hydrate(contentHtml, contentBaseUrl);
 
   return (
@@ -59,8 +59,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { content, ...article } = await getArticle('index', urlContentsAbout);
-  const contentHtml = await renderToString(content, `${urlContentsAbout}/index`);
+  const { content, ...article } = await getArticle('index', UrlTable.about);
+  const contentHtml = await renderToString(content, 'index', UrlTable.about);
 
   return { props: { article, contentHtml } as IndexPageProps };
 };
