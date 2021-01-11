@@ -4,15 +4,12 @@ import { HStack } from '@chakra-ui/react';
 import { ShareButtons } from './Buttons';
 
 type ShareButtonsHorizontalProps = {
-  urlBlog: string;
+  url: string;
   title: string;
 };
 
-export const ShareButtonsHorizontal: React.FC<ShareButtonsHorizontalProps> = ({
-  title,
-  urlBlog,
-}) => (
+export const ShareButtonsHorizontal: React.FC<ShareButtonsHorizontalProps> = ({ title, url }) => (
   <HStack spacing={4}>
-    <ShareButtons urlBlog={urlBlog} title={title} tooltipPlacement="top" />
+    <ShareButtons url={url} title={title} tooltipPlacement="top" />
   </HStack>
 );

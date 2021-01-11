@@ -13,13 +13,17 @@ import { SiHatenabookmark } from 'react-icons/si';
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 
 type ShareButtonsProps = {
-  urlBlog: string;
+  url: string;
   title: string;
   tooltipPlacement: Placement;
 };
 
-export const ShareButtons: React.FC<ShareButtonsProps> = ({ urlBlog, title, tooltipPlacement }) => {
-  const url = new URL(urlBlog, SITE_URL).toString();
+export const ShareButtons: React.FC<ShareButtonsProps> = ({
+  url: _url,
+  title,
+  tooltipPlacement,
+}) => {
+  const url = new URL(_url, SITE_URL).toString();
 
   return (
     <>
@@ -33,17 +37,17 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({ urlBlog, title, tool
           <Icon as={FaFacebook} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
         </Tooltip>
       </FacebookShareButton>
-      <LineShareButton title={title} url={url}>
+      <LineShareButton url={url} title={title}>
         <Tooltip label="LINEでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
           <Icon as={FaLine} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
         </Tooltip>
       </LineShareButton>
-      <PocketShareButton title={title} url={url}>
+      <PocketShareButton url={url} title={title}>
         <Tooltip label="Pocketに保存" shouldWrapChildren hasArrow placement={tooltipPlacement}>
           <Icon as={FaGetPocket} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
         </Tooltip>
       </PocketShareButton>
-      <HatenaShareButton title={title} url={url}>
+      <HatenaShareButton url={url} title={title}>
         <Tooltip
           label="はてなブックマークでシェア"
           shouldWrapChildren

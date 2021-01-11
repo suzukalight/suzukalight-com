@@ -39,7 +39,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero } = article.frontMatter;
-  const urlBlog = `${UrlTable.blogPosts}/${slug}`;
+  const url = `${UrlTable.blogPosts}/${slug}`;
   const urlContentsBlog = getContentsUrl(UrlTable.blog);
   const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
@@ -48,9 +48,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
   return (
     <DefaultLayout>
-      <HtmlHead title={title} description={article.excerpt} url={urlBlog} {...ogImage} />
+      <HtmlHead title={title} description={article.excerpt} url={url} {...ogImage} />
 
-      <ShareButtonsLeftFixed urlBlog={urlBlog} title={title} />
+      <ShareButtonsLeftFixed url={url} title={title} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
@@ -61,7 +61,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               urlTags={UrlTable.blogTags}
             />
             <ArticleDetail contentHtml={content} />
-            <ShareButtonsHorizontal urlBlog={urlBlog} title={title} />
+            <ShareButtonsHorizontal url={url} title={title} />
           </VStack>
 
           <RelatedArticles

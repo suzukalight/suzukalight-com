@@ -39,7 +39,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero } = article.frontMatter;
-  const urlSnippet = `${UrlTable.snippet}/${slug}`;
+  const url = `${UrlTable.snippet}/${slug}`;
   const urlContentsSnippet = getContentsUrl(UrlTable.snippet);
   const contentBaseUrl = `${urlContentsSnippet}/${slug}`;
 
@@ -48,9 +48,9 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 
   return (
     <DefaultLayout>
-      <HtmlHead title={title} description={article.excerpt} url={urlSnippet} {...ogImage} />
+      <HtmlHead title={title} description={article.excerpt} url={url} {...ogImage} />
 
-      <ShareButtonsLeftFixed urlBlog={urlSnippet} title={title} />
+      <ShareButtonsLeftFixed url={url} title={title} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
@@ -61,7 +61,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
               urlTags={UrlTable.snippetTags}
             />
             <ArticleDetail contentHtml={content} />
-            <ShareButtonsHorizontal urlBlog={urlSnippet} title={title} />
+            <ShareButtonsHorizontal url={url} title={title} />
           </VStack>
 
           <RelatedArticles
