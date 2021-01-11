@@ -9,5 +9,10 @@ export const UrlTable = {
   about: '/about',
 };
 
+export const mergeUrlAndSlug = (slug: string, url: string) => `${url}/${encodeURIComponent(slug)}`;
+
 export const getContentsUrl = (url: string) => `/contents${url}`;
+export const getContentsUrlWithSlug = (slug: string, url: string) =>
+  mergeUrlAndSlug(slug, getContentsUrl(url));
+
 export const stripPosts = (url: string) => url.replace(/\/posts$/, '');
