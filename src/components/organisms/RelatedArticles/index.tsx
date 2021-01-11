@@ -11,8 +11,8 @@ type RelatedArticlesProps = {
   relatedArticles: Article[];
   prevArticle: Article;
   nextArticle: Article;
-  urlBlogPosts: string;
-  urlBlogTags: string;
+  urlPosts: string;
+  urlTags: string;
 };
 
 export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
@@ -20,8 +20,8 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
   relatedArticles,
   prevArticle,
   nextArticle,
-  urlBlogPosts,
-  urlBlogTags,
+  urlPosts,
+  urlTags,
 }) => (
   <VStack as="aside" spacing={16} align="stretch">
     <VStack spacing={4} align="left">
@@ -29,7 +29,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
         Tags
       </Heading>
 
-      <TagListRoundBox tags={tags} tagBaseUrl={urlBlogTags} />
+      <TagListRoundBox tags={tags} tagBaseUrl={urlTags} />
     </VStack>
 
     <VStack spacing={4} align="left">
@@ -38,7 +38,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
       </Heading>
 
       {relatedArticles.length > 0 ? (
-        <ArticleTipWithThumbList articles={relatedArticles} url={urlBlogPosts} />
+        <ArticleTipWithThumbList articles={relatedArticles} url={urlPosts} />
       ) : (
         <Text as="small" color="gray.600">
           関連する記事は見つかりませんでした
@@ -53,7 +53,7 @@ export const RelatedArticles: React.FC<RelatedArticlesProps> = ({
 
       <ArticleTipWithThumbList
         articles={[prevArticle, nextArticle].filter((a) => a)}
-        url={urlBlogPosts}
+        url={urlPosts}
       />
     </VStack>
   </VStack>
