@@ -8,7 +8,6 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { TagListWithCount } from '../../../components/molecules/TagList/WithCount';
 
-import { urlContentsSnippet, urlSnippetTags, urlSnippetRoot } from '../../url.json';
 import { getArticles } from '../../../utils/article/fs.server';
 import {
   comparatorTagCount,
@@ -17,6 +16,7 @@ import {
   getTableWithTagAndCountIncludedInArticles,
   TagAndCount,
 } from '../../../utils/article/tag';
+import { UrlTable } from '../../../utils/path/url';
 
 type IndexPageProps = {
   orderByName: TagAndCount[];
@@ -25,25 +25,25 @@ type IndexPageProps = {
 
 export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount }) => (
   <ArticleListLayout title="Tags">
-    <HtmlHead title="Tags" url={urlSnippetTags} />
+    <HtmlHead title="Tags" url={UrlTable.snippetTags} />
 
     <Heading as="h2" fontSize="2xl" mb={4}>
       by Name
     </Heading>
 
-    <TagListWithCount tagAndCounts={orderByName} tagBaseUrl={urlSnippetTags} />
+    <TagListWithCount tagAndCounts={orderByName} tagBaseUrl={UrlTable.snippetTags} />
 
     <Heading as="h2" fontSize="2xl" mt={12} mb={4}>
       by Count
     </Heading>
 
-    <TagListWithCount tagAndCounts={orderByCount} tagBaseUrl={urlSnippetTags} />
+    <TagListWithCount tagAndCounts={orderByCount} tagBaseUrl={UrlTable.snippetTags} />
 
     <Divider mt={12} mb={8} />
 
     <BackLinks
       links={[
-        { to: urlSnippetRoot, icon: FaPencilAlt, label: 'Back to Snippet Index' },
+        { to: UrlTable.snippet, icon: FaPencilAlt, label: 'Back to Snippet Index' },
         { to: '/', icon: FaHome, label: 'Back to Home' },
       ]}
     />
@@ -53,7 +53,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getArticles(urlContentsSnippet);
+  const articles = await getArticles(UrlTable.snippet);
   const tagAndCountTable = getTableWithTagAndCountIncludedInArticles(articles);
   const orderByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const orderByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);

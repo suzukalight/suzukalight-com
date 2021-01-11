@@ -3,21 +3,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { VStack, StackDivider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-import {
-  urlContentsSnippet,
-  urlSnippetRoot,
-  urlSnippetPosts,
-  urlSnippetTags,
-} from '../../url.json';
 import { Article, stripContent } from '../../../utils/article/entity';
-import {
-  getArticle,
-  getArticles,
-  getPublicDirNamesThatHaveMdx,
-} from '../../../utils/article/fs.server';
+import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
+import { getContentsUrl, UrlTable } from '../../../utils/path/url';
 
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
@@ -48,7 +39,8 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero } = article.frontMatter;
-  const snippetUrl = `${urlSnippetPosts}/${slug}`;
+  const urlSnippet = `${UrlTable.snippet}/${slug}`;
+  const urlContentsSnippet = getContentsUrl(UrlTable.snippet);
   const contentBaseUrl = `${urlContentsSnippet}/${slug}`;
 
   const content = hydrate(contentHtml, contentBaseUrl);
@@ -56,9 +48,9 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 
   return (
     <DefaultLayout>
-      <HtmlHead title={title} description={article.excerpt} url={snippetUrl} {...ogImage} />
+      <HtmlHead title={title} description={article.excerpt} url={urlSnippet} {...ogImage} />
 
-      <ShareButtonsLeftFixed urlBlog={snippetUrl} title={title} />
+      <ShareButtonsLeftFixed urlBlog={urlSnippet} title={title} />
 
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
@@ -66,10 +58,10 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
             <ArticleHeader
               article={article}
               urlContent={urlContentsSnippet}
-              urlTags={urlSnippetTags}
+              urlTags={UrlTable.snippetTags}
             />
             <ArticleDetail contentHtml={content} />
-            <ShareButtonsHorizontal urlBlog={snippetUrl} title={title} />
+            <ShareButtonsHorizontal urlBlog={urlSnippet} title={title} />
           </VStack>
 
           <RelatedArticles
@@ -78,13 +70,13 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
             prevArticle={prevArticle}
             nextArticle={nextArticle}
             urlContentsBlog={urlContentsSnippet}
-            urlBlogPosts={urlSnippetPosts}
-            urlBlogTags={urlSnippetTags}
+            urlBlogPosts={UrlTable.snippetPosts}
+            urlBlogTags={UrlTable.snippetTags}
           />
 
           <BackLinks
             links={[
-              { to: urlSnippetRoot, icon: FaPencilAlt, label: 'Back to Snippet List' },
+              { to: UrlTable.snippet, icon: FaPencilAlt, label: 'Back to Snippet List' },
               { to: '/', icon: FaHome, label: 'Back to Home' },
             ]}
           />
@@ -97,8 +89,8 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 export default SnippetPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dirNamesThatHaveMdx = getPublicDirNamesThatHaveMdx(urlContentsSnippet);
-  const paths = dirNamesThatHaveMdx.map((dir) => ({ params: { slug: dir.replace(/\.mdx?/, '') } }));
+  const dirNamesThatHaveMdx = getSlugs(UrlTable.snippet);
+  const paths = dirNamesThatHaveMdx.map((slug) => ({ params: { slug } }));
 
   return {
     fallback: false,
@@ -108,11 +100,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
-  const { content, ...article } = await getArticle(slug, urlContentsSnippet);
+  const { content, ...article } = await getArticle(slug, UrlTable.snippet);
 
-  const contentHtml = await renderToString(content, `${urlContentsSnippet}/${params.slug}`);
+  const contentHtml = await renderToString(content, slug, UrlTable.snippet);
 
-  const articles = await getArticles(urlContentsSnippet);
+  const articles = await getArticles(UrlTable.snippet);
   const _relatedArticles = getRelatedArticles(article, articles);
   const relatedArticles = _relatedArticles.map((r) => stripContent(r));
 

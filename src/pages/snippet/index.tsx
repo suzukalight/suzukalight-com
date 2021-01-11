@@ -8,11 +8,11 @@ import { HtmlHead } from '../../components/atoms/HtmlHead';
 import { ArticleExcerptItem } from '../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
 
-import { urlSnippetRoot, urlSnippetTags, urlSnippetPosts, urlContentsSnippet } from '../url.json';
 import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 import { renderToString } from '../../utils/article/markdown.server';
+import { getContentsUrl, UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   data: {
@@ -26,16 +26,16 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
     title="Snippet"
     subtitle="主に技術系の単発ネタを書き留めたメモ。同じところで悩む誰かの役に立てれば。"
   >
-    <HtmlHead title="Snippet" url={urlSnippetRoot} />
+    <HtmlHead title="Snippet" url={UrlTable.snippet} />
 
     <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
       {data.map((d) => (
         <ArticleExcerptItem
           key={d.article.slug}
           article={d.article}
-          contentBaseUrl={`${urlContentsSnippet}/${d.article.slug}`}
-          tagBaseUrl={urlSnippetTags}
-          postBaseUrl={urlSnippetPosts}
+          contentBaseUrl={`${getContentsUrl(UrlTable.snippet)}/${d.article.slug}`}
+          tagBaseUrl={UrlTable.snippetTags}
+          postBaseUrl={UrlTable.snippetPosts}
           contentHtml={d.contentHtml}
           showReadMore
         />
@@ -51,11 +51,11 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getArticles(urlContentsSnippet);
+  const articles = await getArticles(UrlTable.snippet);
   const data = await Promise.all(
     sortArticlesByDateDesc(articles).map(async ({ content, ...article }) => ({
       article,
-      contentHtml: await renderToString(content, `${urlContentsSnippet}/${article.slug}`),
+      contentHtml: await renderToString(content, article.slug, getContentsUrl(UrlTable.snippet)),
     })),
   );
 

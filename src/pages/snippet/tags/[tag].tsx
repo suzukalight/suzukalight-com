@@ -8,18 +8,13 @@ import { HtmlHead } from '../../../components/atoms/HtmlHead';
 import { ArticleExcerptItem } from '../../../components/molecules/ArticleExcerptItem';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 
-import {
-  urlContentsSnippet,
-  urlSnippetPosts,
-  urlSnippetTags,
-  urlSnippetRoot,
-} from '../../url.json';
 import { Article } from '../../../utils/article/entity';
 import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
 import { renderToString } from '../../../utils/article/markdown.server';
+import { getContentsUrl, UrlTable } from '../../../utils/path/url';
 
 type TagPageProps = {
   tag: string;
@@ -31,7 +26,7 @@ type TagPageProps = {
 
 export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
   const title = `#${tag} タグの付いた Snippet`;
-  const tagUrl = `${urlSnippetTags}/${encodeURIComponent(tag)}`;
+  const tagUrl = `${UrlTable.snippetTags}/${encodeURIComponent(tag)}`;
 
   return (
     <ArticleListLayout title={title}>
@@ -42,9 +37,9 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
           <ArticleExcerptItem
             key={d.article.slug}
             article={d.article}
-            contentBaseUrl={`${urlContentsSnippet}/${d.article.slug}`}
-            tagBaseUrl={urlSnippetTags}
-            postBaseUrl={urlSnippetPosts}
+            contentBaseUrl={`${getContentsUrl(UrlTable.snippet)}/${d.article.slug}`}
+            tagBaseUrl={UrlTable.snippetTags}
+            postBaseUrl={UrlTable.snippetPosts}
             contentHtml={d.contentHtml}
             showReadMore
           />
@@ -55,8 +50,8 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
 
       <BackLinks
         links={[
-          { to: urlSnippetTags, icon: FaPencilAlt, label: 'Back to TagList' },
-          { to: urlSnippetRoot, icon: FaPencilAlt, label: 'Back to Snippet Index' },
+          { to: UrlTable.snippetTags, icon: FaPencilAlt, label: 'Back to TagList' },
+          { to: UrlTable.snippet, icon: FaPencilAlt, label: 'Back to Snippet Index' },
           { to: '/', icon: FaHome, label: 'Back to Home' },
         ]}
       />
@@ -67,7 +62,7 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = await getArticles(urlContentsSnippet);
+  const articles = await getArticles(UrlTable.snippet);
   const tags = getTagsIncludedInArticles(articles);
   const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
 
@@ -80,12 +75,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const tag = params.tag as string;
 
-  const articles = await getArticles(urlContentsSnippet);
+  const articles = await getArticles(UrlTable.snippet);
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
   const data = await Promise.all(
     sortArticlesByDateDesc(articlesFilteredByTag).map(async ({ content, ...article }) => ({
       article,
-      contentHtml: await renderToString(content, `${urlContentsSnippet}/${article.slug}`),
+      contentHtml: await renderToString(content, article.slug, getContentsUrl(UrlTable.snippet)),
     })),
   );
 
