@@ -7,7 +7,7 @@ import { ArticleListLayout } from '../../components/templates/ArticleListLayout'
 import { HtmlHead } from '../../components/molecules/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { ArticleDetail } from '../../components/molecules/ArticleDetail';
-import { SNSLinks } from '../../components/atoms/SNSLinks';
+import { SNSLinks } from '../../components/molecules/SNSLinks';
 
 import { getArticle } from '../../utils/article/fs.server';
 import { hydrate } from '../../utils/article/markdown';
@@ -37,7 +37,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
               Masahiko Kubara (suzukalight)
             </Text>
 
-            <SNSLinks spacing={3} boxSize={4} />
+            <SNSLinks spacing={3} boxSize={4} color="gray.800" />
           </HStack>
 
           <Text>

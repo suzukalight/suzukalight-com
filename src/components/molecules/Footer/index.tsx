@@ -1,19 +1,10 @@
 import React from 'react';
-import {
-  Center,
-  Box,
-  SimpleGrid,
-  StackDivider,
-  Text,
-  VStack,
-  Icon,
-  HStack,
-  Tooltip,
-} from '@chakra-ui/react';
+import { Center, Box, SimpleGrid, StackDivider, Text, VStack, HStack } from '@chakra-ui/react';
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 
 import { Link } from '../../atoms/Link';
-import { SNSLinks } from '../../atoms/SNSLinks';
+import { SNSLinkItem } from '../../atoms/SNSLinkItem';
+import { SNSLinks } from '../../molecules/SNSLinks';
 
 export const Footer: React.FC = () => (
   <VStack
@@ -50,37 +41,25 @@ export const Footer: React.FC = () => (
           <Text size="sm" fontWeight="bold">
             Contact
           </Text>
+
           <HStack spacing={4}>
-            <Link to="https://twitter.com/intent/tweet?screen_name=suzukalight">
-              <Tooltip
-                label="@suzukalight にメッセージを送る"
-                shouldWrapChildren
-                hasArrow
-                placement="top"
-              >
-                <Icon
-                  as={FaTwitter}
-                  boxSize={6}
-                  _hover={{ color: 'teal.500' }}
-                  aria-label="Twitter で @suzukalight にメッセージを送る"
-                />
-              </Tooltip>
-            </Link>
-            <Link to="https://github.com/suzukalight/suzukalight/issues">
-              <Tooltip
-                label="suzukalight にメッセージを送る"
-                shouldWrapChildren
-                hasArrow
-                placement="top"
-              >
-                <Icon
-                  as={FaGithub}
-                  boxSize={6}
-                  _hover={{ color: 'teal.500' }}
-                  aria-label="GitHub で suzukalight にメッセージの Issue を立てる"
-                />
-              </Tooltip>
-            </Link>
+            <SNSLinkItem
+              url="https://twitter.com/intent/tweet?screen_name=suzukalight"
+              label="@suzukalight にメッセージを送る"
+              icon={FaTwitter}
+              boxSize={6}
+              color="gray.800"
+              ariaLabel="Twitter で @suzukalight にメッセージを送る"
+            />
+
+            <SNSLinkItem
+              url="https://github.com/suzukalight/suzukalight/issues"
+              label="suzukalight にメッセージを送る"
+              icon={FaGithub}
+              boxSize={6}
+              color="gray.800"
+              ariaLabel="GitHub で suzukalight にメッセージの Issue を立てる"
+            />
           </HStack>
         </VStack>
       </SimpleGrid>

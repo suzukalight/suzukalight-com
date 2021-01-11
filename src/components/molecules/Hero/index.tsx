@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { FaArrowDown } from 'react-icons/fa';
 
-import { SNSLinks } from '../../atoms/SNSLinks';
+import { SNSLinks } from '../../molecules/SNSLinks';
 
 type HeroProps = {
   title: string;
