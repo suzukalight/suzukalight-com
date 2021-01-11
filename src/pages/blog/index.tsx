@@ -40,7 +40,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
 
     <Divider mt={12} mb={8} />
 
-    <BackLinks links={[{ to: '/', icon: FaHome, label: 'Back to Home' }]} />
+    <BackLinks links={[{ to: UrlTable.home, icon: FaHome, label: 'Back to Home' }]} />
   </ArticleListLayout>
 );
 

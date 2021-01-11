@@ -5,6 +5,7 @@ import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { Link } from '../../atoms/Link';
 import { SNSLinkItem } from '../../atoms/SNSLinkItem';
 import { SNSLinks } from '../SNSLinks';
+import { UrlTable } from '../../../utils/path/url';
 
 export const Footer: React.FC = () => (
   <VStack
@@ -22,19 +23,19 @@ export const Footer: React.FC = () => (
           <Text size="sm" fontWeight="bold">
             Writings
           </Text>
-          <Link to="/blog">blog</Link>
-          <Link to="/snippet">snippet</Link>
+          <Link to={UrlTable.blog}>blog</Link>
+          <Link to={UrlTable.snippet}>snippet</Link>
         </VStack>
 
         <VStack>
-          <Link to="/about">
+          <Link to={UrlTable.about}>
             <Text size="sm" fontWeight="bold">
               About
             </Text>
           </Link>
-          <Link to="/about">skill map</Link>
-          <Link to="/about">resume</Link>
-          <Link to="/about">awards</Link>
+          <Link to={UrlTable.about}>skill map</Link>
+          <Link to={UrlTable.about}>resume</Link>
+          <Link to={UrlTable.about}>awards</Link>
         </VStack>
 
         <VStack>
@@ -67,7 +68,7 @@ export const Footer: React.FC = () => (
 
     <Center mt={-6}>
       <HStack spacing={4} align="center">
-        <Link to="/">
+        <Link to={UrlTable.home}>
           <Text as="small" textDecoration="underline">
             Home
           </Text>

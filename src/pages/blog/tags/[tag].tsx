@@ -48,7 +48,7 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
         links={[
           { to: UrlTable.blogTags, icon: FaPencilAlt, label: 'Back to TagList' },
           { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog Index' },
-          { to: '/', icon: FaHome, label: 'Back to Home' },
+          { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
         ]}
       />
     </ArticleListLayout>

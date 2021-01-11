@@ -82,7 +82,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
           <BackLinks
             links={[
               { to: UrlTable.snippet, icon: FaPencilAlt, label: 'Back to Snippet List' },
-              { to: '/', icon: FaHome, label: 'Back to Home' },
+              { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
             ]}
           />
         </VStack>

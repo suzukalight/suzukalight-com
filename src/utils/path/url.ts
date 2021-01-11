@@ -1,4 +1,6 @@
 export const UrlTable = {
+  root: '/',
+  home: '/',
   blog: '/blog',
   blogPosts: '/blog/posts',
   blogTags: '/blog/tags',

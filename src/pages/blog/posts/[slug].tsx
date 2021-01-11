@@ -76,7 +76,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           <BackLinks
             links={[
               { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog List' },
-              { to: '/', icon: FaHome, label: 'Back to Home' },
+              { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
             ]}
           />
         </VStack>

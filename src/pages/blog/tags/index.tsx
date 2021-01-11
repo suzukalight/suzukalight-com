@@ -44,7 +44,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
     <BackLinks
       links={[
         { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog Index' },
-        { to: '/', icon: FaHome, label: 'Back to Home' },
+        { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
       ]}
     />
   </ArticleListLayout>

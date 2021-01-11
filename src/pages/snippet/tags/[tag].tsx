@@ -52,7 +52,7 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
         links={[
           { to: UrlTable.snippetTags, icon: FaPencilAlt, label: 'Back to TagList' },
           { to: UrlTable.snippet, icon: FaPencilAlt, label: 'Back to Snippet Index' },
-          { to: '/', icon: FaHome, label: 'Back to Home' },
+          { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
         ]}
       />
     </ArticleListLayout>

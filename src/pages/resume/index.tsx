@@ -7,6 +7,8 @@ import { HtmlHead } from '../../components/molecules/HtmlHead';
 import { BackLinks } from '../../components/molecules/BackLinks';
 import { TimelineNode } from '../../components/molecules/Timeline/Node';
 
+import { UrlTable } from '../../utils/path/url';
+
 const Timeline = () => (
   <Box>
     <TimelineNode
@@ -154,8 +156,8 @@ export const IndexPage: React.FC = () => (
 
           <BackLinks
             links={[
-              { to: '/about', icon: FaUser, label: 'Back to About' },
-              { to: '/', icon: FaHome, label: 'Back to Home' },
+              { to: UrlTable.about, icon: FaUser, label: 'Back to About' },
+              { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
             ]}
           />
         </Box>

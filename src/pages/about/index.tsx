@@ -49,7 +49,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
           <ArticleDetail contentHtml={content} />
         </Box>
 
-        <BackLinks links={[{ to: '/', icon: FaHome, label: 'Back to Home' }]} />
+        <BackLinks links={[{ to: UrlTable.home, icon: FaHome, label: 'Back to Home' }]} />
       </VStack>
     </ArticleListLayout>
   );
