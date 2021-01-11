@@ -41,7 +41,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const contentBaseUrl = `${urlContentsTextbook}/${book.slug}/${slug}`;
   const urlContentsTextbookTitle = `${urlContentsTextbook}/${book.slug}`;
 
-  const content = hydrate(contentHtml, contentBaseUrl);
+  const content = hydrate(contentHtml, slug, UrlTable.textbook);
   const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
 
   return (

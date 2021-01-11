@@ -9,6 +9,8 @@ import strip from 'strip-markdown';
 
 import { Link } from '../../components/atoms/Link';
 
+import { getContentsUrlWithSlug } from '../path/url';
+
 const MarkdownImg = (srcBaseUrl: string) => (props) => (
   <span
     style={{
@@ -50,12 +52,13 @@ type MdOptions = {
 /**
  * markdownをサーバでDOMレンダリングしたものについて、hydrateする
  * @param content renderToString で使用した content
- * @param imgRootDir img src の root dir
+ * @param slug
+ * @param url
  * @param options mdx→JSX変換で使用するコンポーネントマップなど
  */
-export const hydrate = (content: string, imgRootDir: string, options?: MdOptions) => {
+export const hydrate = (content: string, slug: string, url: string, options?: MdOptions) => {
   return nmrHydrate(content, {
-    components: options?.components || getDefaultComponents(imgRootDir),
+    components: options?.components || getDefaultComponents(getContentsUrlWithSlug(slug, url)),
   });
 };
 

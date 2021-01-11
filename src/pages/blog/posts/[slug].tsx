@@ -43,7 +43,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const urlContentsBlog = getContentsUrl(UrlTable.blog);
   const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
-  const content = hydrate(contentHtml, contentBaseUrl);
+  const content = hydrate(contentHtml, slug, UrlTable.blog);
   const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
 
   return (

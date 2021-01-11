@@ -12,15 +12,14 @@ import { SNSLinks } from '../../components/atoms/SNSLinks';
 import { getArticle } from '../../utils/article/fs.server';
 import { hydrate } from '../../utils/article/markdown';
 import { renderToString } from '../../utils/article/markdown.server';
-import { getContentsUrl, UrlTable } from '../../utils/path/url';
+import { UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   contentHtml: string;
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
-  const contentBaseUrl = `${getContentsUrl(UrlTable.about)}/index`;
-  const content = hydrate(contentHtml, contentBaseUrl);
+  const content = hydrate(contentHtml, 'index', UrlTable.about);
 
   return (
     <ArticleListLayout title="About">

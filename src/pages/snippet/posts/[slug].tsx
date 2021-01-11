@@ -43,7 +43,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
   const urlContentsSnippet = getContentsUrl(UrlTable.snippet);
   const contentBaseUrl = `${urlContentsSnippet}/${slug}`;
 
-  const content = hydrate(contentHtml, contentBaseUrl);
+  const content = hydrate(contentHtml, slug, UrlTable.snippet);
   const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
 
   return (

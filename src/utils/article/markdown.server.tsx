@@ -38,17 +38,18 @@ type RenderToStringOptions = {
 
 /**
  * markdown→DOM変換を行う
- * @param content markdown から frontMatter を取り除いたもの
- * @param url img src の root dir
+ * @param markdownWithoutFrontMatter
+ * @param slug
+ * @param url
  * @param options mdx→JSX変換で使用するコンポーネントマップ、remarkPlugin設定など
  */
 export const renderToString = async (
-  content: string,
+  markdownWithoutFrontMatter: string,
   slug: string,
   url: string,
   options?: RenderToStringOptions,
 ) => {
-  return await nmrRenderToString(content, {
+  return await nmrRenderToString(markdownWithoutFrontMatter, {
     components: options?.components || getDefaultComponents(getContentsDir(slug, url)),
     mdxOptions: options?.mdxOptions || getDefaultMdxOptions(),
   });
