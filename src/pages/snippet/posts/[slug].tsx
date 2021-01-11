@@ -8,7 +8,7 @@ import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.ser
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
-import { getContentsUrl, UrlTable } from '../../../utils/path/url';
+import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
@@ -39,12 +39,12 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero } = article.frontMatter;
-  const url = `${UrlTable.snippet}/${slug}`;
-  const urlContentsSnippet = getContentsUrl(UrlTable.snippet);
-  const contentBaseUrl = `${urlContentsSnippet}/${slug}`;
+  const url = mergeUrlAndSlug(slug, UrlTable.snippetPosts);
 
   const content = hydrate(contentHtml, slug, UrlTable.snippet);
-  const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
+  const ogImage = hero
+    ? { image: `${getContentsUrlWithSlug(slug, UrlTable.snippet)}/${hero}` }
+    : null;
 
   return (
     <DefaultLayout>
@@ -57,7 +57,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
           <VStack spacing={8} align="left" w="100%">
             <ArticleHeader
               article={article}
-              urlContent={urlContentsSnippet}
+              urlRoot={UrlTable.snippet}
               urlTags={UrlTable.snippetTags}
             />
             <ArticleDetail contentHtml={content} />

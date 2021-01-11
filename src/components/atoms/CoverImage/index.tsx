@@ -2,16 +2,15 @@ import React from 'react';
 import { Image, Center, Text } from '@chakra-ui/react';
 
 type CoverImageProps = {
-  hero?: string;
+  imageSrc?: string;
   emoji?: string;
-  contentBaseUrl?: string;
 };
 
-export const CoverImage: React.FC<CoverImageProps> = ({ hero, emoji, contentBaseUrl }) => (
+export const CoverImage: React.FC<CoverImageProps> = ({ imageSrc, emoji }) => (
   <Center>
-    {hero && (
+    {imageSrc && (
       <Image
-        src={`${contentBaseUrl}/${hero}`}
+        src={imageSrc}
         alt="hero image"
         fit="cover"
         w="100%"

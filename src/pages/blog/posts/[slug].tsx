@@ -8,7 +8,7 @@ import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.ser
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
-import { getContentsUrl, UrlTable } from '../../../utils/path/url';
+import { getContentsUrlWithSlug, UrlTable } from '../../../utils/path/url';
 
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/atoms/HtmlHead';
@@ -40,11 +40,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const { slug } = article;
   const { title, tags, hero } = article.frontMatter;
   const url = `${UrlTable.blogPosts}/${slug}`;
-  const urlContentsBlog = getContentsUrl(UrlTable.blog);
-  const contentBaseUrl = `${urlContentsBlog}/${slug}`;
 
   const content = hydrate(contentHtml, slug, UrlTable.blog);
-  const ogImage = hero ? { image: `${contentBaseUrl}/${hero}` } : null;
+  const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, UrlTable.blog)}/${hero}` } : null;
 
   return (
     <DefaultLayout>
@@ -55,11 +53,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
           <VStack spacing={8} align="left" w="100%">
-            <ArticleHeader
-              article={article}
-              urlContent={urlContentsBlog}
-              urlTags={UrlTable.blogTags}
-            />
+            <ArticleHeader article={article} urlRoot={UrlTable.blog} urlTags={UrlTable.blogTags} />
             <ArticleDetail contentHtml={content} />
             <ShareButtonsHorizontal url={url} title={title} />
           </VStack>
