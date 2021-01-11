@@ -2,9 +2,10 @@ import React from 'react';
 import { LinkProps as NextLinkProps } from 'next/link';
 import { ChakraProps, Wrap, WrapItem, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
 
+import { TagAndCount } from '../../../utils/article/tag';
+
 import { Tag } from './Item';
 import { Link } from '../../atoms/Link';
-import { TagAndCount } from '../../../utils/article/tag';
 
 const withCountTagStyle: ChakraProps = {
   display: 'inline-block',

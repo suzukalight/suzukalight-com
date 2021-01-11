@@ -1,8 +1,8 @@
 import React from 'react';
 import { Heading, Text, VStack } from '@chakra-ui/react';
 
-import { ArticleTipWithThumbList } from '../../../components/molecules/ArticleTipList';
-import { TagListRoundBox } from '../../../components/molecules/TagList';
+import { ArticleTipWithThumbList } from '../../molecules/ArticleTipList';
+import { TagListRoundBox } from '../../molecules/TagList';
 
 import { Article } from '../../../utils/article/entity';
 

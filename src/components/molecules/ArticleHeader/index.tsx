@@ -2,9 +2,10 @@ import React from 'react';
 import { Heading, Text, VStack } from '@chakra-ui/react';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
-import { TagListPlainText } from '../TagList/PlainText';
-import { CoverImage } from '../../../components/atoms/CoverImage';
 import { getContentsUrlWithSlug, mergeUrlAndSlug } from '../../../utils/path/url';
+
+import { TagListPlainText } from '../TagList/PlainText';
+import { CoverImage } from '../../atoms/CoverImage';
 
 type ArticleHeaderProps = {
   article: Article;

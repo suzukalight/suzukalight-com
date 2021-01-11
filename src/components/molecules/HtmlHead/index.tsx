@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { HtmlHeadBase } from '../../atoms/HtmlHeadBase';
 
 import { SITE_NAME, SITE_URL } from '../../../utils/env';

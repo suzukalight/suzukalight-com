@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Box, Heading, Text, Stack, Collapse, VStack } from '@chakra-ui/react';
 
-import { ArticleDetail } from '../ArticleDetail';
-import { ReadMoreButton } from '../../atoms/ReadMoreButton';
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
+import { mergeUrlAndSlug } from '../../../utils/path/url';
+
+import { ArticleDetail } from '../ArticleDetail';
+import { ReadMoreButton } from '../../atoms/ReadMoreButton';
 import { Link } from '../../atoms/Link';
 import { TagListRoundBox } from '../TagList';
-import { mergeUrlAndSlug } from '../../../utils/path/url';
 
 type ArticleExcerptItemProps = {
   article: Article;

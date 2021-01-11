@@ -4,7 +4,7 @@ import { FaTwitter, FaGithub } from 'react-icons/fa';
 
 import { Link } from '../../atoms/Link';
 import { SNSLinkItem } from '../../atoms/SNSLinkItem';
-import { SNSLinks } from '../../molecules/SNSLinks';
+import { SNSLinks } from '../SNSLinks';
 
 export const Footer: React.FC = () => (
   <VStack

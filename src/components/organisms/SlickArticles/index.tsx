@@ -2,12 +2,12 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import Slick, { Settings } from 'react-slick';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 import { ArticleCardWithLink } from '../../molecules/ArticleCard';
 
 import { Article } from '../../../utils/article/entity';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 const settings: Settings = {
   dots: true,
