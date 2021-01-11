@@ -11,7 +11,7 @@ import { BackLinks } from '../../components/molecules/BackLinks';
 import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
-import { getContentsUrl, UrlTable } from '../../utils/path/url';
+import { UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   articles: Article[];
@@ -29,9 +29,9 @@ export const IndexPage: React.FC<IndexPageProps> = ({ articles }) => (
         <ArticleExcerptItem
           key={a.slug}
           article={a}
-          contentBaseUrl={`${getContentsUrl(UrlTable.blog)}/${a.slug}`}
-          tagBaseUrl={UrlTable.blogTags}
-          postBaseUrl={UrlTable.blogPosts}
+          urlRoot={UrlTable.blog}
+          urlTags={UrlTable.blogTags}
+          urlPosts={UrlTable.blogPosts}
           contentText={a.excerpt}
           showContentLink
         />

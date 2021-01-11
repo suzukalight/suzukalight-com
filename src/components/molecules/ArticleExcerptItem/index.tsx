@@ -7,12 +7,13 @@ import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
 import { Link } from '../../atoms/Link';
 import { TagListRoundBox } from '../TagList';
+import { mergeUrlAndSlug } from '../../../utils/path/url';
 
 type ArticleExcerptItemProps = {
   article: Article;
-  contentBaseUrl: string;
-  tagBaseUrl: string;
-  postBaseUrl: string;
+  urlRoot: string;
+  urlTags: string;
+  urlPosts: string;
   contentHtml?: string;
   contentText?: string;
   showReadMore?: boolean;
@@ -21,9 +22,9 @@ type ArticleExcerptItemProps = {
 
 export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
   article,
-  contentBaseUrl,
-  tagBaseUrl,
-  postBaseUrl,
+  urlRoot,
+  urlTags,
+  urlPosts,
   contentHtml,
   contentText,
   showReadMore,
@@ -33,17 +34,18 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
   const handleToggle = () => setShow(!show);
 
   const { title, tags } = article.frontMatter;
-  const content = contentHtml ? hydrate(contentHtml, contentBaseUrl) : contentText;
+  const content = contentHtml ? hydrate(contentHtml, article.slug, urlRoot) : contentText;
+  const url = mergeUrlAndSlug(article.slug, urlPosts);
 
   return (
     <Stack direction={['column', 'column', 'row']} spacing={[2, 2, 8]} w="100%">
       <Box flexShrink={0} w={['100%', '100%', 32]}>
-        <TagListRoundBox tags={tags} tagBaseUrl={tagBaseUrl} />
+        <TagListRoundBox tags={tags} tagBaseUrl={urlTags} />
       </Box>
 
       <VStack flexGrow={1} spacing={4} align="left">
         <Box>
-          <Link to={`${postBaseUrl}/${encodeURIComponent(article.slug)}`}>
+          <Link to={url}>
             <Heading
               as="h1"
               fontSize="xl"
@@ -69,7 +71,7 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
         {showReadMore && <ReadMoreButton show={show} onToggle={handleToggle} />}
         {showContentLink && (
           <Box>
-            <Link to={`${postBaseUrl}/${encodeURIComponent(article.slug)}`}>
+            <Link to={url}>
               <Text fontSize="md" textDecoration="underline" _hover={{ color: 'teal.500' }}>
                 全文を読む→
               </Text>

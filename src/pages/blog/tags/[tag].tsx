@@ -13,7 +13,7 @@ import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
-import { getContentsUrl, UrlTable } from '../../../utils/path/url';
+import { UrlTable } from '../../../utils/path/url';
 
 type TagPageProps = {
   tag: string;
@@ -33,9 +33,9 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
           <ArticleExcerptItem
             key={a.slug}
             article={a}
-            contentBaseUrl={`${getContentsUrl(UrlTable.blog)}/${a.slug}`}
-            tagBaseUrl={UrlTable.blogTags}
-            postBaseUrl={UrlTable.blogPosts}
+            urlRoot={UrlTable.blog}
+            urlTags={UrlTable.blogTags}
+            urlPosts={UrlTable.blogPosts}
             contentText={a.excerpt}
             showContentLink
           />
