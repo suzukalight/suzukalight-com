@@ -10,7 +10,7 @@ export const getContentsRootDir = (url: string) => {
 };
 
 export const getContentsDirNames = (url: string) => {
-  const contentsRootDir = path.join(root, 'public', url);
+  const contentsRootDir = getContentsRootDir(url);
   return fs.readdirSync(contentsRootDir);
 };
 
