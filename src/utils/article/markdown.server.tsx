@@ -5,6 +5,7 @@ import remarkAutolinkHeadings from 'remark-autolink-headings';
 import remarkSlug from 'remark-slug';
 import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
+import remarkCustomBlocks from 'remark-custom-blocks';
 
 import { getDefaultComponents } from './markdown';
 import { getContentsDir } from '../path/file.server';
@@ -25,6 +26,19 @@ const getDefaultMdxOptions = () => ({
       },
     ],
     remarkCodeTitles,
+    [
+      remarkCustomBlocks,
+      {
+        exercise: {
+          classes: 'exercise',
+          title: 'required',
+        },
+        practice: {
+          classes: 'practice',
+          title: 'required',
+        },
+      },
+    ],
     remarkPrism,
   ],
 });
