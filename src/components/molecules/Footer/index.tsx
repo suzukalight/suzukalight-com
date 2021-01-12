@@ -25,6 +25,7 @@ export const Footer: React.FC = () => (
           </Text>
           <Link to={UrlTable.blog}>blog</Link>
           <Link to={UrlTable.snippet}>snippet</Link>
+          <Link to={UrlTable.course}>course</Link>
         </VStack>
 
         <VStack>
