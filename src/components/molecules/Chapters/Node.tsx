@@ -58,7 +58,7 @@ export const ChapterNode: React.FC<ChapterNodeProps> = ({
     }
     position="relative"
     ml={[10, 10, 24]}
-    pb={6}
+    pb={4}
   >
     <Mark icon={icon} />
 
