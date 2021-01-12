@@ -14,6 +14,9 @@ import { Article } from '../utils/article/entity';
 import { getArticle, getArticles } from '../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../utils/article/sorter';
 import { getContentsUrl, UrlTable } from '../utils/path/url';
+import { AboutMePhoto } from '../components/molecules/AboutMePhoto';
+import { AboutMeCards } from '../components/molecules/AboutMeCards';
+import { CTAButton } from '../components/atoms/CTAButton';
 
 type HomePageProps = {
   pickupArticles: Article[];
@@ -26,7 +29,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   blogArticles,
   snippetArticles,
 }) => {
-  const refBlog = useRef<HTMLDivElement>();
+  const refAbout = useRef<HTMLDivElement>();
 
   return (
     <DefaultLayout>
@@ -36,10 +39,23 @@ export const HomePage: React.FC<HomePageProps> = ({
         title="suzukalight.com"
         subtitle={`"なければ作ればいいじゃない"`}
         image="images/hero/01.webp"
-        refBlog={refBlog}
+        refElement={refAbout}
       />
 
-      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]} ref={refBlog}>
+      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]} ref={refAbout}>
+        <CenterMaxW maxWidth="60em">
+          <VStack spacing={8} align="center">
+            <Heading as="h1" fontSize="2xl" pb={8}>
+              <Text as="span">About</Text>
+            </Heading>
+            <AboutMePhoto />
+            <AboutMeCards />
+            <CTAButton to={UrlTable.about} label="READ MORE→" />
+          </VStack>
+        </CenterMaxW>
+      </Box>
+
+      <Box minH="16em" px={[0, 8, 16, 24]}>
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} align="left">
             <Heading as="h1" fontSize="3xl">
@@ -83,7 +99,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </CenterMaxW>
       </Box>
 
-      <Box minH="16em" px={[0, 8, 16, 24]}>
+      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]}>
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} align="left">
             <Heading as="h1" fontSize="3xl">

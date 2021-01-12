@@ -19,16 +19,16 @@ type HeroProps = {
   title: string;
   subtitle: string;
   image: string;
-  refBlog: React.MutableRefObject<HTMLDivElement>;
+  refElement: React.MutableRefObject<HTMLDivElement>;
 };
 
-export const Hero = ({ title, subtitle, image, refBlog }: HeroProps) => {
+export const Hero = ({ title, subtitle, image, refElement }: HeroProps) => {
   const scrollToBlogHeader = useCallback(() => {
-    refBlog.current.scrollIntoView({
+    refElement.current.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
-  }, [refBlog]);
+  }, [refElement]);
 
   return (
     <VStack w="100%" minH="calc(100vh - 64px)">
