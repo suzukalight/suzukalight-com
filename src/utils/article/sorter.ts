@@ -3,9 +3,9 @@ import isEqual from 'date-fns/isEqual';
 
 import { Article } from './entity';
 
-/**
- * 記事を日付降順で並べ替える comparator
- */
+export type ComparatorArticle = (a: Article, b: Article) => number;
+
+/** 記事を日付降順で並べ替える comparator */
 export const comparatorDateDesc = (a: Article, b: Article) => {
   const dateA = new Date(a.frontMatter.date);
   const dateB = new Date(b.frontMatter.date);
@@ -14,10 +14,29 @@ export const comparatorDateDesc = (a: Article, b: Article) => {
   return isAfter(dateA, dateB) ? -1 : 1;
 };
 
+/** 記事を日付昇順で並べ替える comparator */
+export const comparatorDateAsc = (a: Article, b: Article) => -comparatorDateDesc(a, b);
+
+/**
+ * 記事を指定の comparator で並べ替え、新しい配列を返す
+ * @param articles 記事
+ */
+export const sortArticles = (articles: Article[], comparator: ComparatorArticle) => {
+  return articles.slice().sort(comparator);
+};
+
 /**
  * 記事を日付降順で並べ替え、新しい配列を返す
  * @param articles 記事
  */
 export const sortArticlesByDateDesc = (articles: Article[]) => {
   return articles.slice().sort(comparatorDateDesc);
+};
+
+/**
+ * 記事を日付昇順で並べ替え、新しい配列を返す
+ * @param articles 記事
+ */
+export const sortArticlesByDateAsc = (articles: Article[]) => {
+  return articles.slice().sort(comparatorDateAsc);
 };
