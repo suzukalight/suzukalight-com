@@ -96,3 +96,48 @@ article {
     border-top-right-radius: 0;
   }
 }
+
+/* 
+ * Custom Blocks
+ */
+.exercise,
+.practice {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5em;
+  margin-bottom: 1.75em;
+
+  .custom-block-heading {
+    padding: 0.5em 1em;
+    border-radius: 0.5em 0.5em 0 0;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  .custom-block-body {
+    border-radius: 0 0 0.5em 0.5em;
+    padding: 1em;
+    font-size: 1em;
+
+    & ol,
+    & ul,
+    & p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.exercise {
+  border-color: #81E6D9;
+
+  .custom-block-heading {
+    background-color: #E6FFFA;
+  }
+}
+
+.practice {
+  border-color: #FEB2B2;
+
+  .custom-block-heading {
+    background-color: #FED7D7;
+  }
+}
