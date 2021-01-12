@@ -48,8 +48,13 @@ export const HomePage: React.FC<HomePageProps> = ({
             <Heading as="h1" fontSize="2xl" pb={8}>
               <Text as="span">About</Text>
             </Heading>
+
             <AboutMePhoto />
-            <AboutMeCards />
+
+            <Box pt={8}>
+              <AboutMeCards />
+            </Box>
+
             <CTAButton to={UrlTable.about} label="READ MORE→" />
           </VStack>
         </CenterMaxW>
