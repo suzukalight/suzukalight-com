@@ -1,22 +1,22 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Box, Heading, Text, VStack, Stack, Img, Center, Divider } from '@chakra-ui/react';
+import { Box, Heading, VStack, Divider } from '@chakra-ui/react';
 import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
-import { Article, getDateFormatted } from '../../../utils/article/entity';
+import { Article } from '../../../utils/article/entity';
 import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
 import { sortArticlesByDateAsc } from '../../../utils/article/sorter';
-import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
+import { mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 import { renderToString } from '../../../utils/article/markdown.server';
 
 import { HtmlHead } from '../../../components/molecules/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
-import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { CTAButton } from '../../../components/atoms/CTAButton';
 import { ChapterNode } from '../../../components/molecules/Chapters/Node';
 import { Link } from '../../../components/atoms/Link';
+import { CourseItem } from '../../../components/molecules/CourseItem';
 
 type IndexPageProps = {
   course: Article;
@@ -25,10 +25,7 @@ type IndexPageProps = {
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
-  const { slug, excerpt, frontMatter } = course;
-  const { title, hero, emoji } = frontMatter;
   const baseUrl = mergeUrlAndSlug(course.slug, UrlTable.course);
-  const imageSrc = `${getContentsUrlWithSlug(slug, UrlTable.course)}/${hero}`;
 
   return (
     <DefaultLayout>
@@ -36,45 +33,18 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
 
       <CenterMaxW maxWidth="50em">
         <VStack spacing={16} align="left" w="100%">
-          <Stack direction={['column', 'column', 'row-reverse']} spacing={[2, 2, 0]} w="100%">
-            <Box flexShrink={0} w={['100%', '100%', 48]} ml={[0, 0, 8]}>
-              {hero ? (
-                <Img
-                  src={imageSrc}
-                  alt={slug}
-                  w="100%"
-                  h={48}
-                  objectFit="cover"
-                  borderRadius={12}
-                />
-              ) : (
-                <Center>
-                  <Text fontSize="64px">{emoji ?? '📝'}</Text>
-                </Center>
-              )}
-            </Box>
-
-            <VStack flexGrow={1} align="left">
-              <Heading as="h1" fontSize="2xl" lineHeight={1.5}>
-                {`"${title}"`}
-              </Heading>
-
-              <Box>
-                <ArticleDetail contentHtml={excerpt} />
-              </Box>
-
-              <Text fontSize="sm" color="gray.600" mt={1} mb={8}>
-                {getDateFormatted(course)}
-              </Text>
-
+          <CourseItem
+            course={course}
+            urlCourse={UrlTable.course}
+            cta={
               <CTAButton
                 to={mergeUrlAndSlug(chapters[0].slug, baseUrl)}
                 label="コースをはじめる→"
               />
-            </VStack>
-          </Stack>
+            }
+          />
 
-          <VStack spacing={8} align="left">
+          <VStack spacing={8} align="left" p={4} pt={8} backgroundColor="gray.50" borderRadius={4}>
             <Heading as="h1" fontSize={['xl', 'xl', '2xl']} borderBottom="sm">
               Chapters
             </Heading>
