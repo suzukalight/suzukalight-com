@@ -1,6 +1,6 @@
 ---
 title: 初めてのC言語プログラミング
-date: '2012-05-01T01:00:00'
+date: '2012-05-01T00:02:00'
 hero: vc-first-13.png
 status: 'published'
 ---
