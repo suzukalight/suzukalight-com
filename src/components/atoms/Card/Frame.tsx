@@ -10,13 +10,13 @@ type CardFrameProps = {
 
 export const CardFrame: React.FC<CardFrameProps> = ({ image, title, supplement, wrapProps }) => {
   return (
-    <VStack spacing={4} overflow="hidden" maxW={64} h={64} {...wrapProps}>
+    <VStack spacing={4} overflow="hidden" maxW={80} h={64} {...wrapProps}>
       <Center flexShrink={0} w="100%" h={20}>
         {image}
       </Center>
 
       <VStack spacing={2} align="center" w="100%" h={44} overflow="hidden">
-        <Heading as="h2" overflow="hidden" h={6} fontSize="md" lineHeight={1.5}>
+        <Heading as="h2" overflow="hidden" h={8} fontSize="xl" lineHeight={1.5}>
           {title}
         </Heading>
 
