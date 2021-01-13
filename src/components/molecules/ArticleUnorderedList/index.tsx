@@ -2,10 +2,10 @@ import React, { ReactNode } from 'react';
 import { Center, Box, Heading, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react';
 
 import { Link } from '../../atoms/Link';
+import { CTAButton } from '../../atoms/CTAButton';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { mergeUrlAndSlug } from '../../../utils/path/url';
-import { CTAButton } from '../../atoms/CTAButton';
 
 type HomePageProps = {
   image: ReactNode;

@@ -5,6 +5,7 @@ import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { Link } from '../../atoms/Link';
 import { SNSLinkItem } from '../../atoms/SNSLinkItem';
 import { SNSLinks } from '../SNSLinks';
+
 import { UrlTable } from '../../../utils/path/url';
 
 export const Footer: React.FC = () => (
