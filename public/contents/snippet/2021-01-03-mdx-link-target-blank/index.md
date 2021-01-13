@@ -2,7 +2,7 @@
 title: mdxファイルのリンクにtarget=_blankなどを入れる
 date: '2021-01-03T02:00:00'
 category: Snippet
-tags: ['nextjs', 'mdx', 'next-mdx-remote', 'react']
+tags: ['markdown', 'mdx', 'react', 'next-mdx-remote', 'nextjs']
 status: 'published'
 ---
 
