@@ -1,5 +1,5 @@
 import { Article } from './entity';
-import { sortArticlesByDateDesc } from './sorter';
+import { ComparatorArticle, comparatorDateDesc, sortArticles } from './sorter';
 
 /**
  * 対象の記事に類似している記事を返す
@@ -43,8 +43,9 @@ export const getRelatedArticlesByTags = (src: Article, articles: Article[], coun
 export const getPrevAndNextArticle = (
   src: Article,
   articles: Article[],
+  comparator?: ComparatorArticle,
 ): { prevArticle: Article | null; nextArticle: Article | null } => {
-  const articlesOrderByDate = sortArticlesByDateDesc(articles);
+  const articlesOrderByDate = sortArticles(articles, comparator ?? comparatorDateDesc);
   const articleIndex = articlesOrderByDate.findIndex((a) => a.slug === src.slug);
   if (articleIndex < 0) return { prevArticle: null, nextArticle: null };
 

@@ -1,6 +1,18 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Flex, Box, Heading, VStack, ListItem, UnorderedList, Text } from '@chakra-ui/react';
+import {
+  Flex,
+  Box,
+  Heading,
+  VStack,
+  ListItem,
+  UnorderedList,
+  Text,
+  Divider,
+  Button,
+  ButtonProps,
+  Stack,
+} from '@chakra-ui/react';
 
 import { Article, stripContent } from '../../../utils/article/entity';
 import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
@@ -16,6 +28,20 @@ import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { Link } from '../../../components/atoms/Link';
+import { BackLinks } from '../../../components/molecules/BackLinks';
+import { comparatorDateAsc } from '../../../utils/article/sorter';
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+
+const prevNextButtonStyle: ButtonProps = {
+  isFullWidth: true,
+  px: 4,
+  py: 8,
+  variant: 'outline',
+  color: 'teal.600',
+  borderColor: 'teal.600',
+  backgroundColor: 'transparent',
+  _hover: { backgroundColor: 'teal.50' },
+};
 
 type CourseChapterProps = {
   course: Article;
@@ -31,6 +57,8 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
   chapter,
   contentHtml,
   chapters,
+  prevArticle,
+  nextArticle,
 }) => {
   const { slug } = chapter;
   const { title, hero } = chapter.frontMatter;
@@ -57,7 +85,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
         pt="7em"
         px={4}
         align="left"
-        shadow="sm"
+        shadow="md"
       >
         <Heading as="h1" fontSize="md">
           {course.frontMatter.title}
@@ -71,7 +99,6 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
             return (
               <ListItem
                 key={c.frontMatter.title}
-                p={2}
                 borderRadius={4}
                 color={match ? 'gray.800' : 'gray.400'}
                 backgroundColor={match ? 'gray.100' : 'inherit'}
@@ -82,7 +109,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
                 }}
               >
                 <Link to={url}>
-                  <Text fontSize="sm" fontWeight="600">
+                  <Text fontSize="sm" fontWeight="600" p={2}>
                     {c.frontMatter.title}
                   </Text>
                 </Link>
@@ -97,6 +124,39 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
           <VStack spacing={8} align="left">
             <ArticleHeader article={chapter} urlRoot={UrlTable.course} course={course} />
             <ArticleDetail contentHtml={content} />
+            <Box>
+              <Stack direction={['column', 'column', 'row-reverse']} w="100%" spacing={[4, 4, 0]}>
+                <Box w={['100%', '100%', '50%']} pl={[0, 0, 2]}>
+                  {nextArticle ? (
+                    <Link to={mergeUrlAndSlug(nextArticle.slug, urlCourse)}>
+                      <Button {...prevNextButtonStyle} rightIcon={<ArrowForwardIcon />}>
+                        {nextArticle.frontMatter.title}
+                      </Button>
+                    </Link>
+                  ) : null}
+                </Box>
+
+                <Box w={['100%', '100%', '50%']} pr={[0, 0, 2]}>
+                  {prevArticle ? (
+                    <Link to={mergeUrlAndSlug(prevArticle.slug, urlCourse)}>
+                      <Button {...prevNextButtonStyle} leftIcon={<ArrowBackIcon />}>
+                        {prevArticle.frontMatter.title}
+                      </Button>
+                    </Link>
+                  ) : null}
+                </Box>
+              </Stack>
+            </Box>
+            <Divider mt={12} mb={4} />
+            <Box>
+              <BackLinks
+                links={[
+                  { to: urlCourse, label: '表紙に戻る' },
+                  { to: UrlTable.course, label: 'コース一覧に戻る' },
+                  { to: UrlTable.home, label: 'ホームに戻る' },
+                ]}
+              />
+            </Box>
           </VStack>
         </CenterMaxW>
       </Box>
@@ -130,7 +190,7 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
   const contentHtml = await renderToString(content, slug, urlCourse);
 
   const chapters = await getArticles(urlCourse);
-  const { prevArticle, nextArticle } = getPrevAndNextArticle(chapter, chapters);
+  const { prevArticle, nextArticle } = getPrevAndNextArticle(chapter, chapters, comparatorDateAsc);
 
   const course = await getArticle(courseSlug, UrlTable.course);
 
