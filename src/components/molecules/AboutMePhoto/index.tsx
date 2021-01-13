@@ -18,6 +18,8 @@ export const AboutMePhoto: React.FC = () => (
       <SNSLinks spacing={3} boxSize={4} color="gray.800" />
     </HStack>
 
-    <Text>テックリード・スクラムマスター・フロントエンドエンジニア。修士（メディア科学）。</Text>
+    <Text>
+      Webエンジニア。CS系の修士号。高校在学中に競馬アプリの制作および販売を経験。大学ではGUI・ハードウェア・福祉工学を研究。就職後はテックリード、スクラムマスター、採用育成などを経験。趣味は競馬とゲーム。
+    </Text>
   </VStack>
 );
