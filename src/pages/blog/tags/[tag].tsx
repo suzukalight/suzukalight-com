@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Divider, VStack, StackDivider } from '@chakra-ui/react';
-import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../../components/molecules/HtmlHead';
@@ -46,9 +45,9 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 
       <BackLinks
         links={[
-          { to: UrlTable.blogTags, icon: FaPencilAlt, label: 'Back to TagList' },
-          { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog Index' },
-          { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
+          { to: UrlTable.blogTags, label: 'タグ一覧に戻る' },
+          { to: UrlTable.blog, label: 'ブログ一覧に戻る' },
+          { to: UrlTable.home, label: 'ホームに戻る' },
         ]}
       />
     </ArticleListLayout>

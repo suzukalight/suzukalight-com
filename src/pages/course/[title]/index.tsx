@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Box, Heading, VStack, Divider } from '@chakra-ui/react';
-import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { Article } from '../../../utils/article/entity';
 import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
@@ -66,8 +65,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
 
         <BackLinks
           links={[
-            { to: UrlTable.course, icon: FaPencilAlt, label: 'Back to Course list' },
-            { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
+            { to: UrlTable.course, label: 'コース一覧に戻る' },
+            { to: UrlTable.home, label: 'ホームに戻る' },
           ]}
         />
       </CenterMaxW>

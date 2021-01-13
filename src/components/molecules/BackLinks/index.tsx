@@ -12,7 +12,7 @@ type BackLinksProps = {
 };
 
 export const BackLinks: React.FC<BackLinksProps> = ({ links }) => (
-  <VStack spacing={4} alignItems="flex-start">
+  <VStack spacing={2} alignItems="flex-start">
     {links.map((link, index) => (
       <Link key={index} to={link.to}>
         <Text>

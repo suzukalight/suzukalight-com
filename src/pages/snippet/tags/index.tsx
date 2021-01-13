@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import { Heading, Divider } from '@chakra-ui/react';
-import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../../components/molecules/HtmlHead';
@@ -43,8 +42,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 
     <BackLinks
       links={[
-        { to: UrlTable.snippet, icon: FaPencilAlt, label: 'Back to Snippet Index' },
-        { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
+        { to: UrlTable.snippet, label: 'スニペット一覧に戻る' },
+        { to: UrlTable.home, label: 'ホームに戻る' },
       ]}
     />
   </ArticleListLayout>

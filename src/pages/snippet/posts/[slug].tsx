@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { VStack, StackDivider } from '@chakra-ui/react';
-import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 import { Article, stripContent } from '../../../utils/article/entity';
@@ -81,8 +80,8 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 
           <BackLinks
             links={[
-              { to: UrlTable.snippet, icon: FaPencilAlt, label: 'Back to Snippet List' },
-              { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
+              { to: UrlTable.snippet, label: 'スニペット一覧に戻る' },
+              { to: UrlTable.home, label: 'ホームに戻る' },
             ]}
           />
         </VStack>

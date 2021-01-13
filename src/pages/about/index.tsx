@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import { StackDivider, VStack, Box } from '@chakra-ui/react';
-import { FaHome } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../components/molecules/HtmlHead';
@@ -34,7 +33,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
           <ArticleDetail contentHtml={content} />
         </Box>
 
-        <BackLinks links={[{ to: UrlTable.home, icon: FaHome, label: 'Back to Home' }]} />
+        <BackLinks links={[{ to: UrlTable.home, label: 'ホームに戻る' }]} />
       </VStack>
     </ArticleListLayout>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import { Divider, VStack, StackDivider } from '@chakra-ui/react';
-import { FaHome } from 'react-icons/fa';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../components/molecules/HtmlHead';
@@ -44,7 +43,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 
     <Divider mt={12} mb={8} />
 
-    <BackLinks links={[{ to: UrlTable.home, icon: FaHome, label: 'Back to Home' }]} />
+    <BackLinks links={[{ to: UrlTable.home, label: 'ホームに戻る' }]} />
   </ArticleListLayout>
 );
 

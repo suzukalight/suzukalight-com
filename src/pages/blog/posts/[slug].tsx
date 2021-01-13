@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { VStack, StackDivider } from '@chakra-ui/react';
-import { FaHome, FaPencilAlt } from 'react-icons/fa';
 
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 import { Article, stripContent } from '../../../utils/article/entity';
@@ -75,8 +74,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 
           <BackLinks
             links={[
-              { to: UrlTable.blog, icon: FaPencilAlt, label: 'Back to Blog List' },
-              { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
+              { to: UrlTable.blog, label: 'ブログ一覧に戻る' },
+              { to: UrlTable.home, label: 'ホームに戻る' },
             ]}
           />
         </VStack>

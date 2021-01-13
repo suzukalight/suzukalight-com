@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Heading, Divider } from '@chakra-ui/react';
-import { FaHome, FaBuilding, FaUniversity, FaUserGraduate, FaUser } from 'react-icons/fa';
+import { FaBuilding, FaUniversity, FaUserGraduate } from 'react-icons/fa';
 
 import { DefaultLayout } from '../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../components/molecules/HtmlHead';
@@ -156,8 +156,8 @@ export const IndexPage: React.FC = () => (
 
           <BackLinks
             links={[
-              { to: UrlTable.about, icon: FaUser, label: 'Back to About' },
-              { to: UrlTable.home, icon: FaHome, label: 'Back to Home' },
+              { to: UrlTable.about, label: '自己紹介に戻る' },
+              { to: UrlTable.home, label: 'ホームに戻る' },
             ]}
           />
         </Box>
