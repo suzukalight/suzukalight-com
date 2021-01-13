@@ -160,8 +160,8 @@ $mq-sm: 30em;
     font-size: 0.875em;
   }
 
-  & > p > code,
-  & li > code {
+  & > p code,
+  & li code {
     padding: 0.25em 0.5em;
     background-color: #edf2f7;
     word-break: break-all;

@@ -118,9 +118,9 @@ article {
     padding: 1em;
     font-size: 1em;
 
-    & ol,
-    & ul,
-    & p {
+    & ol:last-child,
+    & ul:last-child,
+    & p:last-child {
       margin-bottom: 0;
     }
   }
