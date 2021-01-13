@@ -36,7 +36,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
         refElement={refAbout}
       />
 
-      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]} ref={refAbout}>
+      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]} py={4} ref={refAbout}>
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} align="center">
             <Heading as="h1" fontSize="3xl" pb={4}>
@@ -54,14 +54,14 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
         </CenterMaxW>
       </Box>
 
-      <Box minH="16em" px={[0, 8, 16, 24]}>
+      <Box minH="16em" px={[0, 8, 16, 24]} py={4}>
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} align="center">
             <Heading as="h1" fontSize="3xl" pb={4}>
               <Text as="span">Writings</Text>
             </Heading>
 
-            <SimpleGrid columns={[1, 1, 2, 2]} gap={12} pl={4}>
+            <SimpleGrid columns={[1, 1, 2, 2]} gap={24} pl={4}>
               <GridItem>
                 <ArticleUnorderedList
                   image={<Icon as={FaPencilAlt} boxSize={12} />}
@@ -69,7 +69,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
                   articles={blogArticles}
                   urlPosts={UrlTable.blogPosts}
                   urlAllArticles={UrlTable.blog}
-                  labelAllArticles="すべてのBlogを見る→"
+                  labelAllArticles="すべてのBlog →"
                 />
               </GridItem>
 
@@ -80,7 +80,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
                   articles={snippetArticles}
                   urlPosts={UrlTable.snippetPosts}
                   urlAllArticles={UrlTable.snippet}
-                  labelAllArticles="すべてのSnippetを見る→"
+                  labelAllArticles="すべてのSnippet →"
                 />
               </GridItem>
             </SimpleGrid>

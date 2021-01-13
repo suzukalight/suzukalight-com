@@ -36,7 +36,7 @@ export const ArticleUnorderedList: React.FC<HomePageProps> = ({
         <ListItem key={a.slug} mb={2}>
           <Link to={mergeUrlAndSlug(a.slug, urlPosts)}>
             <Text>
-              <Text as="span" textDecoration="underline solid #1A202C80">
+              <Text as="span" textDecoration="underline solid #1A202C60">
                 {a.frontMatter.title}
               </Text>
               <Text as="small" color="gray.500" fontWeight="normal">{` - ${getDateFormatted(
