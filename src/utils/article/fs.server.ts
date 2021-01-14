@@ -1,11 +1,12 @@
 import path from 'path';
 import fs from 'fs';
 
-import { Article, getArticleFromMdxSource, isPublished } from './entity';
+import { Article, getArticleFromMdxSource, isPublished, stripContent } from './entity';
 import { getContentsDir, getContentsRootDir } from '../path/file.server';
 
 type GetArticleOption = {
   includesDraft?: boolean;
+  withContent?: boolean;
 };
 
 const canRead = (article: Article, options?: GetArticleOption) =>
@@ -16,7 +17,7 @@ const canRead = (article: Article, options?: GetArticleOption) =>
  * @param slug
  * @param url コンテンツのURL
  */
-export const getMdxSource = (slug: string, url: string) => {
+const getMdxSource = (slug: string, url: string) => {
   const contentsDir = getContentsDir(slug, url);
 
   if (fs.existsSync(`${contentsDir}/index.md`)) {
@@ -39,14 +40,16 @@ export const getArticle = async (slug: string, url: string, options?: GetArticle
   const article = await getArticleFromMdxSource(source, slug);
 
   if (!canRead(article, options)) return null;
-  return article;
+  if (options?.withContent) return article;
+
+  return stripContent(article);
 };
 
 /**
  * url/{$1}/index.mdx? にマッチするMDXを探して、それが格納されているディレクトリ一覧を返す
  * @param url コンテンツのURL
  */
-export const getSlugs = (url: string) => {
+const getSlugs = (url: string) => {
   const contentsRootDir = getContentsRootDir(url);
   const dirNames = fs.readdirSync(contentsRootDir);
   const dirNamesThatHaveMdx = dirNames.filter(
@@ -65,21 +68,8 @@ export const getSlugs = (url: string) => {
  * @param slugs コンテンツのslug
  * @param options
  */
-export const getArticlesFromDirs = async (
-  url: string,
-  slugs: string[],
-  options?: GetArticleOption,
-) => {
-  const articles = await Promise.all(
-    slugs.map(async (slug) => {
-      const source = getMdxSource(slug, url);
-      const article = await getArticleFromMdxSource(source, slug);
-
-      if (!canRead(article, options)) return null;
-      return article;
-    }),
-  );
-
+const getArticlesFromDirs = async (url: string, slugs: string[], options?: GetArticleOption) => {
+  const articles = await Promise.all(slugs.map(async (slug) => getArticle(slug, url, options)));
   return articles.filter((a) => a);
 };
 
