@@ -185,7 +185,7 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
   const slug = params.chapter as string;
   const urlCourse = mergeUrlAndSlug(courseSlug, UrlTable.course);
 
-  const { content, ...chapter } = await getArticle(slug, urlCourse);
+  const { content, ...chapter } = await getArticle(slug, urlCourse, { withContent: true });
   const contentHtml = await renderToString(content, slug, urlCourse);
 
   const _chapters = await getArticles(urlCourse);
@@ -199,7 +199,7 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
       course: stripContent(course),
       chapter,
       contentHtml,
-      chapters: chapters.map((c) => stripContent(c)),
+      chapters,
       prevArticle,
       nextArticle,
     },

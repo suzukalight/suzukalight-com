@@ -74,7 +74,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const tag = params.tag as string;
 
-  const articles = await getArticles(UrlTable.snippet);
+  const articles = await getArticles(UrlTable.snippet, { withContent: true });
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
   const data = await Promise.all(
     sortArticlesByDateDesc(articlesFilteredByTag).map(async ({ content, ...article }) => ({

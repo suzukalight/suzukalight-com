@@ -42,7 +42,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { content, ...article } = await getArticle('index', UrlTable.about);
+  const { content, ...article } = await getArticle('index', UrlTable.about, { withContent: true });
   const contentHtml = await renderToString(content, 'index', UrlTable.about);
 
   return { props: { article, contentHtml } as IndexPageProps };

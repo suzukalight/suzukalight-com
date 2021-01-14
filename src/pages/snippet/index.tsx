@@ -50,7 +50,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles = await getArticles(UrlTable.snippet);
+  const articles = await getArticles(UrlTable.snippet, { withContent: true });
   const data = await Promise.all(
     sortArticlesByDateDesc(articles).map(async ({ content, ...article }) => ({
       article,

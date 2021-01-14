@@ -98,7 +98,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
-  const { content, ...article } = await getArticle(slug, UrlTable.blog);
+  const { content, ...article } = await getArticle(slug, UrlTable.blog, { withContent: true });
 
   const contentHtml = await renderToString(content, slug, UrlTable.blog);
 
