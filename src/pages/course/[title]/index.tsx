@@ -28,7 +28,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
 
   return (
     <DefaultLayout>
-      <HtmlHead title="Blog" url={UrlTable.blog} />
+      <HtmlHead title={course.frontMatter.title} url={baseUrl} />
 
       <CenterMaxW maxWidth="50em">
         <VStack spacing={16} align="left" w="100%">

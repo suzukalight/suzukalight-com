@@ -22,7 +22,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ courses }) => (
     title="Course"
     subtitle="実践形式で学んでいくことができる、コース形式のドキュメントです。"
   >
-    <HtmlHead title="Blog" url={UrlTable.blog} />
+    <HtmlHead title="Course" url={UrlTable.course} />
 
     <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
       {courses.map((a) => (
