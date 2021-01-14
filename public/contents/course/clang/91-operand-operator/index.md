@@ -1,5 +1,5 @@
 ---
-title: 式と演算子
+title: (Appendix) 式と演算子
 date: '2012-05-01T00:04:00'
 status: 'published'
 ---
