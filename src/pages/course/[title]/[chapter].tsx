@@ -29,7 +29,7 @@ import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { Link } from '../../../components/atoms/Link';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-import { comparatorDateAsc } from '../../../utils/article/sorter';
+import { comparatorSlugAsc, sortArticles } from '../../../utils/article/sorter';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 const prevNextButtonStyle: ButtonProps = {
@@ -189,8 +189,9 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
   const { content, ...chapter } = await getArticle(slug, urlCourse);
   const contentHtml = await renderToString(content, slug, urlCourse);
 
-  const chapters = await getArticles(urlCourse);
-  const { prevArticle, nextArticle } = getPrevAndNextArticle(chapter, chapters, comparatorDateAsc);
+  const _chapters = await getArticles(urlCourse);
+  const chapters = sortArticles(_chapters, comparatorSlugAsc);
+  const { prevArticle, nextArticle } = getPrevAndNextArticle(chapter, chapters, comparatorSlugAsc);
 
   const course = await getArticle(courseSlug, UrlTable.course);
 

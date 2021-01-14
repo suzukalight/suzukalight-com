@@ -4,7 +4,7 @@ import { Box, Heading, VStack, Divider } from '@chakra-ui/react';
 
 import { Article } from '../../../utils/article/entity';
 import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
-import { sortArticlesByDateAsc } from '../../../utils/article/sorter';
+import { comparatorSlugAsc, sortArticles } from '../../../utils/article/sorter';
 import { mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 import { renderToString } from '../../../utils/article/markdown.server';
 
@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const contentHtml = await renderToString(content, title, UrlTable.snippet);
 
   const chapters = await getArticles(mergeUrlAndSlug(title, UrlTable.course));
-  const chaptersSorted = sortArticlesByDateAsc(chapters);
+  const chaptersSorted = sortArticles(chapters, comparatorSlugAsc);
 
   return { props: { course, contentHtml, chapters: chaptersSorted } as IndexPageProps };
 };
