@@ -7,15 +7,15 @@ emoji: '👨‍💻'
 status: 'published'
 ---
 
-VSCode + WSL2 の環境で C++ ファイルをコンパイルするための環境構築について、手順をまとめました。以下の手順で進めていきます；
+Windows10 + WSL2 + VSCode の環境で C++ ファイルをコンパイルするための環境構築についてまとめました。以下の手順で進めていきます；
 
-1. WSL2 環境の構築
+1. WSL2 環境のセットアップ
 2. Visual Studio Code のインストールと設定
-3. コンパイラの設定
+3. C++コンパイラの設定
 
 # WSL2 環境のセットアップ
 
-## Linux 環境の有効化
+## Linux 用サブシステムの有効化
 
 - Windows を最新バージョンに更新
 - Windows キーを押して、「**Windows の機能の有効化または無効化**」を入力
@@ -29,9 +29,9 @@ wsl --set-default-version 2
 
 ## Ubuntu のインストール
 
-**[Microsoft Store](https://www.microsoft.com/ja-jp/store/apps/windows)**または**[ここから](https://docs.microsoft.com/ja-jp/windows/wsl/install-manual)** Ubuntu をインストールします。LTS バージョンであれば何でも良いと思います。インストールの最中に、username/password を求められますので、入力します。これらは Ubuntu で sudo をするときなどに必要になります。
+**[Microsoft Store](https://www.microsoft.com/ja-jp/store/apps/windows)**または**[ここから](https://docs.microsoft.com/ja-jp/windows/wsl/install-manual)** Ubuntu をインストールします。LTS バージョンであれば何でも良いと思います。インストールの最中に username/password を求められますので入力します。これらは Ubuntu で sudo をするときなどに必要になります。
 
-# vscode のインストール
+# Visual Studio Code のインストールと設定
 
 **[Visual Studio Code](https://code.visualstudio.com/)** をダウンロードします。セットアップが完了したら、下記の拡張機能をインストールしておきます；
 
@@ -39,9 +39,9 @@ wsl --set-default-version 2
 - **C/C++**: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
 - **C++ Intellisense**: https://marketplace.visualstudio.com/items?itemName=austin.code-gnu-global
 
-vscode のターミナルは、WSL2 を見るように設定しておいてください。あるいは設定しなくても、プロジェクトを開く際に「**Open Folder in WSL**」で開けば、ターミナルは WSL2 を見てくれると思います。
+**vscode のターミナルは、WSL2 を見るように設定しておいてください**。あるいは設定しなくても、プロジェクトを開く際に「**Open Folder in WSL**」で開けば、ターミナルは WSL2 を見てくれると思います。
 
-# コンパイラの設定
+# C++コンパイラの設定
 
 ## コンパイラのインストール
 
@@ -118,7 +118,7 @@ Ctrl+Shift+B を入力すると、既定のビルドタスクを選択できま�
 
 Ctrl+Shift+P から Reload Window をしておきます。
 
-# コンパイル
+# コンパイル実行
 
 みんな大好き `Hello, world!` を作成してみます。プロジェクトを作成するときは、必ず「**Open Folder in WSL**」から **Ubuntu のホームディレクトリ `~` 配下へプロジェクトやファイルを作成する**ようにしてください。`/mnt/c/` 配下だとパフォーマンスが著しく低下します。
 
