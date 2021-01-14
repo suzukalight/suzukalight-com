@@ -28,7 +28,7 @@ int main()
   while( sum < 100 )
   {
     printf( "整数値を入力=>" );
-    scanf_s( "%d", &scan );
+    scanf( "%d", &scan );
 
     sum += scan;
     printf( "現在の合計は%d\n", sum );
@@ -65,7 +65,7 @@ int main()
   while( sum < 100 )
   {
     printf( "整数値を入力=>" );
-    scanf_s( "%d", &scan );
+    scanf( "%d", &scan );
 
     // 入力された値が0以下の場合は、処理を終了する
     if( scan <= 0 )
@@ -103,7 +103,7 @@ int main()
   while( 1 )
   {
     printf( "整数値を入力=>" );
-    scanf_s( "%d", &scan );
+    scanf( "%d", &scan );
 
     // 入力された値が0以下の場合は、処理を終了する
     if( scan <= 0 )
@@ -148,7 +148,7 @@ int main()
     printf( "現在の合計は%d\n", sum );
 
     printf( "整数値を入力=>" );
-    scanf_s( "%d", &scan );
+    scanf( "%d", &scan );
   }
   while( scan > 0 );
 
