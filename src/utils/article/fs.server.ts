@@ -1,28 +1,18 @@
 import path from 'path';
 import fs from 'fs';
 
-import { getArticleFromMdxSource, isPublished } from './entity';
+import { Article, getArticleFromMdxSource, isPublished } from './entity';
 import { getContentsDir, getContentsRootDir } from '../path/file.server';
 
-/**
- * url/{$1}/index.mdx? にマッチするMDXを探して、そのディレクトリ一覧を返す
- * @param url コンテンツのURL
- */
-export const getSlugs = (url: string) => {
-  const contentsRootDir = getContentsRootDir(url);
-  const dirNames = fs.readdirSync(contentsRootDir);
-  const dirNamesThatHaveMdx = dirNames.filter(
-    (dir) =>
-      fs.existsSync(path.join(contentsRootDir, dir, 'index.md')) ||
-      fs.existsSync(path.join(contentsRootDir, dir, 'index.mdx')),
-  );
-  const paths = dirNamesThatHaveMdx.map((dir) => dir.replace(/\.mdx?/, ''));
-
-  return paths;
+type GetArticleOption = {
+  includesDraft?: boolean;
 };
 
+const canRead = (article: Article, options?: GetArticleOption) =>
+  isPublished(article) || options?.includesDraft;
+
 /**
- * 指定した slug にマッチするMDXファイルの内容を返す
+ * url配下の、指定したslugにマッチするMDXファイルの内容を返す
  * @param slug
  * @param url コンテンツのURL
  */
@@ -39,21 +29,38 @@ export const getMdxSource = (slug: string, url: string) => {
 };
 
 /**
- * 指定した slug にマッチするMDXファイルの内容を Article にして返す
+ * url配下の、指定したslugにマッチするMDXファイルの内容を Article にして返す
  * @param slug
  * @param url コンテンツのURL
+ * @param options
  */
-export const getArticle = async (slug: string, url: string) => {
+export const getArticle = async (slug: string, url: string, options?: GetArticleOption) => {
   const source = getMdxSource(slug, url);
-  return await getArticleFromMdxSource(source, slug);
-};
+  const article = await getArticleFromMdxSource(source, slug);
 
-type GetArticlesFromDirOption = {
-  includesDraft?: boolean;
+  if (!canRead(article, options)) return null;
+  return article;
 };
 
 /**
- * 指定したコンテンツURLに格納されているMDX?ファイルをすべて返す
+ * url/{$1}/index.mdx? にマッチするMDXを探して、それが格納されているディレクトリ一覧を返す
+ * @param url コンテンツのURL
+ */
+export const getSlugs = (url: string) => {
+  const contentsRootDir = getContentsRootDir(url);
+  const dirNames = fs.readdirSync(contentsRootDir);
+  const dirNamesThatHaveMdx = dirNames.filter(
+    (dir) =>
+      fs.existsSync(path.join(contentsRootDir, dir, 'index.md')) ||
+      fs.existsSync(path.join(contentsRootDir, dir, 'index.mdx')),
+  );
+  const paths = dirNamesThatHaveMdx.map((dir) => dir.replace(/\.mdx?/, ''));
+
+  return paths;
+};
+
+/**
+ * url配下の、指定したslug群にある記事のうち、公開されているもののみを返す
  * @param url コンテンツのURL
  * @param slugs コンテンツのslug
  * @param options
@@ -61,14 +68,14 @@ type GetArticlesFromDirOption = {
 export const getArticlesFromDirs = async (
   url: string,
   slugs: string[],
-  options?: GetArticlesFromDirOption,
+  options?: GetArticleOption,
 ) => {
   const articles = await Promise.all(
     slugs.map(async (slug) => {
       const source = getMdxSource(slug, url);
       const article = await getArticleFromMdxSource(source, slug);
 
-      if (!isPublished(article) && !options?.includesDraft) return null;
+      if (!canRead(article, options)) return null;
       return article;
     }),
   );
@@ -77,11 +84,20 @@ export const getArticlesFromDirs = async (
 };
 
 /**
- * 指定したコンテンツURLに格納されているMDX?ファイルをすべて返す
+ * url配下の記事のうち、公開されているもののみを返す
  * @param url コンテンツのURL
  * @param options
  */
-export const getArticles = async (url: string, options?: GetArticlesFromDirOption) => {
+export const getArticles = async (url: string, options?: GetArticleOption) => {
   const slugs = getSlugs(url);
   return getArticlesFromDirs(url, slugs, options);
+};
+
+/**
+ * url配下の記事のうち、公開されているもののみを選び、そのslugを返す
+ * @param url コンテンツのURL
+ */
+export const getAvailableSlugs = async (url: string) => {
+  const articles = await getArticles(url);
+  return articles.map((a) => a.slug);
 };
