@@ -2,7 +2,7 @@
 title: 'C++ を Windows + WSL2 + VSCode でコンパイル'
 date: '2021-01-14T00:01:00'
 category: Technology
-tags: ['c++', 'windows', 'wsl2', 'vscode']
+tags: ['clang', 'cpp', 'windows', 'wsl2', 'vscode']
 emoji: '👨‍💻'
 status: 'published'
 ---
