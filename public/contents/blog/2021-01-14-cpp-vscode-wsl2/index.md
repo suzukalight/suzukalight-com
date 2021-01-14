@@ -7,38 +7,51 @@ emoji: '👨‍💻'
 status: 'published'
 ---
 
-VSCode + WSL2 の環境で C++ ファイルをコンパイルするための環境構築について、手順をまとめました。
+VSCode + WSL2 の環境で C++ ファイルをコンパイルするための環境構築について、手順をまとめました。以下の手順で進めていきます；
 
-# セットアップ
+1. WSL2 環境の構築
+2. Visual Studio Code のインストールと設定
+3. コンパイラの設定
 
-下記を順にインストールします；
+# WSL2 環境のセットアップ
 
-1. VSCode
-2. WSL2
-3. コンパイラ
+## Linux 環境の有効化
 
-vscode のインストールと、WSL2 環境のセットアップについては省略します。vscode のデフォルトターミナルは WSL2 に向けておきます。さらに vscode に下記の拡張をインストールして、WSL2 環境でワークスペースを開けるようにします；
+- Windows を最新バージョンに更新
+- Windows キーを押して、「**Windows の機能の有効化または無効化**」を入力
+- 「**Linux 用 Windows サブシステム**」「**仮想マシンプラットフォーム**」を選択
+
+以上を行った後、**再起動**します。再起動後、コマンドプロンプトで下記を実行します；
+
+```bash
+wsl --set-default-version 2
+```
+
+## Ubuntu のインストール
+
+**[Microsoft Store](https://www.microsoft.com/ja-jp/store/apps/windows)**または**[ここから](https://docs.microsoft.com/ja-jp/windows/wsl/install-manual)** Ubuntu をインストールします。LTS バージョンであれば何でも良いと思います。インストールの最中に、username/password を求められますので、入力します。これらは Ubuntu で sudo をするときなどに必要になります。
+
+# vscode のインストール
+
+**[Visual Studio Code](https://code.visualstudio.com/)** をダウンロードします。セットアップが完了したら、下記の拡張機能をインストールしておきます；
 
 - **Remote - WSL**: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
+- **C/C++**: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
+- **C++ Intellisense**: https://marketplace.visualstudio.com/items?itemName=austin.code-gnu-global
+
+vscode のターミナルは、WSL2 を見るように設定しておいてください。あるいは設定しなくても、プロジェクトを開く際に「**Open Folder in WSL**」で開けば、ターミナルは WSL2 を見てくれると思います。
+
+# コンパイラの設定
 
 ## コンパイラのインストール
 
-**build-essential** と **gdb** をインストールします；
+WSL2 環境に、**build-essential** と **gdb** をインストールします。Ubuntu からでも、vscode のターミナルからでも OK です。
 
 ```bash
 sudo apt-get update
 sudo apt install build-essential -y
 sudo apt install gdb -y
 ```
-
-## 拡張機能のインストール
-
-基本的な拡張機能 2 つをインストールします；
-
-- **C/C++**: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
-- **C++ Intellisense**: https://marketplace.visualstudio.com/items?itemName=austin.code-gnu-global
-
-# コンパイラの設定
 
 ## C++構成
 
@@ -107,7 +120,7 @@ Ctrl+Shift+P から Reload Window をしておきます。
 
 # コンパイル
 
-みんな大好き `Hello, world!` を作成してみます；
+みんな大好き `Hello, world!` を作成してみます。プロジェクトを作成するときは、必ず「**Open Folder in WSL**」から **Ubuntu のホームディレクトリ `~` 配下へプロジェクトやファイルを作成する**ようにしてください。`/mnt/c/` 配下だとパフォーマンスが著しく低下します。
 
 ```cpp:first/a.cpp
 #include <stdio.h>
@@ -132,5 +145,6 @@ Hello, world!
 
 ### references
 
+- https://qiita.com/EBIHARA_kenji/items/12c7a452429d79006450
 - https://ntk-ta01.hatenablog.com/entry/2020/09/09/181155
 - https://qiita.com/2019Shun/items/5ab290a4117a00e373b6
