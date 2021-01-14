@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Box, Heading, VStack, Divider } from '@chakra-ui/react';
 
 import { Article } from '../../../utils/article/entity';
-import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
+import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
 import { comparatorSlugAsc, sortArticles } from '../../../utils/article/sorter';
 import { mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 import { renderToString } from '../../../utils/article/markdown.server';
@@ -77,7 +77,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
 export default IndexPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const courses = getSlugs(UrlTable.course);
+  const courses = await getAvailableSlugs(UrlTable.course);
   const paths = courses.map((title) => ({ params: { title } }));
 
   return {

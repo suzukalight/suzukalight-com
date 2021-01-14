@@ -15,11 +15,10 @@ import {
 } from '@chakra-ui/react';
 
 import { Article, stripContent } from '../../../utils/article/entity';
-import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
+import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle } from '../../../utils/article/related';
-import { getContentsDirNames } from '../../../utils/path/file.server';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
 import { Header } from '../../../components/molecules/Header';
@@ -167,17 +166,17 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
 export default CourseChapter;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const titles = getContentsDirNames(UrlTable.course);
-  const paths = titles
-    .map((title) => {
-      const slugs = getSlugs(`${UrlTable.course}/${title}`);
+  const titles = await getAvailableSlugs(UrlTable.course);
+  const _paths = await Promise.all(
+    titles.map(async (title) => {
+      const slugs = await getAvailableSlugs(mergeUrlAndSlug(title, UrlTable.course));
       return slugs.map((chapter) => ({ params: { title, chapter } }));
-    })
-    .flat();
+    }),
+  );
 
   return {
     fallback: false,
-    paths,
+    paths: _paths.flat(),
   };
 };
 

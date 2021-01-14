@@ -4,7 +4,7 @@ import { VStack, StackDivider } from '@chakra-ui/react';
 
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 import { Article, stripContent } from '../../../utils/article/entity';
-import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
+import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
@@ -87,7 +87,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 export default BlogPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const slugs = getSlugs(UrlTable.blog);
+  const slugs = await getAvailableSlugs(UrlTable.blog);
   const paths = slugs.map((slug) => ({ params: { slug } }));
 
   return {

@@ -4,7 +4,7 @@ import { VStack, StackDivider } from '@chakra-ui/react';
 
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 import { Article, stripContent } from '../../../utils/article/entity';
-import { getArticle, getArticles, getSlugs } from '../../../utils/article/fs.server';
+import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
@@ -93,8 +93,8 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
 export default SnippetPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const dirNamesThatHaveMdx = getSlugs(UrlTable.snippet);
-  const paths = dirNamesThatHaveMdx.map((slug) => ({ params: { slug } }));
+  const slugs = await getAvailableSlugs(UrlTable.snippet);
+  const paths = slugs.map((slug) => ({ params: { slug } }));
 
   return {
     fallback: false,
