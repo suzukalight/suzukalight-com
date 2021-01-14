@@ -17,6 +17,9 @@ export const comparatorDateDesc = (a: Article, b: Article) => {
 /** 記事を日付昇順で並べ替える comparator */
 export const comparatorDateAsc = (a: Article, b: Article) => -comparatorDateDesc(a, b);
 
+/** 記事を slug 昇順で並べ替える comparator */
+export const comparatorSlugAsc = (a: Article, b: Article) => a.slug.localeCompare(b.slug);
+
 /**
  * 記事を指定の comparator で並べ替え、新しい配列を返す
  * @param articles 記事
@@ -31,12 +34,4 @@ export const sortArticles = (articles: Article[], comparator: ComparatorArticle)
  */
 export const sortArticlesByDateDesc = (articles: Article[]) => {
   return articles.slice().sort(comparatorDateDesc);
-};
-
-/**
- * 記事を日付昇順で並べ替え、新しい配列を返す
- * @param articles 記事
- */
-export const sortArticlesByDateAsc = (articles: Article[]) => {
-  return articles.slice().sort(comparatorDateAsc);
 };
