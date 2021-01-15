@@ -1,6 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, Flex, Center, Img, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
+import Image from 'next/image';
+import { Box, Flex, Center, Text, SimpleGrid, Link as ChakraLink } from '@chakra-ui/react';
+
+import styles from './WithThumb.module.scss';
 
 import { TagListPlainText } from '../TagList';
 
@@ -22,13 +25,16 @@ export const ArticleTipWithThumb: React.FC<ArticleTipWithThumbProps> = ({ articl
         <Flex direction="row" minH={10} maxH={24} overflow="hidden">
           <Box flexShrink={0} mt={1} mr={4}>
             {hero ? (
-              <Img
-                src={`${getContentsUrl(stripPosts(url))}/${slug}/${hero}`}
-                alt={slug}
-                boxSize={8}
-                borderRadius={4}
-                objectFit="cover"
-              />
+              <Flex position="relative" justifyContent="center" alignItems="center">
+                <Image
+                  src={`${getContentsUrl(stripPosts(url))}/${slug}/${hero}`}
+                  alt={slug}
+                  width={32}
+                  height={32}
+                  objectFit="cover"
+                  className={styles.image}
+                />
+              </Flex>
             ) : (
               <Center boxSize={8}>
                 <Text fontSize="28px">{emoji ?? '📝'}</Text>
