@@ -6,6 +6,7 @@ import remarkSlug from 'remark-slug';
 import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
 import remarkCustomBlocks from 'remark-custom-blocks';
+import remarkUnwrapImages from 'remark-unwrap-images';
 
 import { getDefaultComponents } from './markdown';
 import { getContentsDir } from '../path/file.server';
@@ -39,6 +40,7 @@ const getDefaultMdxOptions = () => ({
         },
       },
     ],
+    remarkUnwrapImages,
     remarkPrism,
   ],
 });
