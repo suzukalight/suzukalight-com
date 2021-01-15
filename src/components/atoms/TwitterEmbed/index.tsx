@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { Box, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 
-type TwitterEmbedTypes = {
+type TwitterEmbedProps = {
   tweetId: string;
   placeholder?: ReactNode;
   onLoad?: (element: ReactNode) => void;
@@ -16,7 +16,7 @@ const TweetSkeleton = () => (
   </Box>
 );
 
-export const TwitterEmbed: React.FC<TwitterEmbedTypes> = ({ tweetId, placeholder, options }) => (
+export const TwitterEmbed: React.FC<TwitterEmbedProps> = ({ tweetId, placeholder, options }) => (
   <TwitterTweetEmbed
     tweetId={tweetId}
     placeholder={placeholder || <TweetSkeleton />}
