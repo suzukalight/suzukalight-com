@@ -4,9 +4,9 @@ import Image, { ImageProps } from 'next/image';
 type NextImageProps = {
   src: string;
   alt?: string;
-  width: string;
-  height: string;
-  fit: ImageProps['objectFit'];
+  width?: string;
+  height?: string;
+  fit?: ImageProps['objectFit'];
 };
 
 export const NextImage: React.FC<NextImageProps> = ({ src, alt, width, height, fit, ...props }) => (
