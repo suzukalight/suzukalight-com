@@ -1,12 +1,15 @@
 import React from 'react';
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 
 type NextImageProps = {
   src: string;
   alt?: string;
+  width: string;
+  height: string;
+  fit: ImageProps['objectFit'];
 };
 
-export const NextImage: React.FC<NextImageProps> = ({ src, alt, ...props }) => (
+export const NextImage: React.FC<NextImageProps> = ({ src, alt, width, height, fit, ...props }) => (
   <div
     style={{
       display: 'flex',
@@ -14,10 +17,10 @@ export const NextImage: React.FC<NextImageProps> = ({ src, alt, ...props }) => (
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#f7fafc',
-      width: '100%',
-      height: '16em',
+      width: width ?? '100%',
+      height: height ?? '16em',
     }}
   >
-    <Image {...props} src={src} alt={alt || src} layout="fill" objectFit="contain" />
+    <Image {...props} src={src} alt={alt ?? src} layout="fill" objectFit={fit ?? 'contain'} />
   </div>
 );
