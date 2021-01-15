@@ -1,11 +1,14 @@
 import React, { ReactNode } from 'react';
-import { Box, Heading, Text, Stack, VStack, Img, Center } from '@chakra-ui/react';
+import { Box, Heading, Text, Stack, VStack, Center } from '@chakra-ui/react';
+
+import styles from './index.module.scss';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { getContentsUrlWithSlug, mergeUrlAndSlug } from '../../../utils/path/url';
 
 import { ArticleDetail } from '../ArticleDetail';
 import { Link } from '../../atoms/Link';
+import { NextImage } from '../../atoms/NextImage';
 
 type CourseItemProps = {
   course: Article;
@@ -24,7 +27,14 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course, urlCourse, cta, 
     <Stack direction={['column', 'column', 'row-reverse']} spacing={[2, 2, 0]} w="100%">
       <Box flexShrink={0} w={['100%', '100%', 48]} ml={[0, 0, 8]}>
         {hero ? (
-          <Img src={imageSrc} alt={slug} w="100%" h={48} objectFit="cover" borderRadius={12} />
+          <NextImage
+            className={styles.image}
+            src={imageSrc}
+            alt={slug}
+            width="100%"
+            height="12em"
+            objectFit="cover"
+          />
         ) : (
           <Center>
             <Text fontSize="64px">{emoji ?? '📝'}</Text>

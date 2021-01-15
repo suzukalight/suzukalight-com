@@ -13,7 +13,7 @@ import { TwitterEmbed } from '../../components/atoms/TwitterEmbed';
 import { NextImage } from '../../components/atoms/NextImage';
 
 const MdImage = (srcBaseUrl: string) => ({ src, ...props }) => (
-  <NextImage src={`${srcBaseUrl}/${src}`} {...props} />
+  <NextImage src={`${srcBaseUrl}/${src}`} layout="fill" objectFit="contain" {...props} />
 );
 
 const MdLink = ({ href, ...rest }) => <Link to={href} {...rest} />;
