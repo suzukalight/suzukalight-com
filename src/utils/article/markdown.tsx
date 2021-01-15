@@ -6,39 +6,26 @@ import { MdxRemote } from 'next-mdx-remote/types';
 import remark from 'remark';
 import strip from 'strip-markdown';
 
-import { Link } from '../../components/atoms/Link';
-import { TwitterEmbed } from '../../components/atoms/TwitterEmbed';
-
 import { getContentsUrlWithSlug } from '../path/url';
 
-const MarkdownImg = (srcBaseUrl: string) => (props) => (
-  <span
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#f7fafc',
-    }}
-  >
-    <img
-      {...props}
-      src={`${srcBaseUrl}/${props.src}`}
-      alt={props.alt || props.src}
-      style={{ objectFit: 'contain', width: '100%', height: '16em' }}
-    />
-  </span>
+import { Link } from '../../components/atoms/Link';
+import { TwitterEmbed } from '../../components/atoms/TwitterEmbed';
+import { NextImage } from '../../components/atoms/NextImage';
+
+const MdImage = (srcBaseUrl: string) => ({ src, ...props }) => (
+  <NextImage src={`${srcBaseUrl}/${src}`} {...props} />
 );
 
-const LinkWithTargetBlank = ({ href, ...rest }) => <Link to={href} {...rest} />;
+const MdLink = ({ href, ...rest }) => <Link to={href} {...rest} />;
 
 /**
  * mdx→JSX変換で使用するコンポーネントマップを返す
  * @param imgRootDir img markdown の src の root dir
  */
 export const getDefaultComponents = (imgRootDir: string) => ({
-  img: MarkdownImg(imgRootDir),
+  img: MdImage(imgRootDir),
   TwitterEmbed,
-  a: LinkWithTargetBlank,
+  a: MdLink,
 });
 
 type MdOptions = {
