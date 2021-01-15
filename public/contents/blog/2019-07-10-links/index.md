@@ -4,7 +4,7 @@ date: '2019-07-10T00:08:00'
 description: 'シェアボタン設置・外部リンクに noopener や _blank を付与する・Twitter の投稿を自動展開する・iframely で oEmbed 対応リンクを展開する・headingにanchorアイコンを付与'
 category: Technology
 tags: ['gatsby', 'social', 'twitter', 'iframely', 'anchor']
-hero: ./twitter.png
+hero: twitter.png
 status: 'published'
 ---
 

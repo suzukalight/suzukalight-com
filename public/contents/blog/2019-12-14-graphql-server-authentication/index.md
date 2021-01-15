@@ -3,7 +3,7 @@ title: Apollo-Serverにおける認証と認可 (Authentication/Authorization)
 date: '2019-12-14T00:02:00'
 category: Technology
 tags: ['graphql', 'apollo-server', 'express', 'nodejs', 'typescript', 'jwt', 'bcrypt']
-hero: ./apollo-graphql.png
+hero: apollo-graphql.png
 status: 'published'
 ---
 

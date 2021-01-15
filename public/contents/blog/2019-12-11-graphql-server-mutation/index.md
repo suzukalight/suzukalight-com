@@ -3,7 +3,7 @@ title: GraphQL Apollo-Server 入門 (2)
 date: '2019-12-11T00:02:00'
 category: Technology
 tags: ['graphql', 'apollo-server', 'express', 'nodejs', 'typescript', 'ts-node-dev']
-hero: ./playground.png
+hero: playground.png
 status: 'draft'
 ---
 

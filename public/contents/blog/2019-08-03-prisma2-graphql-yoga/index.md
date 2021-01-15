@@ -3,7 +3,7 @@ title: Prisma2 + graphql-yoga でサーバを立てる
 date: '2019-08-03T00:02:00'
 category: Technology
 tags: ['prisma2', 'hands-on', 'prisma', 'graphql-yoga']
-hero: ./title.png
+hero: title.png
 status: 'draft'
 ---
 

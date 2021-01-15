@@ -3,7 +3,7 @@ title: Storybookでコンポーネントの型情報を表示する
 date: '2019-08-31T00:02:00'
 category: Technology
 tags: ['monorepo', 'storybook', 'create-react-app', 'typescript']
-hero: ./storybook-typescript-docgen.png
+hero: storybook-typescript-docgen.png
 status: 'published'
 ---
 

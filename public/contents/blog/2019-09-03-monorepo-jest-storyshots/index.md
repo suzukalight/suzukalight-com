@@ -3,7 +3,7 @@ title: monorepo環境にJestとStoryshotsのレグレッションテスト環境
 date: '2019-09-03T00:02:00'
 category: Technology
 tags: ['monorepo', 'jest', 'storyshots', 'typescript', 'storybook']
-hero: ./run-storyshots.png
+hero: run-storyshots.png
 status: 'published'
 ---
 

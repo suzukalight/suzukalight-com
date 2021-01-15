@@ -3,7 +3,7 @@ title: Role-Based Access Control (RBAC) を実践する
 date: '2019-11-24T00:02:00'
 category: Technology
 tags: ['rbac', 'react', 'typescript']
-hero: ./hero.png
+hero: hero.png
 status: 'published'
 ---
 

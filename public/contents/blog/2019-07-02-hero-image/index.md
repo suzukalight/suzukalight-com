@@ -4,7 +4,7 @@ date: '2019-07-02T20:00:00'
 description: 'Gatsbyで記事のトップ画像を設定し、さらにその画像を記事一覧のサムネイルとしても表示する手法について'
 category: Technology
 tags: ['gatsby', 'gatsby-image']
-hero: ./gatsbyjs.jpg
+hero: gatsbyjs.jpg
 status: 'published'
 ---
 
@@ -32,7 +32,7 @@ import Image from 'gatsby-image';
 ```yaml
 ---
 ---
-hero: ./title.png
+hero: title.png
 ---
 
 ```

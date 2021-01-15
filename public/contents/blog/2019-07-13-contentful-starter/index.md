@@ -4,7 +4,7 @@ date: '2019-07-13T00:08:00'
 description: ''
 category: Technology
 tags: ['hands-on', 'gatsby', 'contentful', 'github-pages']
-hero: ./update-content.png
+hero: update-content.png
 status: 'published'
 ---
 

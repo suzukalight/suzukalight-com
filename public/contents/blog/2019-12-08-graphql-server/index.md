@@ -3,7 +3,7 @@ title: GraphQL Apollo-Server ハンズオン
 date: '2019-12-08T00:02:00'
 category: Technology
 tags: ['graphql', 'apollo-server', 'express', 'nodejs', 'typescript', 'ts-node-dev']
-hero: ./apollo-graphql.png
+hero: apollo-graphql.png
 status: 'published'
 ---
 

@@ -3,7 +3,7 @@ title: yarn workspaceでMonorepo+TypeScript環境をつくる
 date: '2019-08-18T00:02:00'
 category: Technology
 tags: ['monorepo', 'workspace', 'create-react-app', 'typescript', 'prisma2']
-hero: ./yarn_workspace.png
+hero: yarn_workspace.png
 status: 'published'
 ---
 

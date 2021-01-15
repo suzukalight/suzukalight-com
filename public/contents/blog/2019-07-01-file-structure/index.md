@@ -4,7 +4,7 @@ date: '2019-07-01T23:00:00'
 description: 'Gatsby 開発時に利用するファイル類の構成について'
 category: Technology
 tags: ['gatsby']
-hero: ./title.png
+hero: title.png
 status: 'published'
 ---
 

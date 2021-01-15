@@ -3,7 +3,7 @@ title: Sequelize+TypeScript による Apollo-Server の実装
 date: '2019-12-27T00:02:00'
 category: Technology
 tags: ['sequelize', 'graphql', 'apollo-server', 'express', 'nodejs', 'typescript']
-hero: ./apollo-graphql.png
+hero: apollo-graphql.png
 status: 'published'
 ---
 

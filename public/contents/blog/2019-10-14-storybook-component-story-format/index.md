@@ -3,7 +3,7 @@ title: Storybookの最新フォーマット・Component Story Format(CSF)を試�
 date: '2019-10-14T00:02:00'
 category: Technology
 tags: ['storybook', 'csf', 'react', 'typescript']
-hero: ./storybook-logo.png
+hero: storybook-logo.png
 status: 'published'
 ---
 

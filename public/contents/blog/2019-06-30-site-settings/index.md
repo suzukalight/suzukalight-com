@@ -4,7 +4,7 @@ date: '2019-06-30T00:08:00'
 description: 'PWA対応・OGP対応・テーマ変更・目次表示・syntaxHighlight・GA設定・RSS・Sitemap'
 category: Technology
 tags: ['gatsby', 'pwa']
-hero: ./gatsbyjs.jpg
+hero: gatsbyjs.jpg
 status: 'published'
 ---
 

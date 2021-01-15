@@ -3,7 +3,7 @@ title: react-i18nextで多言語対応（国際化・i18n）を素振り
 date: '2019-09-09T00:02:00'
 category: Technology
 tags: ['i18n', 'react-i18next', 'react']
-hero: ./ja2.png
+hero: ja2.png
 status: 'published'
 ---
 
