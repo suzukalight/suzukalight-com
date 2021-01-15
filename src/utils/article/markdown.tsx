@@ -3,11 +3,11 @@
 import React from 'react';
 import nmrHydrate from 'next-mdx-remote/hydrate';
 import { MdxRemote } from 'next-mdx-remote/types';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 import remark from 'remark';
 import strip from 'strip-markdown';
 
 import { Link } from '../../components/atoms/Link';
+import { TwitterEmbed } from '../../components/atoms/TwitterEmbed';
 
 import { getContentsUrlWithSlug } from '../path/url';
 
@@ -27,10 +27,6 @@ const MarkdownImg = (srcBaseUrl: string) => (props) => (
       style={{ objectFit: 'contain', width: '100%', height: '16em' }}
     />
   </span>
-);
-
-const TwitterEmbed = (props) => (
-  <TwitterTweetEmbed tweetId={props.tweetId} options={props.options || { conversation: 'none' }} />
 );
 
 const LinkWithTargetBlank = ({ href, ...rest }) => <Link to={href} {...rest} />;
