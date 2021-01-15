@@ -1,5 +1,8 @@
 import React from 'react';
-import { Box, HStack, VStack, Avatar, Text } from '@chakra-ui/react';
+import Image from 'next/image';
+import { Box, HStack, VStack, Flex, Center, Text } from '@chakra-ui/react';
+
+import styles from './index.module.scss';
 
 type LogoProps = {
   imageSrc: string;
@@ -10,7 +13,17 @@ type LogoProps = {
 export const Logo: React.FC<LogoProps> = ({ imageSrc, name, supplement }) => (
   <Box w={48} h={12}>
     <HStack spacing={2}>
-      <Avatar src={imageSrc} name={name} size="md" />
+      <Flex position="relative" justifyContent="center" alignItems="center">
+        <Center w={12} h={12} borderRadius={9999} backgroundColor="orange.400">
+          <Image
+            src={imageSrc}
+            alt="Cover image"
+            layout="fill"
+            objectFit="cover"
+            className={styles.image}
+          />
+        </Center>
+      </Flex>
       <VStack spacing={1} align="left">
         <Text fontSize="lg" fontWeight="600" lineHeight={1}>
           {name}
