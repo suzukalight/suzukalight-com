@@ -16,9 +16,10 @@ export const NextImage: React.FC<NextImageProps> = ({ src, alt, width, height, f
       position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#f7fafc',
       width: width ?? '100%',
       height: height ?? '16em',
+      marginBottom: '1.75em',
+      backgroundColor: '#f7fafc',
     }}
   >
     <Image {...props} src={src} alt={alt ?? src} layout="fill" objectFit={fit ?? 'contain'} />
