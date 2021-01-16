@@ -162,7 +162,8 @@ $mq-sm: 30em;
 
   & > p code,
   & > details code,
-  & li code {
+  & li code,
+  & td code {
     padding: 0.25em 0.5em;
     background-color: #edf2f7;
     word-break: break-all;
