@@ -30,6 +30,13 @@ const getDefaultMdxOptions = () => ({
     [
       remarkCustomBlocks,
       {
+        details: {
+          classes: 'details',
+          title: 'required',
+          containerElement: 'details',
+          titleElement: 'summary',
+          contentsElement: 'div',
+        },
         exercise: {
           classes: 'exercise',
           title: 'required',

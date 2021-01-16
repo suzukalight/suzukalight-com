@@ -161,28 +161,10 @@ $mq-sm: 30em;
   }
 
   & > p code,
+  & > details code,
   & li code {
     padding: 0.25em 0.5em;
     background-color: #edf2f7;
     word-break: break-all;
-  }
-
-  & details {
-    margin-bottom: 1.75em;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.5em;
-    padding: 1em;
-
-    & ol:last-child,
-    & ul:last-child,
-    & p:last-child {
-      margin-bottom: 0;
-    }
-
-    & summary {
-      border-radius: 0.5em 0.5em 0 0;
-      font-size: 1em;
-      font-weight: bold;
-    }
   }
 }

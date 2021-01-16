@@ -100,6 +100,29 @@ article {
 /* 
  * Custom Blocks
  */
+.details {
+  margin-bottom: 1.75em;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5em;
+  padding: 1em;
+
+  & ol:last-child,
+  & ul:last-child,
+  & p:last-child {
+    margin-bottom: 0;
+  }
+
+  & summary {
+    border-radius: 0.5em 0.5em 0 0;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  & div {
+    margin-top: 1em;
+  }
+}
+
 .exercise,
 .practice {
   border: 1px solid #e2e8f0;
@@ -127,17 +150,17 @@ article {
 }
 
 .exercise {
-  border-color: #81E6D9;
+  border-color: #81e6d9;
 
   .custom-block-heading {
-    background-color: #E6FFFA;
+    background-color: #e6fffa;
   }
 }
 
 .practice {
-  border-color: #FEB2B2;
+  border-color: #feb2b2;
 
   .custom-block-heading {
-    background-color: #FED7D7;
+    background-color: #fed7d7;
   }
 }
