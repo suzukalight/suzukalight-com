@@ -41,7 +41,11 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
   const { title, tags, hero } = article.frontMatter;
   const url = mergeUrlAndSlug(slug, UrlTable.snippetPosts);
 
-  const content = hydrate(contentHtml, slug, UrlTable.snippet);
+  const content = hydrate(contentHtml, {
+    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.snippet),
+    baseHref: UrlTable.snippetPosts,
+    baseAs: UrlTable.snippetPosts,
+  });
   const ogImage = hero
     ? { image: `${getContentsUrlWithSlug(slug, UrlTable.snippet)}/${hero}` }
     : null;
@@ -106,7 +110,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
   const { content, ...article } = await getArticle(slug, UrlTable.snippet, { withContent: true });
 
-  const contentHtml = await renderToString(content, slug, UrlTable.snippet);
+  const contentHtml = await renderToString(content, {
+    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.snippet),
+    baseHref: UrlTable.snippetPosts,
+    baseAs: UrlTable.snippetPosts,
+  });
 
   const articles = await getArticles(UrlTable.snippet);
   const _relatedArticles = getRelatedArticles(article, articles);

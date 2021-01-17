@@ -1,4 +1,3 @@
-import { MdxRemote } from 'next-mdx-remote/types';
 import { Plugin } from 'unified';
 import nmrRenderToString from 'next-mdx-remote/render-to-string';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
@@ -8,8 +7,7 @@ import remarkPrism from 'remark-prism';
 import remarkCustomBlocks from 'remark-custom-blocks';
 import remarkUnwrapImages from 'remark-unwrap-images';
 
-import { getDefaultComponents } from './markdown';
-import { getContentsDir } from '../path/file.server';
+import { MdOptions, getDefaultComponents } from './markdown';
 
 const getDefaultMdxOptions = () => ({
   remarkPlugins: [
@@ -52,8 +50,7 @@ const getDefaultMdxOptions = () => ({
   ],
 });
 
-type RenderToStringOptions = {
-  components?: MdxRemote.Components;
+type RenderToStringOptions = MdOptions & {
   mdxOptions?: {
     remarkPlugins: Plugin[];
   };
@@ -68,12 +65,12 @@ type RenderToStringOptions = {
  */
 export const renderToString = async (
   markdownWithoutFrontMatter: string,
-  slug: string,
-  url: string,
-  options?: RenderToStringOptions,
+  options: RenderToStringOptions,
 ) => {
   return await nmrRenderToString(markdownWithoutFrontMatter, {
-    components: options?.components || getDefaultComponents(getContentsDir(slug, url)),
+    components:
+      options?.components ||
+      getDefaultComponents(options.baseImageUrl, options?.baseHref, options?.baseAs),
     mdxOptions: options?.mdxOptions || getDefaultMdxOptions(),
   });
 };

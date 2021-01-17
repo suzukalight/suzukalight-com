@@ -6,7 +6,6 @@ import { Article } from '../../../utils/article/entity';
 import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
 import { comparatorSlugAsc, sortArticles } from '../../../utils/article/sorter';
 import { mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
-import { renderToString } from '../../../utils/article/markdown.server';
 
 import { HtmlHead } from '../../../components/molecules/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
@@ -19,7 +18,6 @@ import { CourseItem } from '../../../components/molecules/CourseItem';
 
 type IndexPageProps = {
   course: Article;
-  contentHtml: string;
   chapters: Article[];
 };
 
@@ -88,12 +86,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const title = params.title as string;
-  const { content, ...course } = await getArticle(title, UrlTable.course, { withContent: true });
-
-  const contentHtml = await renderToString(content, title, UrlTable.snippet);
+  const course = await getArticle(title, UrlTable.course);
 
   const chapters = await getArticles(mergeUrlAndSlug(title, UrlTable.course));
   const chaptersSorted = sortArticles(chapters, comparatorSlugAsc);
 
-  return { props: { course, contentHtml, chapters: chaptersSorted } as IndexPageProps };
+  return { props: { course, chapters: chaptersSorted } as IndexPageProps };
 };

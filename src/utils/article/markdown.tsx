@@ -6,29 +6,38 @@ import { MdxRemote } from 'next-mdx-remote/types';
 import remark from 'remark';
 import strip from 'strip-markdown';
 
-import { getContentsUrlWithSlug } from '../path/url';
-
 import { Link } from '../../components/atoms/Link';
 import { TwitterEmbed } from '../../components/atoms/TwitterEmbed';
 import { NextImage } from '../../components/atoms/NextImage';
 
-const MdImage = (srcBaseUrl: string) => ({ src, ...props }) => (
-  <NextImage src={`${srcBaseUrl}/${src}`} layout="fill" objectFit="contain" {...props} />
+const MdImage = (baseImageUrl: string) => ({ src, ...props }) => (
+  <NextImage src={`${baseImageUrl}/${src}`} layout="fill" objectFit="contain" {...props} />
 );
 
-const MdLink = ({ href, ...rest }) => <Link to={href} {...rest} />;
+const MdLink = (baseHref?: string, baseAs?: string) => (props) => {
+  if (baseHref && !props.href.startsWith('http') && !props.href.startsWith('/')) {
+    const href = `${baseHref}/${props.href}`;
+    const as = `${baseAs}/${props.href}`;
+    return <Link {...props} href={href} nextProps={{ as }} />;
+  }
+
+  return <Link {...props} />;
+};
 
 /**
  * mdx→JSX変換で使用するコンポーネントマップを返す
  * @param imgRootDir img markdown の src の root dir
  */
-export const getDefaultComponents = (imgRootDir: string) => ({
-  img: MdImage(imgRootDir),
+export const getDefaultComponents = (baseImageUrl: string, baseHref?: string, baseAs?: string) => ({
+  img: MdImage(baseImageUrl),
   TwitterEmbed,
-  a: MdLink,
+  a: MdLink(baseHref, baseAs),
 });
 
-type MdOptions = {
+export type MdOptions = {
+  baseImageUrl: string;
+  baseHref?: string;
+  baseAs?: string;
   components?: MdxRemote.Components;
 };
 
@@ -39,9 +48,11 @@ type MdOptions = {
  * @param url
  * @param options mdx→JSX変換で使用するコンポーネントマップなど
  */
-export const hydrate = (content: string, slug: string, url: string, options?: MdOptions) => {
+export const hydrate = (content: string, options: MdOptions) => {
   return nmrHydrate(content, {
-    components: options?.components || getDefaultComponents(getContentsUrlWithSlug(slug, url)),
+    components:
+      options?.components ||
+      getDefaultComponents(options.baseImageUrl, options?.baseHref, options?.baseAs),
   });
 };
 

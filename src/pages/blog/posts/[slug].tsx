@@ -41,7 +41,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const { title, tags, hero } = article.frontMatter;
   const url = `${UrlTable.blogPosts}/${slug}`;
 
-  const content = hydrate(contentHtml, slug, UrlTable.blog);
+  const content = hydrate(contentHtml, {
+    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.blog),
+    baseHref: UrlTable.blogPosts,
+    baseAs: UrlTable.blogPosts,
+  });
   const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, UrlTable.blog)}/${hero}` } : null;
 
   return (
@@ -100,7 +104,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
   const { content, ...article } = await getArticle(slug, UrlTable.blog, { withContent: true });
 
-  const contentHtml = await renderToString(content, slug, UrlTable.blog);
+  const contentHtml = await renderToString(content, {
+    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.blog),
+    baseHref: UrlTable.blogPosts,
+    baseAs: UrlTable.blogPosts,
+  });
 
   const articles = await getArticles(UrlTable.blog);
   const _relatedArticles = getRelatedArticles(article, articles);

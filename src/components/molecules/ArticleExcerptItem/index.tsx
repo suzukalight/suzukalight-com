@@ -3,7 +3,7 @@ import { Box, Heading, Text, Stack, Collapse, VStack } from '@chakra-ui/react';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { hydrate } from '../../../utils/article/markdown';
-import { mergeUrlAndSlug } from '../../../utils/path/url';
+import { getContentsUrlWithSlug, mergeUrlAndSlug } from '../../../utils/path/url';
 
 import { ArticleDetail } from '../ArticleDetail';
 import { ReadMoreButton } from '../../atoms/ReadMoreButton';
@@ -35,7 +35,13 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
   const handleToggle = () => setShow(!show);
 
   const { title, tags } = article.frontMatter;
-  const content = contentHtml ? hydrate(contentHtml, article.slug, urlRoot) : contentText;
+  const content = contentHtml
+    ? hydrate(contentHtml, {
+        baseImageUrl: getContentsUrlWithSlug(article.slug, urlRoot),
+        baseHref: urlRoot,
+        baseAs: urlRoot,
+      })
+    : contentText;
   const url = mergeUrlAndSlug(article.slug, urlPosts);
 
   return (

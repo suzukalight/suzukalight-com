@@ -11,7 +11,7 @@ import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 import { renderToString } from '../../utils/article/markdown.server';
-import { getContentsUrl, UrlTable } from '../../utils/path/url';
+import { getContentsUrlWithSlug, UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   data: {
@@ -54,7 +54,11 @@ export const getStaticProps: GetStaticProps = async () => {
   const data = await Promise.all(
     sortArticlesByDateDesc(articles).map(async ({ content, ...article }) => ({
       article,
-      contentHtml: await renderToString(content, article.slug, getContentsUrl(UrlTable.snippet)),
+      contentHtml: await renderToString(content, {
+        baseImageUrl: getContentsUrlWithSlug(article.slug, UrlTable.snippet),
+        baseHref: UrlTable.snippetPosts,
+        baseAs: UrlTable.snippetPosts,
+      }),
     })),
   );
 

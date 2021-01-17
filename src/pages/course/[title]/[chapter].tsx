@@ -64,7 +64,11 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
   const urlCourse = mergeUrlAndSlug(course.slug, UrlTable.course);
   const urlChapter = mergeUrlAndSlug(slug, urlCourse);
 
-  const content = hydrate(contentHtml, slug, urlCourse);
+  const content = hydrate(contentHtml, {
+    baseImageUrl: getContentsUrlWithSlug(slug, urlCourse),
+    baseHref: `${UrlTable.course}/[title]`,
+    baseAs: `${UrlTable.course}/${encodeURIComponent(course.slug)}`,
+  });
   const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, urlChapter)}/${hero}` } : null;
 
   return (
@@ -186,7 +190,11 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
   const urlCourse = mergeUrlAndSlug(courseSlug, UrlTable.course);
 
   const { content, ...chapter } = await getArticle(slug, urlCourse, { withContent: true });
-  const contentHtml = await renderToString(content, slug, urlCourse);
+  const contentHtml = await renderToString(content, {
+    baseImageUrl: getContentsUrlWithSlug(slug, urlCourse),
+    baseHref: `${UrlTable.course}/[title]`,
+    baseAs: `${UrlTable.course}/${encodeURIComponent(courseSlug)}`,
+  });
 
   const _chapters = await getArticles(urlCourse);
   const chapters = sortArticles(_chapters, comparatorSlugAsc);

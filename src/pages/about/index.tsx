@@ -12,14 +12,18 @@ import { ArticleDetail } from '../../components/molecules/ArticleDetail';
 import { getArticle } from '../../utils/article/fs.server';
 import { hydrate } from '../../utils/article/markdown';
 import { renderToString } from '../../utils/article/markdown.server';
-import { UrlTable } from '../../utils/path/url';
+import { getContentsUrlWithSlug, UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   contentHtml: string;
 };
 
 export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
-  const content = hydrate(contentHtml, 'index', UrlTable.about);
+  const content = hydrate(contentHtml, {
+    baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
+    baseHref: UrlTable.about,
+    baseAs: UrlTable.about,
+  });
 
   return (
     <ArticleListLayout title="About">
@@ -43,7 +47,11 @@ export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { content, ...article } = await getArticle('index', UrlTable.about, { withContent: true });
-  const contentHtml = await renderToString(content, 'index', UrlTable.about);
+  const contentHtml = await renderToString(content, {
+    baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
+    baseHref: UrlTable.about,
+    baseAs: UrlTable.about,
+  });
 
   return { props: { article, contentHtml } as IndexPageProps };
 };

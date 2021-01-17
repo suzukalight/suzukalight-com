@@ -13,7 +13,7 @@ import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
 import { renderToString } from '../../../utils/article/markdown.server';
-import { getContentsUrl, UrlTable } from '../../../utils/path/url';
+import { getContentsUrlWithSlug, UrlTable } from '../../../utils/path/url';
 
 type TagPageProps = {
   tag: string;
@@ -79,7 +79,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await Promise.all(
     sortArticlesByDateDesc(articlesFilteredByTag).map(async ({ content, ...article }) => ({
       article,
-      contentHtml: await renderToString(content, article.slug, getContentsUrl(UrlTable.snippet)),
+      contentHtml: await renderToString(content, {
+        baseImageUrl: getContentsUrlWithSlug(article.slug, UrlTable.snippet),
+        baseHref: UrlTable.snippetPosts,
+        baseAs: UrlTable.snippetPosts,
+      }),
     })),
   );
 
