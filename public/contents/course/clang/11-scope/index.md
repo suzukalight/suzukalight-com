@@ -24,7 +24,7 @@ int     betMedal( void )
   int     bet;
 
   printf( "メダル投入枚数: " );
-  scanf( "%d", &bet );
+  scanf_s( "%d", &bet );
 
   return  bet;
 }
