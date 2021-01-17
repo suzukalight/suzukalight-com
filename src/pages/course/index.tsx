@@ -33,11 +33,11 @@ export const IndexPage: React.FC<IndexPageProps> = ({ courses }) => (
           cta={
             <Link href={mergeUrlAndSlug(a.slug, UrlTable.course)}>
               <Text fontSize="md" textDecoration="underline" _hover={{ color: 'teal.500' }}>
-                コースを読む→
+                コースの概要を確認する→
               </Text>
             </Link>
           }
-          hasTitleLink
+          hasLink
         />
       ))}
     </VStack>
