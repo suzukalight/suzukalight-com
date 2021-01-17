@@ -1,7 +1,7 @@
 ---
-title: 改造と実践で学ぶ C言語プログラミング
+title: 実践問題で学ぶ C言語プログラミング
 date: '2012-05-01T00:00:00'
-hero: vc-first-13.png
+hero: splash.png
 status: 'published'
 ---
 
