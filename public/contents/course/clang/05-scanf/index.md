@@ -1,5 +1,5 @@
 ---
-title: 値の入力（scanf_s関数）
+title: 値の入力（scanf_s）
 date: '2012-05-01T00:05:00'
 status: 'published'
 ---

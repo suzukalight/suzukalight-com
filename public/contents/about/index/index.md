@@ -13,7 +13,7 @@ status: 'published'
   - 「[技術選定で大事にした判断基準](/blog/posts/2018-12-08-frontend-technology-selection)」「[2020 年フロントエンド技術スタック](/blog/posts/2020-12-30-react-tech-stack)」
 - G&E ビジネススクール　プログラミング講師
   - **講師として、教育・カリキュラム作成**。C 言語、DirectX、ハードウェア制作など
-  - 使用したテキスト「C 言語プログラミング」「DirectX プログラミング」
+  - 使用したテキスト「[C 言語プログラミング](/course/clang)」「DirectX プログラミング」
 - 中京大学大学院情報科学研究科　博士課程単位満了退学
   - **GUI・ハードウェア融合領域、福祉工学**などの研究
   - 研究成果として「歩行リハビリ支援システム Warasy」の制作および発表
@@ -54,7 +54,7 @@ status: 'published'
 - 開発手法: **Clean Architecture**, OOP(GoF), SPA, PWA
 - デザイン: **デザインシステム**, **Atomic Design**, Responsive Design, Figma, Sketch
 - コミュニケーション: **Git**, **GitHub**, **Slack**, Jira, Product Board, Trello, Miro, etc.
-- プログラミング言語: **TypeScript(JavaScript)**, **C++**, Java, BASIC, PHP
+- プログラミング言語: **TypeScript(JavaScript)**, **C/C++**, Java, BASIC, PHP, DirectX/OpenGL
 
 ### ソフトスキル
 
@@ -64,6 +64,13 @@ status: 'published'
 - **コーチング**: 1on1、フィードバック、コードレビューなど
 - **マネジメント**: 採用、育成、フィードバック、評価など
 - ホラクラシー: ファシリテーター、セクレタリーなど
+
+## 資格
+
+1. 応用情報技術者, 2010
+1. 基本情報技術者, 2002
+1. CG 検定 2 級, 2001
+1. 普通自動車運転免許, 2003
 
 ## 受賞歴
 

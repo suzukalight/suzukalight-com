@@ -76,6 +76,7 @@ export const Header: React.FC = (props) => {
             <MenuItems href="/">Home</MenuItems>
             <MenuItems href="/blog">Blog</MenuItems>
             <MenuItems href="/snippet">Snippet</MenuItems>
+            <MenuItems href="/course">Course</MenuItems>
             <MenuItems href="/about" isLast>
               About
             </MenuItems>
