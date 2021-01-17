@@ -13,6 +13,7 @@ import {
   ButtonProps,
   Stack,
 } from '@chakra-ui/react';
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 import { Article, stripContent } from '../../../utils/article/entity';
 import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
@@ -20,6 +21,7 @@ import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle } from '../../../utils/article/related';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
+import { comparatorSlugAsc, sortArticles } from '../../../utils/article/sorter';
 
 import { Header } from '../../../components/molecules/Header';
 import { HtmlHead } from '../../../components/molecules/HtmlHead';
@@ -28,8 +30,7 @@ import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { Link } from '../../../components/atoms/Link';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-import { comparatorSlugAsc, sortArticles } from '../../../utils/article/sorter';
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { NextImageOrEmoji } from '../../../components/atoms/NextImage/ImageOrEmoji';
 
 const prevNextButtonStyle: ButtonProps = {
   isFullWidth: true,
@@ -59,17 +60,19 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
   prevArticle,
   nextArticle,
 }) => {
+  const { hero, emoji } = course.frontMatter;
   const { slug } = chapter;
-  const { title, hero } = chapter.frontMatter;
+  const { title } = chapter.frontMatter;
   const urlCourse = mergeUrlAndSlug(course.slug, UrlTable.course);
   const urlChapter = mergeUrlAndSlug(slug, urlCourse);
+  const courseHeroUrl = `${getContentsUrlWithSlug(course.slug, UrlTable.course)}/${hero}`;
 
   const content = hydrate(contentHtml, {
     baseImageUrl: getContentsUrlWithSlug(slug, urlCourse),
     baseHref: `${UrlTable.course}/[title]`,
     baseAs: `${UrlTable.course}/${encodeURIComponent(course.slug)}`,
   });
-  const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, urlChapter)}/${hero}` } : null;
+  const ogImage = hero ? { image: courseHeroUrl } : null;
 
   return (
     <Flex direction="column" align="center" w="100%" minH="100vh" m="0 auto" overflowX="hidden">
@@ -81,18 +84,31 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
         as="aside"
         flexShrink={0}
         position="fixed"
+        overflowY="auto"
         left={['-15em', '-15em', '-15em', 0]}
         top={0}
         w="15em"
         h="100vh"
-        pt="7em"
         px={4}
+        pt={4}
         align="left"
         shadow="md"
       >
-        <Heading as="h1" fontSize="md">
-          {course.frontMatter.title}
-        </Heading>
+        <NextImageOrEmoji
+          src={courseHeroUrl}
+          emoji={emoji}
+          fontSize="48px"
+          width="13em"
+          height="4em"
+          objectFit="cover"
+          divStyle={{ marginBottom: 0 }}
+        />
+
+        <Link href={urlCourse}>
+          <Heading as="h1" fontSize="md">
+            {course.frontMatter.title}
+          </Heading>
+        </Link>
 
         <UnorderedList listStyleType="none" spacing={1}>
           {chapters.map((c) => {

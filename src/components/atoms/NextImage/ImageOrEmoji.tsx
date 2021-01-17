@@ -47,6 +47,6 @@ export const NextImageOrEmoji: React.FC<NextImageOrEmojiProps> = ({
     </div>
   ) : (
     <Center>
-      <Text fontSize={fontSize}>{emoji ?? '📝'}</Text>
+      <Text fontSize={fontSize || '64px'}>{emoji ?? '📝'}</Text>
     </Center>
   );
