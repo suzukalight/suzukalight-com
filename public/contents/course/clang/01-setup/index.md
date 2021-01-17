@@ -1,147 +1,94 @@
 ---
 title: 開発環境を整える
 date: '2012-05-01T00:01:00'
-status: 'draft'
+status: 'published'
 ---
 
-Windows で C 言語プログラミングを行う上で必要となる、開発環境の作り方について、手順をまとめました。以下の手順で進めていきます。（このセットアップ手順では Windows10 + VSCode + WSL2 + Ubuntu での開発を想定しています。Windows 環境であれば **[Visual Studio](https://visualstudio.microsoft.com/ja/downloads/)** を利用しても OK です）
+![Visual Studio](splash.png)
 
-1. WSL2 環境の構築
-2. Visual Studio Code のインストールと設定
-3. コンパイラの設定
+こちらのガイドを元に、開発環境をセットアップしていきます；  
+https://docs.microsoft.com/ja-jp/cpp/build/vscpp-step-0-installation?view=msvc-160
 
-# WSL2 環境のセットアップ
+# インストール
 
-## Linux 環境の有効化
+- https://visualstudio.microsoft.com/ja/downloads/
+  - **コミュニティ**を「**無料ダウンロード**」
+- 作業を開始する前に～～
+  - 「**続行**」
+- ダウンロード・インストール
+  - 完了するまで待つ
+- Installer
+  - ワークロード: 「**C++ によるデスクトップ開発**」を追加
+  - Installer: 完了するまで待つ
+  - 再起動が必要です: 「**再起動**」を選択して再起動する
 
-- Windows を最新バージョンに更新
-- Windows キーを押して、「**Windows の機能の有効化または無効化**」を入力
-- 「**Linux 用 Windows サブシステム**」「**仮想マシンプラットフォーム**」を選択
+# 環境設定
 
-以上を行った後、**再起動**します。再起動後、コマンドプロンプトで下記を実行します；
+- 再起動して、Visual Studio 2019 を起動する
+  - サインイン
+    - 「**後で行う**」
+  - 慣れた環境で開始します
+    - 開発設定: **Visual C++**
+    - 配色テーマ: **濃色**（好みで OK）
+    - 「**Visual Studio の開始**」
 
-```bash
-wsl --set-default-version 2
-```
+# 新しいプロジェクトの作成
 
-## Ubuntu のインストール
+![新しいプロジェクトの作成](first.png)
 
-**[Microsoft Store](https://www.microsoft.com/ja-jp/store/apps/windows)**または**[ここから](https://docs.microsoft.com/ja-jp/windows/wsl/install-manual)** Ubuntu をインストールします。LTS バージョンであれば何でも良いと思います。インストールの最中に、username/password を求められますので、入力します。これらは Ubuntu で sudo をするときなどに必要になります。
+- 最近開いた項目
+  - 「**新しいプロジェクトの作成**」
+- 新しいプロジェクトを構成します
+  - 「**空のプロジェクト**」を選択し、「**次へ**」
+- 空のプロジェクト
+  - プロジェクト名: **任意の名前** (First など)
+  - 「**作成**」
 
-# vscode のインストール
+# Hello, world! の作成
 
-**[Visual Studio Code](https://code.visualstudio.com/)** をダウンロードします。セットアップが完了したら、下記の拡張機能をインストールしておきます；
+## ソースファイルの追加
 
-- **Remote - WSL**: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
-- **C/C++**: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
-- **C++ Intellisense**: https://marketplace.visualstudio.com/items?itemName=austin.code-gnu-global
+### ソリューションエクスプローラー
 
-vscode のターミナルは、WSL2 を見るように設定しておいてください。あるいは設定しなくても、プロジェクトを開く際に「**Open Folder in WSL**」で開けば、ターミナルは WSL2 を見てくれると思います。
+![ソリューションエクスプローラー](new_source.png)
 
-# コンパイラの設定
+- **ソースファイルを右クリック**
+- 「**追加**」→「**新しい項目**」
 
-## コンパイラのインストール
+### 新しい項目の追加
 
-WSL2 環境に、**build-essential** と **gdb** をインストールします。Ubuntu からでも、vscode のターミナルからでも OK です。
+![新しい項目の追加](create_main_cpp.png)
 
-```bash
-sudo apt-get update
-sudo apt install build-essential -y
-sudo apt install gdb -y
-```
+- 「**C++ ファイル (.cpp)**」を選択
+- 名前: **任意の名前** (main.cpp など)
 
-## C++構成
+### ソースコードを記述
 
-Ctrl+Shift+P から **C/C++ 構成の編集 - Edit Configuration(JSON)** を選択します。ルートディレクトリに `.vscode/c_cpp_properties.json` が作成されますので、下記の内容で上書きします；
+![ソースコードを記述](main_cpp.png)
 
-```json:.vscode/c_cpp_properties.json
-{
-  "configurations": [
-    {
-      "name": "WSL",
-      "includePath": ["${workspaceFolder}/**", "/usr/include/**"],
-      "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
-      "compilerPath": "/usr/bin/gcc-9",
-      "cStandard": "c11",
-      "cppStandard": "c++17",
-      "intelliSenseMode": "gcc-x64"
-    }
-  ],
-  "version": 4
-}
-```
-
-## ビルドタスクの作成
-
-Ctrl+Shift+B を入力すると、既定のビルドタスクを選択できます。
-
-- **No build task ...** をクリック
-- **Create task.json ...** を選択
-- **Others** を選択
-
-`.vscode/tasks.json` が作成されますので、下記の内容で上書きします；
-
-```json:.vscode/tasks.json
-{
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "shell",
-      "label": "C/C++: g++-9 compile file",
-      "command": "/usr/bin/g++-9",
-      "args": [
-        "-std=gnu++17",
-        "-Wall",
-        "-Wextra",
-        "-Wshadow",
-        "-Wconversion",
-        "-fsanitize=undefined",
-        "-ggdb",
-        "${file}",
-        "-o",
-        "${fileDirname}/${fileBasenameNoExtension}"
-      ],
-      "problemMatcher": ["$gcc"],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    }
-  ]
-}
-```
-
-## vscode を再起動
-
-Ctrl+Shift+P から Reload Window をしておきます。
-
-# コンパイル
-
-みんな大好き `Hello, world!` を作成してみます。プロジェクトを作成するときは、必ず「**Open Folder in WSL**」から **Ubuntu のホームディレクトリ `~` 配下へプロジェクトやファイルを作成する**ようにしてください。`/mnt/c/` 配下だとパフォーマンスが著しく低下します。
-
-```cpp:first/a.cpp
+```cpp:main.cpp
 #include <stdio.h>
 
-int main(void)
-{
-  printf("Hello, world!\n");
-  return 0;
+int main() {
+	printf("Hello, world!\n");
+	return 0;
 }
 ```
 
-コンパイルしたい cpp ファイルを表示して、画面上で Ctrl+Shift+B を入力してください。同じディレクトリに `a` が作成されれば成功です。
+## ビルドとデバッグ
 
-ターミナルでファイルを実行してみましょう；
+### ビルド
 
-```
-./first/a
-Hello, world!
-```
+![ビルド](build_solution.png)
+![ビルド結果](build.png)
 
-成功です！
+- 「**ビルド**」→「**ソリューションのビルド**」
+- `ビルド: 1 正常終了` が表示されれば OK
 
-### references
+### デバッグ
 
-- https://qiita.com/EBIHARA_kenji/items/12c7a452429d79006450
-- https://ntk-ta01.hatenablog.com/entry/2020/09/09/181155
-- https://qiita.com/2019Shun/items/5ab290a4117a00e373b6
+![デバッグなしで開始](debug_run.png)
+![実行画面](run.png)
+
+- 「**デバッグ**」→「**デバッグなしで開始**」
+- `Hello, world!` が表示されれば OK
