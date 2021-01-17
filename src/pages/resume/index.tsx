@@ -156,8 +156,8 @@ export const IndexPage: React.FC = () => (
 
           <BackLinks
             links={[
-              { to: UrlTable.about, label: '自己紹介に戻る' },
-              { to: UrlTable.home, label: 'ホームに戻る' },
+              { href: UrlTable.about, label: '自己紹介に戻る' },
+              { href: UrlTable.home, label: 'ホームに戻る' },
             ]}
           />
         </Box>

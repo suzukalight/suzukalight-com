@@ -24,20 +24,20 @@ export const Footer: React.FC = () => (
           <Text size="sm" fontWeight="bold">
             Writings
           </Text>
-          <Link to={UrlTable.blog}>blog</Link>
-          <Link to={UrlTable.snippet}>snippet</Link>
-          <Link to={UrlTable.course}>course</Link>
+          <Link href={UrlTable.blog}>blog</Link>
+          <Link href={UrlTable.snippet}>snippet</Link>
+          <Link href={UrlTable.course}>course</Link>
         </VStack>
 
         <VStack>
-          <Link to={UrlTable.about}>
+          <Link href={UrlTable.about}>
             <Text size="sm" fontWeight="bold">
               About
             </Text>
           </Link>
-          <Link to={UrlTable.about}>skill map</Link>
-          <Link to={UrlTable.about}>resume</Link>
-          <Link to={UrlTable.about}>awards</Link>
+          <Link href={UrlTable.about}>skill map</Link>
+          <Link href={UrlTable.about}>resume</Link>
+          <Link href={UrlTable.about}>awards</Link>
         </VStack>
 
         <VStack>
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => (
 
     <Center mt={-6}>
       <HStack spacing={4} align="center">
-        <Link to={UrlTable.home}>
+        <Link href={UrlTable.home}>
           <Text as="small" textDecoration="underline">
             Home
           </Text>

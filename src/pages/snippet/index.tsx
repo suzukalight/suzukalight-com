@@ -43,7 +43,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ data }) => (
 
     <Divider mt={12} mb={8} />
 
-    <BackLinks links={[{ to: UrlTable.home, label: 'ホームに戻る' }]} />
+    <BackLinks links={[{ href: UrlTable.home, label: 'ホームに戻る' }]} />
   </ArticleListLayout>
 );
 

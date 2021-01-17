@@ -107,7 +107,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
                   backgroundColor: match ? 'gray.200' : 'gray.50',
                 }}
               >
-                <Link to={url}>
+                <Link href={url}>
                   <Text fontSize="sm" fontWeight="600" p={2}>
                     {c.frontMatter.title}
                   </Text>
@@ -127,7 +127,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
               <Stack direction={['column', 'column', 'row-reverse']} w="100%" spacing={[4, 4, 0]}>
                 <Box w={['100%', '100%', '50%']} pl={[0, 0, 2]}>
                   {nextArticle ? (
-                    <Link to={mergeUrlAndSlug(nextArticle.slug, urlCourse)}>
+                    <Link href={mergeUrlAndSlug(nextArticle.slug, urlCourse)}>
                       <Button {...prevNextButtonStyle} rightIcon={<ArrowForwardIcon />}>
                         {nextArticle.frontMatter.title}
                       </Button>
@@ -137,7 +137,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
 
                 <Box w={['100%', '100%', '50%']} pr={[0, 0, 2]}>
                   {prevArticle ? (
-                    <Link to={mergeUrlAndSlug(prevArticle.slug, urlCourse)}>
+                    <Link href={mergeUrlAndSlug(prevArticle.slug, urlCourse)}>
                       <Button {...prevNextButtonStyle} leftIcon={<ArrowBackIcon />}>
                         {prevArticle.frontMatter.title}
                       </Button>
@@ -150,9 +150,9 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
             <Box>
               <BackLinks
                 links={[
-                  { to: urlCourse, label: '表紙に戻る' },
-                  { to: UrlTable.course, label: 'コース一覧に戻る' },
-                  { to: UrlTable.home, label: 'ホームに戻る' },
+                  { href: urlCourse, label: '表紙に戻る' },
+                  { href: UrlTable.course, label: 'コース一覧に戻る' },
+                  { href: UrlTable.home, label: 'ホームに戻る' },
                 ]}
               />
             </Box>

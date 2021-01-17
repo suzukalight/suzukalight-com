@@ -49,7 +49,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
               <AboutMeCards />
             </Box>
 
-            <CTAButton to={UrlTable.about} label="READ MORE →" />
+            <CTAButton href={UrlTable.about} label="READ MORE →" />
           </VStack>
         </CenterMaxW>
       </Box>

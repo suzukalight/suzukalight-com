@@ -7,18 +7,18 @@ import { Logo } from '../../atoms/Logo';
 import { Link } from '../../atoms/Link';
 
 type MenuItemProps = {
-  to: string;
+  href: string;
   isLast?: boolean;
 };
 
-const MenuItems: React.FC<MenuItemProps> = ({ children, to, isLast, ...rest }) => (
+const MenuItems: React.FC<MenuItemProps> = ({ children, href, isLast, ...rest }) => (
   <Box
     w={{ base: '100%', sm: 'auto' }}
     mb={{ base: isLast ? 0 : 8, sm: 0 }}
     mr={{ base: 0, sm: isLast ? 0 : 4 }}
     px={4}
   >
-    <Link to={to}>
+    <Link href={href}>
       <Text display="block" textAlign="center" {...rest}>
         {children}
       </Text>
@@ -54,7 +54,7 @@ export const Header: React.FC = (props) => {
     >
       <Flex w="100%" maxW="80em" align="center" justify="space-between" wrap="wrap">
         <Flex align="center">
-          <Link to="/">
+          <Link href="/">
             <Logo imageSrc="/tarako.jpg" name="suzukalight" supplement="Masahiko Kubara" />
           </Link>
         </Flex>
@@ -73,10 +73,10 @@ export const Header: React.FC = (props) => {
             direction={['column', 'row', 'row', 'row']}
             pt={[4, 4, 0, 0]}
           >
-            <MenuItems to="/">Home</MenuItems>
-            <MenuItems to="/blog">Blog</MenuItems>
-            <MenuItems to="/snippet">Snippet</MenuItems>
-            <MenuItems to="/about" isLast>
+            <MenuItems href="/">Home</MenuItems>
+            <MenuItems href="/blog">Blog</MenuItems>
+            <MenuItems href="/snippet">Snippet</MenuItems>
+            <MenuItems href="/about" isLast>
               About
             </MenuItems>
           </Flex>

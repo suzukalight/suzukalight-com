@@ -39,7 +39,7 @@ export const TagListRoundBox: React.FC<TagListRoundBoxProps> = ({
           <Link
             chakraProps={tagLinkChakraProps}
             nextProps={tagLinkNextProps}
-            to={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
+            href={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
           >
             <Tag tag={tag} chakraProps={{ ...roundBoxTagStyle, ...tagItemProps }} />
           </Link>

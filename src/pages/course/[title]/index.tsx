@@ -37,7 +37,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
             urlCourse={UrlTable.course}
             cta={
               <CTAButton
-                to={mergeUrlAndSlug(chapters[0].slug, baseUrl)}
+                href={mergeUrlAndSlug(chapters[0].slug, baseUrl)}
                 label="コースをはじめる→"
               />
             }
@@ -52,7 +52,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
               {chapters.map((c, index) => (
                 <ChapterNode
                   key={c.slug}
-                  title={<Link to={mergeUrlAndSlug(c.slug, baseUrl)}>{c.frontMatter.title}</Link>}
+                  title={<Link href={mergeUrlAndSlug(c.slug, baseUrl)}>{c.frontMatter.title}</Link>}
                   left={`#${index + 1}`}
                   isLast={index === chapters.length - 1}
                 />
@@ -65,8 +65,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
 
         <BackLinks
           links={[
-            { to: UrlTable.course, label: 'コース一覧に戻る' },
-            { to: UrlTable.home, label: 'ホームに戻る' },
+            { href: UrlTable.course, label: 'コース一覧に戻る' },
+            { href: UrlTable.home, label: 'ホームに戻る' },
           ]}
         />
       </CenterMaxW>

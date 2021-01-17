@@ -25,7 +25,7 @@ export const SNSLinkItem: React.FC<SNSLinkItemProps> = ({
   colorHover,
   placement,
 }) => (
-  <Link to={url}>
+  <Link href={url}>
     <Tooltip label={label} shouldWrapChildren hasArrow placement={placement ?? 'top'}>
       <Icon
         as={icon}

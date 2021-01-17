@@ -41,7 +41,7 @@ export const TagListWithCount: React.FC<TagListWithCountProps> = ({
           <Link
             chakraProps={tagLinkChakraProps}
             nextProps={tagLinkNextProps}
-            to={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
+            href={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
           >
             <Tag
               tag={`${tag} (${count})`}

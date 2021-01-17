@@ -46,7 +46,7 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
 
       <VStack flexGrow={1} spacing={4} align="left">
         <Box>
-          <Link to={url}>
+          <Link href={url}>
             <Heading
               as="h1"
               fontSize="xl"
@@ -72,7 +72,7 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
         {showReadMore && <ReadMoreButton show={show} onToggle={handleToggle} />}
         {showContentLink && (
           <Box>
-            <Link to={url}>
+            <Link href={url}>
               <Text fontSize="md" textDecoration="underline" _hover={{ color: 'teal.500' }}>
                 全文を読む→
               </Text>

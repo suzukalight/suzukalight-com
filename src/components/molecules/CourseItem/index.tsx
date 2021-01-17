@@ -45,7 +45,7 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course, urlCourse, cta, 
       <VStack flexGrow={1} spacing={2} align="left">
         <Box>
           {hasTitleLink ? (
-            <Link to={url}>
+            <Link href={url}>
               <Heading as="h1" fontSize="2xl" lineHeight={1.5}>
                 {`"${title}"`}
               </Heading>

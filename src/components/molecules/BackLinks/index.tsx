@@ -5,7 +5,7 @@ import { Link } from '../../atoms/Link';
 
 type BackLinksProps = {
   links: Array<{
-    to: string;
+    href: string;
     label: string;
     icon?: React.ElementType;
   }>;
@@ -14,7 +14,7 @@ type BackLinksProps = {
 export const BackLinks: React.FC<BackLinksProps> = ({ links }) => (
   <VStack spacing={2} alignItems="flex-start">
     {links.map((link, index) => (
-      <Link key={index} to={link.to}>
+      <Link key={index} href={link.href}>
         <Text>
           ← {link.icon && <Icon as={link.icon!} boxSize={4} />} {link.label}
         </Text>

@@ -45,9 +45,9 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
 
       <BackLinks
         links={[
-          { to: UrlTable.blogTags, label: 'タグ一覧に戻る' },
-          { to: UrlTable.blog, label: 'ブログ一覧に戻る' },
-          { to: UrlTable.home, label: 'ホームに戻る' },
+          { href: UrlTable.blogTags, label: 'タグ一覧に戻る' },
+          { href: UrlTable.blog, label: 'ブログ一覧に戻る' },
+          { href: UrlTable.home, label: 'ホームに戻る' },
         ]}
       />
     </ArticleListLayout>

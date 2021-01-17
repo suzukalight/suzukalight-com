@@ -5,11 +5,11 @@ import { Link } from '../Link';
 
 type CTAButtonProps = {
   label: ReactNode;
-  to: string;
+  href: string;
 };
 
-export const CTAButton: React.FC<CTAButtonProps> = ({ label, to }) => (
-  <Link to={to} chakraProps={{ _hover: { textDecoration: 'none' } }}>
+export const CTAButton: React.FC<CTAButtonProps> = ({ label, href }) => (
+  <Link href={href} chakraProps={{ _hover: { textDecoration: 'none' } }}>
     <Button
       size="lg"
       borderRadius={24}

@@ -42,8 +42,8 @@ export const IndexPage: React.FC<IndexPageProps> = ({ orderByName, orderByCount 
 
     <BackLinks
       links={[
-        { to: UrlTable.blog, label: 'ブログ一覧に戻る' },
-        { to: UrlTable.home, label: 'ホームに戻る' },
+        { href: UrlTable.blog, label: 'ブログ一覧に戻る' },
+        { href: UrlTable.home, label: 'ホームに戻る' },
       ]}
     />
   </ArticleListLayout>

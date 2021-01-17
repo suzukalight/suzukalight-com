@@ -34,7 +34,7 @@ export const ArticleUnorderedList: React.FC<HomePageProps> = ({
     <UnorderedList listStyleType="disc">
       {articles.map((a) => (
         <ListItem key={a.slug} mb={2}>
-          <Link to={mergeUrlAndSlug(a.slug, urlPosts)}>
+          <Link href={mergeUrlAndSlug(a.slug, urlPosts)}>
             <Text>
               <Text as="span" textDecoration="underline solid #1A202C60">
                 {a.frontMatter.title}
@@ -49,7 +49,7 @@ export const ArticleUnorderedList: React.FC<HomePageProps> = ({
     </UnorderedList>
 
     <Box>
-      <CTAButton to={urlAllArticles} label={labelAllArticles} />
+      <CTAButton href={urlAllArticles} label={labelAllArticles} />
     </Box>
   </VStack>
 );

@@ -31,7 +31,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ courses }) => (
           course={a}
           urlCourse={UrlTable.course}
           cta={
-            <Link to={mergeUrlAndSlug(a.slug, UrlTable.course)}>
+            <Link href={mergeUrlAndSlug(a.slug, UrlTable.course)}>
               <Text fontSize="md" textDecoration="underline" _hover={{ color: 'teal.500' }}>
                 コースを読む→
               </Text>
@@ -44,7 +44,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ courses }) => (
 
     <Divider mt={12} mb={8} />
 
-    <BackLinks links={[{ to: UrlTable.home, label: 'ホームに戻る' }]} />
+    <BackLinks links={[{ href: UrlTable.home, label: 'ホームに戻る' }]} />
   </ArticleListLayout>
 );
 

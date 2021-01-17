@@ -47,7 +47,7 @@ export const TagListPlainText: React.FC<TagListPlainTextProps> = ({
           <Link
             chakraProps={tagLinkChakraProps}
             nextProps={tagLinkNextProps}
-            to={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
+            href={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
           >
             <Tag tag={tag} chakraProps={{ ...plainTextTagStyle, ...tagItemProps }} />
           </Link>
