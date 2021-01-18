@@ -8,7 +8,7 @@ import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/artic
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
-import { getContentsUrlWithSlug, UrlTable } from '../../../utils/path/url';
+import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/molecules/HtmlHead';
@@ -39,12 +39,12 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const { slug } = article;
   const { title, tags, hero } = article.frontMatter;
-  const url = `${UrlTable.blogPosts}/${slug}`;
+  const url = mergeUrlAndSlug(slug, UrlTable.blogPosts);
 
   const content = hydrate(contentHtml, {
     baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.blog),
-    baseHref: UrlTable.blogPosts,
-    baseAs: UrlTable.blogPosts,
+    baseHref: `${UrlTable.blogPosts}/[slug]`,
+    baseAs: url,
   });
   const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, UrlTable.blog)}/${hero}` } : null;
 
@@ -106,8 +106,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const contentHtml = await renderToString(content, {
     baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.blog),
-    baseHref: UrlTable.blogPosts,
-    baseAs: UrlTable.blogPosts,
+    baseHref: `${UrlTable.blogPosts}/[slug]`,
+    baseAs: mergeUrlAndSlug(slug, UrlTable.blogPosts),
   });
 
   const articles = await getArticles(UrlTable.blog);

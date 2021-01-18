@@ -11,7 +11,7 @@ import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 import { renderToString } from '../../utils/article/markdown.server';
-import { getContentsUrlWithSlug, UrlTable } from '../../utils/path/url';
+import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   data: {
@@ -56,8 +56,8 @@ export const getStaticProps: GetStaticProps = async () => {
       article,
       contentHtml: await renderToString(content, {
         baseImageUrl: getContentsUrlWithSlug(article.slug, UrlTable.snippet),
-        baseHref: UrlTable.snippetPosts,
-        baseAs: UrlTable.snippetPosts,
+        baseHref: `${UrlTable.snippetPosts}/[slug]`,
+        baseAs: mergeUrlAndSlug(article.slug, UrlTable.snippetPosts),
       }),
     })),
   );

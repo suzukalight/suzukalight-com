@@ -21,8 +21,8 @@ type IndexPageProps = {
 export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
   const content = hydrate(contentHtml, {
     baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
-    baseHref: UrlTable.about,
-    baseAs: UrlTable.about,
+    baseHref: `${UrlTable.about}/index`,
+    baseAs: `${UrlTable.about}/index`,
   });
 
   return (
@@ -49,8 +49,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const { content, ...article } = await getArticle('index', UrlTable.about, { withContent: true });
   const contentHtml = await renderToString(content, {
     baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
-    baseHref: UrlTable.about,
-    baseAs: UrlTable.about,
+    baseHref: `${UrlTable.about}/index`,
+    baseAs: `${UrlTable.about}/index`,
   });
 
   return { props: { article, contentHtml } as IndexPageProps };
