@@ -113,9 +113,14 @@ article {
   }
 
   & summary {
+    cursor: pointer;
     border-radius: 0.5em 0.5em 0 0;
     font-size: 1em;
     font-weight: bold;
+
+    &:hover {
+      text-decoration: underline dashed;
+    }
   }
 
   & > div {
