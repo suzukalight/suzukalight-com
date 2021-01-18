@@ -1,0 +1,6 @@
+Sitemap: https://suzukalight.com/sitemap.xml
+
+User-agent: *
+Disallow: /api/*
+Disallow: /contents/*
+Allow: /*
