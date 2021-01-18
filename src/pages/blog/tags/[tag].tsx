@@ -59,7 +59,7 @@ export default TagPage;
 export const getStaticPaths: GetStaticPaths = async () => {
   const articles = await getArticles(UrlTable.blog);
   const tags = getTagsIncludedInArticles(articles);
-  const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
+  const paths = tags.map((tag) => ({ params: { tag } }));
 
   return {
     fallback: false,

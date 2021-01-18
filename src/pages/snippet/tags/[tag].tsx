@@ -13,7 +13,7 @@ import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
 import { renderToString } from '../../../utils/article/markdown.server';
-import { getContentsUrlWithSlug, UrlTable } from '../../../utils/path/url';
+import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
 type TagPageProps = {
   tag: string;
@@ -63,7 +63,7 @@ export default TagPage;
 export const getStaticPaths: GetStaticPaths = async () => {
   const articles = await getArticles(UrlTable.snippet);
   const tags = getTagsIncludedInArticles(articles);
-  const paths = tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
+  const paths = tags.map((tag) => ({ params: { tag } }));
 
   return {
     fallback: false,
@@ -81,8 +81,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       article,
       contentHtml: await renderToString(content, {
         baseImageUrl: getContentsUrlWithSlug(article.slug, UrlTable.snippet),
-        baseHref: UrlTable.snippetPosts,
-        baseAs: UrlTable.snippetPosts,
+        baseHref: `${UrlTable.snippetPosts}/[slug]`,
+        baseAs: mergeUrlAndSlug(article.slug, UrlTable.snippetPosts),
       }),
     })),
   );
