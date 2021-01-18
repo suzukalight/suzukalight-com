@@ -40,8 +40,7 @@
     "remark-unwrap-images": "^2.0.0",
     "sass": "^1.32.0",
     "slick-carousel": "^1.8.1",
-    "strip-markdown": "^4.0.0",
-    "webpack-remove-serviceworker-plugin": "^1.0.0"
+    "strip-markdown": "^4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",

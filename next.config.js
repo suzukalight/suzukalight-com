@@ -20,8 +20,4 @@ module.exports = {
       },
     ];
   },
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    config.plugins.push(new RemoveServiceWorkerPlugin());
-    return config;
-  },
 };
