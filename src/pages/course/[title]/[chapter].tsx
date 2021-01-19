@@ -1,9 +1,8 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Flex, Box, VStack, Divider, Button, ButtonProps, Stack } from '@chakra-ui/react';
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { Flex, Box, VStack, Divider } from '@chakra-ui/react';
 
-import { Article, stripContent } from '../../../utils/article/entity';
+import { Article } from '../../../utils/article/entity';
 import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
 import { hydrate } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
@@ -16,20 +15,9 @@ import { HtmlHead } from '../../../components/molecules/HtmlHead';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
-import { Link } from '../../../components/atoms/Link';
 import { BackLinks } from '../../../components/molecules/BackLinks';
 import { ChapterMenu } from '../../../components/molecules/Chapters/Menu';
-
-const prevNextButtonStyle: ButtonProps = {
-  isFullWidth: true,
-  px: 4,
-  py: 8,
-  variant: 'outline',
-  color: 'teal.600',
-  borderColor: 'teal.600',
-  backgroundColor: 'transparent',
-  _hover: { backgroundColor: 'teal.50' },
-};
+import { PrevNextButtons } from '../../../components/molecules/PrevNextButtons';
 
 type CourseChapterProps = {
   course: Article;
@@ -89,29 +77,11 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
           <VStack spacing={8} align="left">
             <ArticleHeader article={chapter} urlRoot={UrlTable.course} course={course} />
             <ArticleDetail contentHtml={content} />
-            <Box>
-              <Stack direction={['column', 'column', 'row-reverse']} w="100%" spacing={[4, 4, 0]}>
-                <Box w={['100%', '100%', '50%']} pl={[0, 0, 2]}>
-                  {nextArticle ? (
-                    <Link href={mergeUrlAndSlug(nextArticle.slug, urlCourse)}>
-                      <Button {...prevNextButtonStyle} rightIcon={<ArrowForwardIcon />}>
-                        {nextArticle.frontMatter.title}
-                      </Button>
-                    </Link>
-                  ) : null}
-                </Box>
-
-                <Box w={['100%', '100%', '50%']} pr={[0, 0, 2]}>
-                  {prevArticle ? (
-                    <Link href={mergeUrlAndSlug(prevArticle.slug, urlCourse)}>
-                      <Button {...prevNextButtonStyle} leftIcon={<ArrowBackIcon />}>
-                        {prevArticle.frontMatter.title}
-                      </Button>
-                    </Link>
-                  ) : null}
-                </Box>
-              </Stack>
-            </Box>
+            <PrevNextButtons
+              urlCourse={urlCourse}
+              prevArticle={prevArticle}
+              nextArticle={nextArticle}
+            />
             <Divider mt={12} mb={4} />
             <Box>
               <BackLinks
@@ -166,7 +136,7 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
 
   return {
     props: {
-      course: stripContent(course),
+      course,
       chapter,
       contentHtml,
       chapters,
