@@ -1,7 +1,7 @@
 import React from 'react';
 import { Center, Heading, StackProps, Text, VStack } from '@chakra-ui/react';
 
-type CardProps = {
+export type CardProps = {
   image: React.ReactNode;
   title: React.ReactNode;
   supplement: React.ReactNode;
