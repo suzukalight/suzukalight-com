@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Box, ButtonProps } from '@chakra-ui/react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-type ReadMoreButtonProps = {
+export type ReadMoreButtonProps = {
   show: boolean;
   onToggle: () => void;
 };

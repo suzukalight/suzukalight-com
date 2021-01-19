@@ -15,8 +15,8 @@ const Template: Story<CTAButtonProps> = (args) => (
   </Box>
 );
 
-export const CTAButtonDefault = Template.bind({});
-CTAButtonDefault.args = {
+export const Default = Template.bind({});
+Default.args = {
   label: 'コースをはじめる',
   href: '/course/title',
 } as CTAButtonProps;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Box, Icon, Image } from '@chakra-ui/react';
+import { Box, Icon, Image as ChakraImage } from '@chakra-ui/react';
 import { FaCode } from 'react-icons/fa';
 
 import { Card, CardProps } from '../Card';
@@ -18,16 +18,16 @@ const Template: Story<CardProps> = (args) => (
   </Box>
 );
 
-export const CardDefault = Template.bind({});
-CardDefault.args = {
+export const Svg = Template.bind({});
+Svg.args = {
   image: <Icon as={FaCode} boxSize={8} fill="teal.500" />,
   title: 'CardDefault',
   supplement: 'This is a supplement text.',
 } as CardProps;
 
-export const CardImage = Template.bind({});
-CardImage.args = {
-  image: <Image src={image} />,
+export const Image = Template.bind({});
+Image.args = {
+  image: <ChakraImage src={image} />,
   title: 'CardImage',
   supplement: 'This is a supplement text.',
 } as CardProps;
