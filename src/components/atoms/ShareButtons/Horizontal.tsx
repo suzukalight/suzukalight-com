@@ -1,13 +1,14 @@
 import React from 'react';
-import { HStack } from '@chakra-ui/react';
+import { HStack, IconProps } from '@chakra-ui/react';
 
 import { ShareButtons } from './Buttons';
 
-type ShareButtonsHorizontalProps = {
+export type ShareButtonsHorizontalProps = {
   url: string;
   title: string;
   indexUrl: string;
   twitterId?: string;
+  iconProps?: Omit<IconProps, 'css'>;
 };
 
 export const ShareButtonsHorizontal: React.FC<ShareButtonsHorizontalProps> = ({
@@ -15,6 +16,7 @@ export const ShareButtonsHorizontal: React.FC<ShareButtonsHorizontalProps> = ({
   url,
   indexUrl,
   twitterId,
+  iconProps,
 }) => (
   <HStack spacing={4}>
     <ShareButtons
@@ -23,6 +25,7 @@ export const ShareButtonsHorizontal: React.FC<ShareButtonsHorizontalProps> = ({
       tooltipPlacement="top"
       indexUrl={indexUrl}
       twitterId={twitterId}
+      iconProps={iconProps}
     />
   </HStack>
 );

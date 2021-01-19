@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Placement, Tooltip } from '@chakra-ui/react';
+import { Icon, IconProps, Placement, Tooltip } from '@chakra-ui/react';
 import {
   FacebookShareButton,
   HatenaShareButton,
@@ -16,6 +16,7 @@ type ShareButtonsProps = {
   tooltipPlacement: Placement;
   indexUrl: string;
   twitterId?: string;
+  iconProps?: Omit<IconProps, 'css'>;
 };
 
 export const ShareButtons: React.FC<ShareButtonsProps> = ({
@@ -24,6 +25,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
   tooltipPlacement,
   indexUrl,
   twitterId,
+  iconProps,
 }) => {
   const url = new URL(_url, indexUrl).toString();
 
@@ -31,22 +33,46 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
     <>
       <TwitterShareButton url={url} title={title} via={twitterId}>
         <Tooltip label="Twitterでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
-          <Icon as={FaTwitter} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
+          <Icon
+            as={FaTwitter}
+            boxSize={6}
+            fill="gray.400"
+            _hover={{ fill: 'teal.500' }}
+            {...iconProps}
+          />
         </Tooltip>
       </TwitterShareButton>
       <FacebookShareButton url={url}>
         <Tooltip label="Facebookでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
-          <Icon as={FaFacebook} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
+          <Icon
+            as={FaFacebook}
+            boxSize={6}
+            fill="gray.400"
+            _hover={{ fill: 'teal.500' }}
+            {...iconProps}
+          />
         </Tooltip>
       </FacebookShareButton>
       <LineShareButton url={url} title={title}>
         <Tooltip label="LINEでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
-          <Icon as={FaLine} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
+          <Icon
+            as={FaLine}
+            boxSize={6}
+            fill="gray.400"
+            _hover={{ fill: 'teal.500' }}
+            {...iconProps}
+          />
         </Tooltip>
       </LineShareButton>
       <PocketShareButton url={url} title={title}>
         <Tooltip label="Pocketに保存" shouldWrapChildren hasArrow placement={tooltipPlacement}>
-          <Icon as={FaGetPocket} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
+          <Icon
+            as={FaGetPocket}
+            boxSize={6}
+            fill="gray.400"
+            _hover={{ fill: 'teal.500' }}
+            {...iconProps}
+          />
         </Tooltip>
       </PocketShareButton>
       <HatenaShareButton url={url} title={title}>
@@ -56,7 +82,13 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           hasArrow
           placement={tooltipPlacement}
         >
-          <Icon as={SiHatenabookmark} boxSize={6} fill="gray.400" _hover={{ fill: 'teal.500' }} />
+          <Icon
+            as={SiHatenabookmark}
+            boxSize={6}
+            fill="gray.400"
+            _hover={{ fill: 'teal.500' }}
+            {...iconProps}
+          />
         </Tooltip>
       </HatenaShareButton>
     </>
