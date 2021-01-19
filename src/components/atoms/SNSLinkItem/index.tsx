@@ -4,7 +4,7 @@ import { IconType } from 'react-icons';
 
 import { Link } from '../Link';
 
-type SNSLinkItemProps = {
+export type SNSLinkItemProps = {
   url: string;
   label: string;
   icon: IconType;
