@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Box, Heading, VStack, Divider } from '@chakra-ui/react';
+import { VStack, Divider } from '@chakra-ui/react';
 
 import { Article } from '../../../utils/article/entity';
 import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
@@ -12,9 +12,8 @@ import { BackLinks } from '../../../components/molecules/BackLinks';
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { CTAButton } from '../../../components/atoms/CTAButton';
-import { ChapterNode } from '../../../components/molecules/Chapters/Node';
-import { Link } from '../../../components/atoms/Link';
 import { CourseItem } from '../../../components/molecules/CourseItem';
+import { Chapters } from '../../../components/molecules/Chapters/Chapters';
 
 type IndexPageProps = {
   course: Article;
@@ -41,22 +40,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ course, chapters }) => {
             }
           />
 
-          <VStack spacing={8} align="left" p={4} pt={8} backgroundColor="gray.50" borderRadius={4}>
-            <Heading as="h1" fontSize={['xl', 'xl', '2xl']} borderBottom="sm">
-              Chapters
-            </Heading>
-
-            <Box>
-              {chapters.map((c, index) => (
-                <ChapterNode
-                  key={c.slug}
-                  title={<Link href={mergeUrlAndSlug(c.slug, baseUrl)}>{c.frontMatter.title}</Link>}
-                  left={`#${index + 1}`}
-                  isLast={index === chapters.length - 1}
-                />
-              ))}
-            </Box>
-          </VStack>
+          <Chapters urlCourse={baseUrl} chapters={chapters} />
         </VStack>
 
         <Divider mt={12} mb={8} />
