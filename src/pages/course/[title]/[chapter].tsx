@@ -1,18 +1,6 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import {
-  Flex,
-  Box,
-  Heading,
-  VStack,
-  ListItem,
-  UnorderedList,
-  Text,
-  Divider,
-  Button,
-  ButtonProps,
-  Stack,
-} from '@chakra-ui/react';
+import { Flex, Box, VStack, Divider, Button, ButtonProps, Stack } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 import { Article, stripContent } from '../../../utils/article/entity';
@@ -30,7 +18,7 @@ import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { Link } from '../../../components/atoms/Link';
 import { BackLinks } from '../../../components/molecules/BackLinks';
-import { NextImageOrEmoji } from '../../../components/atoms/NextImage/ImageOrEmoji';
+import { ChapterMenu } from '../../../components/molecules/Chapters/Menu';
 
 const prevNextButtonStyle: ButtonProps = {
   isFullWidth: true,
@@ -60,7 +48,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
   prevArticle,
   nextArticle,
 }) => {
-  const { hero, emoji } = course.frontMatter;
+  const { hero } = course.frontMatter;
   const { slug } = chapter;
   const { title } = chapter.frontMatter;
   const urlCourse = mergeUrlAndSlug(course.slug, UrlTable.course);
@@ -79,64 +67,22 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
       <Header />
       <HtmlHead title={title} description={chapter.excerpt} url={urlChapter} {...ogImage} />
 
-      <VStack
-        spacing={4}
+      <Box
         as="aside"
+        display={['none', 'none', 'none', 'block']}
         flexShrink={0}
         position="fixed"
         overflowY="auto"
-        left={['-15em', '-15em', '-15em', 0]}
+        left={0}
         top={0}
         w="15em"
         h="100vh"
         px={4}
         pt={4}
-        align="left"
         shadow="md"
       >
-        <NextImageOrEmoji
-          src={courseHeroUrl}
-          emoji={emoji}
-          fontSize="48px"
-          width="13em"
-          height="4em"
-          objectFit="cover"
-          divStyle={{ marginBottom: 0 }}
-        />
-
-        <Link href={urlCourse}>
-          <Heading as="h1" fontSize="md">
-            {course.frontMatter.title}
-          </Heading>
-        </Link>
-
-        <UnorderedList listStyleType="none" spacing={1}>
-          {chapters.map((c) => {
-            const url = mergeUrlAndSlug(c.slug, urlCourse);
-            const match = c.slug === chapter.slug;
-
-            return (
-              <ListItem
-                key={c.frontMatter.title}
-                borderRadius={4}
-                color={match ? 'gray.800' : 'gray.400'}
-                backgroundColor={match ? 'gray.100' : 'inherit'}
-                _hover={{
-                  textDecoration: 'underline',
-                  color: 'gray.800',
-                  backgroundColor: match ? 'gray.200' : 'gray.50',
-                }}
-              >
-                <Link href={url}>
-                  <Text fontSize="sm" fontWeight="600" p={2}>
-                    {c.frontMatter.title}
-                  </Text>
-                </Link>
-              </ListItem>
-            );
-          })}
-        </UnorderedList>
-      </VStack>
+        <ChapterMenu course={course} chapters={chapters} selectedChapter={chapter} />
+      </Box>
 
       <Box ml={[0, 0, 0, '15em']} mt="4em">
         <CenterMaxW maxWidth="40em">

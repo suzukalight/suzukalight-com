@@ -4,8 +4,8 @@ import { Box, Heading, VStack } from '@chakra-ui/react';
 import { Article } from '../../../utils/article/entity';
 import { mergeUrlAndSlug } from '../../../utils/path/url';
 
-import { ChapterNode } from '../../../components/molecules/Chapters/Node';
-import { Link } from '../../../components/atoms/Link';
+import { ChapterNode } from './Node';
+import { Link } from '../../atoms/Link';
 
 type ChaptersProps = {
   urlCourse: string;
