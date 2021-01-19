@@ -12,7 +12,7 @@ import { getArticles } from '../../../utils/article/fs.server';
 import { getTagsIncludedInArticles } from '../../../utils/article/tag';
 import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
-import { UrlTable } from '../../../utils/path/url';
+import { mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
 type TagPageProps = {
   tag: string;
@@ -21,7 +21,7 @@ type TagPageProps = {
 
 export const TagPage: React.FC<TagPageProps> = ({ tag, articles }) => {
   const title = `#${tag} タグの付いた Blog`;
-  const tagUrl = `${UrlTable.blogTags}/${encodeURIComponent(tag)}`;
+  const tagUrl = mergeUrlAndSlug(tag, UrlTable.blogTags);
 
   return (
     <ArticleListLayout title={title}>

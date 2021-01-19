@@ -2,6 +2,8 @@ import React from 'react';
 import { LinkProps as NextLinkProps } from 'next/link';
 import { ChakraProps, Wrap, WrapItem, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
 
+import { mergeUrlAndSlug } from '../../../utils/path/url';
+
 import { Tag } from './Item';
 import { Link } from '../../atoms/Link';
 
@@ -39,7 +41,7 @@ export const TagListRoundBox: React.FC<TagListRoundBoxProps> = ({
           <Link
             chakraProps={tagLinkChakraProps}
             nextProps={tagLinkNextProps}
-            href={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
+            href={mergeUrlAndSlug(tag, tagBaseUrl)}
           >
             <Tag tag={tag} chakraProps={{ ...roundBoxTagStyle, ...tagItemProps }} />
           </Link>

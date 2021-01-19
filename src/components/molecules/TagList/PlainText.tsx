@@ -8,6 +8,8 @@ import {
   WrapProps,
 } from '@chakra-ui/react';
 
+import { mergeUrlAndSlug } from '../../../utils/path/url';
+
 import { Tag } from './Item';
 import { Link } from '../../atoms/Link';
 
@@ -47,7 +49,7 @@ export const TagListPlainText: React.FC<TagListPlainTextProps> = ({
           <Link
             chakraProps={tagLinkChakraProps}
             nextProps={tagLinkNextProps}
-            href={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
+            href={mergeUrlAndSlug(tag, tagBaseUrl)}
           >
             <Tag tag={tag} chakraProps={{ ...plainTextTagStyle, ...tagItemProps }} />
           </Link>

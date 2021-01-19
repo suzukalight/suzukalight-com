@@ -3,6 +3,7 @@ import { LinkProps as NextLinkProps } from 'next/link';
 import { ChakraProps, Wrap, WrapItem, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
 
 import { TagAndCount } from '../../../utils/article/tag';
+import { mergeUrlAndSlug } from '../../../utils/path/url';
 
 import { Tag } from './Item';
 import { Link } from '../../atoms/Link';
@@ -41,7 +42,7 @@ export const TagListWithCount: React.FC<TagListWithCountProps> = ({
           <Link
             chakraProps={tagLinkChakraProps}
             nextProps={tagLinkNextProps}
-            href={`${tagBaseUrl}/${encodeURIComponent(tag)}`}
+            href={mergeUrlAndSlug(tag, tagBaseUrl)}
           >
             <Tag
               tag={`${tag} (${count})`}

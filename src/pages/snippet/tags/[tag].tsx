@@ -25,7 +25,7 @@ type TagPageProps = {
 
 export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
   const title = `#${tag} タグの付いた Snippet`;
-  const tagUrl = `${UrlTable.snippetTags}/${encodeURIComponent(tag)}`;
+  const tagUrl = mergeUrlAndSlug(tag, UrlTable.snippetTags);
 
   return (
     <ArticleListLayout title={title}>
