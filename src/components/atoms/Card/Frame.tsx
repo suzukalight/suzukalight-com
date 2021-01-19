@@ -1,7 +1,7 @@
 import React from 'react';
 import { Center, Heading, StackProps, Text, VStack } from '@chakra-ui/react';
 
-type CardFrameProps = {
+export type CardFrameProps = {
   image: React.ReactNode;
   title: React.ReactNode;
   supplement: React.ReactNode;
@@ -11,7 +11,7 @@ type CardFrameProps = {
 export const CardFrame: React.FC<CardFrameProps> = ({ image, title, supplement, wrapProps }) => {
   return (
     <VStack spacing={4} overflow="hidden" maxW={80} maxH={72} {...wrapProps}>
-      <Center flexShrink={0} w="100%" h={20}>
+      <Center flexShrink={0} w="100%" h={20} overflow="hidden">
         {image}
       </Center>
 
