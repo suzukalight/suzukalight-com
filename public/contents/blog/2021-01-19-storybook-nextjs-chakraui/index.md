@@ -12,6 +12,7 @@ status: 'published'
 - preview.tsx で `ChakraProvider` を呼んでおく
 - main.ts で **emotion へエイリアス**をしておく
 - 画像を読む際は `declare module '*.png'` しておく
+- CSS Modules を併用する場合は `@storybook/preset-scss` を使う
 
 # セットアップ
 
@@ -159,3 +160,17 @@ yarn storybook
 ![Storybook](storybook.png)
 
 [http://localhost:6006/](http://localhost:6006/) に storybook が起動し、記述した story が表示できれば OK。
+
+# CSS Modules を有効化
+
+```bash
+yarn add -D @storybook/preset-scss css-loader sass-loader style-loader
+```
+
+```ts:/.storybook/main.ts
+module.exports = {
+  addons: ['@storybook/preset-scss'],
+};
+```
+
+**[@storybook/preset-scss](https://github.com/storybookjs/presets/tree/master/packages/preset-scss)** を使えば簡単に有効化することができる。
