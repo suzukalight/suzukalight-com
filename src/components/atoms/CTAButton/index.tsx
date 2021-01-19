@@ -3,7 +3,7 @@ import { Button } from '@chakra-ui/react';
 
 import { Link } from '../Link';
 
-type CTAButtonProps = {
+export type CTAButtonProps = {
   label: ReactNode;
   href: string;
 };
