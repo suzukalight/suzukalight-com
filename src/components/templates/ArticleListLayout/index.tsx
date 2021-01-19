@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
-import { DefaultLayout } from '../../../components/templates/DefaultLayout';
+import { DefaultLayout } from '../DefaultLayout';
 
 type ArticleListLayoutProps = {
   title: string;

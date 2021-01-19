@@ -5,7 +5,7 @@ import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { Article } from '../../../utils/article/entity';
 import { mergeUrlAndSlug } from '../../../utils/path/url';
 
-import { Link } from '../../../components/atoms/Link';
+import { Link } from '../../atoms/Link';
 
 const prevNextButtonStyle: ButtonProps = {
   isFullWidth: true,
