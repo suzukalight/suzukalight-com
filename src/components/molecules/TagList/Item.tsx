@@ -1,9 +1,9 @@
 import React from 'react';
-import { ChakraProps, Text } from '@chakra-ui/react';
+import { Text, TextProps } from '@chakra-ui/react';
 
 type TagItemProps = {
   tag: string;
-  chakraProps?: ChakraProps;
+  chakraProps?: TextProps;
 };
 
 export const Tag: React.FC<TagItemProps> = ({ tag, chakraProps }) => (

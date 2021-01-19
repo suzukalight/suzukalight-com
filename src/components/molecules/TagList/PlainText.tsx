@@ -1,9 +1,9 @@
 import React from 'react';
 import { LinkProps as NextLinkProps } from 'next/link';
 import {
-  ChakraProps,
   Wrap,
   WrapItem,
+  TextProps,
   LinkProps as ChakraLinkProps,
   WrapProps,
 } from '@chakra-ui/react';
@@ -13,7 +13,7 @@ import { mergeUrlAndSlug } from '../../../utils/path/url';
 import { Tag } from './Item';
 import { Link } from '../../atoms/Link';
 
-const plainTextTagStyle: ChakraProps = {
+const plainTextTagStyle: TextProps = {
   display: 'inline-block',
   mr: 2,
   mb: 1,
@@ -30,7 +30,7 @@ type TagListPlainTextProps = {
   tagBaseUrl?: string;
   tagLinkChakraProps?: ChakraLinkProps;
   tagLinkNextProps?: NextLinkProps;
-  tagItemProps?: ChakraProps;
+  tagItemProps?: TextProps;
   tagWrapProps?: WrapProps;
 };
 

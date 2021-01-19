@@ -1,13 +1,13 @@
 import React from 'react';
 import { LinkProps as NextLinkProps } from 'next/link';
-import { ChakraProps, Wrap, WrapItem, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
+import { TextProps, Wrap, WrapItem, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
 
 import { mergeUrlAndSlug } from '../../../utils/path/url';
 
 import { Tag } from './Item';
 import { Link } from '../../atoms/Link';
 
-const roundBoxTagStyle: ChakraProps = {
+const roundBoxTagStyle: TextProps = {
   display: 'inline-block',
   borderRadius: 8,
   px: 2,
@@ -24,7 +24,7 @@ type TagListRoundBoxProps = {
   tagBaseUrl?: string;
   tagLinkChakraProps?: ChakraLinkProps;
   tagLinkNextProps?: NextLinkProps;
-  tagItemProps?: ChakraProps;
+  tagItemProps?: TextProps;
 };
 
 export const TagListRoundBox: React.FC<TagListRoundBoxProps> = ({
