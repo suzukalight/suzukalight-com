@@ -8,6 +8,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     'storybook-addon-performance/register',
+    '@storybook/preset-scss',
   ],
   typescript: {
     check: false,
