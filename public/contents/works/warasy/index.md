@@ -1,8 +1,8 @@
 ---
 title: Warasy
 supplement: 歩行リハビリ支援システム
-types: ['job', 'private']
-role: 企画、開発（ハードウェア／ソフトウェア）、共同研究
+types: ['RELATIONS株式会社', '個人開発']
+roles: ['ハードウェアエンジニア', 'アプリケーションエンジニア', '企画', '研究']
 date: '2010-01-01T00:00:00'
 periodFrom: '2010-01-01T00:00:00'
 periodTo: '2014-05-31T00:00:00'

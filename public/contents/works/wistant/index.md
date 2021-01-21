@@ -1,8 +1,8 @@
 ---
 title: Wistant
 supplement: マネジメント支援サービス
-types: ['job']
-role: テックリード、スクラムマスター、フルスタックエンジニア
+types: ['RELATIONS株式会社']
+roles: ['フルスタックエンジニア', 'テックリード', 'スクラムマスター']
 date: '2018-01-01T00:00:00'
 periodFrom: '2018-01-01T00:00:00'
 isNow: true

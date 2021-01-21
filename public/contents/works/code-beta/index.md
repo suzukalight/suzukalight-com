@@ -1,8 +1,8 @@
 ---
 title: Codeβ
 supplement: プログラミング学習サービス
-types: ['job']
-role: 企画、開発（フルスタックエンジニア）
+types: ['RELATIONS株式会社']
+roles: ['フルスタックエンジニア', '企画']
 date: '2014-07-01T00:00:00'
 periodFrom: '2014-07-01T00:00:00'
 periodTo: '2014-12-31T00:00:00'
