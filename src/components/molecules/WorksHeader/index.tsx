@@ -63,15 +63,15 @@ export const WorksHeader: React.FC<WorksHeaderProps> = ({ work, urlRoot, course 
       </VStack>
 
       <UnorderedList spacing={2} align="left">
-        <ListItem fontSize="sm" color="gray.600">
+        <ListItem fontSize="sm" color="gray.600" ml={6}>
           {`期間 : ${genPeriodText({ periodFrom, periodTo, isNow })}`}
         </ListItem>
 
-        <ListItem fontSize="sm" color="gray.600">
+        <ListItem fontSize="sm" color="gray.600" ml={6}>
           {`所属 : ${types.join('，')}`}
         </ListItem>
 
-        <ListItem fontSize="sm" color="gray.600">
+        <ListItem fontSize="sm" color="gray.600" ml={6}>
           {`役割 : ${roles.join('，')}`}
         </ListItem>
       </UnorderedList>

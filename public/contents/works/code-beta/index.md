@@ -36,8 +36,8 @@ Web サービス。「ブラウザ上で動くサンプルを改造する」こ�
 ## 使用技術
 
 - JavaScript
-- enchant.js
-- SPA
+- enchant.js, jQuery
+- Original SPA
 
 ## スクリーンショット
 
