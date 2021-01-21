@@ -3,6 +3,8 @@ import { Center, Box, Flex, Text } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
+import { UrlTable } from '../../../utils/path/url';
+
 import { Logo } from '../../atoms/Logo';
 import { Link } from '../../atoms/Link';
 
@@ -54,7 +56,7 @@ export const Header: React.FC = (props) => {
     >
       <Flex w="100%" maxW="80em" align="center" justify="space-between" wrap="wrap">
         <Flex align="center">
-          <Link href="/">
+          <Link href={UrlTable.home}>
             <Logo imageSrc="/tarako.jpg" name="suzukalight" supplement="Masahiko Kubara" />
           </Link>
         </Flex>
@@ -73,11 +75,11 @@ export const Header: React.FC = (props) => {
             direction={['column', 'row', 'row', 'row']}
             pt={[4, 4, 0, 0]}
           >
-            <MenuItems href="/">Home</MenuItems>
-            <MenuItems href="/blog">Blog</MenuItems>
-            <MenuItems href="/snippet">Snippet</MenuItems>
-            <MenuItems href="/course">Course</MenuItems>
-            <MenuItems href="/about" isLast>
+            <MenuItems href={UrlTable.home}>Home</MenuItems>
+            <MenuItems href={UrlTable.blog}>Blog</MenuItems>
+            <MenuItems href={UrlTable.course}>Course</MenuItems>
+            <MenuItems href={UrlTable.work}>Works</MenuItems>
+            <MenuItems href={UrlTable.about} isLast>
               About
             </MenuItems>
           </Flex>

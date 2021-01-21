@@ -6,7 +6,7 @@ import { Link } from '../../atoms/Link';
 import { SNSLinkItem } from '../../atoms/SNSLinkItem';
 import { SNSLinks } from '../SNSLinks';
 
-import { UrlTable } from '../../../utils/path/url';
+import { mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
 export const Footer: React.FC = () => (
   <VStack
@@ -19,7 +19,7 @@ export const Footer: React.FC = () => (
     backgroundColor="gray.100"
   >
     <Box w="100%" maxW="80em" mt={12}>
-      <SimpleGrid columns={[2, 2, 3]} gap={12}>
+      <SimpleGrid columns={[2, 3, 4, 4]} gap={12}>
         <VStack>
           <Text size="sm" fontWeight="bold">
             Writings
@@ -27,6 +27,17 @@ export const Footer: React.FC = () => (
           <Link href={UrlTable.blog}>blog</Link>
           <Link href={UrlTable.snippet}>snippet</Link>
           <Link href={UrlTable.course}>course</Link>
+        </VStack>
+
+        <VStack>
+          <Link href={UrlTable.work}>
+            <Text size="sm" fontWeight="bold">
+              Works
+            </Text>
+          </Link>
+          <Link href={mergeUrlAndSlug('wistant', UrlTable.workDetail)}>Wistant</Link>
+          <Link href={mergeUrlAndSlug('warasy', UrlTable.workDetail)}>Warasy</Link>
+          <Link href={mergeUrlAndSlug('shining-run', UrlTable.workDetail)}>Shining Run</Link>
         </VStack>
 
         <VStack>
