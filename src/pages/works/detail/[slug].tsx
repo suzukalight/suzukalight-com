@@ -20,12 +20,12 @@ import {
   ShareButtonsLeftFixed,
 } from '../../../components/atoms/ShareButtons';
 
-type BlogPostProps = {
+type WorksDetailProps = {
   work: Article;
   contentHtml: string;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ work, contentHtml }) => {
+export const WorksDetail: React.FC<WorksDetailProps> = ({ work, contentHtml }) => {
   const { slug } = work;
   const { title, hero } = work.frontMatter;
   const url = mergeUrlAndSlug(slug, UrlTable.worksDetail);
@@ -70,7 +70,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ work, contentHtml }) => {
   );
 };
 
-export default BlogPost;
+export default WorksDetail;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await getAvailableSlugs(UrlTable.works);
