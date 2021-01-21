@@ -90,7 +90,7 @@ export const denyInvalidArticleDTO = (dto: Record<string, unknown>) => {
  */
 export const createExcerpt = async (content: string, length = 256) => {
   const excerpt = await stripMarkdown(content.slice(0, length));
-  return excerpt.replace(/\s+/g, '');
+  return excerpt.replace(/(\r\n){3,}/g, '\n').replace(/(\n){2,}/g, '　');
 };
 
 /**
