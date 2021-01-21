@@ -12,9 +12,9 @@ import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../util
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../../components/molecules/HtmlHead';
 import { BackLinks } from '../../../components/molecules/BackLinks';
+import { WorksHeader } from '../../../components/molecules/WorksHeader';
 import { ArticleDetail } from '../../../components/molecules/ArticleDetail';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
-import { ArticleHeader } from '../../../components/molecules/ArticleHeader';
 import {
   ShareButtonsHorizontal,
   ShareButtonsLeftFixed,
@@ -48,7 +48,7 @@ export const WorksDetail: React.FC<WorksDetailProps> = ({ work, contentHtml }) =
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
           <VStack spacing={8} align="left" w="100%">
-            <ArticleHeader article={work} urlRoot={UrlTable.works} />
+            <WorksHeader work={work} urlRoot={UrlTable.works} />
             <ArticleDetail contentHtml={content} />
             <ShareButtonsHorizontal
               url={url}

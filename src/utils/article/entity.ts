@@ -16,9 +16,12 @@ export type ArticleFrontMatter = {
   date: string;
   periodFrom?: string;
   periodTo?: string;
+  isNow?: string;
   status: ArticleStatus;
   category?: string;
   tags?: string[];
+  types?: string[];
+  roles?: string[];
   hero?: string;
   emoji?: string;
 };
