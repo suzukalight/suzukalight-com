@@ -8,10 +8,10 @@ import strip from 'strip-markdown';
 
 import { Link } from '../../components/atoms/Link';
 import { TwitterEmbed } from '../../components/atoms/TwitterEmbed';
-import { NextImage } from '../../components/atoms/NextImage';
+import { NextImageArticle } from '../../components/atoms/NextImage/Article';
 
-const MdImage = (baseImageUrl: string) => ({ src, ...props }) => (
-  <NextImage src={`${baseImageUrl}/${src}`} layout="fill" objectFit="contain" {...props} />
+const MdImage = (baseImageUrl: string) => ({ src }) => (
+  <NextImageArticle src={`${baseImageUrl}/${src}`} />
 );
 
 const MdLink = (baseHref?: string, baseAs?: string) => (props) => {

@@ -4,8 +4,8 @@ import { Center, Text, StackProps } from '@chakra-ui/react';
 import { Article } from '../../../utils/article/entity';
 
 import { Card } from '../../atoms/Card';
-import { NextImage } from '../../atoms/NextImage';
 import { TagListPlainText } from '../TagList';
+import { NextImageOrEmoji } from '../../atoms/NextImage/ImageOrEmoji';
 
 type ArticleCardProps = {
   article: Article;
@@ -21,7 +21,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, urlContents, 
     <Card
       image={
         hero ? (
-          <NextImage
+          <NextImageOrEmoji
             src={`${urlContents}/${slug}/${hero}`}
             width="100%"
             height="8em"
