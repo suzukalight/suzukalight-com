@@ -78,7 +78,7 @@ export const Header: React.FC = (props) => {
             <MenuItems href={UrlTable.home}>Home</MenuItems>
             <MenuItems href={UrlTable.blog}>Blog</MenuItems>
             <MenuItems href={UrlTable.course}>Course</MenuItems>
-            <MenuItems href={UrlTable.work}>Works</MenuItems>
+            <MenuItems href={UrlTable.works}>Works</MenuItems>
             <MenuItems href={UrlTable.about} isLast>
               About
             </MenuItems>

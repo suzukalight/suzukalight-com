@@ -15,12 +15,15 @@ type WorksListProps = {
 export const WorksList: React.FC<WorksListProps> = ({ works }) => (
   <SimpleGrid columns={[1, 1, 2, 3]} columnGap={4} rowGap={16} w="100%">
     {works.map(({ frontMatter, slug }) => (
-      <Link key={slug} href={mergeUrlAndSlug(slug, UrlTable.workDetail)}>
+      <Link key={slug} href={mergeUrlAndSlug(slug, UrlTable.worksDetail)}>
         <Box w="100%" maxH="20em">
           <CardCatalog
             image={
               <NextImageOrEmoji
-                src={mergeUrlAndSlug(frontMatter.hero, getContentsUrlWithSlug(slug, UrlTable.work))}
+                src={mergeUrlAndSlug(
+                  frontMatter.hero,
+                  getContentsUrlWithSlug(slug, UrlTable.works),
+                )}
                 emoji={frontMatter.emoji}
                 width="100%"
                 height="12em"

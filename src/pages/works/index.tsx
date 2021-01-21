@@ -18,7 +18,7 @@ type IndexPageProps = {
 
 export const IndexPage: React.FC<IndexPageProps> = ({ works }) => (
   <ArticleListLayout title="Works" boxProps={{ maxW: '60em' }}>
-    <HtmlHead title="Works" url={UrlTable.work} />
+    <HtmlHead title="Works" url={UrlTable.works} />
 
     <WorksList works={works} />
 
@@ -31,7 +31,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ works }) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const works = await getArticles(UrlTable.work);
+  const works = await getArticles(UrlTable.works);
   const worksSorted = sortArticlesByDateDesc(works);
 
   return { props: { works: worksSorted } as IndexPageProps };

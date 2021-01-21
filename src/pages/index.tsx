@@ -69,7 +69,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <WorksList works={pickupWorks} />
 
-            <CTAButton href={UrlTable.work} label="MORE WORKS →" />
+            <CTAButton href={UrlTable.works} label="MORE WORKS →" />
           </VStack>
         </CenterMaxW>
       </Box>
@@ -132,7 +132,9 @@ export const getStaticProps: GetStaticProps = async () => {
   // );
 
   const pickupWorks = await Promise.all(
-    ['wistant', 'warasy', 'shining-run'].map(async (slug) => await getArticle(slug, UrlTable.work)),
+    ['wistant', 'warasy', 'shining-run'].map(
+      async (slug) => await getArticle(slug, UrlTable.works),
+    ),
   );
 
   return {

@@ -28,14 +28,16 @@ type BlogPostProps = {
 export const BlogPost: React.FC<BlogPostProps> = ({ work, contentHtml }) => {
   const { slug } = work;
   const { title, hero } = work.frontMatter;
-  const url = mergeUrlAndSlug(slug, UrlTable.workDetail);
+  const url = mergeUrlAndSlug(slug, UrlTable.worksDetail);
 
   const content = hydrate(contentHtml, {
-    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.work),
-    baseHref: `${UrlTable.workDetail}/[slug]`,
+    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.works),
+    baseHref: `${UrlTable.worksDetail}/[slug]`,
     baseAs: url,
   });
-  const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, UrlTable.work)}/${hero}` } : null;
+  const ogImage = hero
+    ? { image: `${getContentsUrlWithSlug(slug, UrlTable.works)}/${hero}` }
+    : null;
 
   return (
     <DefaultLayout>
@@ -46,7 +48,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ work, contentHtml }) => {
       <CenterMaxW maxWidth="40em">
         <VStack divider={<StackDivider />} spacing={12} align="left">
           <VStack spacing={8} align="left" w="100%">
-            <ArticleHeader article={work} urlRoot={UrlTable.work} />
+            <ArticleHeader article={work} urlRoot={UrlTable.works} />
             <ArticleDetail contentHtml={content} />
             <ShareButtonsHorizontal
               url={url}
@@ -58,7 +60,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ work, contentHtml }) => {
 
           <BackLinks
             links={[
-              { href: UrlTable.work, label: 'Works一覧に戻る' },
+              { href: UrlTable.works, label: 'Works一覧に戻る' },
               { href: UrlTable.home, label: 'ホームに戻る' },
             ]}
           />
@@ -71,7 +73,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ work, contentHtml }) => {
 export default BlogPost;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const slugs = await getAvailableSlugs(UrlTable.work);
+  const slugs = await getAvailableSlugs(UrlTable.works);
   const paths = slugs.map((slug) => ({ params: { slug } }));
 
   return {
@@ -82,12 +84,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
-  const { content, ...work } = await getArticle(slug, UrlTable.work, { withContent: true });
+  const { content, ...work } = await getArticle(slug, UrlTable.works, { withContent: true });
 
   const contentHtml = await renderToString(content, {
-    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.work),
-    baseHref: `${UrlTable.workDetail}/[slug]`,
-    baseAs: mergeUrlAndSlug(slug, UrlTable.workDetail),
+    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.works),
+    baseHref: `${UrlTable.worksDetail}/[slug]`,
+    baseAs: mergeUrlAndSlug(slug, UrlTable.worksDetail),
   });
 
   return {

@@ -30,14 +30,14 @@ export const Footer: React.FC = () => (
         </VStack>
 
         <VStack>
-          <Link href={UrlTable.work}>
+          <Link href={UrlTable.works}>
             <Text size="sm" fontWeight="bold">
               Works
             </Text>
           </Link>
-          <Link href={mergeUrlAndSlug('wistant', UrlTable.workDetail)}>Wistant</Link>
-          <Link href={mergeUrlAndSlug('warasy', UrlTable.workDetail)}>Warasy</Link>
-          <Link href={mergeUrlAndSlug('shining-run', UrlTable.workDetail)}>Shining Run</Link>
+          <Link href={mergeUrlAndSlug('wistant', UrlTable.worksDetail)}>Wistant</Link>
+          <Link href={mergeUrlAndSlug('warasy', UrlTable.worksDetail)}>Warasy</Link>
+          <Link href={mergeUrlAndSlug('shining-run', UrlTable.worksDetail)}>Shining Run</Link>
         </VStack>
 
         <VStack>
