@@ -12,7 +12,10 @@ export type ArticleStatus = 'published' | 'draft';
 /** MDXの先頭に記述している frontMatter */
 export type ArticleFrontMatter = {
   title: string;
+  supplement?: string;
   date: string;
+  periodFrom?: string;
+  periodTo?: string;
   status: ArticleStatus;
   category?: string;
   tags?: string[];
