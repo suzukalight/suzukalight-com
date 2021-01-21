@@ -12,6 +12,7 @@ import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../utils/path/url';
+import { Link } from '../../components/atoms/Link';
 
 type IndexPageProps = {
   works: Article[];
@@ -23,23 +24,28 @@ export const IndexPage: React.FC<IndexPageProps> = ({ works }) => (
 
     <SimpleGrid columns={[1, 1, 2, 3]} columnGap={4} rowGap={16}>
       {works.map(({ frontMatter, slug }) => (
-        <Box key={slug} w="100%" maxH="20em">
-          <CardCatalog
-            image={
-              <NextImageOrEmoji
-                src={mergeUrlAndSlug(frontMatter.hero, getContentsUrlWithSlug(slug, UrlTable.work))}
-                emoji={frontMatter.emoji}
-                width="100%"
-                height="12em"
-                objectFit="cover"
-                divStyle={{ marginBottom: 0 }}
-              />
-            }
-            title={frontMatter.title}
-            supplement={frontMatter.supplement}
-            wrapProps={{ justifySelf: 'center', alignSelf: 'center' }}
-          />
-        </Box>
+        <Link key={slug} href={mergeUrlAndSlug(slug, UrlTable.workDetail)}>
+          <Box w="100%" maxH="20em">
+            <CardCatalog
+              image={
+                <NextImageOrEmoji
+                  src={mergeUrlAndSlug(
+                    frontMatter.hero,
+                    getContentsUrlWithSlug(slug, UrlTable.work),
+                  )}
+                  emoji={frontMatter.emoji}
+                  width="100%"
+                  height="12em"
+                  objectFit="cover"
+                  divStyle={{ marginBottom: 0 }}
+                />
+              }
+              title={frontMatter.title}
+              supplement={frontMatter.supplement}
+              wrapProps={{ justifySelf: 'center', alignSelf: 'center' }}
+            />
+          </Box>
+        </Link>
       ))}
     </SimpleGrid>
 

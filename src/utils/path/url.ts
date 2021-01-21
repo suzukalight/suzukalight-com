@@ -10,6 +10,7 @@ export const UrlTable = {
   snippetTags: '/snippet/tags',
   about: '/about',
   work: '/work',
+  workDetail: '/work/detail',
 };
 
 export const mergeUrlAndSlug = (slug: string, url: string) => `${url}/${encodeURIComponent(slug)}`;
