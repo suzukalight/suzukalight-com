@@ -10,15 +10,18 @@ status: 'published'
 
 - RELATIONS 株式会社　 Web エンジニア
   - **テックリード・スクラムマスター・フロントエンドエンジニア**など
+  - [Wistant](/works/detail/wistant), [Andlearn](/works/detail/andlearn), [SELECK](/works/detail/seleck), [Codeβ](/works/detail/code-beta), [Warasy](/works/detail/warasy), COGOO ほか数件を開発
   - 「[技術選定で大事にした判断基準](/blog/posts/2018-12-08-frontend-technology-selection)」「[2020 年フロントエンド技術スタック](/blog/posts/2020-12-30-react-tech-stack)」
 - G&E ビジネススクール　プログラミング講師
   - **講師として、教育・カリキュラム作成**。C 言語、DirectX、ハードウェア制作など
-  - 作成したテキスト「[C 言語プログラミング](/course/clang)」「DirectX プログラミング」
+  - 作成したテキスト「[C 言語プログラミング](/course/clang)」
 - 中京大学大学院情報科学研究科　博士課程単位満了退学
   - **GUI・ハードウェア融合領域、福祉工学**などの研究
-  - 研究成果として「歩行リハビリ支援システム Warasy」の制作および発表
+  - 研究成果として「[歩行リハビリ支援システム Warasy](/works/detail/warasy)」の制作および発表
+  - 大学講師、CS 系の TA、ワークショップ開催、地域住民向け PC 講座開催、後輩指導などを経験
 - 個人制作
-  - **競馬**に関する制作。「競馬予想ソフト ShiningRun」の開発
+  - **競馬**に関する制作。「[競馬予想ソフト Shining Run](/works/detail/shining-run)」の開発
+  - Web マンダラート、動画同時再生アプリ、家屋壁紙ジェネレータ、メディアアートデバイス作成など
 
 ## 興味のあること
 
@@ -29,11 +32,11 @@ status: 'published'
 - **ものづくりに関すること**
   - 何かを作ること、手を動かすことが好きです
   - 生涯何らかのプレイヤーであることを望んでいます（最低限、業務の一部だけでも）
-  - Web エンジニアリングだけでなく、電子工作や IoT 分野にも興味および経験があります
+  - Web だけでなく、電子工作や IoT 分野にも興味および経験があります
 - **競馬とその周辺分野**
-  - 「自分で予想して当てる楽しみ」「血の歴史」「馬という動物とのふれあい」に価値をおいています
   - キッカケはダビスタで、ウイポもやります。[一口馬主（キャロットクラブ）](/blog/posts/2019-09-06-join-carrot-club)として競馬に参加しています
-  - 単なるギャンブルではなく、上記のような様々な角度から、競馬や周辺分野に親しんでもらえるようなサービスづくりが理想です
+  - 「自分で予想して当てる楽しみ」「血の歴史」「馬という動物とのふれあい」に価値をおいています
+  - 上記のような様々な角度から、競馬や周辺分野に親しんでもらえるようなサービスづくりが理想です
 
 ## スキルマップ
 
@@ -45,7 +48,7 @@ status: 'published'
 - Mobile: **React Native**(Expo), Cordova, Android Java
 - DB: RDB(**MySQL**, Oracle, SQLite, etc.), NoSQL(**Firebase**), ORM(**Sequelize**, **TypeORM**, Sails.js, Laravel), SQL
 - Infra: **AWS**, GCP, Vercel, Heroku, Terraform, Docker
-- xaaS: Auth0, Stripe, Sentry, Intercom, Papertrail, Slack, Twilio
+- XaaS: Auth0, Stripe, Sentry, Intercom, Papertrail, Slack, Twilio
 - etc.: **Git**, **ESLint**, **Prettier**, **Jest**, CircleCI, Webpack, Gulp, monorepo
 
 ### 基礎技術
@@ -53,7 +56,7 @@ status: 'published'
 - **情報科学**: **修士号**、データ構造とアルゴリズム、ネットワーク基礎、代数学、etc.
 - **電子工学**: 回路設計、部材選定、基板実装、etc.
 - 開発手法: **Clean Architecture**, OOP(GoF), SPA, PWA
-- デザイン: **デザインシステム**, **Atomic Design**, Responsive Design, Figma, Sketch
+- デザイン: **デザインシステム**, **Atomic Design**, **Responsive Design**, Figma, Sketch
 - コミュニケーション: **Git**, **GitHub**, **Slack**, Jira, Product Board, Trello, Miro, etc.
 - プログラミング言語: **TypeScript(JavaScript)**, **C/C++**, Java, BASIC, PHP, DirectX/OpenGL
 
@@ -72,6 +75,11 @@ status: 'published'
 1. 基本情報技術者, 2002
 1. CG 検定 2 級, 2001
 1. 普通自動車運転免許, 2003
+
+## 外部資金獲得
+
+1. 堀科学芸術振興財団, “実時間視聴覚フィードバック可能な携帯型歩行リハビリ支援システムの開発”, 2011/03
+1. A3(Android Application Award) 2012, ”Warasy―Android 端末を利用した歩行リハビリ支援システム―”, 2012/04
 
 ## 受賞歴
 
