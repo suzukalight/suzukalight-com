@@ -1,28 +1,34 @@
 import React, { useRef } from 'react';
 import { GetStaticProps } from 'next';
 import { Box, Heading, SimpleGrid, GridItem, Text, VStack, Icon } from '@chakra-ui/react';
+import { FaCode, FaPencilAlt } from 'react-icons/fa';
 
 import { DefaultLayout } from '../components/templates/DefaultLayout';
 import { HtmlHead } from '../components/molecules/HtmlHead';
 import { Hero } from '../components/molecules/Hero';
 import { CenterMaxW } from '../components/atoms/CenterMaxW';
-
-import { Article } from '../utils/article/entity';
-import { getArticles } from '../utils/article/fs.server';
-import { sortArticlesByDateDesc } from '../utils/article/sorter';
-import { UrlTable } from '../utils/path/url';
 import { AboutMePhoto } from '../components/molecules/AboutMePhoto';
 import { AboutMeCards } from '../components/molecules/AboutMeCards';
 import { CTAButton } from '../components/atoms/CTAButton';
 import { ArticleUnorderedList } from '../components/molecules/ArticleUnorderedList';
-import { FaCode, FaPencilAlt } from 'react-icons/fa';
+import { WorksList } from '../components/molecules/WorksList';
+
+import { Article } from '../utils/article/entity';
+import { getArticle, getArticles } from '../utils/article/fs.server';
+import { sortArticlesByDateDesc } from '../utils/article/sorter';
+import { UrlTable } from '../utils/path/url';
 
 type HomePageProps = {
+  pickupWorks: Article[];
   blogArticles: Article[];
   snippetArticles: Article[];
 };
 
-export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticles }) => {
+export const HomePage: React.FC<HomePageProps> = ({
+  pickupWorks,
+  blogArticles,
+  snippetArticles,
+}) => {
   const refAbout = useRef<HTMLDivElement>();
 
   return (
@@ -49,12 +55,26 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
               <AboutMeCards />
             </Box>
 
-            <CTAButton href={UrlTable.about} label="READ MORE →" />
+            <CTAButton href={UrlTable.about} label="MORE ABOUT ME →" />
           </VStack>
         </CenterMaxW>
       </Box>
 
-      <Box minH="16em" px={[0, 8, 16, 24]} py={4}>
+      <Box minH="16em" px={[0, 8, 16, 24]} py={4} ref={refAbout}>
+        <CenterMaxW maxWidth="60em">
+          <VStack spacing={8} w="100%" align="center">
+            <Heading as="h1" fontSize="3xl" pb={4}>
+              <Text as="span">Works</Text>
+            </Heading>
+
+            <WorksList works={pickupWorks} />
+
+            <CTAButton href={UrlTable.work} label="MORE WORKS →" />
+          </VStack>
+        </CenterMaxW>
+      </Box>
+
+      <Box backgroundColor="gray.50" minH="16em" px={[0, 8, 16, 24]} py={4}>
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} align="center">
             <Heading as="h1" fontSize="3xl" pb={4}>
@@ -69,7 +89,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
                   articles={blogArticles}
                   urlPosts={UrlTable.blogPosts}
                   urlAllArticles={UrlTable.blog}
-                  labelAllArticles="すべてのBlog →"
+                  labelAllArticles="MORE BLOGS →"
                 />
               </GridItem>
 
@@ -80,7 +100,7 @@ export const HomePage: React.FC<HomePageProps> = ({ blogArticles, snippetArticle
                   articles={snippetArticles}
                   urlPosts={UrlTable.snippetPosts}
                   urlAllArticles={UrlTable.snippet}
-                  labelAllArticles="すべてのSnippet →"
+                  labelAllArticles="MORE SNIPPETS →"
                 />
               </GridItem>
             </SimpleGrid>
@@ -111,9 +131,14 @@ export const getStaticProps: GetStaticProps = async () => {
   //   ].map(async (slug) => await getArticle(slug, UrlTable.blog)),
   // );
 
+  const pickupWorks = await Promise.all(
+    ['wistant', 'warasy', 'shining-run'].map(async (slug) => await getArticle(slug, UrlTable.work)),
+  );
+
   return {
     props: {
       // pickupArticles,
+      pickupWorks,
       blogArticles: blogArticlesSorted,
       snippetArticles: snippetArticlesSorted,
     } as HomePageProps,
