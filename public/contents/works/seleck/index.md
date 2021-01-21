@@ -6,7 +6,6 @@ roles: ['フルスタックエンジニア']
 date: '2015-01-01T00:00:00'
 periodFrom: '2015-01-01T00:00:00'
 periodTo: '2017-12-31T00:00:00'
-isNow: true
 hero: seleck-main.png
 status: 'published'
 ---

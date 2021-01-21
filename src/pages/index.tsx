@@ -60,7 +60,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         </CenterMaxW>
       </Box>
 
-      <Box minH="16em" px={[0, 8, 16, 24]} py={4} ref={refAbout}>
+      <Box minH="16em" px={[0, 8, 16, 24]} py={4}>
         <CenterMaxW maxWidth="60em">
           <VStack spacing={8} w="100%" align="center">
             <Heading as="h1" fontSize="3xl" pb={4}>
