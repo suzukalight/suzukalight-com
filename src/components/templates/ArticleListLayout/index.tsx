@@ -1,22 +1,24 @@
 import React from 'react';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { ChakraProps, Box, Heading, Text } from '@chakra-ui/react';
 
 import { DefaultLayout } from '../DefaultLayout';
 
 type ArticleListLayoutProps = {
   title: string;
   subtitle?: string;
+  boxProps?: Omit<ChakraProps, 'css'>;
 };
 
 export const ArticleListLayout: React.FC<ArticleListLayoutProps> = ({
   title,
   subtitle,
+  boxProps,
   children,
 }) => (
   <DefaultLayout>
     <Box py={8}>
       <Box m="1em">
-        <Box maxW="50em" mx="auto">
+        <Box maxW="50em" mx="auto" {...boxProps}>
           <Heading as="h1" mb={subtitle ? 4 : 12}>
             {title}
           </Heading>
