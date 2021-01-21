@@ -16,18 +16,25 @@ status: 'published'
 
 立ち上げメンバーとして、技術選定および開発を行った。
 
-マイクロラーニングを提供するために PUSH 通知が必要となり、ネイティブアプリとしての提供が必須要件となった。社内での経験値を鑑み、React.js のノウハウを活かせるほうが良いと判断し、React Native での開発を行うこととした。
+マイクロラーニングを提供するために PUSH 通知が必要となり、ネイティブアプリとしての提供が必須要件となった。社内の経験値を鑑みて React.js のノウハウを活かせるほうが良いと判断し、React Native での開発を行うこととした。
 
-このときの技術選定について、ブログでも公開済み。
+[このときの技術選定について、ブログでも公開済み。](/blog/posts/2019-02-05-to-release-smartphone-app)
 
 React Native(Expo)によるフロントエンド、Firebase によるバックエンドを経験。2 ヶ月ほどで β テスト配布まで漕ぎ着けた。そのままトライアルまで行ったが、最終的に開発資源を Wistant に集中することとなり、プロジェクトクローズ。
 
 ## チーム規模
 
-- 全体: 2 名
-- 開発: 1 名
+- 全体: 2 名 → 5 名
+- 開発: 1 名 → 3 名
 
 ## 使用技術
+
+- JavaScript
+- React Native(Expo), React.js, Redux, Redux-Saga, Redux-Form, styled-components
+- NativeBase, React Navigation
+- Atomic Design, Responsive Design, Sketch
+- Firebase, Firebase Authentication, Firestore, Cloud Functions, Firebase Hosting, Expo Push Notification
+- ESLint, Prettier, Storybook
 
 ## スクリーンショット
 

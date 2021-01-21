@@ -29,7 +29,8 @@ status: 'published'
 
 ## 使用技術
 
-- Microchip PIC24F, STMicro Cortex-M3(ARM), Audio chip(MP3/MIDI), XBee(zigbee), Bluetooth chip
+- Microchip PIC24F, STMicro Cortex-M3(ARM)
+- Audio chip(MP3/MIDI), XBee(zigbee), Bluetooth chip
 - PIC-C, ARM C++
 - Android Java, Windows MFC/C++
 - ハードウェアについて、基板設計、部材選定、実装
