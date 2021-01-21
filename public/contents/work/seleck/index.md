@@ -1,12 +1,13 @@
 ---
 title: SELECK
-supplement: 現場の事例から学ぶビジネスメディア。
+supplement: 現場の事例から学ぶビジネスメディア
 types: ['job']
 role: フルスタックエンジニア
+date: '2015-01-01T00:00:00'
 periodFrom: '2015-01-01T00:00:00'
 periodTo: '2017-12-31T00:00:00'
 isNow: true
-hero: seleck_main.png
+hero: seleck-main.png
 status: 'published'
 ---
 

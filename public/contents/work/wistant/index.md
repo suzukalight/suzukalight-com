@@ -3,6 +3,7 @@ title: Wistant
 supplement: マネジメント支援サービス
 types: ['job']
 role: テックリード、スクラムマスター、フルスタックエンジニア
+date: '2018-01-01T00:00:00'
 periodFrom: '2018-01-01T00:00:00'
 isNow: true
 hero: wistant.png

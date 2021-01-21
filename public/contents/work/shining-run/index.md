@@ -3,6 +3,7 @@ title: Shining Run
 supplement: 競馬予想ソフト
 types: ['private']
 role: 企画、開発、販売
+date: '1998-01-01T00:00:00'
 periodFrom: '1998-01-01T00:00:00'
 periodTo: '2004-03-31T00:00:00'
 hero: sr.jpg
