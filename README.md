@@ -1,12 +1,13 @@
 # suzukalight-com
 
-自己紹介、オリジナルコース、コードスニペット、ブログなどの様々なコンテンツを掲載することができる Web サイトプロジェクトです。Next.js + Chakra-UI + mdx(markdown) をメイン技術として使用しています。
+自己紹介、ポートフォリオ、オリジナルコース、コードスニペット、ブログなどの様々なコンテンツを掲載することができる Web サイトプロジェクトです。Next.js + Chakra-UI + mdx(markdown) をメイン技術として使用しています。
 
 ## DEMO
 
 https://suzukalight.com にて公開および運用中です。コンテンツサンプルとして、下記リンクを参照ください。
 
 - [自己紹介](https://suzukalight.com/about)
+- [ポートフォリオ](https://suzukalight.com/works)
 - [コース「実践問題で学ぶ C 言語プログラミング」](https://suzukalight.com/course/clang)
 - [ブログ「2020 年の振り返り」](https://suzukalight.com/blog/posts/2020-12-31-2020-reflection)
 - [コードスニペット一覧](https://suzukalight.com/snippet)
@@ -15,7 +16,7 @@ https://suzukalight.com にて公開および運用中です。コンテンツ�
 
 - Next.js (React.js)
 - Chakra UI
-- next-mdx-remote
+- markdown (next-mdx-remote)
 - remark.js
 
 # 環境構築
@@ -68,12 +69,13 @@ https://suzukalight.com/blog/posts/2020-12-20-vercel-deploy
 
 ## 様々な種類のコンテンツを作成できる
 
-単なるブログだけではなく、以下のような種類のコンテンツを作成することができます。
+単なる markdown ブログだけではなく、以下のような種類のコンテンツを作成することができます。
 
-- **Snippet**: コードスニペットなどの、メモ書き程度のもの
-- **Blog**: 日記や調べ物など、比較的長文のもの
-- **Course**: 複数の章節からなる、続きもののドキュメント
 - **About**: あなたの自己紹介
+- **Works**: あなたのポートフォリオ
+- **Course**: 複数の章節からなる、続きもののドキュメント
+- **Blog**: 日記や調べ物など、比較的長文のもの
+- **Snippet**: コードスニペットなどの、メモ書き程度のもの
 
 これらをそれぞれのコンテンツタイプに適した形で表示する機能を有しています。
 
@@ -91,17 +93,17 @@ https://suzukalight.com/blog/posts/2020-12-20-vercel-deploy
 
 コースの各章は作成日順で自動的に連番処理され、目次も作成されます。ほか詳細は **[コンテンツに関する README](public/contents/README.md)** を参照ください。
 
-## タグページを自動生成
+## その他
+
+### タグページを自動生成
 
 ブログやスニペットに `frontMatter.tags` にタグを付与すると、タグごとの記事一覧ページや、タグ一覧ページを自動的に作成し、反映します。
-
-## その他
 
 ### sitemap.xml を自動生成＋公開
 
 `/src/pages/sitemap.xml.tsx` によって SSR にて自動的に生成し、更新されます。特別なコマンドなどは必要ありません。
 
-### タイトルイメージは、画像または emoji が使える
+### タイトルイメージは、画像のほかに emoji が使える
 
 記事のタイトルイメージは、画像ファイルの他に、emoji を指定することもできます。画像を用意するほどでもないようなコンテンツに対しても、簡単に見栄えを良くすることができます。
 
