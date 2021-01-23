@@ -57,5 +57,5 @@ export const getStaticProps: GetStaticProps = async () => {
   const orderByName = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagName);
   const orderByCount = getArrayOfTagAndCountFromTable(tagAndCountTable, comparatorTagCount);
 
-  return { props: { orderByName, orderByCount } as IndexPageProps, revalidate: 30 };
+  return { props: { orderByName, orderByCount } as IndexPageProps };
 };

@@ -62,5 +62,5 @@ export const getStaticProps: GetStaticProps = async () => {
     })),
   );
 
-  return { props: { data } as IndexPageProps, revalidate: 30 };
+  return { props: { data } as IndexPageProps };
 };

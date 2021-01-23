@@ -137,5 +137,5 @@ export const getStaticProps: GetStaticProps = async () => {
     ),
   );
 
-  return { props: { contentHtml, pickupWorks } as IndexPageProps, revalidate: 30 };
+  return { props: { contentHtml, pickupWorks } as IndexPageProps };
 };

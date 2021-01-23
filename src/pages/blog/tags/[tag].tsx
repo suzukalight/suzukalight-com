@@ -74,5 +74,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const articlesFilteredByTag = filterArticleByTag(articles, tag);
   const articlesSorted = sortArticlesByDateDesc(articlesFilteredByTag);
 
-  return { props: { tag, articles: articlesSorted } as TagPageProps, revalidate: 30 };
+  return { props: { tag, articles: articlesSorted } as TagPageProps };
 };

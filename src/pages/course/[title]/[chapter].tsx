@@ -143,6 +143,5 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
       prevArticle,
       nextArticle,
     },
-    revalidate: 30,
   };
 };

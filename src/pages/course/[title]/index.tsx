@@ -75,5 +75,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const chapters = await getArticles(mergeUrlAndSlug(title, UrlTable.course));
   const chaptersSorted = sortArticles(chapters, comparatorSlugAsc);
 
-  return { props: { course, chapters: chaptersSorted } as IndexPageProps, revalidate: 30 };
+  return { props: { course, chapters: chaptersSorted } as IndexPageProps };
 };
