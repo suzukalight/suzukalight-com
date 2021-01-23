@@ -31,7 +31,7 @@ const MorePrivates = () => (
           <CardCatalog
             image={
               <NextImageOrEmoji
-                src="/images/sankt.png"
+                src="/images/sankt.jpg"
                 width="100%"
                 height="12em"
                 objectFit="cover"

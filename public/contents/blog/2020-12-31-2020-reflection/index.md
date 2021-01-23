@@ -66,7 +66,7 @@ TailwindCSS を経て会得した ChakraUI の使いやすさが身にしみて�
 
 # ゲーム
 
-![Factorio](factorio.png)
+![Factorio](factorio.jpg)
 
 2020 年は結構ゲームもできてたと思う。リモートになって可処分時間が増えたのと、旅行のかわりにゲーム楽しむ時間が増えたおかげかな。
 

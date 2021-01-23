@@ -3,7 +3,7 @@ title: プレイしたボードゲーム一覧
 date: '2021-01-23T00:01:00'
 category: Technology
 tags: ['game', 'board-game']
-hero: scythe.png
+hero: scythe.jpg
 status: 'published'
 ---
 
@@ -69,7 +69,7 @@ status: 'published'
 - まじかる ☆ ベーカリー〜わたしが店長っ！〜
 - **★ モダンアート**
 
-![サンクトペテルブルク第2版](sankt.png)
+![サンクトペテルブルク第2版](sankt.jpg)
 
 ![モダンアート](modern-art.jpg)
 
@@ -109,9 +109,9 @@ status: 'published'
 - **★ センチュリー：イースタンワンダーズ**
 - センチュリー：スパイスロード
 
-![THE GAME](the-game.png)
+![THE GAME](the-game.jpg)
 
-![センチュリー：イースタンワンダーズ](century-eastern.png)
+![センチュリー：イースタンワンダーズ](century-eastern.jpg)
 
 # ゲーム合宿 201805
 
@@ -132,9 +132,9 @@ status: 'published'
 - モンコレデックビルディング：エレメンタル・ストーム
 - おばけキャッチ・ぼうしの中
 
-![マジックメイズ](magic-maze.png)
+![マジックメイズ](magic-maze.jpg)
 
-![大鎌戦役（SCYTHE）](scythe.png)
+![大鎌戦役（SCYTHE）](scythe.jpg)
 
 # 交流ゲーム会 20180122
 
