@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { StackDivider, VStack, Box } from '@chakra-ui/react';
+import { StackDivider, VStack, Box, SimpleGrid, Heading } from '@chakra-ui/react';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../components/molecules/HtmlHead';
@@ -8,17 +8,85 @@ import { BackLinks } from '../../components/molecules/BackLinks';
 import { AboutMePhoto } from '../../components/molecules/AboutMePhoto';
 import { AboutMeCards } from '../../components/molecules/AboutMeCards';
 import { ArticleDetail } from '../../components/molecules/ArticleDetail';
+import { Link } from '../../components/atoms/Link';
+import { NextImageOrEmoji } from '../../components/atoms/NextImage';
+import { CardCatalog } from '../../components/atoms/Card/Catalog';
+import { WorksList } from '../../components/molecules/WorksList';
 
 import { getArticle } from '../../utils/article/fs.server';
 import { hydrate } from '../../utils/article/markdown';
 import { renderToString } from '../../utils/article/markdown.server';
-import { getContentsUrlWithSlug, UrlTable } from '../../utils/path/url';
+import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../utils/path/url';
+import { Article } from '../../utils/article/entity';
+
+const MorePrivates = () => (
+  <VStack spacing={8} align="left">
+    <Heading as="h1" fontSize="2xl">
+      掘り下げ記事
+    </Heading>
+
+    <SimpleGrid columns={[1, 1, 2, 3]} columnGap={4} rowGap={16} w="100%">
+      <Link href={mergeUrlAndSlug('2021-01-23-played-board-games', UrlTable.blogPosts)}>
+        <Box w="100%" maxH="20em">
+          <CardCatalog
+            image={
+              <NextImageOrEmoji
+                src="/images/sankt.png"
+                width="100%"
+                height="12em"
+                objectFit="cover"
+                divStyle={{ marginBottom: 0 }}
+              />
+            }
+            title="プレイしたボードゲーム"
+            supplement=""
+          />
+        </Box>
+      </Link>
+      <Link href="https://note.com/suzukalight/n/ne0ede6e0394f">
+        <Box w="100%" maxH="20em">
+          <CardCatalog
+            image={
+              <NextImageOrEmoji
+                src="/images/intj.png"
+                width="100%"
+                height="12em"
+                objectFit="cover"
+                divStyle={{ marginBottom: 0 }}
+              />
+            }
+            title="生い立ち～就職まで @note"
+            supplement=""
+          />
+        </Box>
+      </Link>
+      <Link href={mergeUrlAndSlug('2019-09-06-join-carrot-club', UrlTable.blogPosts)}>
+        <Box w="100%" maxH="20em">
+          <CardCatalog
+            image={
+              <NextImageOrEmoji
+                src="/images/paddock.jpg"
+                width="100%"
+                height="12em"
+                objectFit="cover"
+                divStyle={{ marginBottom: 0 }}
+              />
+            }
+            title="一口馬主になるまで"
+            supplement=""
+          />
+        </Box>
+      </Link>
+    </SimpleGrid>
+  </VStack>
+);
 
 type IndexPageProps = {
   contentHtml: string;
+  pickupWorks: Article[];
 };
 
-export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
+export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml, pickupWorks }) => {
   const content = hydrate(contentHtml, {
     baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
     baseHref: `${UrlTable.about}/index`,
@@ -37,6 +105,16 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
           <ArticleDetail contentHtml={content} />
         </Box>
 
+        <MorePrivates />
+
+        <VStack spacing={8} w="100%" align="left">
+          <Heading as="h1" fontSize="2xl">
+            ポートフォリオピックアップ
+          </Heading>
+
+          <WorksList works={pickupWorks} />
+        </VStack>
+
         <BackLinks links={[{ href: UrlTable.home, label: 'ホームに戻る' }]} />
       </VStack>
     </ArticleListLayout>
@@ -46,12 +124,18 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml }) => {
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { content, ...article } = await getArticle('index', UrlTable.about, { withContent: true });
+  const { content } = await getArticle('index', UrlTable.about, { withContent: true });
   const contentHtml = await renderToString(content, {
     baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
     baseHref: `${UrlTable.about}/index`,
     baseAs: `${UrlTable.about}/index`,
   });
 
-  return { props: { article, contentHtml } as IndexPageProps };
+  const pickupWorks = await Promise.all(
+    ['wistant', 'warasy', 'shining-run'].map(
+      async (slug) => await getArticle(slug, UrlTable.works),
+    ),
+  );
+
+  return { props: { contentHtml, pickupWorks } as IndexPageProps };
 };
