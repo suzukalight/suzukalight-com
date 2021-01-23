@@ -11,7 +11,7 @@ import {
   IconButton,
   VStack,
 } from '@chakra-ui/react';
-import { FaArrowDown } from 'react-icons/fa';
+import { FaArrowDown } from '@react-icons/all-files/fa/FaArrowDown';
 
 import { SNSLinks } from '../SNSLinks';
 

@@ -7,8 +7,11 @@ import {
   PocketShareButton,
   TwitterShareButton,
 } from 'react-share';
-import { FaFacebook, FaGetPocket, FaLine, FaTwitter } from 'react-icons/fa';
-import { SiHatenabookmark } from 'react-icons/si';
+import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
+import { FaGetPocket } from '@react-icons/all-files/fa/FaGetPocket';
+import { FaLine } from '@react-icons/all-files/fa/FaLine';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
+import { SiHatenabookmark } from '@react-icons/all-files/si/SiHatenabookmark';
 
 type ShareButtonsProps = {
   url: string;

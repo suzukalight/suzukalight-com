@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Box, Text, Heading, Icon } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { FaCircle } from 'react-icons/fa';
+import { FaCircle } from '@react-icons/all-files/fa/FaCircle';
 
 type MarkProps = { icon: IconType };
 

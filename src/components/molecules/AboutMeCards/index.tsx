@@ -1,7 +1,8 @@
 import React from 'react';
 import { SimpleGrid, Icon } from '@chakra-ui/react';
-import { FaCodeBranch, FaChalkboardTeacher } from 'react-icons/fa';
-import { GiHorseHead } from 'react-icons/gi';
+import { FaCodeBranch } from '@react-icons/all-files/fa/FaCodeBranch';
+import { FaChalkboardTeacher } from '@react-icons/all-files/fa/FaChalkboardTeacher';
+import { GiHorseHead } from '@react-icons/all-files/gi/GiHorseHead';
 
 import { CardFrame } from '../../atoms/Card/Frame';
 

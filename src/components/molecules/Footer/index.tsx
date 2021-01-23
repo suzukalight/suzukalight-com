@@ -1,6 +1,7 @@
 import React from 'react';
 import { Center, Box, SimpleGrid, StackDivider, Text, VStack, HStack } from '@chakra-ui/react';
-import { FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
+import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 
 import { Link } from '../../atoms/Link';
 import { SNSLinkItem } from '../../atoms/SNSLinkItem';

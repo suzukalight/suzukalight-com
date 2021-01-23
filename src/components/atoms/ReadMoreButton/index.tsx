@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Box, ButtonProps } from '@chakra-ui/react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown';
+import { FaChevronUp } from '@react-icons/all-files/fa/FaChevronUp';
 
 export type ReadMoreButtonProps = {
   show: boolean;

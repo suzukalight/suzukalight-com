@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge, Box, Text, Heading, Icon, HStack } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { FaCircle } from 'react-icons/fa';
+import { FaCircle } from '@react-icons/all-files/fa/FaCircle';
 
 import { TimelineCardData, TimelineCard } from './Card';
 import { formatJpYYYYM } from '../../../utils/date/format';

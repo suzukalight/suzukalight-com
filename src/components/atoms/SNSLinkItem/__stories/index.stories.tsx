@@ -3,7 +3,8 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { Box } from '@chakra-ui/react';
 
 import { SNSLinkItem, SNSLinkItemProps } from '../';
-import { FaFacebookF, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
 
 export default {
   title: 'atoms/SNSLinkItem',

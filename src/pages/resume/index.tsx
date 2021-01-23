@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Heading, Divider } from '@chakra-ui/react';
-import { FaBuilding, FaUniversity, FaUserGraduate } from 'react-icons/fa';
+import { FaBuilding } from '@react-icons/all-files/fa/FaBuilding';
+import { FaUniversity } from '@react-icons/all-files/fa/FaUniversity';
+import { FaUserGraduate } from '@react-icons/all-files/fa/FaUserGraduate';
 
 import { DefaultLayout } from '../../components/templates/DefaultLayout';
 import { HtmlHead } from '../../components/molecules/HtmlHead';

@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { GetStaticProps } from 'next';
 import { Box, Heading, SimpleGrid, GridItem, Text, VStack, Icon } from '@chakra-ui/react';
-import { FaCode, FaPencilAlt } from 'react-icons/fa';
+import { FaCode } from '@react-icons/all-files/fa/FaCode';
+import { FaPencilAlt } from '@react-icons/all-files/fa/FaPencilAlt';
 
 import { DefaultLayout } from '../components/templates/DefaultLayout';
 import { HtmlHead } from '../components/molecules/HtmlHead';

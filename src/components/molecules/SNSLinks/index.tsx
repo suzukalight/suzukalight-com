@@ -1,6 +1,8 @@
 import React from 'react';
 import { HStack, SystemProps, LayoutProps, ColorProps } from '@chakra-ui/react';
-import { FaTwitter, FaGithub, FaFacebookF } from 'react-icons/fa';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
+import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
 
 import { SNSLinkItem } from '../../atoms/SNSLinkItem';
 
