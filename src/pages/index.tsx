@@ -144,5 +144,6 @@ export const getStaticProps: GetStaticProps = async () => {
       blogArticles: blogArticlesSorted,
       snippetArticles: snippetArticlesSorted,
     } as HomePageProps,
+    revalidate: 30,
   };
 };

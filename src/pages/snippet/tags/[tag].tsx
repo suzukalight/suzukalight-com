@@ -87,5 +87,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     })),
   );
 
-  return { props: { tag, data } as TagPageProps };
+  return { props: { tag, data } as TagPageProps, revalidate: 30 };
 };

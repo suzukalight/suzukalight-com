@@ -49,5 +49,5 @@ export const getStaticProps: GetStaticProps = async () => {
   const articles = await getArticles(UrlTable.blog);
   const articlesSorted = sortArticlesByDateDesc(articles);
 
-  return { props: { articles: articlesSorted } as IndexPageProps };
+  return { props: { articles: articlesSorted } as IndexPageProps, revalidate: 30 };
 };
