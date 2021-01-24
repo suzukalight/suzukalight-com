@@ -34,7 +34,7 @@ export const CardCatalog: React.FC<CardCatalogProps> = ({
           {title}
         </Heading>
 
-        <Text maxH={36} wordBreak="break-word" fontSize="sm" lineHeight={1.125} color="gray.600">
+        <Text noOfLines={1} textAlign="center" fontSize="sm" lineHeight={1.125} color="gray.600">
           {supplement}
         </Text>
       </VStack>
