@@ -56,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const smSnippetTags = await genFromTags(UrlTable.snippet, UrlTable.snippetTags);
   const smCourseTitles = await genFromSlugs(UrlTable.course, UrlTable.course);
   const smCourseChapters = await genFromChapters(UrlTable.course);
+  const smWorksDetail = await genFromSlugs(UrlTable.works, UrlTable.worksDetail);
 
   const sitemap = [
     ...smFixed,
@@ -65,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     ...smSnippetTags,
     ...smCourseTitles,
     ...smCourseChapters,
+    ...smWorksDetail,
   ].join('');
 
   if (res) {
