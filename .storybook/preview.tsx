@@ -3,6 +3,9 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { StoryContext } from '@storybook/react';
 import { withPerformance } from 'storybook-addon-performance';
 
+/** Mock next/image to <img /> */
+import './__mocks/NextImage';
+
 /**
  * Add global context for RTL-LTR switching
  */
