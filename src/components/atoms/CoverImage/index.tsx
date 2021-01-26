@@ -4,7 +4,7 @@ import { Center, Flex, Text } from '@chakra-ui/react';
 
 import styles from './index.module.scss';
 
-type CoverImageProps = {
+export type CoverImageProps = {
   imageSrc?: string;
   emoji?: string;
 };
