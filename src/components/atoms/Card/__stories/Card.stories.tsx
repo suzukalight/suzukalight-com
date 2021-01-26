@@ -1,11 +1,10 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Box, Icon, Image as ChakraImage } from '@chakra-ui/react';
+import { Box, Icon } from '@chakra-ui/react';
 import { FaCode } from '@react-icons/all-files/fa/FaCode';
 
 import { Card, CardProps } from '../Card';
-
-import image from './hakodate-night.jpg';
+import { NextImageOrEmoji } from '../../NextImage';
 
 export default {
   title: 'atoms/Card/Card',
@@ -27,7 +26,7 @@ Svg.args = {
 
 export const Image = Template.bind({});
 Image.args = {
-  image: <ChakraImage src={image} />,
+  image: <NextImageOrEmoji src="images/hakodate-night.jpg" width="100%" height="8em" />,
   title: 'CardImage',
   supplement: 'This is a supplement text.',
 } as CardProps;
