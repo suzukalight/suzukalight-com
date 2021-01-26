@@ -60,9 +60,11 @@ yarn test
 yarn storybook
 ```
 
+http://localhost:6006/ で閲覧することができます。
+
 ## デプロイ
 
-[公開中のサイト](https://suzukalight.com) は Vercel を使用しています。  
+Vercel にデプロイしています。手順は下記記事にて公開しました；  
 https://suzukalight.com/blog/posts/2020-12-20-vercel-deploy
 
 # 特徴
