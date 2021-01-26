@@ -7,7 +7,7 @@ import { ArticleCard } from './Card';
 import { Article } from '../../../utils/article/entity';
 import { mergeUrlAndSlug } from '../../../utils/path/url';
 
-type ArticleCardWithLinkProps = {
+export type ArticleCardWithLinkProps = {
   article: Article;
   urlContents: string;
   urlPosts: string;
