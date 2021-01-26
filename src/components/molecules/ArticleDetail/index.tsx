@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 // NOTE: markdownのHTMLにCSSを直接あてることにする
 import styles from './article.module.scss';
 
-type ArticleDetailProps = {
+export type ArticleDetailProps = {
   contentHtml: ReactNode;
 };
 
