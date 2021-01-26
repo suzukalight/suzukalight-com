@@ -11,7 +11,7 @@
     "test": "jest",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./.storybook/public -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
