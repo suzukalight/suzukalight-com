@@ -27,7 +27,6 @@ export const ChapterMenu: React.FC<ChapterMenuProps> = ({ course, chapters, sele
         width="13em"
         height="4em"
         objectFit="cover"
-        divStyle={{ marginBottom: 0 }}
       />
 
       <Link href={urlCourse}>

@@ -35,7 +35,6 @@ const MorePrivates = () => (
                 width="100%"
                 height="12em"
                 objectFit="cover"
-                divStyle={{ marginBottom: 0 }}
               />
             }
             title="プレイしたボードゲーム"
@@ -52,7 +51,6 @@ const MorePrivates = () => (
                 width="100%"
                 height="12em"
                 objectFit="cover"
-                divStyle={{ marginBottom: 0 }}
               />
             }
             title="生い立ち～就職まで @note"
@@ -69,7 +67,6 @@ const MorePrivates = () => (
                 width="100%"
                 height="12em"
                 objectFit="cover"
-                divStyle={{ marginBottom: 0 }}
               />
             }
             title="一口馬主になるまで"

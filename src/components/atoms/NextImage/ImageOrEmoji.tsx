@@ -32,18 +32,11 @@ export const NextImageOrEmoji: React.FC<NextImageOrEmojiProps> = ({
         alignItems: 'center',
         width: width ?? '100%',
         height: height ?? '16em',
-        marginBottom: '1.75em',
         backgroundColor: '#f7fafc',
         ...divStyle,
       }}
     >
-      <Image
-        {...props}
-        src={src}
-        alt={alt ?? src}
-        layout="fill"
-        objectFit={objectFit ?? 'contain'}
-      />
+      <Image {...props} src={src} alt={alt ?? src} layout="fill" objectFit={objectFit ?? 'cover'} />
     </div>
   ) : (
     <Center>

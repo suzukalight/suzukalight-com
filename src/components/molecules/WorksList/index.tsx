@@ -28,7 +28,6 @@ export const WorksList: React.FC<WorksListProps> = ({ works }) => (
                 width="100%"
                 height="12em"
                 objectFit="cover"
-                divStyle={{ marginBottom: 0 }}
               />
             }
             title={frontMatter.title}
