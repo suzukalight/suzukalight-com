@@ -33,10 +33,8 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course, urlCourse, cta, 
               src={imageSrc}
               emoji={emoji}
               alt={slug}
-              width="100%"
               height="12em"
               fontSize="64px"
-              objectFit="cover"
             />
           </Link>
         ) : (
@@ -45,10 +43,8 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course, urlCourse, cta, 
             src={imageSrc}
             emoji={emoji}
             alt={slug}
-            width="100%"
             height="12em"
             fontSize="64px"
-            objectFit="cover"
           />
         )}
       </Box>

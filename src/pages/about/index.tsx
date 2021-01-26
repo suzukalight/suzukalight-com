@@ -29,14 +29,7 @@ const MorePrivates = () => (
       <Link href={mergeUrlAndSlug('2021-01-23-played-board-games', UrlTable.blogPosts)}>
         <Box w="100%" maxH="20em">
           <CardCatalog
-            image={
-              <NextImageOrEmoji
-                src="/images/sankt.jpg"
-                width="100%"
-                height="12em"
-                objectFit="cover"
-              />
-            }
+            image={<NextImageOrEmoji src="/images/sankt.jpg" height="12em" />}
             title="プレイしたボードゲーム"
             supplement=""
           />
@@ -45,14 +38,7 @@ const MorePrivates = () => (
       <Link href="https://note.com/suzukalight/n/ne0ede6e0394f">
         <Box w="100%" maxH="20em">
           <CardCatalog
-            image={
-              <NextImageOrEmoji
-                src="/images/intj.png"
-                width="100%"
-                height="12em"
-                objectFit="cover"
-              />
-            }
+            image={<NextImageOrEmoji src="/images/intj.png" height="12em" />}
             title="生い立ち～就職まで @note"
             supplement=""
           />
@@ -61,14 +47,7 @@ const MorePrivates = () => (
       <Link href={mergeUrlAndSlug('2019-09-06-join-carrot-club', UrlTable.blogPosts)}>
         <Box w="100%" maxH="20em">
           <CardCatalog
-            image={
-              <NextImageOrEmoji
-                src="/images/paddock.jpg"
-                width="100%"
-                height="12em"
-                objectFit="cover"
-              />
-            }
+            image={<NextImageOrEmoji src="/images/paddock.jpg" height="12em" />}
             title="一口馬主になるまで"
             supplement=""
           />

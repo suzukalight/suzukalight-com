@@ -25,9 +25,7 @@ export const WorksList: React.FC<WorksListProps> = ({ works }) => (
                   getContentsUrlWithSlug(slug, UrlTable.works),
                 )}
                 emoji={frontMatter.emoji}
-                width="100%"
                 height="12em"
-                objectFit="cover"
               />
             }
             title={frontMatter.title}

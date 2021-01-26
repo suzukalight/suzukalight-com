@@ -21,12 +21,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, urlContents, 
     <Card
       image={
         hero ? (
-          <NextImageOrEmoji
-            src={`${urlContents}/${slug}/${hero}`}
-            width="100%"
-            height="8em"
-            objectFit="cover"
-          />
+          <NextImageOrEmoji src={`${urlContents}/${slug}/${hero}`} height="8em" />
         ) : (
           <Center>
             <Text fontSize="64px">{emoji ?? '📝'}</Text>

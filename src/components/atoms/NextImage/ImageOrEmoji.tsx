@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import Image, { ImageProps } from 'next/image';
 import { Center, Text, TypographyProps } from '@chakra-ui/react';
 
-type NextImageOrEmojiProps = ImageProps & {
+export type NextImageOrEmojiProps = Omit<ImageProps, 'alt' | 'width' | 'height'> & {
   src?: string;
   emoji?: string;
   alt?: string;
