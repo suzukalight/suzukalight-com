@@ -13,6 +13,10 @@ status: 'published'
 - main.ts で **emotion へエイリアス**をしておく
 - 画像を読む際は `declare module '*.png'` しておく
 - CSS Modules を併用する場合は `@storybook/preset-scss` を使う
+- next/image をモックする
+- `-s` static-dir オプションを指定して、assets のパスを解決する
+
+（2021/1/26 追記）next/image, static-dir option を追記
 
 # セットアップ
 
@@ -174,3 +178,38 @@ module.exports = {
 ```
 
 **[@storybook/preset-scss](https://github.com/storybookjs/presets/tree/master/packages/preset-scss)** を使えば簡単に有効化することができる。
+
+# next/image をモック
+
+[この Issue](https://github.com/vercel/next.js/issues/18393#issuecomment-750910068) を参考に、下記のようにモックを追加；
+
+```tsx:.storybook/__mocks/NextImage.tsx
+import * as nextImage from 'next/image';
+
+Object.defineProperty(nextImage, 'default', {
+  // https://github.com/vercel/next.js/issues/18393#issuecomment-750910068
+  // をここに複写
+}
+```
+
+```tsx:.storybook/preview.tsx
+/** Mock next/image to <img /> */
+import './__mocks/NextImage';
+```
+
+# `-s` を指定して、assets のパスを解決する
+
+```json:package.json
+{
+  "storybook": "start-storybook -s ./.storybook/public -p 6006"
+}
+```
+
+`-s [dir]` オプションを指定すると、そこを static files のルートディレクトリとして URL 解決してくれるようになる。これで画像ファイルの指定などをパスで行えるようになる。
+
+```tsx
+// 例えばこんな感じの指定でもOKになる
+<NextImage src="/images/tarako.jpg" />
+```
+
+reference: https://storybook.js.org/docs/react/api/cli-options
