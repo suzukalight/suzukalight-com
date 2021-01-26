@@ -4,7 +4,7 @@ import { Box, HStack, VStack, Flex, Center, Text } from '@chakra-ui/react';
 
 import styles from './index.module.scss';
 
-type LogoProps = {
+export type LogoProps = {
   imageSrc: string;
   name: string;
   supplement?: string;
