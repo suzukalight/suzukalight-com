@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import styles from './Article.module.scss';
 
-type NextImageArticleProps = {
+export type NextImageArticleProps = {
   src: string;
   alt?: string;
 };
