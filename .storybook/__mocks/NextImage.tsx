@@ -94,6 +94,8 @@ Object.defineProperty(nextImage, 'default', {
       );
     }
 
+    const { objectFit, ...rest } = props;
+
     return (
       <div style={wrapperStyle}>
         {sizerStyle ? (
@@ -109,7 +111,7 @@ Object.defineProperty(nextImage, 'default', {
             ) : null}
           </div>
         ) : null}
-        <img {...props} decoding="async" style={imgStyle} />
+        <img {...rest} decoding="async" style={imgStyle} />
       </div>
     );
   },
