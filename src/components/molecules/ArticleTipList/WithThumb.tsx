@@ -10,7 +10,7 @@ import { TagListPlainText } from '../TagList';
 import { Article } from '../../../utils/article/entity';
 import { getContentsUrl, stripPosts } from '../../../utils/path/url';
 
-type ArticleTipWithThumbProps = {
+export type ArticleTipWithThumbProps = {
   article: Article;
   url: string;
 };
@@ -72,7 +72,7 @@ export const ArticleTipWithThumb: React.FC<ArticleTipWithThumbProps> = ({ articl
   );
 };
 
-type ArticleTipWithThumbListProps = {
+export type ArticleTipWithThumbListProps = {
   articles: Article[];
   url: string;
 };

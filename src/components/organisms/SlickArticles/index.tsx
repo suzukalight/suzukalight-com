@@ -35,21 +35,17 @@ const settings: Settings = {
 
 type SlickArticlesProps = {
   articles: Article[];
-  urlContents: string;
+  urlContent: string;
   urlPosts: string;
 };
 
-export const SlickArticles: React.FC<SlickArticlesProps> = ({
-  articles,
-  urlContents,
-  urlPosts,
-}) => (
+export const SlickArticles: React.FC<SlickArticlesProps> = ({ articles, urlContent, urlPosts }) => (
   <>
     {articles.length > 0 ? (
       <Slick {...settings}>
         {articles.map((a) => (
           <Box key={a.slug} p={[2, 4]}>
-            <ArticleCardWithLink article={a} urlContents={urlContents} urlPosts={urlPosts} />
+            <ArticleCardWithLink article={a} urlContent={urlContent} urlPosts={urlPosts} />
           </Box>
         ))}
       </Slick>
