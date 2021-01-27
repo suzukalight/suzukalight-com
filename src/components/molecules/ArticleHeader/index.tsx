@@ -7,7 +7,7 @@ import { getContentsUrlWithSlug, mergeUrlAndSlug } from '../../../utils/path/url
 import { TagListPlainText } from '../TagList/PlainText';
 import { CoverImage } from '../../atoms/CoverImage';
 
-type ArticleHeaderProps = {
+export type ArticleHeaderProps = {
   article: Article;
   urlRoot: string;
   urlTags?: string;
