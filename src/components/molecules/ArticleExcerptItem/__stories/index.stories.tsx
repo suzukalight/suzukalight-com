@@ -22,13 +22,13 @@ const Template: Story<ArticleExcerptItemProps> = (args) => (
 const args = {
   article: {
     slug: 'new-blog',
-    tags: ['new-blog', 'blog'],
     excerpt:
       'キャロットクラブの新規会員募集ページから、フォームに必要事項を記入して申し込みます。　1週間かからずに、申込書とカタログが届きました。オラワクワクすっぞ！',
     frontMatter: {
       title: '新しいブログ',
       date: '2019-09-06T00:02:00',
       status: 'published',
+      tags: ['new-blog', 'blog'],
     } as ArticleFrontMatter,
   } as Article,
   urlRoot: '',
