@@ -6,7 +6,7 @@ import { TagListPlainText } from '../TagList';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 
-type ArticleTipPlainTextProps = {
+export type ArticleTipPlainTextProps = {
   article: Article;
   url: string;
 };
@@ -52,7 +52,7 @@ export const ArticleTipPlainText: React.FC<ArticleTipPlainTextProps> = ({ articl
   );
 };
 
-type ArticleTipPlainTextListProps = {
+export type ArticleTipPlainTextListProps = {
   articles: Article[];
   url: string;
 };
