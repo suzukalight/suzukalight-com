@@ -3,8 +3,9 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { Box } from '@chakra-ui/react';
 
 import { ArticleCardWithLink, ArticleCardWithLinkProps } from '../WithLink';
-import { getContentsUrlWithSlug, UrlTable } from '../../../../utils/path/url';
-import { Article } from '../../../../utils/article/entity';
+import { article3, article4 } from '../../../../../.storybook/__mocks/article';
+
+import { UrlTable } from '../../../../utils/path/url';
 
 export default {
   title: 'molecules/ArticleCardWithLink',
@@ -17,24 +18,16 @@ const Template: Story<ArticleCardWithLinkProps> = (args) => (
   </Box>
 );
 
-const article = {
-  slug: 'new-blog',
-  frontMatter: {
-    title: '新しいブログ新しいブログ新しいブログ新しいブログ新しいブログ新しいブログ新しいブログ',
-    tags: ['new-blog', 'blog', 'blog-test'],
-  },
-} as Article;
-
-export const Default = Template.bind({});
-Default.args = {
-  article,
-  urlContents: getContentsUrlWithSlug(article.slug, UrlTable.blogPosts),
+export const Image = Template.bind({});
+Image.args = {
+  article: article3,
+  urlContent: UrlTable.blog,
   urlPosts: UrlTable.blogPosts,
 } as ArticleCardWithLinkProps;
 
-export const Image = Template.bind({});
-Image.args = {
-  article: { ...article, frontMatter: { ...article.frontMatter, hero: './horse.jpg' } },
-  urlContents: 'contents',
+export const Emoji = Template.bind({});
+Emoji.args = {
+  article: article4,
+  urlContent: UrlTable.blog,
   urlPosts: UrlTable.blogPosts,
 } as ArticleCardWithLinkProps;

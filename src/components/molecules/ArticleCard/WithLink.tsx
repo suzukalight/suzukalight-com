@@ -9,13 +9,13 @@ import { mergeUrlAndSlug } from '../../../utils/path/url';
 
 export type ArticleCardWithLinkProps = {
   article: Article;
-  urlContents: string;
+  urlContent: string;
   urlPosts: string;
 };
 
 export const ArticleCardWithLink: React.FC<ArticleCardWithLinkProps> = ({
   article,
-  urlContents,
+  urlContent,
   urlPosts,
 }) => (
   <Link href={`${urlPosts}/[slug]`} as={mergeUrlAndSlug(article.slug, urlPosts)}>
@@ -26,7 +26,7 @@ export const ArticleCardWithLink: React.FC<ArticleCardWithLinkProps> = ({
     >
       <ArticleCard
         article={article}
-        urlContents={urlContents}
+        urlContent={urlContent}
         wrapProps={{ _hover: { borderColor: 'teal.300' } }}
       />
     </ChakraLink>
