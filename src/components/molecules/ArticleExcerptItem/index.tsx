@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Heading, Text, Stack, Collapse, VStack } from '@chakra-ui/react';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
-import { hydrate } from '../../../utils/article/markdown';
+import { hydrate, MdxSource } from '../../../utils/article/markdown';
 import { getContentsUrlWithSlug, mergeUrlAndSlug } from '../../../utils/path/url';
 
 import { ArticleDetail } from '../ArticleDetail';
@@ -10,12 +10,12 @@ import { ReadMoreButton } from '../../atoms/ReadMoreButton';
 import { Link } from '../../atoms/Link';
 import { TagListRoundBox } from '../TagList';
 
-type ArticleExcerptItemProps = {
+export type ArticleExcerptItemProps = {
   article: Article;
   urlRoot: string;
   urlTags: string;
   urlPosts: string;
-  contentHtml?: string;
+  contentSource?: MdxSource;
   contentText?: string;
   showReadMore?: boolean;
   showContentLink?: boolean;
@@ -26,7 +26,7 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
   urlRoot,
   urlTags,
   urlPosts,
-  contentHtml,
+  contentSource,
   contentText,
   showReadMore,
   showContentLink,
@@ -35,8 +35,8 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
   const handleToggle = () => setShow(!show);
 
   const { title, tags } = article.frontMatter;
-  const content = contentHtml
-    ? hydrate(contentHtml, {
+  const content = contentSource
+    ? hydrate(contentSource, {
         baseImageUrl: getContentsUrlWithSlug(article.slug, urlRoot),
         baseHref: urlRoot,
         baseAs: urlRoot,
@@ -68,9 +68,9 @@ export const ArticleExcerptItem: React.FC<ArticleExcerptItemProps> = ({
             {getDateFormatted(article)}
           </Text>
 
-          <Collapse startingHeight={contentHtml ? '12em' : '6.5em'} in={show}>
+          <Collapse startingHeight={contentSource ? '12em' : '6.5em'} in={show}>
             <Box py={[4, 4, 2]}>
-              <ArticleDetail contentHtml={content} />
+              <ArticleDetail content={content} />
             </Box>
           </Collapse>
         </Box>
