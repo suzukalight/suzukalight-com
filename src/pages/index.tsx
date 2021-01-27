@@ -11,7 +11,7 @@ import { CenterMaxW } from '../components/atoms/CenterMaxW';
 import { AboutMePhoto } from '../components/molecules/AboutMePhoto';
 import { AboutMeCards } from '../components/molecules/AboutMeCards';
 import { CTAButton } from '../components/atoms/CTAButton';
-import { ArticleUnorderedList } from '../components/molecules/ArticleUnorderedList';
+import { RecentArticleList } from '../components/organisms/RecentArticleList';
 import { WorksList } from '../components/molecules/WorksList';
 
 import { Article } from '../utils/article/entity';
@@ -84,7 +84,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             <SimpleGrid columns={[1, 1, 2, 2]} gap={24} pl={4}>
               <GridItem>
-                <ArticleUnorderedList
+                <RecentArticleList
                   image={<Icon as={FaPencilAlt} boxSize={12} />}
                   title="Blog"
                   articles={blogArticles}
@@ -95,7 +95,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </GridItem>
 
               <GridItem>
-                <ArticleUnorderedList
+                <RecentArticleList
                   image={<Icon as={FaCode} boxSize={12} />}
                   title="Snippet"
                   articles={snippetArticles}
