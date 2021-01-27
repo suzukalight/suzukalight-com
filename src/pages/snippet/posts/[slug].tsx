@@ -5,7 +5,7 @@ import { VStack, StackDivider } from '@chakra-ui/react';
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 import { Article, stripContent } from '../../../utils/article/entity';
 import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
-import { hydrate } from '../../../utils/article/markdown';
+import { hydrate, MdxSource } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle, getRelatedArticles } from '../../../utils/article/related';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
@@ -24,7 +24,7 @@ import {
 
 type SnippetPostProps = {
   article: Article;
-  contentHtml: string;
+  contentSource: MdxSource;
   relatedArticles: Article[];
   prevArticle?: Article;
   nextArticle?: Article;
@@ -32,7 +32,7 @@ type SnippetPostProps = {
 
 export const SnippetPost: React.FC<SnippetPostProps> = ({
   article,
-  contentHtml,
+  contentSource,
   relatedArticles,
   prevArticle,
   nextArticle,
@@ -41,7 +41,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
   const { title, tags, hero } = article.frontMatter;
   const url = mergeUrlAndSlug(slug, UrlTable.snippetPosts);
 
-  const content = hydrate(contentHtml, {
+  const content = hydrate(contentSource, {
     baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.snippet),
     baseHref: `${UrlTable.snippetPosts}/[slug]`,
     baseAs: url,
@@ -64,7 +64,7 @@ export const SnippetPost: React.FC<SnippetPostProps> = ({
               urlRoot={UrlTable.snippet}
               urlTags={UrlTable.snippetTags}
             />
-            <ArticleDetail contentHtml={content} />
+            <ArticleDetail content={content} />
             <ShareButtonsHorizontal
               url={url}
               title={title}
@@ -110,7 +110,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
   const { content, ...article } = await getArticle(slug, UrlTable.snippet, { withContent: true });
 
-  const contentHtml = await renderToString(content, {
+  const contentSource = await renderToString(content, {
     baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.snippet),
     baseHref: `${UrlTable.snippetPosts}/[slug]`,
     baseAs: mergeUrlAndSlug(slug, UrlTable.snippetPosts),
@@ -125,7 +125,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       article,
-      contentHtml,
+      contentSource,
       relatedArticles,
       prevArticle,
       nextArticle,

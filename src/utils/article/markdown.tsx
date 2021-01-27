@@ -34,6 +34,8 @@ export const getDefaultComponents = (baseImageUrl: string, baseHref?: string, ba
   a: MdLink(baseHref, baseAs),
 });
 
+export type MdxSource = MdxRemote.Source;
+
 export type MdOptions = {
   baseImageUrl: string;
   baseHref?: string;
@@ -48,7 +50,7 @@ export type MdOptions = {
  * @param url
  * @param options mdx→JSX変換で使用するコンポーネントマップなど
  */
-export const hydrate = (content: string, options: MdOptions) => {
+export const hydrate = (content: MdxSource, options: MdOptions) => {
   return nmrHydrate(content, {
     components:
       options?.components ||

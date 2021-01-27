@@ -5,7 +5,7 @@ import { VStack, StackDivider } from '@chakra-ui/react';
 import { SITE_URL, TWITTER_ID } from '../../../utils/env';
 import { Article } from '../../../utils/article/entity';
 import { getArticle, getAvailableSlugs } from '../../../utils/article/fs.server';
-import { hydrate } from '../../../utils/article/markdown';
+import { hydrate, MdxSource } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
@@ -22,15 +22,15 @@ import {
 
 type WorksDetailProps = {
   work: Article;
-  contentHtml: string;
+  contentSource: MdxSource;
 };
 
-export const WorksDetail: React.FC<WorksDetailProps> = ({ work, contentHtml }) => {
+export const WorksDetail: React.FC<WorksDetailProps> = ({ work, contentSource }) => {
   const { slug } = work;
   const { title, hero } = work.frontMatter;
   const url = mergeUrlAndSlug(slug, UrlTable.worksDetail);
 
-  const content = hydrate(contentHtml, {
+  const content = hydrate(contentSource, {
     baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.works),
     baseHref: `${UrlTable.worksDetail}/[slug]`,
     baseAs: url,
@@ -49,7 +49,7 @@ export const WorksDetail: React.FC<WorksDetailProps> = ({ work, contentHtml }) =
         <VStack divider={<StackDivider />} spacing={12} align="left">
           <VStack spacing={8} align="left" w="100%">
             <WorksHeader work={work} urlRoot={UrlTable.works} />
-            <ArticleDetail contentHtml={content} />
+            <ArticleDetail content={content} />
             <ShareButtonsHorizontal
               url={url}
               title={title}
@@ -86,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.slug as string;
   const { content, ...work } = await getArticle(slug, UrlTable.works, { withContent: true });
 
-  const contentHtml = await renderToString(content, {
+  const contentSource = await renderToString(content, {
     baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.works),
     baseHref: `${UrlTable.worksDetail}/[slug]`,
     baseAs: mergeUrlAndSlug(slug, UrlTable.worksDetail),
@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       work,
-      contentHtml,
+      contentSource,
     },
   };
 };

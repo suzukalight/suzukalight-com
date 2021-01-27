@@ -4,9 +4,9 @@ import React, { ReactNode } from 'react';
 import styles from './article.module.scss';
 
 export type ArticleDetailProps = {
-  contentHtml: ReactNode;
+  content: ReactNode;
 };
 
-export const ArticleDetail: React.FC<ArticleDetailProps> = ({ contentHtml }) => (
-  <article className={styles.article}>{contentHtml}</article>
+export const ArticleDetail: React.FC<ArticleDetailProps> = ({ content }) => (
+  <article className={styles.article}>{content}</article>
 );

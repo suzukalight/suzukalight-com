@@ -14,12 +14,13 @@ import { filterArticleByTag } from '../../../utils/article/filter';
 import { sortArticlesByDateDesc } from '../../../utils/article/sorter';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
+import { MdxSource } from '../../../utils/article/markdown';
 
 type TagPageProps = {
   tag: string;
   data: {
     article: Article;
-    contentHtml: string;
+    contentSource: MdxSource;
   }[];
 };
 
@@ -39,7 +40,7 @@ export const TagPage: React.FC<TagPageProps> = ({ tag, data }) => {
             urlRoot={UrlTable.snippet}
             urlTags={UrlTable.snippetTags}
             urlPosts={UrlTable.snippetPosts}
-            contentHtml={d.contentHtml}
+            contentSource={d.contentSource}
             showReadMore
           />
         ))}
@@ -79,7 +80,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await Promise.all(
     sortArticlesByDateDesc(articlesFilteredByTag).map(async ({ content, ...article }) => ({
       article,
-      contentHtml: await renderToString(content, {
+      contentSource: await renderToString(content, {
         baseImageUrl: getContentsUrlWithSlug(article.slug, UrlTable.snippet),
         baseHref: `${UrlTable.snippetPosts}/[slug]`,
         baseAs: mergeUrlAndSlug(article.slug, UrlTable.snippetPosts),

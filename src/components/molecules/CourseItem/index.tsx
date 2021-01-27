@@ -65,7 +65,7 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course, urlCourse, cta, 
         </Box>
 
         <Box>
-          <ArticleDetail contentHtml={excerpt} />
+          <ArticleDetail content={excerpt} />
         </Box>
 
         <Text fontSize="sm" color="gray.600" my={1}>

@@ -4,7 +4,7 @@ import { Flex, Box, VStack, Divider } from '@chakra-ui/react';
 
 import { Article } from '../../../utils/article/entity';
 import { getArticle, getArticles, getAvailableSlugs } from '../../../utils/article/fs.server';
-import { hydrate } from '../../../utils/article/markdown';
+import { hydrate, MdxSource } from '../../../utils/article/markdown';
 import { renderToString } from '../../../utils/article/markdown.server';
 import { getPrevAndNextArticle } from '../../../utils/article/related';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
@@ -22,7 +22,7 @@ import { PrevNextButtons } from '../../../components/molecules/PrevNextButtons';
 type CourseChapterProps = {
   course: Article;
   chapter: Article;
-  contentHtml: string;
+  contentSource: MdxSource;
   chapters: Article[];
   prevArticle?: Article;
   nextArticle?: Article;
@@ -31,7 +31,7 @@ type CourseChapterProps = {
 export const CourseChapter: React.FC<CourseChapterProps> = ({
   course,
   chapter,
-  contentHtml,
+  contentSource,
   chapters,
   prevArticle,
   nextArticle,
@@ -43,7 +43,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
   const urlChapter = mergeUrlAndSlug(slug, urlCourse);
   const courseHeroUrl = `${getContentsUrlWithSlug(course.slug, UrlTable.course)}/${hero}`;
 
-  const content = hydrate(contentHtml, {
+  const content = hydrate(contentSource, {
     baseImageUrl: getContentsUrlWithSlug(slug, urlCourse),
     baseHref: `${UrlTable.course}/[title]/[chapter]`,
     baseAs: urlChapter,
@@ -76,7 +76,7 @@ export const CourseChapter: React.FC<CourseChapterProps> = ({
         <CenterMaxW maxWidth="40em">
           <VStack spacing={8} align="left">
             <ArticleHeader article={chapter} urlRoot={UrlTable.course} course={course} />
-            <ArticleDetail contentHtml={content} />
+            <ArticleDetail content={content} />
             <PrevNextButtons
               urlCourse={urlCourse}
               prevArticle={prevArticle}
@@ -122,7 +122,7 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
   const urlCourse = mergeUrlAndSlug(courseSlug, UrlTable.course);
 
   const { content, ...chapter } = await getArticle(slug, urlCourse, { withContent: true });
-  const contentHtml = await renderToString(content, {
+  const contentSource = await renderToString(content, {
     baseImageUrl: getContentsUrlWithSlug(slug, urlCourse),
     baseHref: `${UrlTable.course}/[title]/[chapter]`,
     baseAs: mergeUrlAndSlug(slug, urlCourse),
@@ -138,7 +138,7 @@ export const getStaticProps: GetStaticProps<CourseChapterProps> = async ({ param
     props: {
       course,
       chapter,
-      contentHtml,
+      contentSource,
       chapters,
       prevArticle,
       nextArticle,

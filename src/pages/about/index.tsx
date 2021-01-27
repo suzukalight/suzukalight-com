@@ -14,7 +14,7 @@ import { CardCatalog } from '../../components/atoms/Card/Catalog';
 import { WorksList } from '../../components/molecules/WorksList';
 
 import { getArticle } from '../../utils/article/fs.server';
-import { hydrate } from '../../utils/article/markdown';
+import { hydrate, MdxSource } from '../../utils/article/markdown';
 import { renderToString } from '../../utils/article/markdown.server';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../utils/path/url';
 import { Article } from '../../utils/article/entity';
@@ -58,12 +58,12 @@ const MorePrivates = () => (
 );
 
 type IndexPageProps = {
-  contentHtml: string;
+  contentSource: MdxSource;
   pickupWorks: Article[];
 };
 
-export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml, pickupWorks }) => {
-  const content = hydrate(contentHtml, {
+export const IndexPage: React.FC<IndexPageProps> = ({ contentSource, pickupWorks }) => {
+  const content = hydrate(contentSource, {
     baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
     baseHref: `${UrlTable.about}/index`,
     baseAs: `${UrlTable.about}/index`,
@@ -78,7 +78,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ contentHtml, pickupWorks }
         <AboutMeCards />
 
         <Box mt={-8}>
-          <ArticleDetail contentHtml={content} />
+          <ArticleDetail content={content} />
         </Box>
 
         <MorePrivates />
@@ -101,7 +101,7 @@ export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { content } = await getArticle('index', UrlTable.about, { withContent: true });
-  const contentHtml = await renderToString(content, {
+  const contentSource = await renderToString(content, {
     baseImageUrl: getContentsUrlWithSlug('index', UrlTable.about),
     baseHref: `${UrlTable.about}/index`,
     baseAs: `${UrlTable.about}/index`,
@@ -113,5 +113,5 @@ export const getStaticProps: GetStaticProps = async () => {
     ),
   );
 
-  return { props: { contentHtml, pickupWorks } as IndexPageProps };
+  return { props: { contentSource, pickupWorks } as IndexPageProps };
 };
