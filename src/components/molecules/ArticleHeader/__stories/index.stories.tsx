@@ -3,8 +3,10 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { Box } from '@chakra-ui/react';
 
 import { ArticleHeader, ArticleHeaderProps } from '..';
+import { article1, article4 } from '../../../../../.storybook/__mocks/article';
+
 import { UrlTable } from '../../../../utils/path/url';
-import { Article, ArticleFrontMatter } from '../../../../utils/article/entity';
+import { Article } from '../../../../utils/article/entity';
 
 export default {
   title: 'molecules/ArticleHeader',
@@ -18,24 +20,22 @@ const Template: Story<ArticleHeaderProps> = (args) => (
 );
 
 const args = {
-  article: {
-    slug: 'new-blog',
-    excerpt:
-      'キャロットクラブの新規会員募集ページから、フォームに必要事項を記入して申し込みます。　1週間かからずに、申込書とカタログが届きました。オラワクワクすっぞ！',
-    frontMatter: {
-      title: '新しいブログ',
-      date: '2019-09-06T00:02:00',
-      status: 'published',
-      tags: ['new-blog', 'blog'],
-    } as ArticleFrontMatter,
-  } as Article,
-  urlRoot: '',
+  article: { ...article1 } as Article,
+  urlRoot: UrlTable.blog,
   urlTags: UrlTable.blogTags,
 };
 
 export const Default = Template.bind({});
 Default.args = {
   ...args,
+  article: {
+    ...args.article,
+    frontMatter: {
+      ...args.article.frontMatter,
+      hero: undefined,
+      emoji: undefined,
+    },
+  },
 } as ArticleHeaderProps;
 
 export const Image = Template.bind({});
@@ -45,7 +45,7 @@ Image.args = {
     ...args.article,
     frontMatter: {
       ...args.article.frontMatter,
-      hero: 'horse.jpg',
+      emoji: undefined,
     },
   },
 } as ArticleHeaderProps;
@@ -57,6 +57,7 @@ Emoji.args = {
     ...args.article,
     frontMatter: {
       ...args.article.frontMatter,
+      hero: undefined,
       emoji: '👍',
     },
   },
@@ -66,9 +67,9 @@ export const TooLong = Template.bind({});
 TooLong.args = {
   ...args,
   article: {
-    ...args.article,
+    ...article4,
     frontMatter: {
-      ...args.article.frontMatter,
+      ...article4.frontMatter,
       title:
         'とても長いタイトルとても長いタイトルとても長いタイトルとても長いタイトルとても長いタイトルとても長いタイトルとても長いタイトルとても長いタイトルとても長いタイトルとても長いタイトル',
       tags: [
@@ -83,7 +84,6 @@ TooLong.args = {
         'tag-no19',
         'tag-no20',
       ],
-      hero: 'horse.jpg',
     },
   },
 } as ArticleHeaderProps;

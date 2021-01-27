@@ -3,8 +3,10 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { Box } from '@chakra-ui/react';
 
 import { ArticleExcerptItem, ArticleExcerptItemProps } from '..';
+import { article1 } from '../../../../../.storybook/__mocks/article';
+
 import { UrlTable } from '../../../../utils/path/url';
-import { Article, ArticleFrontMatter } from '../../../../utils/article/entity';
+import { Article } from '../../../../utils/article/entity';
 
 import contentSource from '../../../../../.storybook/__mocks/contentSource';
 
@@ -20,17 +22,7 @@ const Template: Story<ArticleExcerptItemProps> = (args) => (
 );
 
 const args = {
-  article: {
-    slug: 'new-blog',
-    excerpt:
-      'キャロットクラブの新規会員募集ページから、フォームに必要事項を記入して申し込みます。　1週間かからずに、申込書とカタログが届きました。オラワクワクすっぞ！',
-    frontMatter: {
-      title: '新しいブログ',
-      date: '2019-09-06T00:02:00',
-      status: 'published',
-      tags: ['new-blog', 'blog'],
-    } as ArticleFrontMatter,
-  } as Article,
+  article: { ...article1 } as Article,
   urlRoot: '',
   urlTags: UrlTable.blogTags,
   urlPosts: UrlTable.blogPosts,
