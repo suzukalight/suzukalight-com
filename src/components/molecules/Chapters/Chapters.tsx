@@ -7,12 +7,12 @@ import { mergeUrlAndSlug } from '../../../utils/path/url';
 import { ChapterNode } from './Node';
 import { Link } from '../../atoms/Link';
 
-type ChaptersProps = {
-  urlCourse: string;
+export type ChaptersProps = {
   chapters: Article[];
+  urlCourse: string;
 };
 
-export const Chapters: React.FC<ChaptersProps> = ({ urlCourse, chapters }) => (
+export const Chapters: React.FC<ChaptersProps> = ({ chapters, urlCourse }) => (
   <VStack spacing={8} align="left" p={4} pt={8} backgroundColor="gray.50" borderRadius={4}>
     <Heading as="h1" fontSize={['xl', 'xl', '2xl']} borderBottom="sm">
       Chapters
