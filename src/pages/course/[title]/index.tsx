@@ -12,7 +12,7 @@ import { BackLinks } from '../../../components/molecules/BackLinks';
 import { DefaultLayout } from '../../../components/templates/DefaultLayout';
 import { CenterMaxW } from '../../../components/atoms/CenterMaxW';
 import { CTAButton } from '../../../components/atoms/CTAButton';
-import { CourseItem } from '../../../components/molecules/CourseItem';
+import { CourseItem } from '../../../components/molecules/CourseItem/Item';
 import { Chapters } from '../../../components/molecules/Chapters/Chapters';
 
 type IndexPageProps = {

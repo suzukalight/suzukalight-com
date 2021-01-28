@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Box, Heading, Text, Stack, VStack } from '@chakra-ui/react';
 
-import styles from './index.module.scss';
+import styles from './Item.module.scss';
 
 import { Article, getDateFormatted } from '../../../utils/article/entity';
 import { getContentsUrlWithSlug, mergeUrlAndSlug } from '../../../utils/path/url';
@@ -10,7 +10,7 @@ import { ArticleDetail } from '../ArticleDetail';
 import { Link } from '../../atoms/Link';
 import { NextImageOrEmoji } from '../../atoms/NextImage/ImageOrEmoji';
 
-type CourseItemProps = {
+export type CourseItemProps = {
   course: Article;
   urlCourse: string;
   cta: ReactNode;
