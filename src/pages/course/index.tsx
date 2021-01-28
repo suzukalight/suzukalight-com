@@ -1,17 +1,16 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { Divider, VStack, StackDivider, Text } from '@chakra-ui/react';
+import { Divider } from '@chakra-ui/react';
 
 import { ArticleListLayout } from '../../components/templates/ArticleListLayout';
 import { HtmlHead } from '../../components/molecules/HtmlHead';
-import { CourseItem } from '../../components/molecules/CourseItem';
 import { BackLinks } from '../../components/molecules/BackLinks';
-import { Link } from '../../components/atoms/Link';
+import { CourseList } from '../../components/molecules/Course/List';
 
 import { Article } from '../../utils/article/entity';
 import { getArticles } from '../../utils/article/fs.server';
 import { sortArticlesByDateDesc } from '../../utils/article/sorter';
-import { mergeUrlAndSlug, UrlTable } from '../../utils/path/url';
+import { UrlTable } from '../../utils/path/url';
 
 type IndexPageProps = {
   courses: Article[];
@@ -24,23 +23,7 @@ export const IndexPage: React.FC<IndexPageProps> = ({ courses }) => (
   >
     <HtmlHead title="Course" url={UrlTable.course} />
 
-    <VStack spacing={8} divider={<StackDivider borderColor="gray.200" />}>
-      {courses.map((a) => (
-        <CourseItem
-          key={a.slug}
-          course={a}
-          urlCourse={UrlTable.course}
-          cta={
-            <Link href={mergeUrlAndSlug(a.slug, UrlTable.course)}>
-              <Text fontSize="md" textDecoration="underline" _hover={{ color: 'teal.500' }}>
-                コースの概要を確認する→
-              </Text>
-            </Link>
-          }
-          hasLink
-        />
-      ))}
-    </VStack>
+    <CourseList courses={courses} />
 
     <Divider mt={12} mb={8} />
 
