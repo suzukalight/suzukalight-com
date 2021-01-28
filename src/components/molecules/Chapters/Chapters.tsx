@@ -12,21 +12,22 @@ export type ChaptersProps = {
   urlCourse: string;
 };
 
-export const Chapters: React.FC<ChaptersProps> = ({ chapters, urlCourse }) => (
-  <VStack spacing={8} align="left" p={4} pt={8} backgroundColor="gray.50" borderRadius={4}>
-    <Heading as="h1" fontSize={['xl', 'xl', '2xl']} borderBottom="sm">
-      Chapters
-    </Heading>
+export const Chapters: React.FC<ChaptersProps> = ({ chapters, urlCourse }) =>
+  !chapters.length ? null : (
+    <VStack spacing={8} align="left" p={4} pt={8} backgroundColor="gray.50" borderRadius={4}>
+      <Heading as="h1" fontSize={['xl', 'xl', '2xl']} borderBottom="sm">
+        Chapters
+      </Heading>
 
-    <Box>
-      {chapters.map((c, index) => (
-        <ChapterNode
-          key={c.slug}
-          title={<Link href={mergeUrlAndSlug(c.slug, urlCourse)}>{c.frontMatter.title}</Link>}
-          left={`#${index + 1}`}
-          isLast={index === chapters.length - 1}
-        />
-      ))}
-    </Box>
-  </VStack>
-);
+      <Box>
+        {chapters.map((c, index) => (
+          <ChapterNode
+            key={c.slug}
+            title={<Link href={mergeUrlAndSlug(c.slug, urlCourse)}>{c.frontMatter.title}</Link>}
+            left={`#${index + 1}`}
+            isLast={index === chapters.length - 1}
+          />
+        ))}
+      </Box>
+    </VStack>
+  );

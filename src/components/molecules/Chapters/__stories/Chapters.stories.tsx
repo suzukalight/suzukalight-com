@@ -8,7 +8,7 @@ import { chapter2, chapter3, chapter5, chapter6 } from '../../../../../.storyboo
 import { mergeUrlAndSlug, UrlTable } from '../../../../utils/path/url';
 
 export default {
-  title: 'molecules/Chapters',
+  title: 'molecules/Chapters/Chapters',
   component: Chapters,
 } as Meta;
 
@@ -21,5 +21,11 @@ const Template: Story<ChaptersProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   chapters: [chapter2, chapter3, chapter5, chapter6],
+  urlCourse: mergeUrlAndSlug('clang', UrlTable.course),
+} as ChaptersProps;
+
+export const Empty = Template.bind({});
+Empty.args = {
+  chapters: [],
   urlCourse: mergeUrlAndSlug('clang', UrlTable.course),
 } as ChaptersProps;
