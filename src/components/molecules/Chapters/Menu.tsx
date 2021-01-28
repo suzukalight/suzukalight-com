@@ -7,10 +7,10 @@ import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../util
 import { Link } from '../../atoms/Link';
 import { NextImageOrEmoji } from '../../atoms/NextImage/ImageOrEmoji';
 
-type ChapterMenuProps = {
+export type ChapterMenuProps = {
   course: Article;
   chapters: Article[];
-  selectedChapter: Article;
+  selectedChapter?: Article | null;
 };
 
 export const ChapterMenu: React.FC<ChapterMenuProps> = ({ course, chapters, selectedChapter }) => {
@@ -37,7 +37,7 @@ export const ChapterMenu: React.FC<ChapterMenuProps> = ({ course, chapters, sele
       <UnorderedList listStyleType="none" spacing={1}>
         {chapters.map((c) => {
           const url = mergeUrlAndSlug(c.slug, urlCourse);
-          const match = c.slug === selectedChapter.slug;
+          const match = c.slug === selectedChapter?.slug;
 
           return (
             <ListItem
