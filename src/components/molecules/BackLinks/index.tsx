@@ -3,7 +3,7 @@ import { Text, Icon, VStack } from '@chakra-ui/react';
 
 import { Link } from '../../atoms/Link';
 
-type BackLinksProps = {
+export type BackLinksProps = {
   links: Array<{
     href: string;
     label: string;
