@@ -15,7 +15,7 @@ import { FaArrowDown } from '@react-icons/all-files/fa/FaArrowDown';
 
 import { SNSLinks } from '../SNSLinks';
 
-type HeroProps = {
+export type HeroProps = {
   title: string;
   subtitle: string;
   image: string;
