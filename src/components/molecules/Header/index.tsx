@@ -43,6 +43,8 @@ export const Header: React.FC = (props) => {
     <Center
       as="nav"
       position="fixed"
+      left={0}
+      top={0}
       w="100%"
       mb={4}
       p={4}
@@ -57,7 +59,7 @@ export const Header: React.FC = (props) => {
       <Flex w="100%" maxW="80em" align="center" justify="space-between" wrap="wrap">
         <Flex align="center">
           <Link href={UrlTable.home}>
-            <Logo imageSrc="/tarako.jpg" name="suzukalight" supplement="Masahiko Kubara" />
+            <Logo imageSrc="/images/tarako.jpg" name="suzukalight" supplement="Masahiko Kubara" />
           </Link>
         </Flex>
 
