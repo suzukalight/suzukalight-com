@@ -18,7 +18,7 @@ const prevNextButtonStyle: ButtonProps = {
   _hover: { backgroundColor: 'teal.50' },
 };
 
-type PrevNextButtonsProps = {
+export type PrevNextButtonsProps = {
   urlCourse: string;
   prevArticle?: Article;
   nextArticle?: Article;
