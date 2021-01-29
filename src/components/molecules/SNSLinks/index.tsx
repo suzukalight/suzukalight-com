@@ -6,7 +6,7 @@ import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
 
 import { SNSLinkItem } from '../../atoms/SNSLinkItem';
 
-type SNSLinksProps = {
+export type SNSLinksProps = {
   spacing: SystemProps['margin'];
   boxSize: LayoutProps['boxSize'];
   color?: ColorProps['color'];
