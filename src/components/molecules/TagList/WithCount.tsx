@@ -14,13 +14,18 @@ const withCountTagStyle: TextProps = {
   mb: 1,
   color: 'gray.600',
   fontSize: 'md',
+  lineHeight: 1.25,
+};
+
+const withCountTagWithLinkStyle: TextProps = {
+  ...withCountTagStyle,
   lineHeight: 1,
   _hover: { textDecoration: 'underline' },
 };
 
 export const getWithCountTagStyle = () => ({ ...withCountTagStyle });
 
-type TagListWithCountProps = {
+export type TagListWithCountProps = {
   tagAndCounts: TagAndCount[];
   tagBaseUrl?: string;
   tagLinkChakraProps?: ChakraLinkProps;
@@ -46,11 +51,15 @@ export const TagListWithCount: React.FC<TagListWithCountProps> = ({
           >
             <Tag
               tag={`${tag} (${count})`}
-              chakraProps={{ ...withCountTagStyle, ...tagItemProps }}
+              chakraProps={{ ...withCountTagWithLinkStyle, ...tagItemProps }}
             />
           </Link>
         ) : (
-          <Tag key={tag} tag={`${tag} (${count})`} chakraProps={tagItemProps} />
+          <Tag
+            key={tag}
+            tag={`${tag} (${count})`}
+            chakraProps={{ ...withCountTagStyle, ...tagItemProps }}
+          />
         )}
       </WrapItem>
     ))}
