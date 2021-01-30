@@ -15,17 +15,21 @@ import { Link } from '../../atoms/Link';
 
 const plainTextTagStyle: TextProps = {
   display: 'inline-block',
-  mr: 2,
   mb: 1,
   color: 'gray.600',
   fontSize: 'sm',
-  lineHeight: 1,
+  lineHeight: 1.25,
+};
+
+const plainTextTagWithLinkStyle: TextProps = {
+  ...plainTextTagStyle,
+  mr: 2,
   _hover: { textDecoration: 'underline' },
 };
 
 export const getPlainTextTagStyle = () => ({ ...plainTextTagStyle });
 
-type TagListPlainTextProps = {
+export type TagListPlainTextProps = {
   tags: string[];
   tagBaseUrl?: string;
   tagLinkChakraProps?: ChakraLinkProps;
@@ -51,10 +55,10 @@ export const TagListPlainText: React.FC<TagListPlainTextProps> = ({
             nextProps={tagLinkNextProps}
             href={mergeUrlAndSlug(tag, tagBaseUrl)}
           >
-            <Tag tag={tag} chakraProps={{ ...plainTextTagStyle, ...tagItemProps }} />
+            <Tag tag={tag} chakraProps={{ ...plainTextTagWithLinkStyle, ...tagItemProps }} />
           </Link>
         ) : (
-          <Tag key={tag} tag={tag} chakraProps={tagItemProps} />
+          <Tag key={tag} tag={tag} chakraProps={{ ...plainTextTagStyle, ...tagItemProps }} />
         )}
       </WrapItem>
     ))}
