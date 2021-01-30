@@ -90,3 +90,15 @@ status: 'published'
 1. **情報処理学会第 68 回全国大会 学生奨励賞**: "MVC を用いたコンポーネント連携型 UIMS の提案", 2006/03
 1. **中京大学 学長賞**: 2004/03
 1. **第 3 回 JRA-VAN 競馬ソフトコンテスト 佳作**: "競馬予想ソフト Shining Run ver.2", 1998/09
+
+## 外部サイト
+
+- GitHub: https://github.com/suzukalight
+- Qiita: https://qiita.com/suzukalight
+- Zenn: https://zenn.dev/suzukalight
+- Wantedly Profile: https://www.wantedly.com/id/masahiko_kubara
+- Twitter: https://twitter.com/suzukalight
+
+## Email
+
+mail@mkubara.com
