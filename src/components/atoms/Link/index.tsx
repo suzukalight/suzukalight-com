@@ -10,7 +10,7 @@ type LinkProps = {
 
 export const Link: React.FC<LinkProps> = ({ children, href, chakraProps, nextProps }) => (
   <NextLink href={href} {...nextProps} passHref>
-    <ChakraLink {...chakraProps} isExternal={href.startsWith('http')}>
+    <ChakraLink {...chakraProps} isExternal={href.startsWith('http') || href.startsWith('mailto')}>
       {children}
     </ChakraLink>
   </NextLink>

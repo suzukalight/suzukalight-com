@@ -15,7 +15,12 @@ const MdImage = (baseImageUrl: string) => ({ src }) => (
 );
 
 const MdLink = (baseHref?: string, baseAs?: string) => (props) => {
-  if (baseHref && !props.href.startsWith('http') && !props.href.startsWith('/')) {
+  if (
+    baseHref &&
+    !props.href.startsWith('http') &&
+    !props.href.startsWith('/') &&
+    !props.href.startsWith('mailto')
+  ) {
     const href = `${baseHref}/${props.href}`;
     const as = `${baseAs}/${props.href}`;
     return <Link {...props} href={href} nextProps={{ as }} />;
