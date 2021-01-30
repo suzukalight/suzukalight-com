@@ -14,12 +14,16 @@ const roundBoxTagStyle: TextProps = {
   backgroundColor: 'gray.100',
   fontSize: 'sm',
   lineHeight: 2,
+};
+
+const roundBoxTagWithLinkStyle: TextProps = {
+  ...roundBoxTagStyle,
   _hover: { textDecoration: 'underline' },
 };
 
 export const getRoundBoxTagStyle = () => ({ ...roundBoxTagStyle });
 
-type TagListRoundBoxProps = {
+export type TagListRoundBoxProps = {
   tags: string[];
   tagBaseUrl?: string;
   tagLinkChakraProps?: ChakraLinkProps;
@@ -43,10 +47,10 @@ export const TagListRoundBox: React.FC<TagListRoundBoxProps> = ({
             nextProps={tagLinkNextProps}
             href={mergeUrlAndSlug(tag, tagBaseUrl)}
           >
-            <Tag tag={tag} chakraProps={{ ...roundBoxTagStyle, ...tagItemProps }} />
+            <Tag tag={tag} chakraProps={{ ...roundBoxTagWithLinkStyle, ...tagItemProps }} />
           </Link>
         ) : (
-          <Tag key={tag} tag={tag} chakraProps={tagItemProps} />
+          <Tag key={tag} tag={tag} chakraProps={{ ...roundBoxTagStyle, ...tagItemProps }} />
         )}
       </WrapItem>
     ))}
