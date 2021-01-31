@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading, ListItem, UnorderedList, Text, VStack } from '@chakra-ui/react';
 
 import { Article } from '../../../utils/article/entity';
-import { getContentsUrlWithSlug, mergeUrlAndSlug } from '../../../utils/path/url';
+import { getContentsUrlWithSlug } from '../../../utils/path/url';
 
 import { CoverImage } from '../../atoms/CoverImage';
 import { formatJpYYYYM } from '../../../utils/date/format';
@@ -25,13 +25,12 @@ const genPeriodText = ({ periodFrom, periodTo, isNow }: GenPeriodTextProps) => {
   return periodText;
 };
 
-type WorksHeaderProps = {
+export type WorksHeaderProps = {
   work: Article;
   urlRoot: string;
-  course?: Article;
 };
 
-export const WorksHeader: React.FC<WorksHeaderProps> = ({ work, urlRoot, course }) => {
+export const WorksHeader: React.FC<WorksHeaderProps> = ({ work, urlRoot }) => {
   const { slug } = work;
   const {
     title,
@@ -44,9 +43,7 @@ export const WorksHeader: React.FC<WorksHeaderProps> = ({ work, urlRoot, course 
     types,
     roles,
   } = work.frontMatter;
-  const imageSrc = course
-    ? `${getContentsUrlWithSlug(slug, mergeUrlAndSlug(course.slug, urlRoot))}/${hero}`
-    : `${getContentsUrlWithSlug(slug, urlRoot)}/${hero}`;
+  const imageSrc = `${getContentsUrlWithSlug(slug, urlRoot)}/${hero}`;
 
   return (
     <VStack spacing={8} align="left" w="100%">
