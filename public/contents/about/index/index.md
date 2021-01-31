@@ -9,7 +9,7 @@ status: 'published'
 ## 略歴
 
 - RELATIONS 株式会社　 Web エンジニア
-  - **テックリード・スクラムマスター・フロントエンドエンジニア**など
+  - **テックリード・スクラムマスター・フロントエンドエンジニア**を中心に職域多数
   - [Wistant](/works/detail/wistant), [Andlearn](/works/detail/andlearn), [SELECK](/works/detail/seleck), [Codeβ](/works/detail/code-beta), [Warasy](/works/detail/warasy), COGOO ほか数件を開発
   - 「[技術選定で大事にした判断基準](/blog/posts/2018-12-08-frontend-technology-selection)」「[2020 年フロントエンド技術スタック](/blog/posts/2020-12-30-react-tech-stack)」
 - G&E ビジネススクール　プログラミング講師
@@ -27,16 +27,16 @@ status: 'published'
 
 - **学び続けられるサービス**
   - 「常に学習ができている状態」が好きです
-  - 学びの集大成は、インプットだけではなく、アウトプットや他者へのティーチングにあると考えています
-  - インプットからアウトプットまで一気通貫にできるサービスづくりが理想です
+  - 学びの完成は、インプットだけではなく、アウトプットや他者へのティーチングにもあると考えています
+  - 体系的なインプットと、実践的なアウトプットができるサービスづくりが理想です
 - **ものづくりに関すること**
   - 何かを作ること、手を動かすことが好きです
   - 生涯何らかのプレイヤーであることを望んでいます（最低限、業務の一部だけでも）
   - Web だけでなく、電子工作や IoT 分野にも興味および経験があります
 - **競馬とその周辺分野**
-  - キッカケはダビスタで、ウイポもやります。[一口馬主（キャロットクラブ）](/blog/posts/2019-09-06-join-carrot-club)として競馬に参加しています
   - 「自分で予想して当てる楽しみ」「血の歴史」「馬という動物とのふれあい」に価値をおいています
-  - 上記のような様々な角度から、競馬や周辺分野に親しんでもらえるようなサービスづくりが理想です
+  - キッカケはダビスタで、ウイポもやります。[一口馬主（キャロットクラブ）](/blog/posts/2019-09-06-join-carrot-club)として競馬に参加しています
+  - 様々な角度から、競馬や周辺分野に親しんでもらえるようなサービスづくりが理想です
 
 ## スキルマップ
 
@@ -96,7 +96,7 @@ status: 'published'
 - GitHub: https://github.com/suzukalight
 - Qiita: https://qiita.com/suzukalight
 - Zenn: https://zenn.dev/suzukalight
-- Wantedly Profile: https://www.wantedly.com/id/masahiko_kubara
+- Wantedly: https://www.wantedly.com/id/masahiko_kubara
 - Twitter: https://twitter.com/suzukalight
 
 ## Email
