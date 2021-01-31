@@ -8,7 +8,7 @@ import { Link } from '../../atoms/Link';
 import { Article } from '../../../utils/article/entity';
 import { getContentsUrlWithSlug, mergeUrlAndSlug, UrlTable } from '../../../utils/path/url';
 
-type WorksListProps = {
+export type WorksListProps = {
   works: Article[];
 };
 
