@@ -9,13 +9,16 @@ status: 'published'
 ## 略歴
 
 - RELATIONS 株式会社　 Web エンジニア
+  - 2013/02 ～ 現任（8 年）
   - **テックリード・スクラムマスター・フロントエンドエンジニア**を中心に職域多数
   - [Wistant](/works/detail/wistant), [Andlearn](/works/detail/andlearn), [SELECK](/works/detail/seleck), [Codeβ](/works/detail/code-beta), [Warasy](/works/detail/warasy), COGOO ほか数件を開発
   - 「[技術選定で大事にした判断基準](/blog/posts/2018-12-08-frontend-technology-selection)」「[2020 年フロントエンド技術スタック](/blog/posts/2020-12-30-react-tech-stack)」
 - G&E ビジネススクール　プログラミング講師
+  - 2010/04 ～ 2014/03（4 年）
   - **講師として、教育・カリキュラム作成**。C 言語、DirectX、ハードウェア制作など
   - 作成したテキスト「[C 言語プログラミング](/course/clang)」
 - 中京大学大学院情報科学研究科　博士課程単位満了退学
+  - 2000/04 ～ 2012/03（学士～博士）
   - **GUI・ハードウェア融合領域、福祉工学**などの研究
   - 研究成果として「[歩行リハビリ支援システム Warasy](/works/detail/warasy)」の制作および発表
   - 大学講師、CS 系の TA、ワークショップ開催、地域住民向け PC 講座開催、後輩指導などを経験
