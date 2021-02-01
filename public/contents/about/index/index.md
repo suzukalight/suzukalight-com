@@ -26,6 +26,8 @@ status: 'published'
   - **競馬**に関する制作。「[競馬予想ソフト Shining Run](/works/detail/shining-run)」の開発
   - Web マンダラート、動画同時再生アプリ、家屋壁紙ジェネレータ、メディアアートデバイス作成など
 
+職務経歴書的な表示ができる [Wantedly のプロフィール](https://www.wantedly.com/id/masahiko_kubara) もご利用ください。
+
 ## 興味のあること
 
 - **学び続けられるサービス**
