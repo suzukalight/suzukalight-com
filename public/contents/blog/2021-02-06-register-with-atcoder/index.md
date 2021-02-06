@@ -2,7 +2,7 @@
 title: AtCoderに登録して、AtCoder Beginners Selection やってみた
 date: '2021-02-06T00:01:00'
 category: Technology
-tags: ['atcoder', 'typescript']
+tags: ['atcoder', 'typescript', 'algorithm', 'computational-geometry']
 emoji: '👨‍💻'
 status: 'published'
 ---
@@ -19,13 +19,13 @@ status: 'published'
 
 A 問題は開発環境に慣れるためみたいなもので、stdin から情報受け取って、変数に展開して、そこから必要な加工をして、最後に stdout（コンソール）に出力する、という一連のお作法に慣れていくのが主なタスクだった。ここで何回か素振りさせてもらえたので、BC 問題にうまくつなげさせてもらえたと思う。
 
-B 問題はあまり計算コストなどは考えなくても大丈夫そうで、どうやって情報を処理させるかの題意を読み解くような問題が多かった気がする。「あ、要するに Array.uniq してほしいのね」とか「Array.sort してからふるい分けする話だね」とか「3 重ループで総当りする練習だね」とか。むかし実践問題を作っていた側なので、こういう問題の作り方は良いなぁ、なんて思ったりした。
+B 問題はあまり計算コストなどは考えなくても大丈夫そうで、どうやって情報を処理させるかの題意を読み解くような問題が多かった気がする。「あ、要するに Array.uniq してほしいのね」とか「Array.sort してからふるい分けする話だね」とか「3 重ループで総当りする練習だね」とか。プログラミング講師時代は生徒用に実践問題を作っていた側なので、こういう問題の作り方は良いなぁ、なんて思ったりしながら解いていた。
 
-C 問題はいよいよ省力化やアルゴリズム実装が必要になった。3 重ループと見せかけてちゃんと計算すれば 2 重で大丈夫だよ案件、押してダメなら引いてみな案件（文字列探索アルゴリズムとかである）、マンハッタン距離と偶奇判定。
+C 問題はいよいよ省力化やアルゴリズム実装が必要になった。3 重ループと見せかけてちゃんと計算すれば 2 重で大丈夫だよ案件、押してダメなら引いてみな案件（文字列探索アルゴリズムとかである）、マンハッタン距離と偶奇判定案件。引き出しを持ってないと力押しになって負けるので、知識をつけていかないと。
 
 # 作例
 
-### Welcome to AtCoder
+### PracticeA: Welcome to AtCoder
 
 ```ts
 const main = (input: string) => {
@@ -40,9 +40,9 @@ const input = require('fs').readFileSync('/dev/stdin', 'utf8');
 main(input);
 ```
 
-Welcome to AtCoder。`split`, `parseInt`, `readFileSync` に慣れていく。
+Welcome to AtCoder。ほぼ parser を書く問題。`split`, `parseInt`, `readFileSync` に慣れていく。
 
-### Product
+### ABC086A: Product
 
 ```ts
 const main = (input: string) => {
@@ -57,9 +57,9 @@ const input = require('fs').readFileSync('/dev/stdin', 'utf8');
 main(input);
 ```
 
-Product。たぶん個別に偶奇判定しても大丈夫。ビット演算すればもっと早いと思うけど、JS 系でそれやるのもなんか違うような気がして。
+Product。たぶん a, b 別々で偶奇判定しても大丈夫。ビット演算すればもっと早いと思うけど、JS 系でそれやるのもなんか違うような気がして。C++で書くときはやってみよう。
 
-### Placing Marbles
+### ABC081A: Placing Marbles
 
 ```ts
 const main = (input: string) => {
@@ -71,9 +71,9 @@ const input = require('fs').readFileSync('/dev/stdin', 'utf8');
 main(input);
 ```
 
-Placing Marbles。たぶん出題者に怒られる解答。
+Placing Marbles。正規表現でカウントするという、たぶん出題者に怒られる解答。String.split でトークナイズすればよかったかな。
 
-### Shift only
+### ABC081B: Shift only
 
 ```ts
 const operate = (n: number, a: number[]) => {
@@ -105,7 +105,7 @@ main(input);
 
 Shift only。単純に割り続けてみた。しまった引数を破壊してる。。。
 
-### Coins
+### ABC087B: Coins
 
 ```ts
 const operate = (a: number, b: number, c: number, x: number) => {
@@ -136,7 +136,7 @@ main(input);
 
 Coins。ネストを重ねて物理で殴る。
 
-### Some Sums
+### ABC083B: Some Sums
 
 ```ts
 const operate = (n: number, a: number, b: number) => {
@@ -165,7 +165,7 @@ main(input);
 
 Some Sums。これも桁処理は数値でやったほうが怒られない案件かもしれない。その場合は 10 の剰余演算をループして分離することになるかな。
 
-### Card Game for Two
+### ABC088B: Card Game for Two
 
 ```ts
 const operate = (n: number, an: number[]) => {
@@ -194,9 +194,9 @@ const input = require('fs').readFileSync('/dev/stdin', 'utf8');
 main(input);
 ```
 
-Card Game for Two。大きいものから順にとっていくので、まず並べ替える。そして Alice 側から見た得失点で考えればいいので、偶奇で加減算を変えれば良いはず。
+Card Game for Two。プレイヤは大きいものから順にとっていくので、まず並べ替えておいて取りやすくする。Alice 側から見た得失点で考えればいいので、偶奇で得点の加減算を切り替えれば良いはず、という解答。
 
-### Kagami Mochi
+### ABC085B: Kagami Mochi
 
 ```ts
 const operate = (n: number, mochis: number[]) => {
@@ -215,9 +215,9 @@ const input = require('fs').readFileSync('/dev/stdin', 'utf8');
 main(input);
 ```
 
-Kagami Mochi。要するに uniq すればいいんだよね、ってことで、JS 環境なら Set を使うのが楽。
+Kagami Mochi。要するに uniq すればいいんだよね、ってことで、JS 環境なら Set を使うのが王道かなと。
 
-### Otoshidama
+### ABC085C: Otoshidama
 
 ```ts
 const operate = (n: number, y: number) => {
@@ -248,9 +248,9 @@ const input = require('fs').readFileSync('/dev/stdin', 'utf8');
 main(input);
 ```
 
-Otoshidama。1 万円と 5 千円の枚数が決まれば、千円の枚数が自動的に決まる。これを忘れると O(N^3) になって計算時間が足りなくなる。きれいにハマりました。
+Otoshidama。1 万円と 5 千円の枚数が決まれば、千円の枚数が自動的に決まる。これを忘れると計算量が O(N^3) になって時間が足りなくなる。最初きれいに罠にハマりました。
 
-### 白昼夢
+### ABC049C: 白昼夢
 
 ```ts
 const operate = (str: string) => {
@@ -269,13 +269,36 @@ main(input);
 
 白昼夢。順探索だと dream と dreamer と erase がかぶってしまうのでうまく除去できない。逆探索でやってやるとかぶらなくなるのできれいに達成できる。と頭では思いながら正規表現でやっつける。
 
-### Traveling
+逆探索するなら、おそらくこんな感じ；
+
+```ts
+const searchStrs = ['dreamer', 'eraser', 'dream', 'erase'];
+
+const operate = (str: string) => {
+  let target = str;
+  let i = 0;
+  while (true) {
+    if (target === searchStrs[i]) return true;
+    if (target.endsWith(searchStrs[i])) {
+      target = target.substr(0, target.length - searchStrs[i].length);
+      i = 0;
+    } else {
+      i++;
+      if (i >= 4) return false;
+    }
+  }
+
+  return false;
+};
+```
+
+### ABC086C: Traveling
 
 ```ts
 type Plan = number[];
 
 const trip = (plan: Plan, x: number, y: number, n: number) => {
-  // 距離的に到達可能、かつ偶数回の余剰は往復でつぶせる
+  // 距離的に到達可能で、余剰距離が偶数ならOK
   const dist = Math.abs(x - plan[1]) + Math.abs(y - plan[2]);
   if (dist > n) return false;
   if (dist % 2 !== n % 2) return false;
@@ -310,4 +333,4 @@ const input = require('fs').readFileSync('/dev/stdin', 'utf8');
 main(input);
 ```
 
-Traveling。4 近傍の移動。xy 軸の移動を再帰関数で表現する方法もあるけど、たぶんスタックが枯渇する。これはアルゴリズムで解く問題で、マンハッタン距離を計算して到達可能であれば、あとは余剰分を反復横跳びで消化できるかをチェックする形。反復横跳びは偶奇判定で達成できる。
+Traveling。4 近傍の移動。xy 軸の移動を再帰関数で表現する方法もあるけど、たぶんスタックが枯渇する。これは計算幾何学で解く問題で、具体的にはまずマンハッタン距離を計算して到達可能かどうかを確かめ、さらに余剰距離を反復横跳びで消化できるかをチェックする形。反復横跳びは 2 の倍数判定なので、偶奇判定で達成できる。
