@@ -6,8 +6,6 @@ tags: ['react-native', 'react-hook-form', 'yup', 'typescript']
 status: 'published'
 ---
 
-TL;DR
-
 ## react-hook-form の特徴
 
 パフォーマンスにフォーカスしており、redux-form や formik より高速に動作することを謳っている。その方法論として「非同期コントロール」であることを打ち出している（redux-form や formik は同期型）。
