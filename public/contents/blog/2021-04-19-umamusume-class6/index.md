@@ -74,7 +74,7 @@ hero: hero.jpg
 | -------------- | ---------- | -------------------------- | -------- |
 | 短距離         | SP > PW    | SP / SP / SP / SP / PW / ※ | PW > ST  |
 | マイル・ダート | SP > PW    | SP / SP / SP / PW / PW / ※ | ST > PW  |
-| 中距離         | ST = SP    | SP / SP / SP / PW / PW / ※ | ST       |
+| 中距離         | ST = SP    | SP / SP / SP / ST / ST / ※ | PW       |
 | 長距離         | ST > SP    | SP / SP / ST / ST / ST / ※ | PW > SP  |
 
 **サポートカードは 2 種類のステータスに狙いをつけてデッキ構成します**。例えば「SP / SP / SP / PW / PW / 友」という感じです。
