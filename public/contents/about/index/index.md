@@ -8,8 +8,12 @@ status: 'published'
 
 ## 略歴
 
+- 株式会社 CureApp 　 フルスタックエンジニア
+  - 2021/05 ～ 現任
+  - **テックリード・スクラムマスター・フルスタックエンジニア**
+  - 医療機器アプリの開発に従事。React Native や AWS CDK など、フル TypeScript で開発
 - RELATIONS 株式会社　 Web エンジニア
-  - 2013/02 ～ 現任（8 年）
+  - 2013/02 ～ 2021/04（8 年）
   - **テックリード・スクラムマスター・フロントエンドエンジニア**を中心に職域多数
   - [Wistant](/works/detail/wistant), [Andlearn](/works/detail/andlearn), [SELECK](/works/detail/seleck), [Codeβ](/works/detail/code-beta), [Warasy](/works/detail/warasy), COGOO ほか数件を開発
   - 「[技術選定で大事にした判断基準](/blog/posts/2018-12-08-frontend-technology-selection)」「[2020 年フロントエンド技術スタック](/blog/posts/2020-12-30-react-tech-stack)」
@@ -18,7 +22,7 @@ status: 'published'
   - **講師として、教育・カリキュラム作成**。C 言語、DirectX、ハードウェア制作など
   - 作成したテキスト「[C 言語プログラミング](/course/clang)」
 - 中京大学大学院情報科学研究科　博士課程単位満了退学
-  - 2000/04 ～ 2012/03（学士～博士）
+  - 2000/04 ～ 2012/03
   - **GUI・ハードウェア融合領域、福祉工学**などの研究
   - 研究成果として「[歩行リハビリ支援システム Warasy](/works/detail/warasy)」の制作および発表
   - 大学講師、CS 系の TA、ワークショップ開催、地域住民向け PC 講座開催、後輩指導などを経験
@@ -37,7 +41,7 @@ status: 'published'
 - **ものづくりに関すること**
   - 何かを作ること、手を動かすことが好きです
   - 生涯何らかのプレイヤーであることを望んでいます（最低限、業務の一部だけでも）
-  - Web だけでなく、電子工作や IoT 分野にも興味および経験があります
+  - Web やアプリだけでなく、電子工作や IoT 分野にも興味および経験があります
 - **競馬とその周辺分野**
   - 「自分で予想して当てる楽しみ」「血の歴史」「馬という動物とのふれあい」に価値をおいています
   - キッカケはダビスタで、ウイポもやります。[一口馬主（キャロットクラブ）](/blog/posts/2019-09-06-join-carrot-club)として競馬に参加しています
@@ -48,7 +52,7 @@ status: 'published'
 ### 技術スタック
 
 - Markup: **HTML5**, CSS(**SCSS**, Stylus, **BEM**), CSS-in-JS(**styled-components**), CSS Modules, **Responsive Design**
-- Frontend: **TypeScript**, JavaScript, **React.js**, **Next.js**, **Gatsby.js**, **GraphQL**, **Apollo Client**, Vue.js, Material UI, **Chakra UI**, **formik**, jQuery
+- Frontend: **TypeScript**, JavaScript, **React.js**, **Redux**, **Next.js**, **Gatsby.js**, **GraphQL**, **Apollo Client**, Vue.js, Material UI, **Chakra UI**, **formik**, jQuery
 - Backend: **Node.js**(Express, Koa, **Apollo Server**, WebSocket, **GraphQL**), PHP(CakePHP, Laravel), Java
 - Mobile: **React Native**(Expo), Cordova, Android Java
 - DB: RDB(**MySQL**, Oracle, SQLite, etc.), NoSQL(**Firebase**), ORM(**Sequelize**, **TypeORM**, Sails.js, Laravel), SQL
