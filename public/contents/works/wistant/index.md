@@ -43,10 +43,10 @@ SaaS 型の Web サービス。目標・1on1・フィードバックの 3 要素
 
 ## スクリーンショット
 
-![マイボード](/contents/works/wistant/wistant-myboard.png)
+![マイボード](wistant-myboard.png)
 
-![1on1シート](/contents/works/wistant/wistant-1on1.png)
+![1on1シート](wistant-1on1.png)
 
-![会社分析](/contents/works/wistant/wistant-analytics.png)
+![会社分析](wistant-analytics.png)
 
-![目標ツリー](/contents/works/wistant/wistant-objective-tree.png)
+![目標ツリー](wistant-objective-tree.png)
