@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, LightMode } from '@chakra-ui/react';
 import { DefaultSeo } from 'next-seo';
 
 import '../styles/prism.scss';
@@ -29,8 +29,10 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 
   return (
     <ChakraProvider theme={theme} resetCSS={true} portalZIndex={40} disableGlobalStyle={false}>
-      <DefaultSeo {...SEO} />
-      <Component {...pageProps} />
+      <LightMode>
+        <DefaultSeo {...SEO} />
+        <Component {...pageProps} />
+      </LightMode>
     </ChakraProvider>
   );
 };
