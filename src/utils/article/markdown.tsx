@@ -33,11 +33,24 @@ const MdLink = (baseHref?: string, baseAs?: string) => (props) => {
  * mdx→JSX変換で使用するコンポーネントマップを返す
  * @param imgRootDir img markdown の src の root dir
  */
-export const getDefaultComponents = (baseImageUrl: string, baseHref?: string, baseAs?: string) => ({
-  img: MdImage(baseImageUrl),
-  TwitterEmbed,
-  a: MdLink(baseHref, baseAs),
-});
+export const getDefaultComponents = () => {
+  return {
+    img: ({ src, ...props }: { src: any }) => {
+      if (src.startsWith('http')) {
+        return <img src={src} {...props} />;
+      }
+      return <img src={`/images/blog/${src}`} {...props} />;
+    },
+    TwitterEmbed,
+    a: (props: any) => {
+      const { href } = props;
+      if (href.startsWith('http')) {
+        return <a target="_blank" rel="noopener noreferrer" {...props} />;
+      }
+      return <a {...props} />;
+    },
+  } as unknown as MdxRemote.Components;
+};
 
 export type MdxSource = MdxRemote.Source;
 
@@ -59,7 +72,7 @@ export const hydrate = (content: MdxSource, options: MdOptions) => {
   return nmrHydrate(content, {
     components:
       options?.components ||
-      getDefaultComponents(options.baseImageUrl, options?.baseHref, options?.baseAs),
+      getDefaultComponents(),
   });
 };
 

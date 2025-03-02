@@ -23,7 +23,9 @@
     "noImplicitAny": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "noErrorTruncation": false,
+    "skipDefaultLibCheck": true
   },
   "include": [
     "next-env.d.ts",

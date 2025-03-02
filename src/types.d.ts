@@ -32,4 +32,18 @@ declare module 'next-mdx-remote/types' {
       [key: string]: any;
     }
   }
+}
+
+// next-mdx-remoteの型定義の問題を回避（追加）
+declare module 'next-mdx-remote/render-to-string' {
+  import { MdxRemote } from 'next-mdx-remote/types';
+  
+  export default function renderToString(
+    source: string,
+    options?: {
+      components?: MdxRemote.Components;
+      mdxOptions?: any;
+      scope?: any;
+    }
+  ): Promise<MdxRemote.Source>;
 } 
