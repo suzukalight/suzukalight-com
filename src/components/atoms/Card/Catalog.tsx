@@ -22,19 +22,21 @@ export const CardCatalog: React.FC<CardCatalogProps> = ({
         {image}
       </Center>
 
-      <VStack spacing={2} align="center" w="100%" maxH={48} overflow="hidden">
+      <VStack spacing={2} align="center" w="100%" overflow="hidden">
         <Heading
           as="h2"
           overflow="hidden"
-          wordBreak="break-all"
+          wordBreak="break-word"
           fontSize="lg"
           fontWeight="600"
           lineHeight={1.125}
+          textAlign="center"
+          width="100%"
         >
           {title}
         </Heading>
 
-        <Text noOfLines={1} textAlign="center" fontSize="sm" lineHeight={1.125} color="gray.600">
+        <Text textAlign="center" fontSize="sm" lineHeight={1.125} color="gray.600" width="100%">
           {supplement}
         </Text>
       </VStack>

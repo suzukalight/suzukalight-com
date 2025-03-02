@@ -34,6 +34,7 @@ export const NextImageOrEmoji: React.FC<NextImageOrEmojiProps> = ({
         width: width ?? '100%',
         height: height ?? '16em',
         backgroundColor: '#f7fafc',
+        overflow: 'hidden',
         ...divStyle,
       }}
     >
@@ -46,7 +47,7 @@ export const NextImageOrEmoji: React.FC<NextImageOrEmojiProps> = ({
       />
     </div>
   ) : (
-    <Center>
+    <Center width={width ?? '100%'} height={height ?? '16em'} backgroundColor="#f7fafc">
       <Text fontSize={fontSize || '64px'}>{emoji ?? '📝'}</Text>
     </Center>
   );

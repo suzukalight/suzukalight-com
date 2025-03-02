@@ -16,7 +16,7 @@ export const WorksList: React.FC<WorksListProps> = ({ works }) => (
   <SimpleGrid columns={[1, 1, 2, 3]} columnGap={4} rowGap={16} w="100%">
     {works.map(({ frontMatter, slug }) => (
       <Link key={slug} href={mergeUrlAndSlug(slug, UrlTable.worksDetail)}>
-        <Box w="100%" maxH="20em">
+        <Box w="100%">
           <CardCatalog
             image={
               <NextImageOrEmoji
@@ -26,11 +26,12 @@ export const WorksList: React.FC<WorksListProps> = ({ works }) => (
                 )}
                 emoji={frontMatter.emoji}
                 height="12em"
+                width="100%"
               />
             }
             title={frontMatter.title}
             supplement={frontMatter.supplement}
-            wrapProps={{ justifySelf: 'center', alignSelf: 'center' }}
+            wrapProps={{ justifySelf: 'center', alignSelf: 'center', width: '100%' }}
           />
         </Box>
       </Link>
