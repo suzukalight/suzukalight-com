@@ -10,6 +10,13 @@ import { Link } from '../../components/atoms/Link';
 import { TwitterEmbed } from '../../components/atoms/TwitterEmbed';
 import { NextImageArticle } from '../../components/atoms/NextImage/Article';
 
+// カスタムコンポーネント型を定義
+export type CustomComponents = {
+  img: React.ComponentType<{ src: unknown }>;
+  TwitterEmbed: React.ComponentType<unknown>;
+  a: React.ComponentType<unknown>;
+};
+
 const MdImage =
   (baseImageUrl: string) =>
   ({ src }) =>
@@ -34,11 +41,11 @@ const MdLink = (baseHref?: string, baseAs?: string) => (props) => {
  * mdx→JSX変換で使用するコンポーネントマップを返す
  * @param imgRootDir img markdown の src の root dir
  */
-export const getDefaultComponents: MdxRemote.Components = (
+export const getDefaultComponents = (
   baseImageUrl: string,
   baseHref?: string,
   baseAs?: string,
-) => ({
+): CustomComponents => ({
   img: MdImage(baseImageUrl),
   TwitterEmbed,
   a: MdLink(baseHref, baseAs),
@@ -61,11 +68,14 @@ export type MdOptions = {
  * @param options mdx→JSX変換で使用するコンポーネントマップなど
  */
 export const hydrate = (content: MdxSource, options: MdOptions) => {
-  return nmrHydrate(content, {
-    components:
-      options?.components ||
-      getDefaultComponents(options.baseImageUrl, options?.baseHref, options?.baseAs),
-  });
+  const customComponents = getDefaultComponents(
+    options.baseImageUrl,
+    options?.baseHref,
+    options?.baseAs,
+  );
+  const components = options?.components || (customComponents as unknown as MdxRemote.Components);
+
+  return nmrHydrate(content, { components });
 };
 
 /**

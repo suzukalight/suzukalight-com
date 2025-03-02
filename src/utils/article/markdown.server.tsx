@@ -6,6 +6,7 @@ import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
 import remarkCustomBlocks from 'remark-custom-blocks';
 import remarkUnwrapImages from 'remark-unwrap-images';
+import { MdxRemote } from 'next-mdx-remote/types';
 
 import { getDefaultComponents, MdOptions } from './markdown';
 
@@ -67,10 +68,15 @@ export const renderToString = async (
   markdownWithoutFrontMatter: string,
   options: RenderToStringOptions,
 ) => {
+  const customComponents = getDefaultComponents(
+    options.baseImageUrl,
+    options?.baseHref,
+    options?.baseAs,
+  );
+  const components = options?.components || (customComponents as unknown as MdxRemote.Components);
+
   return await nmrRenderToString(markdownWithoutFrontMatter, {
-    components:
-      options?.components ||
-      getDefaultComponents(options.baseImageUrl, options?.baseHref, options?.baseAs),
+    components,
     mdxOptions: options?.mdxOptions || getDefaultMdxOptions(),
   });
 };

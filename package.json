@@ -4,6 +4,7 @@
   "engines": {
     "node": "22.x"
   },
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
     "fix": "run-s typecheck lint format",
