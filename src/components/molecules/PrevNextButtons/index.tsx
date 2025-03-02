@@ -8,7 +8,7 @@ import { mergeUrlAndSlug } from '../../../utils/path/url';
 import { Link } from '../../atoms/Link';
 
 const prevNextButtonStyle: ButtonProps = {
-  isFullWidth: true,
+  width: '100%',
   px: 4,
   py: 8,
   variant: 'outline',

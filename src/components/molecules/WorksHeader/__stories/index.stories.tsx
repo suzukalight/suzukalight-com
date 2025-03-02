@@ -21,6 +21,6 @@ const Template: Story<WorksHeaderProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  work: (work3 as unknown) as Article,
+  work: work3 as unknown as Article,
   urlRoot: UrlTable.works,
 } as WorksHeaderProps;

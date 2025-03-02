@@ -29,12 +29,12 @@ describe('ArticleEntity', () => {
     });
 
     test('NG: tags が配列ではないため、失敗した', () => {
-      const illegalFrontMatter = ({
+      const illegalFrontMatter = {
         title: frontMatter.title,
         date: frontMatter.date,
         status: frontMatter.status,
         tags: 'tag-not-array',
-      } as unknown) as ArticleFrontMatter;
+      } as unknown as ArticleFrontMatter;
 
       expect(() =>
         denyInvalidArticleDTO({ frontMatter: illegalFrontMatter, content, slug }),
@@ -54,11 +54,11 @@ describe('ArticleEntity', () => {
     });
 
     test('NG: status が正しくないため、失敗した', () => {
-      const illegalFrontMatter = ({
+      const illegalFrontMatter = {
         title: frontMatter.title,
         date: frontMatter.date,
         status: 'invalidStatus',
-      } as unknown) as ArticleFrontMatter;
+      } as unknown as ArticleFrontMatter;
 
       expect(() =>
         denyInvalidArticleDTO({ frontMatter: illegalFrontMatter, content, slug }),

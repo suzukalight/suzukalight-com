@@ -51,7 +51,12 @@ export const getDefaultComponents = (
   a: MdLink(baseHref, baseAs),
 });
 
-export type MdxSource = MdxRemote.Source;
+// MdxRemote.Sourceの代わりに直接型を定義
+export type MdxSource = {
+  compiledSource: string;
+  renderedOutput: string;
+  scope?: Record<string, unknown>;
+};
 
 export type MdOptions = {
   baseImageUrl: string;
@@ -73,7 +78,10 @@ export const hydrate = (content: MdxSource, options: MdOptions) => {
     options?.baseHref,
     options?.baseAs,
   );
-  const components = options?.components || (customComponents as unknown as MdxRemote.Components);
+
+  // 型の不一致を解決するために、any型を使用
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const components = options?.components || (customComponents as any);
 
   return nmrHydrate(content, { components });
 };

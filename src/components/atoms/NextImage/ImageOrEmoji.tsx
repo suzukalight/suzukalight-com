@@ -37,12 +37,12 @@ export const NextImageOrEmoji: React.FC<NextImageOrEmojiProps> = ({
         ...divStyle,
       }}
     >
-      <Image 
-        {...props} 
-        src={src} 
-        alt={alt ?? src} 
-        fill 
-        style={{ objectFit: (objectFit as CSSProperties['objectFit']) ?? 'cover' }} 
+      <Image
+        {...props}
+        src={src}
+        alt={alt ?? src}
+        fill
+        style={{ objectFit: (objectFit as CSSProperties['objectFit']) ?? 'cover' }}
       />
     </div>
   ) : (

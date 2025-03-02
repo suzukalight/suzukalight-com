@@ -42,7 +42,7 @@ type SlickArticlesProps = {
 export const SlickArticles: React.FC<SlickArticlesProps> = ({ articles, urlContent, urlPosts }) => (
   <>
     {articles.length > 0 ? (
-      // @ts-ignore
+      // @ts-expect-error Slickコンポーネントの型定義が不完全なため
       <Slick {...settings}>
         {articles.map((a) => (
           <Box key={a.slug} p={[2, 4]}>

@@ -6,7 +6,6 @@ import remarkCodeTitles from 'remark-code-titles';
 import remarkPrism from 'remark-prism';
 import remarkCustomBlocks from 'remark-custom-blocks';
 import remarkUnwrapImages from 'remark-unwrap-images';
-import { MdxRemote } from 'next-mdx-remote/types';
 
 import { getDefaultComponents, MdOptions } from './markdown';
 
@@ -73,7 +72,10 @@ export const renderToString = async (
     options?.baseHref,
     options?.baseAs,
   );
-  const components = options?.components || (customComponents as unknown as MdxRemote.Components);
+
+  // 型の不一致を解決するために、any型を使用
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const components = options?.components || (customComponents as any);
 
   return await nmrRenderToString(markdownWithoutFrontMatter, {
     components,

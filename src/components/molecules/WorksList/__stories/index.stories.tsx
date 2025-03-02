@@ -20,15 +20,15 @@ const Template: Story<WorksListProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  works: ([work1, work2, work3] as unknown[]) as Article[],
+  works: [work1, work2, work3] as unknown[] as Article[],
 } as WorksListProps;
 
 export const One = Template.bind({});
 One.args = {
-  works: ([work3] as unknown[]) as Article[],
+  works: [work3] as unknown[] as Article[],
 } as WorksListProps;
 
 export const Empty = Template.bind({});
 Empty.args = {
-  works: ([] as unknown[]) as Article[],
+  works: [] as unknown[] as Article[],
 } as WorksListProps;

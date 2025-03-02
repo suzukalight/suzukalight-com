@@ -32,17 +32,8 @@ export type WorksHeaderProps = {
 
 export const WorksHeader: React.FC<WorksHeaderProps> = ({ work, urlRoot }) => {
   const { slug } = work;
-  const {
-    title,
-    supplement,
-    hero,
-    emoji,
-    periodFrom,
-    periodTo,
-    isNow,
-    types,
-    roles,
-  } = work.frontMatter;
+  const { title, supplement, hero, emoji, periodFrom, periodTo, isNow, types, roles } =
+    work.frontMatter;
   const imageSrc = `${getContentsUrlWithSlug(slug, urlRoot)}/${hero}`;
 
   return (
@@ -59,7 +50,7 @@ export const WorksHeader: React.FC<WorksHeaderProps> = ({ work, urlRoot }) => {
         </Text>
       </VStack>
 
-      <UnorderedList spacing={2} align="left">
+      <UnorderedList spacing={2}>
         <ListItem fontSize="sm" color="gray.600" ml={6}>
           {`期間 : ${genPeriodText({ periodFrom, periodTo, isNow })}`}
         </ListItem>

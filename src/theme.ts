@@ -7,4 +7,4 @@ const config = {
 
 const theme = extendTheme({ config });
 
-export default theme; 
+export default theme;
