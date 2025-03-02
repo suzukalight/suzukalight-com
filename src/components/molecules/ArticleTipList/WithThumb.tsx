@@ -31,7 +31,7 @@ export const ArticleTipWithThumb: React.FC<ArticleTipWithThumbProps> = ({ articl
                   alt={slug}
                   width={32}
                   height={32}
-                  objectFit="cover"
+                  style={{ objectFit: 'cover' }}
                   className={styles.image}
                 />
               </Flex>

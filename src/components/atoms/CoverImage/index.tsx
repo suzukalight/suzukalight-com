@@ -23,8 +23,8 @@ export const CoverImage: React.FC<CoverImageProps> = ({ imageSrc, emoji }) =>
           <Image
             src={imageSrc}
             alt="Cover image"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             className={styles.image}
           />
         )}

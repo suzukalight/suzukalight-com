@@ -8,6 +8,7 @@ export type NextImageOrEmojiProps = Omit<ImageProps, 'alt' | 'width' | 'height'>
   alt?: string;
   width?: string;
   height?: string;
+  objectFit?: string;
   fontSize?: TypographyProps['fontSize'];
   divStyle?: CSSProperties;
 };
@@ -36,7 +37,13 @@ export const NextImageOrEmoji: React.FC<NextImageOrEmojiProps> = ({
         ...divStyle,
       }}
     >
-      <Image {...props} src={src} alt={alt ?? src} layout="fill" objectFit={objectFit ?? 'cover'} />
+      <Image 
+        {...props} 
+        src={src} 
+        alt={alt ?? src} 
+        fill 
+        style={{ objectFit: objectFit as any ?? 'cover' }} 
+      />
     </div>
   ) : (
     <Center>
