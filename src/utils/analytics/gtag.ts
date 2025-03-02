@@ -11,7 +11,7 @@ export const pageview = (url: string) => {
 type EventProps = {
   action: string;
   category: string;
-  label?: any;
+  label?: unknown;
   value?: number;
 };
 
