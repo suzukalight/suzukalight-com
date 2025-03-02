@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AppProps } from 'next/app';
-import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { DefaultSeo } from 'next-seo';
 
 import '../styles/prism.scss';
@@ -10,6 +10,7 @@ import '../styles/slick.scss';
 
 import SEO from '../../next-seo.config';
 import * as gtag from '../utils/analytics/gtag';
+import theme from '../theme';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -27,15 +28,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, [router.events]);
 
   return (
-    <ChakraProvider>
-      <ColorModeProvider
-        options={{
-          useSystemColorMode: true,
-        }}
-      >
-        <DefaultSeo {...SEO} />
-        <Component {...pageProps} />
-      </ColorModeProvider>
+    <ChakraProvider theme={theme}>
+      <DefaultSeo {...SEO} />
+      <Component {...pageProps} />
     </ChakraProvider>
   );
 };
