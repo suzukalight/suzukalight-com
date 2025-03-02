@@ -47,10 +47,17 @@ module.exports = withBundleAnalyzer({
         ...config.resolve.fallback,
         fs: false,
         path: false,
+        punycode: false,
       };
     }
 
     return config;
   },
   trailingSlash: false,
+  experimental: {
+    // 静的エクスポートの問題を解決するための設定
+    esmExternals: 'loose',
+    // SSRエラーを回避するための設定
+    serverComponentsExternalPackages: ['punycode'],
+  },
 });

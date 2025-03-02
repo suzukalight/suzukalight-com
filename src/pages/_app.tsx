@@ -28,7 +28,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, [router.events]);
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme} resetCSS={true} portalZIndex={40} disableGlobalStyle={false}>
       <DefaultSeo {...SEO} />
       <Component {...pageProps} />
     </ChakraProvider>
