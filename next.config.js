@@ -3,9 +3,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
-  future: {
-    webpack5: true,
-  },
+  // future: {
+  //   webpack5: true,
+  // }, // webpack5 is now default in Next.js 14
   async redirects() {
     return [
       {
