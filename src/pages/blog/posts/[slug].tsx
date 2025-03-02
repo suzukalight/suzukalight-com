@@ -46,7 +46,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
     baseHref: `${UrlTable.blogPosts}/[slug]`,
     baseAs: url,
   });
-  const ogImage = hero ? { image: `${getContentsUrlWithSlug(slug, UrlTable.blog)}/${hero}` } : null;
+  const ogImage = hero ? { image: `/contents${UrlTable.blog}/${slug}/${hero}` } : null;
 
   return (
     <DefaultLayout>
@@ -105,7 +105,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { content, ...article } = await getArticle(slug, UrlTable.blog, { withContent: true });
 
   const contentSource = await renderToString(content, {
-    baseImageUrl: getContentsUrlWithSlug(slug, UrlTable.blog),
+    baseImageUrl: `/contents${UrlTable.blog}/${slug}`,
     baseHref: `${UrlTable.blogPosts}/[slug]`,
     baseAs: mergeUrlAndSlug(slug, UrlTable.blogPosts),
   });

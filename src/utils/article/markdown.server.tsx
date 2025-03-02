@@ -7,7 +7,7 @@ import remarkPrism from 'remark-prism';
 import remarkCustomBlocks from 'remark-custom-blocks';
 import remarkUnwrapImages from 'remark-unwrap-images';
 
-import { MdOptions } from './markdown';
+import { getDefaultComponents, MdOptions } from './markdown';
 
 const getDefaultMdxOptions = () => ({
   remarkPlugins: [
@@ -68,7 +68,9 @@ export const renderToString = async (
   options: RenderToStringOptions,
 ) => {
   return await nmrRenderToString(markdownWithoutFrontMatter, {
-    components: options?.components,
+    components:
+      options?.components ||
+      getDefaultComponents(options.baseImageUrl, options?.baseHref, options?.baseAs),
     mdxOptions: options?.mdxOptions || getDefaultMdxOptions(),
   });
 };

@@ -10,6 +10,12 @@ export type NextImageArticleProps = {
 
 export const NextImageArticle: React.FC<NextImageArticleProps> = ({ src, alt }) => (
   <div className={styles.wrap}>
-    <Image src={src} alt={alt ?? src} layout="fill" objectFit="contain" />
+    <Image
+      src={src}
+      alt={alt ?? src}
+      fill
+      style={{ objectFit: 'contain' }}
+      sizes="(max-width: 768px) 100vw, 768px"
+    />
   </div>
 );
