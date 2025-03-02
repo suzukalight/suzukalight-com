@@ -9,6 +9,7 @@ import { Logo } from '../../atoms/Logo';
 import { Link } from '../../atoms/Link';
 
 type MenuItemProps = {
+  children: React.ReactNode;
   href: string;
   isLast?: boolean;
 };

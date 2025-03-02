@@ -4,6 +4,7 @@ import { LinkProps as ChakraLinkProps, Link as ChakraLink } from '@chakra-ui/rea
 
 type LinkProps = {
   href: string;
+  children: React.ReactNode;
   chakraProps?: ChakraLinkProps;
   nextProps?: NextLinkProps;
 };

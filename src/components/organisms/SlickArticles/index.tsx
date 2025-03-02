@@ -42,13 +42,13 @@ type SlickArticlesProps = {
 export const SlickArticles: React.FC<SlickArticlesProps> = ({ articles, urlContent, urlPosts }) => (
   <>
     {articles.length > 0 ? (
-      <Slick {...settings}>
+      <Box as={(Slick as any)} {...settings}>
         {articles.map((a) => (
           <Box key={a.slug} p={[2, 4]}>
             <ArticleCardWithLink article={a} urlContent={urlContent} urlPosts={urlPosts} />
           </Box>
         ))}
-      </Slick>
+      </Box>
     ) : (
       <Text as="small" color="gray.600">
         関連する記事は見つかりませんでした

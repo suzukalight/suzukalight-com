@@ -4,6 +4,7 @@ import { ChakraProps, Box, Heading, Text } from '@chakra-ui/react';
 import { DefaultLayout } from '../DefaultLayout';
 
 type ArticleListLayoutProps = {
+  children: React.ReactNode;
   title: string;
   subtitle?: string;
   boxProps?: Omit<ChakraProps, 'css'>;
