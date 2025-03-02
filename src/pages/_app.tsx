@@ -14,6 +14,16 @@ import theme from '../theme';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
+
+  // カラーモード関連のローカルストレージをクリア
+  useEffect(() => {
+    // ブラウザ環境かどうかをチェック
+    if (typeof window !== 'undefined') {
+      // Chakra UIのカラーモード設定をクリア
+      localStorage.removeItem('chakra-ui-color-mode');
+    }
+  }, []);
+
   useEffect(() => {
     if (!gtag.GA_TRACKING_ID) return;
 
