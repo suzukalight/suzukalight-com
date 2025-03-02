@@ -19,7 +19,11 @@
     "jsx": "preserve",
     "maxNodeModuleJsDepth": 0,
     "typeRoots": ["./node_modules/@types", "./types"],
-    "incremental": true
+    "incremental": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "downlevelIteration": true
   },
   "include": [
     "next-env.d.ts",

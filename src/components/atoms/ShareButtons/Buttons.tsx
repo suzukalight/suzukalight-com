@@ -34,7 +34,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
 
   return (
     <>
-      <TwitterShareButton url={url} title={title} via={twitterId}>
+      <TwitterShareButton url={url} title={title} via={twitterId} style={{}} aria-label="Twitter">
         <Tooltip label="Twitterでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
           <Icon
             as={FaTwitter}
@@ -45,7 +45,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           />
         </Tooltip>
       </TwitterShareButton>
-      <FacebookShareButton url={url}>
+      <FacebookShareButton url={url} style={{}} aria-label="Facebook">
         <Tooltip label="Facebookでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
           <Icon
             as={FaFacebook}
@@ -56,7 +56,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           />
         </Tooltip>
       </FacebookShareButton>
-      <LineShareButton url={url} title={title}>
+      <LineShareButton url={url} title={title} style={{}} aria-label="Line">
         <Tooltip label="LINEでシェア" shouldWrapChildren hasArrow placement={tooltipPlacement}>
           <Icon
             as={FaLine}
@@ -67,7 +67,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           />
         </Tooltip>
       </LineShareButton>
-      <PocketShareButton url={url} title={title}>
+      <PocketShareButton url={url} title={title} style={{}} aria-label="Pocket">
         <Tooltip label="Pocketに保存" shouldWrapChildren hasArrow placement={tooltipPlacement}>
           <Icon
             as={FaGetPocket}
@@ -78,7 +78,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           />
         </Tooltip>
       </PocketShareButton>
-      <HatenaShareButton url={url} title={title}>
+      <HatenaShareButton url={url} title={title} style={{}} aria-label="Hatena">
         <Tooltip
           label="はてなブックマークでシェア"
           shouldWrapChildren
