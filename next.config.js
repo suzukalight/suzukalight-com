@@ -37,4 +37,20 @@ module.exports = withBundleAnalyzer({
     // 本番環境では必ず修正してください
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: [],
+  },
+  assetPrefix: '',
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+      };
+    }
+
+    return config;
+  },
+  trailingSlash: false,
 });
